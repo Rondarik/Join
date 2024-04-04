@@ -1,0 +1,8 @@
+.side_container{
+    width: 232px;
+    height: 1024px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #2A3647;
+}
