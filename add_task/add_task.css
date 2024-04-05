@@ -1,76 +1,155 @@
+/* Seite */
 body {
     margin: 0;
     font-size: 24px;
+    background-color: #f6f7f8;
 }
 
+.add_task_container {
+    margin-left: 328px;
+    margin-top: 208px;
+    display: flex;
+    flex-direction: column;
 
-
-.dummy {
-
-    height: 100%;
-    /* Full-height: remove this if you want "auto" height */
-    width: 160px;
-    /* Set the width of the sidebar */
-    position: fixed;
-    /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 1;
-    /* Stay on top */
-    top: 0;
-    /* Stay at the top */
-    left: 0;
-    background-color: #111;
-    /* Black */
-    overflow-x: hidden;
-    /* Disable horizontal scroll */
-    padding-top: 20px;
+    border: 1px solid black;
 }
 
-.add_task_container{
-    margin-left: 160px;
-}
-
-.add_task_container h2{
+/* Template */
+.add_task_container h2 {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
     font-size: 61px;
     line-height: 120%;
+    margin-block: 6px;
 }
 
-.form_container form{
+.add_task_container p{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.form_container{
     display: flex;
     flex-direction: column;
-    max-width: 1024px;
+    width: fit-content;
 }
 
-.form_inner{
+
+.form_container form {
     display: flex;
+    flex-direction: column;
+    /* max-width: 1024px; */
+}
+
+.form_inner {
+    margin-top: 40px;
+    display: flex;
+
     border: 1px solid red;
 }
 
-.form_left{
-    height: 376px;
-    width: 440px;
+.form_inner label {
+    font-family: 'Inter';
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
 
-    border: 1px solid black;
 }
 
-.separator{
+.input_styles {
+    margin-top: 8px;
+    width: 430px;
+    height: 48px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: "Inter";
+    border-color: rgb(0, 0, 0, 0.2);
+    padding-left: 10px;
+    margin-bottom: 24px;
+}
+
+.input_styles::placeholder {
+    color: lightgray;
+}
+
+/* --------- Left Container --------- */
+.form_left {
+    height: 376px;
+}
+
+#taskTitle {
+    height: 48px;
+}
+
+/* Textarea */
+#TaskDiscription {
+    height: 110px;
+    padding-top: 10px;
+}
+
+#assignedTo {
+    width: 444px;
+    height: 48px;
+}
+
+.separator {
     height: 424px;
     margin-left: 24px;
     margin-right: 24px;
-    /* width: 1px; */
-    border: 1px solid black;
-
+    border: 1px solid rgb(225, 225, 225);
 }
 
-.form_right{
+/* ---------- Right Container --------- */
+.form_right {
     height: 416px;
     width: 440px;
 
     border: 1px solid black;
 }
 
-.form_buttons{
+#dueDate {
+    width: 430px !important;
+}
+
+.prio_buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    margin-bottom: 24px;
+}
+
+.prio_buttons button {
+    height: 56px;
+    width: 136px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: none;
+    font-family: 'Inter';
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+    box-shadow: 0 0 6px -4px;
+}
+
+.prio_btn_2{
+    background-color: #ffa800 !important;
+    color: white;
+}
+
+#dueDate {
+    width: 430px !important;
+    height: 48px !important;
+}
+
+#category, #subtasks{
+    width: 440px;
+}
+
+.form_buttons {
     align-self: end;
 }
