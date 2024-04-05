@@ -1,0 +1,11 @@
+body{
+    margin: 0;
+    background-color:#F6F7F8;
+}
+
+.big{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
