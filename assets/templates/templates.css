@@ -83,12 +83,15 @@ body{
     /* padding: 243px 0 0 52px; */
 }
 header{
-    width: 1440px;
     height: 96px;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left:232px;
+    right:0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px 20px 348px;
     box-shadow: 0px 4px 4px 0px #0000001A;
 }
 .header_text{
@@ -98,6 +101,7 @@ font-weight: 400;
 line-height: 24px;
 width: 319px;
 height: 24px;
+padding-left: 80px;
 }
 .initial_container{
     display: flex;
@@ -106,6 +110,7 @@ height: 24px;
     gap: 16px;
     height:56px;
     width:104px;
+    padding-right: 40px;
 }
 .initial_text{
 width:56px;
