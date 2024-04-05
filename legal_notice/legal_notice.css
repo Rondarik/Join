@@ -1,0 +1,43 @@
+.legal_notice_container{
+padding-left: 328px; 
+padding-top: 206px;
+background-color: #F6F7F8;
+}
+h1{
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 61px;
+color: black;
+}
+h2{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 27px;
+    color: black; 
+}
+p{
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Inter", sans-serif;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    
+}
+li{
+        font-size: 16px;
+        font-weight: 400;
+        font-family: "Inter", sans-serif;
+}
+h3{
+    font-size: 16px;
+        font-weight: 400;
+        font-family: "Inter", sans-serif;
+        color: black;
+        margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+.highlicht{
+    color: #2AABE2;
+}
