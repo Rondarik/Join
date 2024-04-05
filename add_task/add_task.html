@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <link rel="shortcut icon" href="./assets/templates/img/favicon.png">
+    <link rel="stylesheet" href="/assets/templates/templates.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/add_task.css">
+    <script src="/assets/templates/template_script.js"></script>
+
+
+
+</head>
+
+<body onload="includeHTML()">
+    <!-- <div w3-include-html="./assets/templates/side_menu.html"></div>
+    <div w3-include-html="./assets/templates/header.html"></div> -->
+
+    <div class="dummy"></div>
+
+    <div class="add_task_container">
+        <h2>Add Task</h2>
+        <div class="form_container">
+            <form action="">
+                <div class="form_inner">
+                    <div class="form_left">
+                        <label for="taskTitle">Title</label><br>
+                        <input type="text" id="taskTitle" placeholder="enter a title"><br>
+                        <label for="Tas"></label>
+                        <textarea name="" id="" cols="30" rows="10"></textarea><br>
+                        <label for="cars">Assigned to</label><br>
+                        <select name="cars" id="cars">
+                            <option value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option value="opel">Opel</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="form_right">
+                        <div class="form_buttons">
+                            <label for="date">Due Date</label><br>
+                            <input type="date" id="birthday" name="birthday"><br>
+                            <label for="">Prio</label><br>
+                            <div class="prio_buttons">
+                                <button>urgend</button>
+                                <button>medium</button>
+                                <button>low</button>
+                            </div>
+                            <label for="category">Category</label><br>
+                            <select name="cars" id="category">
+                                <option value="volvo">Volvo</option>
+                                <option value="saab">Saab</option>
+                                <option value="opel">Opel</option>
+                                <option value="audi">Audi</option>
+                            </select><br>
+                            <label for="subtasks">Subtasks</label><br>
+                            <select name="cars" id="subtasks">
+                                <option value="volvo">Volvo</option>
+                                <option value="saab">Saab</option>
+                                <option value="opel">Opel</option>
+                                <option value="audi">Audi</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form_buttons">
+                    <button>Clear X</button>
+                    <button>Create Task</button>
+                </div>
+            </form>
+        </div>
+        <p>*This field is required</p>
+    </div>
+
+</body>
+
+</html>
