@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    font-size: 24px;
+}
+
+.dummy {
+
+    height: 100%;
+    /* Full-height: remove this if you want "auto" height */
+    width: 160px;
+    /* Set the width of the sidebar */
+    position: fixed;
+    /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1;
+    /* Stay on top */
+    top: 0;
+    /* Stay at the top */
+    left: 0;
+    background-color: #111;
+    /* Black */
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    padding-top: 20px;
+}
+
+.add_task_container{
+    margin-left: 160px;
+}
+
+.form_container form{
+    display: flex;
+    flex-direction: column;
+}
+
+.form_inner{
+    display: flex;
+
+    border: 1px solid red;
+}
+
+.form_left{
+    height: 376px;
+    width: 440px;
+
+    border: 1px solid black;
+}
+
+.separator{
+    height: 424px;
+    margin-left: 24px;
+    margin-right: 24px;
+    /* width: 1px; */
+    border: 1px solid black;
+
+}
+
+.form_right{
+    height: 416px;
+    width: 440px;
+
+    border: 1px solid black;
+}
+
+.form_buttons{
+    align-self: end;
+}
