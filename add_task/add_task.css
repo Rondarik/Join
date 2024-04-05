@@ -30,9 +30,11 @@ body {
 }
 
 .add_task_container h2{
-    font-family: 'inter';
-    font-size: 61px;
+    font-family: 'Inter';
+    font-style: normal;
     font-weight: 700;
+    font-size: 61px;
+    line-height: 120%;
 }
 
 .form_container form{
