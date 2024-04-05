@@ -3,6 +3,8 @@ body {
     font-size: 24px;
 }
 
+
+
 .dummy {
 
     height: 100%;
@@ -27,14 +29,20 @@ body {
     margin-left: 160px;
 }
 
+.add_task_container h2{
+    font-family: 'inter';
+    font-size: 61px;
+    font-weight: 700;
+}
+
 .form_container form{
     display: flex;
     flex-direction: column;
+    max-width: 1024px;
 }
 
 .form_inner{
     display: flex;
-
     border: 1px solid red;
 }
 
