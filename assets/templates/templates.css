@@ -123,9 +123,13 @@ border: 3px solid #2A3647;
 border-radius: 559px;
 }
 .help_img{
-    width: 32px;
-    height: 32px;
+    width: 20px;
+    height: 20px;
     top:6px;
     left: 6px;
     cursor: pointer;
+}
+.help_img:hover{
+    width: 24px;
+    height: 24px;
 }
