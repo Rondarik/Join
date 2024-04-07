@@ -41,3 +41,10 @@ h3{
 .highlicht{
     color: #2AABE2;
 }
+.arrow_img{
+    width: 37px;
+    height: 37px;
+    position: absolute;
+    top:225px;
+    right: 200px;
+}
