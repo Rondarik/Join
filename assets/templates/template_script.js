@@ -25,3 +25,8 @@ function includeHTML() {
     }
   }
 }
+
+function toggleNavMenu() {
+  let navMenu = document.getElementById('navMenu');
+  navMenu.classList.toggle('active');
+}
