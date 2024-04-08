@@ -44,4 +44,10 @@
         position: absolute;
         top:225px;
         right: 200px;
+        cursor: pointer;
+        border-radius: 100%;
     }
+
+.arrow_img:hover{
+    background-color: lightgray;
+}
