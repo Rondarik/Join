@@ -7,7 +7,7 @@ body{
 
 .top{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
 #headline{
@@ -63,14 +63,22 @@ body{
     width: 280px;
 }
 
-.password{
-    background: url(../assets/img/passwordLock.svg) no-repeat scroll 264px 4px;
+.password-input{
+    /* background: url(../assets/img/passwordLock.svg) no-repeat scroll 264px 4px; */
     margin-bottom: 20px;
     border: solid 1px #d1d1d1;
     border-radius: 5px;
     padding: 8px;
     width: 280px;
 }
+
+#lock{
+        position: relative;
+        left: -40px;
+        top: 7px;
+}
+
+
 
 .check{
     justify-content: flex-start;
@@ -96,4 +104,69 @@ body{
     align-items: center;
     gap:32px;
     height: 24px;
+}
+
+.wholeSite{
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #F6F7F8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    transition: all 1s ease;
+    transition-delay: 1s;
+    /* animation: background-color 2s ease 1; */
+}
+
+.wholeSiteStart{
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    height: 160px;
+    width: 160px;
+    background: transparent;
+}
+
+/* @keyframes background-color{
+    0%{
+        background-color: #F6F7F8; 
+    }
+    100%{
+        background-color: transparent;
+    }
+} */
+
+.logoBig{
+    height: 200px;
+    width: auto;
+   transition: all 1s ease;
+   transition-delay: 1s;
+}
+
+.logoBigStart{
+    height: 80px;
+    width: auto;
+}
+
+.d-none{
+    display: none;
+}
+
+#eyeOff{
+    position: relative;
+    left: -42px;
+    top: 7px;
+    cursor: pointer;
+}
+
+#eyeOpen{
+    position: relative;
+    left: -42px;
+    top: 3px;
 }

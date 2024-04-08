@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log in</title>
     <link rel="stylesheet" href="./css/login.css">
+    <script src="./js/login.js"></script>
 </head>
-<body>
+<body onload="init()">
     
     <div class="top">
-        <div><img src="./assets/img/logo.svg" alt="Logo"></div>
+        <div class="wholeSite">
+ 
+            <img class="logoBig" src="./assets/img/logoBig.svg" alt="Logo groß">
+    
+        </div>
         <div class="signUp">
             <span>Not a Join user?</span>
             <button class="btnBlue">Sign up</button>
@@ -20,7 +25,14 @@
         <h1 id="headline">Log in</h1>
         <form>
             <div><input class="email" type="text" placeholder="Email"></div>
-            <div><input class="password" type="text" placeholder="Password"></div>
+
+            <div>
+                <input oninput="changingEye()" type="password" id="password" class="password-input" placeholder="Password" required>
+                <img id="lock" src="./assets/img/passwordLock.svg" alt="">
+                <img onclick="eyeOn()" id="eyeOff" class="d-none" src="./assets/img/eyeOff.svg" alt="">
+                <img onclick="eye()" id="eyeOpen" class="d-none" src="./assets/img/eyeOn.svg" alt="">
+            </div>
+
             <div class="check">
                 <input type="checkbox" id="rememberMe" name="rememberMe" />
                 <label for="rememberMe">Remember me</label>
