@@ -30,7 +30,7 @@ height: 32px;
     border: 3px solid #29ABE2;
     height: 59px;
 }
-.summary_main{
+.summary_tasks{
     width: 560px;
     height: 562px;
     display: flex;
@@ -150,4 +150,28 @@ h3{
 .text_container{
     width:83px;
     height: 125px;
+}
+.summary_main{
+    display: flex;
+    align-items: center;
+    gap:96px;
+}
+.greet_container{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 47px; 
+    color: #2A3647;
+    line-height: 56.4px;
+}
+.summary_greet{
+    gap:3px;
+}
+.name_container{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px; 
+    color:#29ABE2;
+    line-height: 76.8px;
 }
