@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <link rel="stylesheet" href="/assets/templates/templates.css">
+    <link rel="stylesheet" href="/assets/fonts.css">
+    <script src="/assets/templates/template_script.js"></script>
+    <link rel="shortcut icon" href="/assets/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="summary.css">
+</head>
+<body onload="includeHTML()">
+    <div w3-include-html="/assets/templates/side_menu.html"></div>
+    <div w3-include-html="/assets/templates/header.html"></div>
+    <div class="summary_container">
+        <div class="headline">
+            <h1>Join 360</h1>
+            <div class="line_blue"></div>
+            <p class="subtitle">Key Metrics at a Glance</p>
+        </div>
+        <div class="summary_main">
+            <div class="row_container">
+                <div class="todo_container">
+                    <img class="summary_img" src="/assets/img/todo.svg" alt="">
+                    <div>
+                        <h2>1</h2>
+                        <p class="text_below">To-do</p>
+                    </div>
+                </div>
+                <div class="done_container">
+                    <img class="summary_img" src="/assets/img/done.svg" alt="">
+                    <div>
+                        <h2>1</h2>
+                        <p class="text_below">Done</p>
+                    </div>
+                </div>
+            </div>
+            <div class="prio_row_container">
+                <div class="prio_container">
+                    <img class="summary_img" src="/assets/img/prio.svg" alt="">
+                    <div>
+                        <h2>1</h2>
+                        <p class="text_below">Urgent</p>
+                    </div>
+                </div>
+                <div class="line_grey"></div>
+                <div class="date_container">
+                    <h3>April 24, 2024</h3>
+                    <p style="font-size: 16px;" class="text_below">Upcoming Deadline</p>
+                </div>
+            </div>
+        <div class="tasks_container">
+            <div class="tasks_row">
+                <div class="text_container">
+                <h2>5</h2>
+                <p class="text_below">Tasks in Board</p>
+                </div>
+            </div>
+            <div class="tasks_row">
+                <div class="text_container">
+                <h2>5</h2>
+                <p class="text_below">Tasks in Progress</p>
+                </div>
+            </div>
+            <div class="tasks_row">
+                <div class="text_container">
+                <h2>5</h2>
+                <p class="text_below">Awaiting Feedback</p>
+                </div>
+            </div>
+           
+        </div>
+    
+    </div>
+</body>
+</html>
