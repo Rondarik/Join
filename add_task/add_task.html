@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/templates/templates.css">
     <link rel="stylesheet" href="/assets/fonts.css">
+    <link rel="stylesheet" href="/assets/templates/task_form.css">
     <link rel="stylesheet" href="/add_task/add_task.css">
     <script src="/assets/templates/template_script.js"></script>
 </head>
@@ -15,42 +16,45 @@
 <body onload="includeHTML()">
     <div w3-include-html="/assets/templates/side_menu.html"></div>
     <div w3-include-html="/assets/templates/header.html"></div>
+    <div w3-include-html="/assets/templates/task_form.html"></div>
 
-    <div class="add_task_container">
+    <!-- <div class="add_task_container">
         <h2>Add Task</h2>
         <div class="form_container">
             <form action="">
                 <div class="form_inner">
                     <div class="form_left">
-                        <label for="taskTitle">Title*</label><br>
+                        <label for="taskTitle">Title<span style="color: #ffa800;">*</span></label><br>
                         <input class="input_styles" type="text" id="taskTitle" placeholder="Enter a title"><br>
-                        <label for="Tas">Discription</label><br>
+                        <label for="TaskDiscription">Discription</label><br>
                         <textarea class="input_styles" name="" id="TaskDiscription" placeholder="Enter a Discription"></textarea><br>
                         <label for="assignedTo">Assigned to</label><br>
                         <select class="input_styles" name="assignedTo" id="assignedTo">
-                            <option value="volvo">Select contacts to assign</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
+                            <option value="" selected disabled hidden multiple>Select contacts to assign</option>
+                        
+                            <option value="">1</option>
+                            <option value="">2</option>
+                            <option value="">3</option>
                         </select>
+                        
+                        <div class="assign_contact_container">T E S T</div>
                     </div>
                     <div class="separator"></div>
                     <div class="form_right">
                         <div class="form_buttons">
-                            <label for="date">Due date*</label><br>
+                            <label for="dueDate">Due date<span style="color: #ffa800;">*</span></label><br>
                             <input class="input_styles" type="date" id="dueDate" name="dueDate"><br>
-                            <label for="">Prio</label><br>
+                            <label >Prio</label><br>
                             <div class="prio_buttons">
-                                <button>Urgend</button>
-                                <button class="prio_btn_2">Medium</button>
-                                <button>Low</button>
+                                <button class="prio_btn_1">Urgend <img src="/assets/img/prio_urgend.svg" alt=""></button>
+                                <button class="prio_btn_2">Medium <img src="/assets/img/prio_medium_white.svg" alt=""></button>
+                                <button class="prio_btn_3">Lowi <img src="/assets/img/prio_low.svg" alt=""></button>
                             </div>
-                            <label for="category">Category*</label><br>
+                            <label for="category" contenteditable>Category<span style="color: #ffa800;">*</span></label><br>
                             <select class="input_styles" name="cars" id="category">
-                                <option value="volvo">Select task category</option>
-                                <option value="saab">Saab</option>
-                                <option value="opel">Opel</option>
-                                <option value="audi">Audi</option>
+                                <option value="" selected disabled hidden>Select task category <img src="/assets/img/event_calendar.svg" alt=""></option>
+                                <option value="">Technical Task</option>
+                                <option value="">User Story</option>
                             </select><br>
                             <label for="subtasks">Subtasks</label><br>
                             <select class="input_styles" name="cars" id="subtasks">
@@ -62,14 +66,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="form_spacer"></div>
                 <div class="form_buttons">
-                    <button>Clear X</button>
-                    <button>Create Task</button>
+                    <button class="clear_btn">Clear <img src="/assets/img/close.svg" alt=""></button>
+                    <button class="create_btn">Create Task <img src="/assets/img/check_white.svg" alt=""></button>
                 </div>
             </form>
         </div>
-        <p>*This field is required</p>
-    </div>
+        <p><span style="color: #ffa800;">*</span>This field is required</p>
+    </div> -->
 
 </body>
 
