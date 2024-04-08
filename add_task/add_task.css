@@ -4,7 +4,7 @@ body {
     background-color: #f6f7f8;
 }
 
-.add_task_container {
+.main_container {
     margin-left: 328px;
     margin-top: 208px;
     display: flex;

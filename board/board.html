@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.png">
+    <link rel="stylesheet" href="/assets/templates/templates.css">
+    <link rel="stylesheet" href="/assets/fonts.css">
+    <link rel="stylesheet" href="/assets/templates/task_form.css">
+    <link rel="stylesheet" href="/add_task/add_task.css">
+    <link rel="stylesheet" href="/board/board.css">
+    <script src="/assets/templates/add_task.js"></script>
+    <script src="/board/board.js"></script>
+    <script src="/assets/templates/template_script.js"></script>
+</head>
+
+<body onload="includeHTML()">
+    <div w3-include-html="/assets/templates/side_menu.html"></div>
+    <div w3-include-html="/assets/templates/header.html"></div>
+
+
+
+    <div class="add_task_overlay d-none" id="addTaskOverlayID" onclick="closeAddTaskOverlay()">
+        <div class="add_task_overlay_inner" onclick="doNotClose(event)">
+            <div w3-include-html="/assets/templates/task_form.html"></div>
+        </div>
+    </div>
+
+
+    <!-- zum testen des overlay -->
+    <button class="test_button" onclick="showAddTaskOverlay()">add Task +</button>
+
+</body>
+
+</html>

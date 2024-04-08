@@ -4,8 +4,8 @@ let dummyTasks = [
         "description": "Description for Task 1",
         "assignedTo": [],
         "dueDate": "2024-04-10",
-        "prio": "high",
-        "category": "Work",
+        "prio": "urgent",
+        "category": "technical task",
         "subtasks": []
     },
     {
@@ -14,7 +14,7 @@ let dummyTasks = [
         "assignedTo": [],
         "dueDate": "2024-04-12",
         "prio": "medium",
-        "category": "Personal",
+        "category": "user story",
         "subtasks": []
     },
     {
@@ -23,7 +23,7 @@ let dummyTasks = [
         "assignedTo": [],
         "dueDate": "2024-04-15",
         "prio": "low",
-        "category": "Study",
+        "category": "user story",
         "subtasks": []
     },
     {
@@ -31,8 +31,8 @@ let dummyTasks = [
         "description": "Description for Task 4",
         "assignedTo": [],
         "dueDate": "2024-04-20",
-        "prio": "high",
-        "category": "Personal",
+        "prio": "urgent",
+        "category": "user story",
         "subtasks": []
     },
     {
@@ -41,7 +41,7 @@ let dummyTasks = [
         "assignedTo": [],
         "dueDate": "2024-04-25",
         "prio": "medium",
-        "category": "Work",
+        "category": "technical task",
         "subtasks": []
     }
 ];
