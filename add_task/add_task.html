@@ -5,20 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Task</title>
-    <link rel="shortcut icon" href="./assets/templates/img/favicon.png">
-    <!-- <link rel="stylesheet" href="/assets/templates/templates.css"> -->
-    <link rel="stylesheet" href="/css/fonts.css">
-    <link rel="stylesheet" href="/css/add_task.css">
+    <link rel="shortcut icon" href="/assets/img/favicon.png">
+    <link rel="stylesheet" href="/assets/templates/templates.css">
+    <link rel="stylesheet" href="/assets/fonts.css">
+    <link rel="stylesheet" href="/add_task/add_task.css">
     <script src="/assets/templates/template_script.js"></script>
-
-
-
 </head>
 
 <body onload="includeHTML()">
-    <!-- <div w3-include-html="./assets/templates/side_menu.html"></div> -->
-
-    <div class="dummy"></div>
+    <div w3-include-html="/assets/templates/side_menu.html"></div>
+    <div w3-include-html="/assets/templates/header.html"></div>
 
     <div class="add_task_container">
         <h2>Add Task</h2>
@@ -26,13 +22,13 @@
             <form action="">
                 <div class="form_inner">
                     <div class="form_left">
-                        <label for="taskTitle">Title</label><br>
-                        <input type="text" id="taskTitle" placeholder="enter a title"><br>
-                        <label for="Tas"></label>
-                        <textarea name="" id="" cols="30" rows="10"></textarea><br>
-                        <label for="cars">Assigned to</label><br>
-                        <select name="cars" id="cars">
-                            <option value="volvo">Volvo</option>
+                        <label for="taskTitle">Title*</label><br>
+                        <input class="input_styles" type="text" id="taskTitle" placeholder="Enter a title"><br>
+                        <label for="Tas">Discription</label><br>
+                        <textarea class="input_styles" name="" id="TaskDiscription" placeholder="Enter a Discription"></textarea><br>
+                        <label for="assignedTo">Assigned to</label><br>
+                        <select class="input_styles" name="assignedTo" id="assignedTo">
+                            <option value="volvo">Select contacts to assign</option>
                             <option value="saab">Saab</option>
                             <option value="opel">Opel</option>
                             <option value="audi">Audi</option>
@@ -41,24 +37,24 @@
                     <div class="separator"></div>
                     <div class="form_right">
                         <div class="form_buttons">
-                            <label for="date">Due Date</label><br>
-                            <input type="date" id="birthday" name="birthday"><br>
+                            <label for="date">Due date*</label><br>
+                            <input class="input_styles" type="date" id="dueDate" name="dueDate"><br>
                             <label for="">Prio</label><br>
                             <div class="prio_buttons">
-                                <button>urgend</button>
-                                <button>medium</button>
-                                <button>low</button>
+                                <button>Urgend</button>
+                                <button class="prio_btn_2">Medium</button>
+                                <button>Low</button>
                             </div>
-                            <label for="category">Category</label><br>
-                            <select name="cars" id="category">
-                                <option value="volvo">Volvo</option>
+                            <label for="category">Category*</label><br>
+                            <select class="input_styles" name="cars" id="category">
+                                <option value="volvo">Select task category</option>
                                 <option value="saab">Saab</option>
                                 <option value="opel">Opel</option>
                                 <option value="audi">Audi</option>
                             </select><br>
                             <label for="subtasks">Subtasks</label><br>
-                            <select name="cars" id="subtasks">
-                                <option value="volvo">Volvo</option>
+                            <select class="input_styles" name="cars" id="subtasks">
+                                <option value="volvo">Add new subtask</option>
                                 <option value="saab">Saab</option>
                                 <option value="opel">Opel</option>
                                 <option value="audi">Audi</option>

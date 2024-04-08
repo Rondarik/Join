@@ -40,7 +40,7 @@ body{
 }
 
 .arrowLeft{
-    position: absolute;
+    position: relative;
     top: 272px;
     left: 272px;
 }
