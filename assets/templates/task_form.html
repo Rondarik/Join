@@ -1,11 +1,11 @@
 <div class="add_task_container">
     <h2>Add Task</h2>
     <div class="form_container">
-        <form action="">
+        <form onsubmit="addNewTask();return false;">
             <div class="form_inner">
                 <div class="form_left">
                     <label for="taskTitle">Title<span style="color: #ffa800;">*</span></label><br>
-                    <input class="input_styles" type="text" id="taskTitle" placeholder="Enter a title"><br>
+                    <input class="input_styles" type="text" id="taskTitle" placeholder="Enter a title" required><br>
                     <label for="TaskDiscription">Discription</label><br>
                     <textarea class="input_styles" name="" id="TaskDiscription" placeholder="Enter a Discription"></textarea><br>
                     <label for="assignedTo">Assigned to</label><br>
@@ -23,15 +23,21 @@
                 <div class="form_right">
                     <div class="form_buttons">
                         <label for="dueDate">Due date<span style="color: #ffa800;">*</span></label><br>
-                        <input class="input_styles" type="date" id="dueDate" name="dueDate"><br>
+                        <input class="input_styles" type="date" id="dueDate" name="dueDate" required><br>
                         <label >Prio</label><br>
                         <div class="prio_buttons">
-                            <button class="prio_btn_1">Urgend <img src="/assets/img/prio_urgend.svg" alt=""></button>
-                            <button class="prio_btn_2">Medium <img src="/assets/img/prio_medium_white.svg" alt=""></button>
-                            <button class="prio_btn_3">Lowi <img src="/assets/img/prio_low.svg" alt=""></button>
+                            <button class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('urgent')">
+                                Urgent <img src="/assets/img/prio_urgent.svg" alt="">
+                            </button>
+                            <button class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('medium')">
+                                Medium <img src="/assets/img/prio_medium.svg" alt="">
+                            </button>
+                            <button class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('low')">
+                                Low <img src="/assets/img/prio_low.svg" alt="">
+                            </button>
                         </div>
-                        <label for="category" contenteditable>Category<span style="color: #ffa800;">*</span></label><br>
-                        <select class="input_styles" name="cars" id="category">
+                        <label for="category">Category<span style="color: #ffa800;">*</span></label><br>
+                        <select class="input_styles" name="cars" id="category" required>
                             <option value="" selected disabled hidden>Select task category <img src="/assets/img/event_calendar.svg" alt=""></option>
                             <option value="">Technical Task</option>
                             <option value="">User Story</option>
