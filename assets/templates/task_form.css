@@ -188,11 +188,6 @@
     cursor: pointer;
 }
 
-.create_btn:hover{
-    background-color: #29abe2;
-    box-shadow: 0px 4px 10px -5px;
-}
-
 .form_buttons button {
     height: 56px;
     border-radius: 10px;
@@ -202,9 +197,9 @@
     font-weight: 700;
 }
 
-.form_buttons button:hover{
-    box-shadow: 0px 4px 10px -5px;
-} 
+.prio_buttons button:hover {
+       box-shadow: 0px 4px 10px -5px;
+}
 
 .prio_btn_1.clicked {
     background-color: #ff3d00;
@@ -228,7 +223,16 @@
     margin-right: 16px;
 }
 
+.clear_btn:hover{
+    box-shadow: 0px 4px 4px 0px #00000040;
+}
+
 .create_btn {
     background-color: #2a3647;
     color: #ffffff;
+}
+
+.create_btn:hover{
+    background-color: #29abe2;
+    box-shadow: 0px 4px 4px 0px #00000040;
 }

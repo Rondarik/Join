@@ -5,50 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Button Background Color and Image Change</title>
 <style>
-/* Füge hier dein CSS für die Hintergrundfarben der Buttons hinzu */
-.prio_btn_1.clicked {
-    background-color: red; /* Beispielhafte Farbe für den geklickten Urgent-Button */
-}
-.prio_btn_2.clicked {
-    background-color: yellow; /* Beispielhafte Farbe für den geklickten Medium-Button */
-}
-.prio_btn_3.clicked {
-    background-color: green; /* Beispielhafte Farbe für den geklickten Low-Button */
-}
+
 </style>
 </head>
 <body>
-<div class="prio_buttons">
-    <button class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('urgent', this)">
-        Urgent <img src="/assets/img/prio_urgent.svg" alt="">
-    </button>
-    <button class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('medium', this)">
-        Medium <img src="/assets/img/prio_medium.svg" alt="">
-    </button>
-    <button class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('low', this)">
-        Low <img src="/assets/img/prio_low.svg" alt="">
-    </button>
-</div>
 
-<script>
-function setTaskPrio(priority, button) {
-    // Entferne 'clicked' Klasse von allen Buttons
-    document.querySelectorAll('.prio_buttons button').forEach(btn => {
-        btn.classList.remove('clicked');
-        // Setze das Bild zurück
-        btn.querySelector('img').src = '/assets/img/prio_' + priority + '.svg';
-    });
-
-    // Füge 'clicked' Klasse zum geklickten Button hinzu
-    button.classList.add('clicked');
-
-    // Ändere das Bild im geklickten Button
-    button.querySelector('img').src = '/assets/img/prio_' + priority + '.svg';
-
-    // Hier kannst du den Rest deiner Logik für die Priorität festlegen
-    // Zum Beispiel kannst du eine Funktion aufrufen, die weitere Aktionen ausführt.
-    console.log('Priority set to: ' + priority);
-}
-</script>
 </body>
 </html>
