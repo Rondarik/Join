@@ -8,6 +8,18 @@ body{
 .top{
     display: flex;
     justify-content: flex-end;
+    opacity: 0;
+    animation: fade-in 1s ease 1s forwards;
+}
+
+.policy{
+    opacity: 0;
+    animation: fade-in 1s ease 1s forwards;
+}
+
+.legal{
+    opacity: 0;
+    animation: fade-in 1s ease 1s forwards;
 }
 
 #headline{
@@ -37,6 +49,8 @@ body{
     border-radius: 30px;
     gap: 32px;
     margin:auto;
+    opacity: 0;
+    animation: fade-in 1s ease 1s forwards;
 }
 
 .btnBlue{
@@ -114,14 +128,12 @@ body{
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #F6F7F8;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 999;
     transition: all 1s ease;
     transition-delay: 1s;
-    /* animation: background-color 2s ease 1; */
 }
 
 .wholeSiteStart{
@@ -130,17 +142,16 @@ body{
     left: 16px;
     height: 160px;
     width: 160px;
-    background: transparent;
 }
 
-/* @keyframes background-color{
+@keyframes fade-in{
     0%{
-        background-color: #F6F7F8; 
+        opacity: 0;
     }
     100%{
-        background-color: transparent;
+        opacity: 1;
     }
-} */
+}
 
 .logoBig{
     height: 200px;
@@ -170,3 +181,4 @@ body{
     left: -42px;
     top: 3px;
 }
+

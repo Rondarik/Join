@@ -1,7 +1,7 @@
 body{
     margin: 0;
     background-color:#F6F7F8;
-    padding: 60px;
+    /* padding: 60px; */
     font-family: sans-serif;
 }
 
@@ -41,8 +41,8 @@ body{
 
 .arrowLeft{
     position: relative;
-    top: 272px;
-    left: 272px;
+    top: 96px;
+    left: -176px;
 }
 
 .btnBlue{
@@ -115,9 +115,30 @@ body{
     gap: 32px;
 }
 
-.signUp{
+.sign{
+    height: 80px;
+    width: auto;
+}
+
+.flyer{
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap:32px;
-    height: 24px;
+    width: 100%;
+
+    animation: fly 2s ease 1;
+    position: fixed;
+    top: 50vh;
+  
+    z-index: 999;
+}
+
+@keyframes fly{
+    0%{
+       transform: translate(0,150vh);
+    }
+}
+
+.d-none{
+    display: none;
 }
