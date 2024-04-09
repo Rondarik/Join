@@ -22,7 +22,6 @@
     width: fit-content;
 }
 
-
 .form_container form {
     display: flex;
     flex-direction: column;
@@ -32,6 +31,8 @@
 .form_inner {
     margin-top: 40px;
     display: flex;
+    max-height: 550px;
+    height: 50vh;
 
     /* border: 1px solid red; */
 }
@@ -62,7 +63,8 @@
 
 /* --------- Left Container --------- */
 .form_left {
-    height: 376px;
+    max-width: 440px;
+    /* height: 376px; */
 }
 
 #taskTitle {
@@ -105,9 +107,9 @@
 
 /* ---------- Right Container --------- */
 .form_right {
-    height: 416px;
+    /* height: 416px; */
     width: 440px;
-    margin-bottom: 138px;
+    /* margin-bottom: 138px; */
 
     /* border: 1px solid black; */
 }

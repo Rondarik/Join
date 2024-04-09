@@ -13,11 +13,28 @@ function addNewTask(){
     console.log(activUserTasks);
 }
 
+function setTaskID() {
+    
+}
+
+
+
+
+
 function setTaskPrio(prio) {
     let taskPrio = prio
 
     setBtnCollorByPrio(prio);
 }
+
+
+
+
+
+
+
+
+
 
 /**
  * This function swaps the background color and the icon in the priority buttons
