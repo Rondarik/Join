@@ -7,39 +7,76 @@ body {
 
 .contacts{
     width: 456px;
-    height: 928px; 
+    height: 920px; 
     position: fixed;
     top: 96px;
     left: 232px;
     background-color: white;
     box-shadow: 4px 0px 6px 0px #00000014;
+    overflow: auto;
 }
 
 .contact_list{
-    height: 1188px;
+    margin-top: 101px;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.letter_a_layout{
+    width: 90px;
+    display: flex;
+    justify-content: center;
+}
+
+.letter_b_layout{
+    width: 90px;
+    display: flex;
+    justify-content: center;
+}
+
 .letter_a{
     width: 356px;
-    height: 70px;
-    gap: 8px;
+    height: 40px;
+    display: flex;
+    align-items: start;
+}
+
+.letter_b{
+    width: 356px;
+    height: 60px;
     display: flex;
     align-items: center;
+
 }
 
 .letter_a span{
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
-    padding-left: 30px;
+}
+
+.letter_b span{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.btn_container{
+    width: 440px;
+    height: 101px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 96px;
 }
 
 button{
     background-color: #2A3647;
-    width: 356px;
+    width: 352px;
     height: 56px;
     border-radius: 10px;
     border: 1px solid #2A3647;
@@ -49,7 +86,6 @@ button{
     justify-content: center;
     align-items: center;
     gap: 16px;
-    margin-top: 30px;
 }
 
 button:hover{
@@ -119,7 +155,7 @@ button:hover{
 
 .divding_line_container{
     width: 352px;
-    gap: 10px;
+    height: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -132,9 +168,121 @@ button:hover{
 
 .contact_dummy_1{
     display: flex;
+    align-items: center;
+    width: 352px;
+    height: 78px;
+    cursor: pointer;
 }
 
 .contact_dummy_info{
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    width: 200px;
+    height: 48px;
+}
+
+.contact_dummy_border{
+    width: 42px;
+    height: 42px;
+    border-radius: 45px;
+    background-color: #FF7A00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    line-height: 14.4px;
+    color: white;
+}
+
+.contact_dummy2_border{
+    width: 42px;
+    height: 42px;
+    border-radius: 45px;
+    background-color: #9327ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    line-height: 14.4px;
+    color: white;
+}
+
+.contact_dummy_border_layout{
+    height: 78px;
+    min-width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact_dummy_info_layout{
+    min-width: 262px;
+    max-width: 262px;
+    height: 78px;
+    display: flex;
+    align-items: center;
+    margin-bottom: -4px;
+}
+
+.contact_dummy_name{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: black;
+}
+
+.contact_dummy_mail{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.2px;
+    color: #007CEE;
+}
+
+.contacts::-webkit-scrollbar {
+    width: 8px;
+}
+
+.contacts::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+.contacts::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+/* Firefox scrollbar */
+.contacts {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
+
+.clicked {
+    background-color: #2A3647;
+    border-radius: 10px;
+}
+
+.clicked .contact_dummy_border {
+    border: 3px solid white;
+    border-radius: 50%;
+}
+
+.clicked .contact_dummy2_border {
+    border: 3px solid white;
+    border-radius: 50%;
+}
+
+.clicked .contact_dummy_name {
+    color: white;
+}
+
+.contact_dummy_1:hover {
+    background: linear-gradient(to right, #cacaca2e, #6e6e6e19);
+    border-radius: 10px;
+}
+
+.clicked:hover {
+    background: #2A3647;
 }
