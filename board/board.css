@@ -1,9 +1,14 @@
 .add_task_overlay {
     position: absolute;
+    top:0;
+    bottom: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: 99;
     background-color: rgba(0, 0, 0, 0.2);
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
 }
 .add_task_overlay_inner {
     background-color: #ffffff;
@@ -57,7 +62,6 @@ h1{
 }
 .inputfield{
     border: unset;
-    height: 32px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -70,6 +74,7 @@ input::placeholder{
 .search_img{
     width: 48px;
     height: 32px;
+    cursor: pointer;
 }
 .board_button{
     width: 160px;
@@ -99,7 +104,32 @@ input::placeholder{
     background-color:#2AABE2;
     border: 1px solid #2AABE2;
 }
-
+.process_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 64px;
+    padding-right: 64px;
+}
+.container_row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 244px; 
+}
+.container_row_text{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px; 
+    line-height: 24px;
+   color: #42526E;
+}
+.container_row_img{
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
 .d-none {
     display: none;
 }
