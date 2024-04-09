@@ -1,6 +1,24 @@
 function addNewTask(){
-    console.log('Hello World')
+    console.log(activUserTasks);
+    let taskTilte = document.getElementById('taskTitle').value;
+    // let taskDiscription = document.getElementById('TaskDiscription').value;
+
+    let task = {
+        "taskID": "0",
+        "title": taskTilte,
+        "description": "Description for Task 1",
+    };
+  
+    activUserTasks.push(task);
+    console.log(activUserTasks);
 }
+
+function setTaskID() {
+    
+}
+
+
+
 
 
 function setTaskPrio(prio) {
@@ -9,6 +27,20 @@ function setTaskPrio(prio) {
     setBtnCollorByPrio(prio);
 }
 
+
+
+
+
+
+
+
+
+
+/**
+ * This function swaps the background color and the icon in the priority buttons
+ * 
+ * @param {string} prio - This is the priority that is set via the respective button
+ */
 function setBtnCollorByPrio(prio) {
     let urgentBtn = document.getElementById('urgentBtnID');
     let mediumBtn = document.getElementById('mediumBtnID');
