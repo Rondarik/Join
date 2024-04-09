@@ -38,3 +38,16 @@
             margin-block-start: 0em;
         margin-block-end: 0em;
     }
+    .arrow_img{
+        width: 37px;
+        height: 37px;
+        position: absolute;
+        top:225px;
+        right: 200px;
+        cursor: pointer;
+        border-radius: 100%;
+    }
+
+.arrow_img:hover{
+    background-color: lightgray;
+}
