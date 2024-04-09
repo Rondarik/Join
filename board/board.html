@@ -19,6 +19,18 @@
 <body onload="includeHTML()">
     <div w3-include-html="/assets/templates/side_menu.html"></div>
     <div w3-include-html="/assets/templates/header.html"></div>
+    <div class="board_container">
+        <div class="headline">
+            <h1>Board</h1>
+            <div class="search_container">
+                <div class="input_container">
+                    <input class="inputfield" type="text" placeholder="Find Task">
+                    <img class="search_img" src="/assets/img/search.svg" alt="">
+                </div>
+                <button onclick="showAddTaskOverlay()" class="board_button">Add Task <img src="/assets/img/add.svg" alt=""></button>
+            </div>
+        </div>
+    </div>
 
     <div class="add_task_overlay d-none" id="addTaskOverlayID" onclick="closeAddTaskOverlay()">
         <div class="add_task_overlay_inner" onclick="doNotClose(event)">
@@ -26,9 +38,6 @@
         </div>
     </div>
 
-
-    <!-- zum testen des overlay -->
-    <button class="test_button" onclick="showAddTaskOverlay()">add Task +</button>
 
 </body>
 
