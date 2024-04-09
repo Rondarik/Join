@@ -4,8 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacts</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.png">
+    <link rel="stylesheet" href="/assets/templates/templates.css">
+    <link rel="stylesheet" href="/assets/fonts.css">
+    <link rel="stylesheet" href="/contacts/contacts.css">
+    <script src="/assets/templates/template_script.js"></script>
 </head>
-<body>
-    
+
+<body onload="includeHTML()">
+<div w3-include-html="/assets/templates/side_menu.html"></div>
+<div w3-include-html="/assets/templates/header.html"></div>
+
+<div class="content">   
+    <div class="contacts">
+        <div class="contact_list">
+                <button>
+                        <div class="btn_span">
+                            <span>Add new contact</span>
+                        </div>
+                        <div class="btn_img">
+                            <img src="/assets/img/addContact.svg" alt="">
+                        </div>
+                </button>
+            <div class="letter_a">
+                <span>A</span>
+            </div>
+            <div class="divding_line_container">
+                <div class="dividing_line_contacts"></div>
+            </div>
+            <div class="contact_dummy_1">
+                <div class="contact_dummy_border">
+                   AM
+                </div>
+                <div class="contact_dummy_info">
+                    <span>Anton Mayer</span>
+                    <span>antom@gmail.com</span>                    
+                </div>
+            </div>
+        </div>
+         
+    </div>
+    <div class="contact">
+        <span class="contact_headline">Contacts</span>
+        <div class="dividing_line"></div>
+        <span class="contact_text">Better with a team</span>
+    </div>
+</div>        
 </body>
 </html>
