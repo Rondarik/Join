@@ -1,5 +1,7 @@
 let logedInAs = "max.mustermann@example.com";
 let activUserTasks = [];
-let allContacts = [];
+let allUser = [];
 
-
+function wirSendenzumServer(){
+    setItem('allUser',allUser);
+}
