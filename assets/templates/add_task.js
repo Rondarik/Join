@@ -21,8 +21,14 @@ async function addNewTask(){
     console.log(activUserTasks);
 }
 
-function clearTaskForm(){
-    location.reload();
+async function clearTaskForm(){
+    // location.reload();
+    try {
+        activUserTasks = JSON.parse(await getItem('allTasks'));
+    } catch(e){
+        console.error('Loading error:', e);
+    }
+    console.log(activUserTasks);
 }
 
 /**
