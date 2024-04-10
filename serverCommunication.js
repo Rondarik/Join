@@ -1,4 +1,4 @@
-const STORAGE_TOKEN = GMRE7FNSDEXMO4KXUOG94GLBJAO0BM9MB1CKCLIB;
+const STORAGE_TOKEN = 'GMRE7FNSDEXMO4KXUOG94GLBJAO0BM9MB1CKCLIB';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
 async function setItem(key, value) {
@@ -14,5 +14,10 @@ async function setItem(key, value) {
  */
 async function getItem(key) {
     const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-    return fetch(url).then(res => res.json());
+    return fetch(url).then(res => res.json()).then(res => {
+        // Verbesserter code
+        if (res.data) { 
+            return res.data.value;
+        } throw `Could not find data with key "${key}".`;
+    });
 }

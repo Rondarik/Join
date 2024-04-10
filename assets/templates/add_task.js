@@ -1,8 +1,10 @@
-function addNewTask(){
+let taskPrio = "medium";
+
+async function addNewTask(){
     let taskTilte = document.getElementById('taskTitle').value;
     let taskDiscription = document.getElementById('TaskDiscription').value;
     let date = document.getElementById('dueDate').value;
-
+    let category = document.getElementById('category').value;
     let task = {
         "taskID": setTaskID(),
         "processingStatus": "ToDo",
@@ -10,17 +12,28 @@ function addNewTask(){
         "description": taskDiscription,
         "assignedTo": [],
         "dueDate": date,
-        "prio": "medium",
-        "category": "user story",
+        "prio": taskPrio,
+        "category": category,
         "subtasks": []
     };
-    activUserTasks.push(task);
-    console.log(activUserTasks);
+    allTasks.push(task);
+    await setItem('allTasks', JSON.stringify(allTasks));
+    console.log(allTasks);
 }
 
-function clearTaskForm(){
-    let category = document.getElementById('category').value;
-    console.log(category);
+function clearTaskForm() {
+    location.reload();
+}
+
+
+// Hier nur für Testzwecke
+async function getAllTasksFromServer(){
+    try {
+        allTasks = JSON.parse(await getItem('allTasks'));
+    } catch(e){
+        console.error('Loading error:', e);
+    }
+    console.log(allTasks); // nur zur Kontrolle!
 }
 
 /**
@@ -43,8 +56,8 @@ function setTaskID() {
  * @returns false if the number not exists in the Tasksarray
  */
 function IdAlreadyExists(ID) {
-    for (let i = 0; i < activUserTasks.length; i++) {
-        const taskID = activUserTasks[i].taskID;
+    for (let i = 0; i < allTasks.length; i++) {
+        const taskID = allTasks[i].taskID;
         if (taskID == ID) {
             return true;
         }
@@ -52,24 +65,15 @@ function IdAlreadyExists(ID) {
     return false;
 }
 
-
-
-
-
+/**
+ * this function set the selected priority in the clobal variable for the new task
+ * 
+ * @param {string} prio - the priority of task, selected by the user
+ */
 function setTaskPrio(prio) {
-    let taskPrio = prio
-
+    taskPrio = prio;
     setBtnCollorByPrio(prio);
 }
-
-
-
-
-
-
-
-
-
 
 /**
  * This function swaps the background color and the icon in the priority buttons
