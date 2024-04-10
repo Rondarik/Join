@@ -1,5 +1,5 @@
 let logedInAs = "max.mustermann@example.com";
-let activUserTasks = [];
+let allTasks = [];
 let allContacts = [];
 
 

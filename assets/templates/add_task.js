@@ -16,19 +16,24 @@ async function addNewTask(){
         "category": category,
         "subtasks": []
     };
-    activUserTasks.push(task);
-    await setItem('allTasks', JSON.stringify(activUserTasks));
-    console.log(activUserTasks);
+    allTasks.push(task);
+    await setItem('allTasks', JSON.stringify(allTasks));
+    console.log(allTasks);
 }
 
-async function clearTaskForm(){
-    // location.reload();
+function clearTaskForm() {
+    location.reload();
+}
+
+
+// Hier nur für Testzwecke
+async function getAllTasksFromServer(){
     try {
-        activUserTasks = JSON.parse(await getItem('allTasks'));
+        allTasks = JSON.parse(await getItem('allTasks'));
     } catch(e){
         console.error('Loading error:', e);
     }
-    console.log(activUserTasks);
+    console.log(allTasks); // nur zur Kontrolle!
 }
 
 /**
@@ -51,8 +56,8 @@ function setTaskID() {
  * @returns false if the number not exists in the Tasksarray
  */
 function IdAlreadyExists(ID) {
-    for (let i = 0; i < activUserTasks.length; i++) {
-        const taskID = activUserTasks[i].taskID;
+    for (let i = 0; i < allTasks.length; i++) {
+        const taskID = allTasks[i].taskID;
         if (taskID == ID) {
             return true;
         }
