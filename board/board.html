@@ -30,7 +30,31 @@
                 <button onclick="showAddTaskOverlay()" class="board_button">Add Task <img src="/assets/img/add.svg" alt=""></button>
             </div>
         </div>
+        <div class="process_container">
+            <div class="container_row">
+                <p class="container_row_text">To do</p>
+                <button class="plus_button" onclick="showAddTaskOverlay()"><b>+</b></button>
+            </div>
+            <div class="container_row">
+                <p class="container_row_text">In progress</p>
+                <button class="plus_button"onclick="showAddTaskOverlay()"><b>+</b></button>
+            </div>
+            <div class="container_row">
+                <p class="container_row_text">Await Feedback</p>
+                <button class="plus_button" onclick="showAddTaskOverlay()"><b>+</b></button>
+            </div>
+            <div class="container_row">
+                <p class="container_row_text">Done</p>
+            </div>
+        </div>
+        <div class="content_container">
+            <div class="content_column"></div>
+            <div class="content_column"></div>
+            <div class="content_column"></div>
+            <div class="content_column"></div>
+        </div>
     </div>
+   
 
     <div class="add_task_overlay d-none" id="addTaskOverlayID" onclick="closeAddTaskOverlay()">
         <div class="add_task_overlay_inner" onclick="doNotClose(event)">
