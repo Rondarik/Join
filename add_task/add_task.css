@@ -5,8 +5,8 @@ body {
 }
 
 .main_container {
-    margin-left: 328px;
-    margin-top: 208px;
+    margin-left: 300px;
+    margin-top: 150px;
     display: flex;
     flex-direction: column;
 

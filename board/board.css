@@ -11,10 +11,11 @@
 }
 .add_task_overlay_inner {
     background-color: #ffffff;
-    margin-left: 162px;
-    margin-top: 77px;
-    max-width: 1116px;
-    height: 870px;
+    margin-left: 160px;
+    margin-top: 70px;
+    /* max-width: 1116px; */
+    max-width: 1040px;
+    height: 670px;
     display: flex;
     justify-content: center;
     align-items: center;

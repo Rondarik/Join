@@ -1,20 +1,55 @@
 function addNewTask(){
-    console.log(activUserTasks);
     let taskTilte = document.getElementById('taskTitle').value;
-    // let taskDiscription = document.getElementById('TaskDiscription').value;
+    let taskDiscription = document.getElementById('TaskDiscription').value;
+    let date = document.getElementById('dueDate').value;
 
     let task = {
-        "taskID": "0",
+        "taskID": setTaskID(),
+        "processingStatus": "ToDo",
         "title": taskTilte,
-        "description": "Description for Task 1",
+        "description": taskDiscription,
+        "assignedTo": [],
+        "dueDate": date,
+        "prio": "medium",
+        "category": "user story",
+        "subtasks": []
     };
-  
     activUserTasks.push(task);
     console.log(activUserTasks);
 }
 
+function clearTaskForm(){
+    let category = document.getElementById('category').value;
+    console.log(category);
+}
+
+/**
+ * This function gets a number as taskId that does not yet exist 
+ * 
+ * @returns the new unique taskId
+ */
 function setTaskID() {
-    
+    let ID = 0;
+    while (IdAlreadyExists(ID)) {
+       ID++;
+    }
+    return ID;
+}
+
+/**
+ * This function looks for the passed ID in all tasks to check whether the ID already exists
+ * 
+ * @param {number} ID - Task-id
+ * @returns false if the number not exists in the Tasksarray
+ */
+function IdAlreadyExists(ID) {
+    for (let i = 0; i < activUserTasks.length; i++) {
+        const taskID = activUserTasks[i].taskID;
+        if (taskID == ID) {
+            return true;
+        }
+    }
+    return false;
 }
 
 
