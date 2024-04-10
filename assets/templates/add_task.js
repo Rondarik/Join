@@ -1,8 +1,10 @@
-function addNewTask(){
+let taskPrio = "medium";
+
+async function addNewTask(){
     let taskTilte = document.getElementById('taskTitle').value;
     let taskDiscription = document.getElementById('TaskDiscription').value;
     let date = document.getElementById('dueDate').value;
-
+    let category = document.getElementById('category').value;
     let task = {
         "taskID": setTaskID(),
         "processingStatus": "ToDo",
@@ -10,17 +12,17 @@ function addNewTask(){
         "description": taskDiscription,
         "assignedTo": [],
         "dueDate": date,
-        "prio": "medium",
-        "category": "user story",
+        "prio": taskPrio,
+        "category": category,
         "subtasks": []
     };
     activUserTasks.push(task);
+    await setItem('allTasks', JSON.stringify(activUserTasks));
     console.log(activUserTasks);
 }
 
 function clearTaskForm(){
-    let category = document.getElementById('category').value;
-    console.log(category);
+    location.reload();
 }
 
 /**
@@ -52,24 +54,15 @@ function IdAlreadyExists(ID) {
     return false;
 }
 
-
-
-
-
+/**
+ * this function set the selected priority in the clobal variable for the new task
+ * 
+ * @param {string} prio - the priority of task, selected by the user
+ */
 function setTaskPrio(prio) {
-    let taskPrio = prio
-
+    taskPrio = prio;
     setBtnCollorByPrio(prio);
 }
-
-
-
-
-
-
-
-
-
 
 /**
  * This function swaps the background color and the icon in the priority buttons
