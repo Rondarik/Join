@@ -1,11 +1,16 @@
 /* Template */
+.add_task_container{
+    height: 73%;
+    max-height: 747px;
+}
+
 .add_task_container h2 {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
     font-size: 61px;
     line-height: 120%;
-    margin-block: 6px;
+    margin-block: 0;
 }
 
 .add_task_container p {
@@ -20,6 +25,7 @@
     display: flex;
     flex-direction: column;
     width: fit-content;
+    max-height: 618px;
 }
 
 .form_container form {
@@ -29,10 +35,9 @@
 }
 
 .form_inner {
-    margin-top: 40px;
+    margin-top: 20px;
     display: flex;
     max-height: 550px;
-    height: 50vh;
 
     /* border: 1px solid red; */
 }
@@ -109,7 +114,7 @@
 .form_right {
     /* height: 416px; */
     width: 440px;
-    /* margin-bottom: 138px; */
+    /* margin-bottom: 80px; */
 
     /* border: 1px solid black; */
 }
@@ -140,8 +145,6 @@
     box-shadow: 0 0 6px -4px;
     cursor: pointer;
 }
-
-
 
 #dueDate[type="date"]::-webkit-calendar-picker-indicator {
     display: none;

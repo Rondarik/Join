@@ -26,13 +26,13 @@
                         <input class="input_styles" type="date" id="dueDate" name="dueDate" required><br>
                         <label >Prio</label><br>
                         <div class="prio_buttons">
-                            <button class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('urgent')">
+                            <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('urgent')">
                                 Urgent <img src="/assets/img/prio_urgent.svg" alt="">
                             </button>
-                            <button class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('medium')">
+                            <button type="button" class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('medium')">
                                 Medium <img src="/assets/img/prio_medium.svg" alt="">
                             </button>
-                            <button class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('low')">
+                            <button type="button" class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('low')">
                                 Low <img src="/assets/img/prio_low.svg" alt="">
                             </button>
                         </div>
@@ -54,8 +54,8 @@
             </div>
             <!-- <div class="form_spacer"></div> -->
             <div class="form_buttons">
-                <button class="clear_btn">Clear <img src="/assets/img/close.svg" alt=""></button>
-                <button class="create_btn">Create Task <img src="/assets/img/check_white.svg" alt=""></button>
+                <button type="button" class="clear_btn" onclick="clearTaskForm()">Clear <img src="/assets/img/close.svg" alt=""></button>
+                <button class="create_btn">Create Task <img src="/assets/img/check_white.svg" alt="" ></button>
             </div>
         </form>
     </div>
