@@ -96,3 +96,11 @@ let dummyContacts = [
         "Tasks": []
     }
 ];
+
+let dummyUser = [
+    {
+        "name": "Max Mustermann",
+        "eMail": "max.mustermann@example.com",
+        "password":"pw11",
+    }
+];
