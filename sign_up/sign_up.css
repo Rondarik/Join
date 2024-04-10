@@ -78,8 +78,8 @@ body{
     width: 280px;
 }
 
-.password{
-    background: url(../assets/img/passwordLock.svg) no-repeat scroll 264px 4px;
+.password-input{
+    /* background: url(../assets/img/passwordLock.svg) no-repeat scroll 264px 4px; */
     margin-bottom: 20px;
     border: solid 1px #d1d1d1;
     border-radius: 5px;
@@ -141,4 +141,23 @@ body{
 
 .d-none{
     display: none;
+}
+
+#eyeOff{
+    position: relative;
+    left: -42px;
+    top: 6px;
+    cursor: pointer;
+}
+
+#eyeOpen{
+    position: relative;
+    left: -42px;
+    top: 3px;
+}
+
+#lock{
+    position: relative;
+    left: -40px;
+    top: 7px;
 }

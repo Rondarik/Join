@@ -25,7 +25,7 @@
     <div class="loginForm">
         <h1 id="headline">Log in</h1>
         <form>
-            <div><input class="email" type="text" placeholder="Email"></div>
+            <div><input id="uEmail" class="email" type="text" placeholder="Email"></div>
 
             <div>
                 <input oninput="changingEye()" type="password" id="password" class="password-input" placeholder="Password" required>
@@ -40,7 +40,7 @@
             </div>
         </form>
         <div>
-            <button class="btnBlue">Log in</button>
+            <button onclick="saveEmailandPassword()" class="btnBlue">Log in</button>
             <button class="btnWhite">Guest Log in</button>
         </div>
     </div>

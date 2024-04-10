@@ -1,6 +1,27 @@
+let userEmail;
+let userPassword;
+
 function init(){
     document.querySelector('.wholeSite').classList.add('wholeSiteStart');
     document.querySelector('.logoBig').classList.add('logoBigStart');
+
+    loadEmailandPassword();
+
+    input = document.getElementById('password').value;
+    inputE = document.getElementById('uEmail').value;
+    if((input == null)||(inputE == null)){
+        document.getElementById('uEmail').value = '';
+        document.getElementById('password').value = '';
+    } else {
+        changingEye();
+    }
+
+    // if((input.length >= 1)||(inputE != null)){
+    //     changingEye();
+    // } else{
+    //     document.getElementById('uEmail').value = '';
+    //     document.getElementById('password').value = '';
+    // }
 }
 
 function changingEye(){
@@ -36,5 +57,21 @@ function eye(){
        document.getElementById('eyeOff').classList.remove('d-none');
        document.getElementById('eyeOpen').classList.add('d-none');
        document.getElementById('password').type = "password";
+    }
+}
+
+function saveEmailandPassword(){
+    userEmail = document.getElementById('uEmail').value;
+    userPassword = document.getElementById('password').value;
+    localStorage.setItem('Email', userEmail);
+    localStorage.setItem('Password', userPassword);
+}
+
+function loadEmailandPassword(){
+    userEmail = localStorage.getItem('Email');
+    userPassword = localStorage.getItem('Password');
+    if(userEmail || userPassword){
+        document.getElementById('uEmail').value = `${userEmail}`;
+        document.getElementById('password').value = `${userPassword}`;
     }
 }
