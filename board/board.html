@@ -13,10 +13,12 @@
     <link rel="stylesheet" href="/board/board.css">
     <script src="/assets/templates/add_task.js"></script>
     <script src="/board/board.js"></script>
+    <!-- <script src="/script.js"></script>
+    <script src="/serverCommunication.js"></script> -->
     <script src="/assets/templates/template_script.js"></script>
 </head>
 
-<body onload="includeHTML()">
+<body onload="includeHTML(), updateHTML()">
     <div w3-include-html="/assets/templates/side_menu.html"></div>
     <div w3-include-html="/assets/templates/header.html"></div>
     <div class="board_container">
@@ -48,11 +50,11 @@
             </div>
         </div>
         <div class="content_container">
-            <div class="content_column task" id="todo_column">
-                <div class="task_todo">No tasks to do</div>
-            </div>
-            <div class="content_column task" id="progress_column">
-                <div class="task_progress">
+            <div class="content_column" id="todo" ondrop="moveTo('todo')" ondragover="allowDrop(event)"></div>
+                <!-- <div class="task_todo" draggable="true" ondragstart="drag(event)">No tasks to do</div>
+            </div> -->
+            <div class="content_column" id="progress" ondrop="moveTo('progress')" ondragover="allowDrop(event)"></div>
+                <!-- <div class="task_progress">
                     <div>
                         <span class="progress_title">User Story</span>
                         <div class="progress_text">
@@ -69,9 +71,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="content_column task" id="await_feedback_column"></div>
-            <div class="content_column task" id="done_column"></div>
+                </div> -->
+            <div class="content_column" id="awaitFeedback"ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)"></div>
+            <div class="content_column" id="done"ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
         </div>
     </div>
    
