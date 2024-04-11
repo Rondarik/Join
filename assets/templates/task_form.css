@@ -108,6 +108,20 @@
 
 #assignedTo {
     margin-bottom: 0;
+    background-color: #ffffff;
+    position: relative;
+    display: inline-block;
+}
+
+.contact_to_assign_container{
+    /* display: none; */
+    position: absolute;
+    min-width: 200px;
+    max-width: 440px;
+    z-index: 1;
+    background-color: #ffffff;
+    border: 1px solid black;
+
 }
 
 /* ---------- Right Container --------- */
