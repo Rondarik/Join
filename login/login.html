@@ -25,10 +25,10 @@
     <div class="loginForm">
         <h1 id="headline">Log in</h1>
         <form>
-            <div><input id="uEmail" class="email" type="text" placeholder="Email"></div>
+            <div><input required id="uEmail" class="email" type="text" placeholder="Email"></div>
 
             <div>
-                <input oninput="changingEye()" type="password" id="password" class="password-input" placeholder="Password" required>
+                <input required oninput="changingEye()" type="password" id="password" class="password-input" placeholder="Password">
                 <img id="lock" src="../assets/img/passwordLock.svg" alt="">
                 <img onclick="eyeOn()" id="eyeOff" class="d-none" src="../assets/img/eyeOff.svg" alt="">
                 <img onclick="eye()" id="eyeOpen" class="d-none" src="../assets/img/eyeOn.svg" alt="">

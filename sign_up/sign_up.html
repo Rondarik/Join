@@ -7,42 +7,42 @@
     <link rel="stylesheet" href="./sign_up.css">
     <script src="sign_up.js"></script>
     <script src="../serverCommunication.js"></script>
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </head>
-<body>
+<body onload="init()">
     
-    
-
     <div class="top">
         <div><img src="../assets/img/logo.svg" alt="Logo"></div>
     </div>
 
-    
-   
     <div class="loginForm">
       
             <div><img class="arrowLeft" src="../assets/img/arrowLeft.svg" alt="Pfeil zurück zum Log in"></div>
             <div><h1 id="headline" class="headline">Sign Up</h1></div>
         
-        <form>
-            <div><input class="user" type="text" placeholder="Name"></div>
-            <div><input id="uEmail" class="email" type="text" placeholder="Email"></div>
-            <input oninput="changingEye()" type="password" id="password" class="password-input" placeholder="Password" required>
+        <form onsubmit="register(); return false;">
+            <label for="fullName"></label>
+            <div><input required type="text" placeholder="Name" id="remoteName" class="user" name="fullName" pattern="[A-Z][a-zA-Z]* [A-Z][a-zA-Z]*" title="Bitte geben Sie Ihren Vor- und Nachnamen ein. Der erste Buchstabe jedes Namens muss großgeschrieben sein."></div>
+            <div><input required id="remoteEmail" class="email" type="email" placeholder="Email"></div>
+            <input required oninput="changingEye()" type="password" id="remotePassword" class="password-input" placeholder="Password">
             <img id="lock" src="../assets/img/passwordLock.svg" alt="">
             <img onclick="eyeOn()" id="eyeOff" class="d-none" src="../assets/img/eyeOff.svg" alt="">
             <img onclick="eye()" id="eyeOpen" class="d-none" src="../assets/img/eyeOn.svg" alt="">
-            <div><input class="password-input" type="text" placeholder="Confirm Password"></div>
+            <div><input required class="password-input" type="password" placeholder="Confirm Password"></div>
             <div class="check">
                 <input type="checkbox" id="rememberMe" name="rememberMe" />
                 <label class="labelAccept" for="rememberMe">I accept the <a class="ankerBabyblue" href="#">Privacy policy</a></label>
             </div>
+
+            <div>
+                <button type="submit" onclick="flyIn()" id="registerBtn" class="btnBlue">Sign up</button>
+            </div>
         </form>
-        <div>
-            <button onclick="flyIn()" class="btnBlue">Sign up</button>
-        </div>
+
+     
+
     </div>
    
-
     <div class="links">
     <a class="greyAnker" href="../privicy_policy/privacy_policy.html">Privacy Policy</a>
     <a class="greyAnker" href="../legal_notice/legal_notice.html">Legal notice</a>

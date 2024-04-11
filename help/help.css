@@ -3,6 +3,11 @@ padding-left: 328px;
 padding-top: 106px;
 background-color: #F6F7F8;
 }
+.help_headline{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 h1{
 font-family: 'Inter';
 font-style: normal;
@@ -38,11 +43,9 @@ h2{
 .arrow_img{
     width: 37px;
     height: 37px;
-    position: absolute;
-    top:225px;
-    right: 200px;
     cursor: pointer;
     border-radius: 100%;
+    margin-right: 220px;
 }
 .arrow_img:hover{
     background-color: lightgray;

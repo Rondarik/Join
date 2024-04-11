@@ -158,7 +158,100 @@ input::placeholder{
 .content_column{
     width:246px;
     height: 400px;
-    border:1px solid black
+}
+.task_todo{
+    width: 246px;
+    height: 48px;
+    border-radius: 10px;
+    background: #E7E7E7;
+    border: 1px dashed #A8A8A8;
+    box-shadow: 0px 0px 4px 0px #00000029;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px; 
+    line-height: 19.2px;
+    color: #A8A8A8;
+    cursor: pointer;
+}
+.task_progress{
+    width: 210px;
+    height: 230px;
+    padding: 16px;
+    box-shadow: 0px 0px 10px 3px #00000014;
+    background: #FFFFFF;
+    gap:24px;
+    border-radius: 24px;
+    cursor: pointer;
+}
+.progress_title{
+    width: 81px;
+    height: 19px;
+    background: #0038FF;
+    border-radius: 8px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px; 
+    line-height: 19.2px;
+    color:white;
+    padding: 4px 16px;
+}
+.progress_text{
+width:220pxpx;
+height:84pxpx;
+gap:8px;
+border-radius: 10px 0px 0px 0px;
+opacity: 0px;
+}
+.text_headline{
+font-family: Inter;
+font-size: 16px;
+font-weight: 700;
+line-height: 19.2px;
+text-align: left;
+color: #2A3647;
+}
+.text_description{
+font-family: Inter;
+font-size: 16px;
+font-weight: 400;
+line-height: 19.2px;
+text-align: left;
+color: #A8A8A8;
+}
+.progress_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#file{
+    width: 128px;
+}
+.progress_text{
+font-family: Inter;
+font-size: 12px;
+font-weight: 400;
+line-height: 14.4px;
+text-align: left;
+color: black;
+}
+.contacts_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.contacts_img{
+    width: 80px;
+    height: 32px;
+}
+.prio_img{
+    width: 32px;
+    height: 32px;
 }
 .d-none {
     display: none;

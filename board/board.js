@@ -10,3 +10,4 @@ function closeAddTaskOverlay(){
 function doNotClose(event) {
     event.stopPropagation();
 }
+

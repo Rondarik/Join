@@ -63,17 +63,17 @@ body{
     font-size: 16px;
     font-weight: 400;
     color: #A8A8A8;
-    width: auto;
     height: 19px;
     margin-block-start: 0;
     margin-block-end:0;
 }
 .policy_text:hover{
     color: #2AABE2;
+font-weight: 700;
 }
 .policy_link{
     text-decoration: none;
-    width: 105px;
+    width: 110px;
     height: 35px;
     display: flex;
     align-items: center;
@@ -120,6 +120,9 @@ padding-left: 80px;
     width:104px;
     padding-right: 40px;
 }
+.initial_text:hover{
+   background-color:  #0C2E621F ;
+}
 .initial_text{
 width:56px;
 height:56px;
@@ -128,6 +131,11 @@ justify-content: center;
 align-items: center;
 border: 3px solid #2A3647;
 border-radius: 100%;
+color: #29ABE2;
+font-family: "Inter", sans-serif;
+font-size: 16px;
+font-weight: 700;
+line-height: 24px;
 cursor: pointer;
 }
 .help_img{
