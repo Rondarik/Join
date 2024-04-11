@@ -92,4 +92,27 @@ function allowDrop(ev) {
 function moveTo(processingStatus) {
     allTasks[currentDraggedElement]['processingStatus'] = processingStatus;
     updateHTML();
+    checkEmptyToDo();
+    // checkEmptyProgress();
+    // checkEmptyAwaitFeedback();
 }
+
+function checkEmptyToDo() {
+    let toDoColumn = document.getElementById('todo');
+    if (toDoColumn.innerHTML.trim() === '') {
+        toDoColumn.innerHTML = '<div class="task_todo">No tasks to do</div>';
+    }
+}
+// function checkEmptyProgress() {
+//     let progressColumn = document.getElementById('progress');
+//     if (progressColumn.innerHTML.trim() === '') {
+//         progressColumn.innerHTML = '<div class="task_todo">No tasks in Progress</div>';
+//     }
+// }
+// function checkEmptyAwaitFeedback() {
+//     let awaitFeedbackColumn = document.getElementById('awaitFeedback');
+//     if (awaitFeedbackColumn.innerHTML.trim() === '') {
+//         awaitFeedbackColumn.innerHTML = '<div class="task_todo">No tasks in Await Feedback</div>';
+//     }
+// }
+
