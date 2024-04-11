@@ -1,6 +1,7 @@
 let dummyTasks = [
     {
         "taskID": 0,
+        "processingStatus": "ToDo",
         "title": "Task 1",
         "description": "Description for Task 1",
         "assignedTo": [],
@@ -11,6 +12,7 @@ let dummyTasks = [
     },
     {
         "taskID": 1,
+        "processingStatus": "ToDo",
         "title": "Task 2",
         "description": "Description for Task 2",
         "assignedTo": [],
@@ -21,6 +23,7 @@ let dummyTasks = [
     },
     {
         "taskID": 2,
+        "processingStatus": "ToDo",
         "title": "Task 3",
         "description": "Description for Task 3",
         "assignedTo": [],
@@ -31,6 +34,7 @@ let dummyTasks = [
     },
     {
         "taskID": 3,
+        "processingStatus": "ToDo",
         "title": "Task 4",
         "description": "Description for Task 4",
         "assignedTo": [],
@@ -41,6 +45,7 @@ let dummyTasks = [
     },
     {   
         "taskID": 4,
+        "processingStatus": "ToDo",
         "title": "Task 5",
         "description": "Description for Task 5",
         "assignedTo": [],
