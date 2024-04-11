@@ -1,4 +1,10 @@
-// 
+// async function getAllTasksFromServer(){
+//     try {
+//         allTasks = await getItem('allTasks');
+//     } catch(e){
+//         console.error('Loading error:', e);
+//     }
+// }
 
 let allTasks = [{
     "taskID": 0,
@@ -73,6 +79,7 @@ function updateHTML() {
 function startDragging(taskID){
     currentDraggedElement=taskID;
 }
+
 
 function generateTodoHTML(element){
     return `<div class="task_todo" draggable="true" ondragstart="startDragging(${element['taskID']})">${element['title']}</div>`
