@@ -1,6 +1,7 @@
 let taskPrio = "medium";
 
 async function addNewTask(){
+    await getAllTasksFromServer();
     let taskTilte = document.getElementById('taskTitle').value;
     let taskDiscription = document.getElementById('TaskDiscription').value;
     let date = document.getElementById('dueDate').value;
