@@ -187,7 +187,9 @@ input::placeholder{
     background: #FFFFFF;
     gap:24px;
     border-radius: 24px;
+    margin-top: 10px;
     cursor: pointer;
+   
 }
 .progress_title{
     width: 81px;
@@ -245,6 +247,7 @@ color: black;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 16px;
 }
 .contacts_img{
     width: 80px;

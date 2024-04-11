@@ -9,7 +9,7 @@
 let allTasks = [{
     "taskID": 0,
     "processingStatus": "ToDo",
-    "title": "Einkaufen",
+    "title": "Kochwelt Page & Recipe Recommender",
 },{
     "taskID": 1,
     "processingStatus": "ToDo",
@@ -82,7 +82,24 @@ function startDragging(taskID){
 
 
 function generateTodoHTML(element){
-    return `<div class="task_todo" draggable="true" ondragstart="startDragging(${element['taskID']})">${element['title']}</div>`
+    return `<div class="task_progress"draggable="true" ondragstart="startDragging(${element['taskID']})">
+    <div>
+        <span class="progress_title">User Story</span>
+        <div class="progress_text">
+            <p class="text_headline">${element['title']}</p>
+            <p class="text_description">Build start page with recipe recommendation...</p>
+        </div>
+        <div class="progress_container">
+            <progress id="file" max="100" value="50">50%</progress>
+            <p class="progress_text">1/2 Subtasks</p>
+        </div>
+        <div class="contacts_container">
+            <img class="contacts_img" src="/assets/img/contacts_board.svg" alt="">
+            <img class="prio_img" src="/assets/img/prio_medium.svg" alt="">
+        </div>
+    </div>
+</div>
+</div>`
 }
 
 function allowDrop(ev) {
