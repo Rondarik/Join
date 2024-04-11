@@ -91,6 +91,8 @@ button{
 button:hover{
     background-color: #29ABE2;
     border: #29ABE2;
+    box-shadow: 0px 4px 4px 0px #00000040;
+
 }
 
 .btn_span{
@@ -128,6 +130,16 @@ button:hover{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.contact_layout{
+    width: 569px;
+    height: 465px;
+    position: fixed;
+    top: 206px;
+    left: 743px;
+    display: flex;
+    flex-direction: column;
 }
 
 .contact_headline{
@@ -226,6 +238,212 @@ button:hover{
     margin-bottom: -4px;
 }
 
+.contact_info_onclick {
+    margin-top: 100px;
+    margin-left: calc(100vw - 461px);
+    width: 461px;
+    height: 364px;
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+}
+
+.contact_info_onclick {
+    transition: margin-left 0.2s ease-in-out;
+}
+
+.contact_info_onclick.show {
+    margin-left: 10px;
+}
+
+.contact_info_onclick_title{
+    display: flex;
+    align-items: center;
+    width: 461px;
+    height: 120px;
+    gap: 54px;
+}
+
+.contact_info_onclick_profilebadge_layout{
+    width: 120px;
+    height: 120px;
+}
+
+.contact_info_onclick_profilebadge{
+    width: 120px;
+    height: 120px;
+    border: 3px solid;
+    border-radius: 70px;
+    background-color: #FF7A00;
+    border-color: white;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+}
+
+.contact_info_onclick_profilebadge{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    font-weight: 500;
+    font-size: 47px;
+    line-height: 56.4px;
+    text-align: center;
+    color: white;
+}
+
+.contact_info_onclick_name_edit{
+    width:287px;
+    height: 88px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contact_info_onclick_name span{
+    font-size: 47px;
+    font-weight: 500;
+    line-height: 56.4px;
+    color: black
+}
+
+.contact_info_onclick_edit_delete{
+    display: flex;
+    width: 159px;
+    height: 24px;
+    gap: 13px
+}
+
+.contact_info_onclick_edit{
+    width: 62px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.contact_info_onclick_edit img{
+    height: 18.28px;
+    width: 18.25px;
+}
+
+.contact_info_onclick_edit span{
+    width: 30px;
+    height: 19px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    color: #2A3647;
+}
+
+.contact_info_onclick_edit:hover span {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19.2px;
+    color: #29ABE2;
+}
+
+.contact_info_onclick_delete{
+    width: 81px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.contact_info_onclick_delete img{
+    height: 16px;
+    width: 18px;
+}
+
+.contact_info_onclick_delete span{
+    width: 49px;
+    height: 19px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    color: #2A3647;
+}
+
+.contact_info_onclick_delete:hover span {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19.2px;
+    color: #29ABE2;
+}
+
+.contact_info_onclick_text{
+    width: 207px;
+    height: 74px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    color: black;
+}
+
+.contact_info_onclick_email_phone{
+    width: 140px;
+    height: 128px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;   
+}
+
+.contact_info_onclick_email{
+    width: 140px;
+    height: 53px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact_info_onclick_phone{
+    width: 124px;
+    height: 53px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.email_text span{
+    width: 43px;
+    height: 19px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19.2px;
+}
+
+.email{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.2px;
+    color: #007CEE;
+}
+
+.phone_text span{
+    width: 50px;
+    height: 19px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19.2px;
+}
+
+.phone{
+    width: 124px;
+    height: 19px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.2px;
+    color: #007CEE;
+}
+
+
 .contact_dummy_name{
     font-weight: 400;
     font-size: 20px;
@@ -279,7 +497,7 @@ button:hover{
 }
 
 .contact_dummy_1:hover {
-    background: linear-gradient(to right, #cacaca2e, #6e6e6e19);
+    background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
     border-radius: 10px;
 }
 
