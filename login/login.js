@@ -1,4 +1,4 @@
-let on;
+let on = false;
 let userEmail;
 let userPassword;
 
@@ -23,6 +23,7 @@ function init(){
     //     document.getElementById('uEmail').value = '';
     //     document.getElementById('password').value = '';
     // }
+    getAllUserFromServer();
 }
 
 function changingEye(){
@@ -62,7 +63,7 @@ function eye(){
 }
 
 function saveEmailandPassword(){
-    if(on === true){
+    if(on){
     userEmail = document.getElementById('uEmail').value;
     userPassword = document.getElementById('password').value;
     localStorage.setItem('Email', userEmail);
