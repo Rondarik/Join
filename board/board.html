@@ -26,8 +26,8 @@
             <h1>Board</h1>
             <div class="search_container">
                 <div class="input_container">
-                    <input class="inputfield" type="text" placeholder="Find Task">
-                    <img class="search_img" src="/assets/img/search.svg" alt="">
+                    <input class="inputfield" type="text" placeholder="Find Task" id="search">
+                    <img class="search_img" src="/assets/img/search.svg" alt="" onkeydown="filterTasks(searchTerm)">
                 </div>
                 <button onclick="showAddTaskOverlay()" class="board_button">Add Task <img src="/assets/img/add.svg" alt=""></button>
             </div>
@@ -51,34 +51,12 @@
         </div>
         <div class="content_container">
             <div class="content_column" id="todo" ondrop="moveTo('ToDo')" ondragover="allowDrop(event)"></div>
-                <!-- <div class="task_todo" draggable="true" ondragstart="drag(event)">No tasks to do</div>
-            </div> -->
-            <!-- <div class="task_todo" draggable="true" ondragstart="startDragging(${element['taskID']})">${element['title']}</div> -->
             <div class="content_column" id="progress" ondrop="moveTo('progress')" ondragover="allowDrop(event)"></div>
-                <!-- <div class="task_progress">
-                    <div>
-                        <span class="progress_title">User Story</span>
-                        <div class="progress_text">
-                            <p class="text_headline">Kochwelt Page & Recipe Recommender</p>
-                            <p class="text_description">Build start page with recipe recommendation...</p>
-                        </div>
-                        <div class="progress_container">
-                            <progress id="file" max="100" value="50">50%</progress>
-                            <p class="progress_text">1/2 Subtasks</p>
-                        </div>
-                        <div class="contacts_container">
-                            <img class="contacts_img" src="/assets/img/contacts_board.svg" alt="">
-                            <img class="prio_img" src="/assets/img/prio_medium.svg" alt="">
-                        </div>
-                    </div>
-                </div>
-                </div> -->
             <div class="content_column" id="awaitFeedback"ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)"></div>
             <div class="content_column" id="done"ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
         </div>
     </div>
    
-
     <div class="add_task_overlay d-none" id="addTaskOverlayID" onclick="closeAddTaskOverlay()">
         <div class="add_task_overlay_inner" onclick="doNotClose(event)">
             <div w3-include-html="/assets/templates/task_form.html"></div>

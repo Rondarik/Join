@@ -11,4 +11,23 @@ function greetUser(){
                 greeting = 'Good evening,';
             }
             greet.innerHTML=greeting;
-        }
+}
+
+// function countTasksByStatus(status) {
+//     return allTasks.filter(task => task.processingStatus === status).length;
+// }
+
+// function updateSummary() {
+//     const todoCount = countTasksByStatus('ToDo');
+//     const progressCount = countTasksByStatus('progress');
+//     const awaitFeedbackCount = countTasksByStatus('awaitFeedback');
+//     const doneCount = countTasksByStatus('done');
+
+//     document.getElementById('todoCount').innerText = todoCount;
+//     document.getElementById('progressCount').innerText = progressCount;
+//     document.getElementById('awaitFeedbackCount').innerText = awaitFeedbackCount;
+//     document.getElementById('doneCount').innerText = doneCount;
+// }
+
+
+

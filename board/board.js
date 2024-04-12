@@ -1,31 +1,54 @@
-// async function getAllTasksFromServer(){
-//     try {
-//         allTasks = await getItem('allTasks');
-//     } catch(e){
-//         console.error('Loading error:', e);
-//     }
-// }
-
+let filteredTasks=[];
 let allTasks = [{
     "taskID": 0,
     "processingStatus": "ToDo",
     "title": "Kochwelt Page & Recipe Recommender",
+    "description":'Build start page with recipe recommendation...',
+    "assignedTo":[],
+    "dueDate":10/5/2023,
+    "prio":'/assets/img/prio_medium.svg',
+    "category":'User Story',
+    "subtasks":['Start Page Loyout', 'Implement Recipe Recommendation']
+
 },{
     "taskID": 1,
-    "processingStatus": "ToDo",
-    "title": "Lernen",
+    "processingStatus": "progress",
+    "title": "HTML Base Template Creation",
+    "description":'Create reusable HTML base templates...',
+    "assignedTo":[],
+    "dueDate":10/5/2023,
+    "prio":'/assets/img/prio_low.svg',
+    "category":'Technical Task',
+    "subtasks":[]
+
 },
 {
     "taskID": 2,
-    "processingStatus": "ToDo",
-    "title": "Projekt",
+    "processingStatus": "progress",
+    "title": "Daily Kochwelt Recipe",
+    "description":'Implement daily recipe and portion calculator....',
+    "assignedTo":[],
+    "dueDate":10/5/2023,
+    "prio":'/assets/img/prio_medium.svg',
+    "category":'User Story',
+    "subtasks":['Start Page Loyout', 'Implement Recipe Recommendation']
+
 },
 {
     "taskID": 3,
-    "processingStatus": "ToDo",
-    "title": "Putzen",
+    "processingStatus": "awaitFeedback",
+    "title": "CSS Architecture Planning",
+    "description":'Define CSS naming conventions and structure...',
+    "assignedTo":[],
+    "dueDate":10/5/2023,
+    "prio":'/assets/img/prio_urgent.svg',
+    "category":'Technical Task',
+    "subtasks":[]
+
 
 }];
+
+
 
 function showAddTaskOverlay() {
     document.getElementById('addTaskOverlayID').classList.remove('d-none');
@@ -74,6 +97,7 @@ function updateHTML() {
         const element = done[index];
         document.getElementById('done').innerHTML += generateTodoHTML(element);
     }
+    // updateSummary();
 }
 
 function startDragging(taskID){
@@ -82,12 +106,18 @@ function startDragging(taskID){
 
 
 function generateTodoHTML(element){
+    let categoryColor = '';
+    if(element['category'] === 'User Story') {
+        categoryColor = '#0038FF';
+    } else if(element['category'] === 'Technical Task') {
+        categoryColor = '#1FD7C1'; 
+    }
     return `<div class="task_progress"draggable="true" ondragstart="startDragging(${element['taskID']})">
     <div>
-        <span class="progress_title">User Story</span>
+        <span class="progress_title" style="background-color: ${categoryColor};">${element['category']}</span>
         <div class="progress_text">
             <p class="text_headline">${element['title']}</p>
-            <p class="text_description">Build start page with recipe recommendation...</p>
+            <p class="text_description">${element['description']}</p>
         </div>
         <div class="progress_container">
             <progress id="file" max="100" value="50">50%</progress>
@@ -95,7 +125,7 @@ function generateTodoHTML(element){
         </div>
         <div class="contacts_container">
             <img class="contacts_img" src="/assets/img/contacts_board.svg" alt="">
-            <img class="prio_img" src="/assets/img/prio_medium.svg" alt="">
+            <img class="prio_img" src="${element['prio']}" alt="">
         </div>
     </div>
 </div>
@@ -110,26 +140,42 @@ function moveTo(processingStatus) {
     allTasks[currentDraggedElement]['processingStatus'] = processingStatus;
     updateHTML();
     checkEmptyToDo();
-    // checkEmptyProgress();
-    // checkEmptyAwaitFeedback();
+    checkEmptyDone();
+    checkEmptyProgress();
+    checkEmptyAwaitFeedback();
+}
+function checkEmptyColumn(columnId, message) {
+    let column = document.getElementById(columnId);
+    if (column.innerHTML.trim() === '') {
+        column.innerHTML = `<div class="task_todo">${message}</div>`;
+    }
 }
 
 function checkEmptyToDo() {
-    let toDoColumn = document.getElementById('todo');
-    if (toDoColumn.innerHTML.trim() === '') {
-        toDoColumn.innerHTML = '<div class="task_todo">No tasks to do</div>';
-    }
+    checkEmptyColumn('todo', 'No tasks to do');
 }
-// function checkEmptyProgress() {
-//     let progressColumn = document.getElementById('progress');
-//     if (progressColumn.innerHTML.trim() === '') {
-//         progressColumn.innerHTML = '<div class="task_todo">No tasks in Progress</div>';
-//     }
-// }
-// function checkEmptyAwaitFeedback() {
-//     let awaitFeedbackColumn = document.getElementById('awaitFeedback');
-//     if (awaitFeedbackColumn.innerHTML.trim() === '') {
-//         awaitFeedbackColumn.innerHTML = '<div class="task_todo">No tasks in Await Feedback</div>';
-//     }
-// }
+
+function checkEmptyProgress() {
+    checkEmptyColumn('progress', 'No tasks in Progress');
+}
+
+function checkEmptyAwaitFeedback() {
+    checkEmptyColumn('awaitFeedback', 'No tasks in Await Feedback');
+}
+
+function checkEmptyDone() {
+    checkEmptyColumn('done', 'No tasks Done');
+}
+function filterTasks(searchTerm) {
+    let search = document.getElementById('search').value;
+    search= search.toLowerCase(); 
+    let filteredTasks = allTasks.filter(task => {
+        // Überprüfe, ob der Titel oder die Beschreibung das Suchkriterium enthalten
+        return task.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+               task.description.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+
+    return filteredTasks;
+}
+
 

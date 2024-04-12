@@ -86,9 +86,12 @@ font-weight: 700;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap:4px;
-    
+    gap:4px;  
 }
+.sideMenuLinkActive {
+    background-color: #091931;
+}
+
 header{
     height: 96px;
     position: fixed;
