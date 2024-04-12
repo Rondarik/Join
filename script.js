@@ -1,8 +1,8 @@
-let logedInAs = "max.mustermann@example.com";
+let logedInAs = "";
 let allTasks = [];
 let allUser = [];
 let allContacts = [];
 
-function wirSendenzumServer(){
-    setItem('allUser',allUser);
+async function deleteAllUser(){
+    await setItem('allUser', JSON.stringify([]));
 }

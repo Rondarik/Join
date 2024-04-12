@@ -43,6 +43,7 @@ body{
     position: relative;
     top: 96px;
     left: -176px;
+    cursor: pointer;
 }
 
 .btnBlue{
@@ -154,10 +155,33 @@ body{
     position: relative;
     left: -42px;
     top: 3px;
+    cursor: pointer;
 }
 
 #lock{
     position: relative;
     left: -40px;
     top: 7px;
+    cursor: pointer;
+}
+
+#eyesOff{
+    position: relative;
+    left: 262px;
+    top: -50px;
+    cursor: pointer;
+}
+
+#eyesOpen{
+    position: relative;
+    left: 262px;
+    top: -50px;
+    cursor: pointer;
+}
+
+#locks {
+    position: relative;
+    left: 262px;
+    top: -50px;
+    cursor: pointer;
 }

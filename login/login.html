@@ -6,6 +6,8 @@
     <title>Log in</title>
     <link rel="stylesheet" href="./login.css">
     <script src="./login.js"></script>
+    <script src="../script.js"></script>
+    <script src="../serverCommunication.js"></script>
 </head>
 <body onload="init()">
     
@@ -18,7 +20,7 @@
         
         <div class="signUp">
             <span>Not a Join user?</span>
-            <button class="btnBlue">Sign up</button>
+            <a href="../sign_up/sign_up.html"><button class="btnBlue">Sign up</button></a>
         </div>
     </div>
 
@@ -35,18 +37,20 @@
             </div>
 
             <div class="check">
-                <input type="checkbox" id="rememberMe" name="rememberMe" required/>
-                <label for="rememberMe">Remember me</label>
+                <img onclick="checked()" id="checkboxOff" src="../assets/img/checkboxOff.svg" alt="">
+                <img onclick="unchecked()" id="checkboxOn" class="d-none" src="../assets/img/checkboxOn.svg" alt="">
+                <span>Remember me</span>
             </div>
-        </form>
+        
         <div>
-            <button onclick="saveEmailandPassword()" class="btnBlue">Log in</button>
+            <button onclick="saveEmailandPassword()" class="btnBlue"><a href="../summary/summary.html">Log in</a></button>
             <button class="btnWhite">Guest Log in</button>
         </div>
+        </form>
     </div>
 
     <div class="links">
-    <a class="greyAnker policy" href="../privicy_policy/privacy_policy.html">Privacy Policy</a>
+    <a class="greyAnker policy" href="../privacy_policy/privacy_policy.html">Privacy Policy</a>
     <a class="greyAnker legal" href="../legal_notice/legal_notice.html">Legal notice</a>
     </div>
     

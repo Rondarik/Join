@@ -1,3 +1,4 @@
+let on;
 let userEmail;
 let userPassword;
 
@@ -61,10 +62,12 @@ function eye(){
 }
 
 function saveEmailandPassword(){
+    if(on === true){
     userEmail = document.getElementById('uEmail').value;
     userPassword = document.getElementById('password').value;
     localStorage.setItem('Email', userEmail);
     localStorage.setItem('Password', userPassword);
+    logedInAs = userEmail;}
 }
 
 function loadEmailandPassword(){
@@ -74,4 +77,16 @@ function loadEmailandPassword(){
         document.getElementById('uEmail').value = `${userEmail}`;
         document.getElementById('password').value = `${userPassword}`;
     }
+}
+
+function checked(){
+    document.getElementById('checkboxOff').classList.add('d-none');
+    document.getElementById('checkboxOn').classList.remove('d-none');
+    on = true;
+}
+
+function unchecked(){
+    document.getElementById('checkboxOff').classList.remove('d-none');
+    document.getElementById('checkboxOn').classList.add('d-none');
+    on = false;
 }

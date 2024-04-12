@@ -71,3 +71,50 @@ function resetForm(){
 async function loadUsers(){
     allUser = await getItem('allUser');
 }
+
+// alle Mails vom Server downloaden
+// vergleichen ob Email bereits vorhanden ist
+//wennn ja dann Fehlermeldung -> rote Schrift darunter
+// wenn richtig neuen User anlegen
+
+// async function checkUser(){
+//     if('remoteEmail' = true){
+
+//     } else {
+
+//     }
+// }
+
+function changingEyes(){ 
+    document.getElementById('locks').classList.add('d-none');
+    if(document.getElementById('remoteCPassword').type =="password"){
+        document.getElementById('eyesOff').classList.remove('d-none');
+        document.getElementById('eyesOpen').classList.add('d-none');
+    }else {
+        document.getElementById('eyesOpen').classList.remove('d-none');
+        document.getElementById('eyesOff').classList.add('d-none');
+    }
+    iput = document.getElementById('remoteCPassword').value;
+    if(iput.length < 1){
+        document.getElementById('locks').classList.remove('d-none'); 
+        document.getElementById('eyesOff').classList.add('d-none');
+        document.getElementById('eyesOpen').classList.add('d-none');
+        document.getElementById('remoteCPassword').type = "password";
+    } 
+}
+
+function eyesOn(){
+    if(document.getElementById('remoteCPassword').type =="password"){
+        document.getElementById('eyesOff').classList.add('d-none');
+        document.getElementById('eyesOpen').classList.remove('d-none');
+        document.getElementById('remoteCPassword').type = "text";
+    } 
+}
+
+function eyes(){
+    if(document.getElementById('remoteCPassword').type =="text"){
+       document.getElementById('eyesOff').classList.remove('d-none');
+       document.getElementById('eyesOpen').classList.add('d-none');
+       document.getElementById('remoteCPassword').type = "password";
+    }
+}

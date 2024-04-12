@@ -8,6 +8,7 @@
     <script src="sign_up.js"></script>
     <script src="../serverCommunication.js"></script>
     <script src="../script.js"></script>
+    <script src="../login/login.js"></script>
 </head>
 <body onload="init()">
     
@@ -17,7 +18,7 @@
 
     <div class="loginForm">
       
-            <div><img class="arrowLeft" src="../assets/img/arrowLeft.svg" alt="Pfeil zurück zum Log in"></div>
+            <div><a href="../login/login.html"><img class="arrowLeft" src="../assets/img/arrowLeft.svg" alt="Pfeil zurück zum Log in"></a></div>
             <div><h1 id="headline" class="headline">Sign Up</h1></div>
         
         <form onsubmit="register(); return false;">
@@ -28,11 +29,22 @@
             <img id="lock" src="../assets/img/passwordLock.svg" alt="">
             <img onclick="eyeOn()" id="eyeOff" class="d-none" src="../assets/img/eyeOff.svg" alt="">
             <img onclick="eye()" id="eyeOpen" class="d-none" src="../assets/img/eyeOn.svg" alt="">
-            <div><input required class="password-input" type="password" placeholder="Confirm Password"></div>
+            <div><input required oninput="changingEyes()" id="remoteCPassword" class="password-input" type="password" placeholder="Confirm Password"></div>
+            <img id="locks" src="../assets/img/passwordLock.svg" alt="">
+            <img onclick="eyesOn()" id="eyesOff" class="d-none" src="../assets/img/eyeOff.svg" alt="">
+            <img onclick="eyes()" id="eyesOpen" class="d-none" src="../assets/img/eyeOn.svg" alt="">
+           
+           
             <div class="check">
-                <input type="checkbox" id="rememberMe" name="rememberMe" />
-                <label class="labelAccept" for="rememberMe">I accept the <a class="ankerBabyblue" href="#">Privacy policy</a></label>
+                <img onclick="checked()" id="checkboxOff" src="../assets/img/checkboxOff.svg" alt="">
+                <img onclick="unchecked()" id="checkboxOn" class="d-none" src="../assets/img/checkboxOn.svg" alt="">
+                <span>I accept the <a class="ankerBabyblue" href="#">Privacy policy</a></span>
             </div>
+           
+           
+                
+               
+            
 
             <div>
                 <button type="submit" onclick="flyIn()" id="registerBtn" class="btnBlue">Sign up</button>
@@ -44,7 +56,7 @@
     </div>
    
     <div class="links">
-    <a class="greyAnker" href="../privicy_policy/privacy_policy.html">Privacy Policy</a>
+    <a class="greyAnker" href="../privacy_policy/privacy_policy.html">Privacy Policy</a>
     <a class="greyAnker" href="../legal_notice/legal_notice.html">Legal notice</a>
     </div>
     
