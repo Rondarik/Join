@@ -1,8 +1,8 @@
 let taskPrio = "medium";
+let assignedContacts = [];
 
-async function addNewTask(){
+async function addNewTask() {
     await getAllTasksFromServer();
-
     let taskTilte = document.getElementById('taskTitle').value;
     let taskDiscription = document.getElementById('TaskDiscription').value;
     let date = document.getElementById('dueDate').value;
@@ -18,8 +18,8 @@ async function addNewTask(){
         "category": category,
         "subtasks": []
     };
-    allTasks.push(task);
-    await setItem('allTasks', JSON.stringify(allTasks));
+    // allTasks.push(task);
+    // await setItem('allTasks', JSON.stringify(allTasks));
     console.log(allTasks);
 }
 
@@ -29,15 +29,55 @@ async function clearTaskForm() {
     getAllTasksFromServer();
 }
 
+function showAssignablContacts() {
+    document.getElementById('assign_arrow_up').classList.toggle('d-none');
+    document.getElementById('assign_arrow_down').classList.toggle('d-none');
+    let contactsContainer = document.getElementById('contact_to_assign_containerID');
+    contactsContainer.classList.toggle('d-none');
+    contactsContainer.innerHTML = '';
+    renderAllContacts(contactsContainer);
+}
+
+function renderAllContacts(contactsContainer) {
+    for (let i = 0; i < dummyContacts.length; i++) {
+        const bgColor = dummyContacts[i].color;
+        const userName = dummyContacts[i].name;
+        const initials = makeInitials(userName);
+        console.log(initials);
+        contactsContainer.innerHTML += renderAssignablContactsHTML(bgColor,initials,userName,i);
+    }
+}
+
+function makeInitials(string){
+        var names = string.split(' '),
+            initials = names[0].substring(0, 1).toUpperCase();
+        if (names.length > 1) {
+            initials += names[names.length - 1].substring(0, 1).toUpperCase();
+        }
+        return initials;
+    }
+
+function renderAssignablContactsHTML(bgColor,initials,userName,id) {
+    return /*html*/ `
+        <div class="contact_to_assign_box" onclick="addContanctToTask(${id})" >
+            <div class="user_name_box">
+                <div class="user_tag" style="background-color: ${bgColor}">${initials}</div>
+                <div class="user_name">${userName}</div>
+            </div>
+            <img src="/assets/img/checkboxOff.svg" alt="">
+            <img class="d-none" src="/assets/img/checkboxOn.svg" alt="">
+        </div>
+    `;
+}
+
 
 // Hier nur für Testzwecke
-async function getAllTasksFromServer(){
+async function getAllTasksFromServer() {
     try {
-        allTasks = JSON.parse(await getItem('allTasks'));
-    } catch(e){
+        allTasks = await getItem('allTasks');
+    } catch (e) {
         console.error('Loading error:', e);
     }
-    console.log(allTasks); // nur zur Kontrolle!
 }
 
 /**
@@ -48,7 +88,7 @@ async function getAllTasksFromServer(){
 function setTaskID() {
     let ID = 0;
     while (IdAlreadyExists(ID)) {
-       ID++;
+        ID++;
     }
     return ID;
 }

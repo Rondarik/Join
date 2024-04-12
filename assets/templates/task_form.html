@@ -1,73 +1,79 @@
 <div class="add_task_container">
     <h2>Add Task</h2>
     <div class="form_container">
-        <form onsubmit="addNewTask();return false;">
-            <div class="form_inner">
-                <div class="form_left">
+        <div class="form_inner">
+            <div class="form_left">
+                <div class="title_container">
                     <label for="taskTitle">Title<span style="color: #ffa800;">*</span></label><br>
                     <input class="input_styles" type="text" id="taskTitle" placeholder="Enter a title" required><br>
+                    <p class="error_message">This field is required</p>
+                </div>
+                <div class="discripton_container">
                     <label for="TaskDiscription">Discription</label><br>
-                    <textarea class="input_styles" name="" id="TaskDiscription"
+                    <textarea class="input_styles" name="" id="taskDiscription"
                         placeholder="Enter a Discription"></textarea><br>
+                </div>
+                <div class="dropdown_container">
                     <label for="assignedTo">Assigned to</label><br>
-                    <!-- <select class="input_styles" name="assignedTo" id="assignedTo">
-                        <option value="" selected disabled hidden multiple>Select contacts to assign</option>
-                        
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                    </select> -->
                     <div class="dropdown">
-                        <div class="input_styles" id="assignedTo"></div>
-                        <div class="contact_to_assign_container">
-                            <div class="contact_to_assign">Aaaaa</div>
-                            <div class="contact_to_assign">Bbbbb</div>
-                            <div class="contact_to_assign">Ccccc</div>
+                        <div class="input_styles" id="assignedTo" onclick="showAssignablContacts()">Select contacts to assign
+                            <img id="assign_arrow_down" src="/assets/img/arrow_drop_down.svg" alt="">
+                            <img id="assign_arrow_up" class="d-none" src="/assets/img/arrow_up_drop_down.svg" alt="">
+                        </div>
+                        <div class="contact_to_assign_container d-none" id="contact_to_assign_containerID">
+                        <!-- render content -->
                         </div>
                     </div>
-                    <div class="assign_contact_container">T E S T</div>
-                </div>
-                <div class="separator"></div>
-                <div class="form_right">
-                    <div class="form_buttons">
-                        <label for="dueDate">Due date<span style="color: #ffa800;">*</span></label><br>
-                        <input class="input_styles" type="date" id="dueDate" name="dueDate" required><br>
-                        <label>Prio</label><br>
-                        <div class="prio_buttons">
-                            <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('urgent')">
-                                Urgent <img src="/assets/img/prio_urgent.svg" alt="">
-                            </button>
-                            <button type="button" class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('medium')">
-                                Medium <img src="/assets/img/prio_medium.svg" alt="">
-                            </button>
-                            <button type="button" class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('low')">
-                                Low <img src="/assets/img/prio_low.svg" alt="">
-                            </button>
-                        </div>
-                        <label for="category">Category<span style="color: #ffa800;">*</span></label><br>
-                        <select class="input_styles" name="cars" id="category" required>
-                            <option value="" selected disabled hidden>Select task category <img
-                                    src="/assets/img/event_calendar.svg" alt=""></option>
-                            <option value="technikalTask">Technical Task</option>
-                            <option value="userStory">User Story</option>
-                        </select><br>
-                        <label for="subtasks">Subtasks</label><br>
-                        <select class="input_styles" name="cars" id="subtasks">
-                            <option value="volvo">Add new subtask</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
-                        </select>
+                    <div class="assign_contact_container">
+                        <div class="user_tag">BB</div>
                     </div>
                 </div>
             </div>
-            <!-- <div class="form_spacer"></div> -->
+            <div class="separator"></div>
+            <div class="form_right">
+                <div class="form_buttons">
+                    <label for="dueDate">Due date<span style="color: #ffa800;">*</span></label><br>
+                    <input class="input_styles" type="date" id="dueDate" name="dueDate" required><br>
+                    <p class="error_message">This field is required</p>
+                    <label>Prio</label><br>
+                    <div class="prio_buttons">
+                        <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('urgent')">
+                            Urgent <img src="/assets/img/prio_urgent.svg" alt="">
+                        </button>
+                        <button type="button" class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('medium')">
+                            Medium <img src="/assets/img/prio_medium.svg" alt="">
+                        </button>
+                        <button type="button" class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('low')">
+                            Low <img src="/assets/img/prio_low.svg" alt="">
+                        </button>
+                    </div>
+                    <label for="category">Category<span style="color: #ffa800;">*</span></label><br>
+                    <select class="input_styles" name="cars" id="category" required>
+                        <option value="" selected disabled hidden>Select task category <img
+                                src="/assets/img/event_calendar.svg" alt=""></option>
+                        <option value="technikalTask">Technical Task</option>
+                        <option value="userStory">User Story</option>
+                    </select><br>
+                    <p class="error_message">This field is required</p>
+                    <label for="subtasks">Subtasks</label><br>
+                    <select class="input_styles" name="cars" id="subtasks">
+                        <option value="volvo">Add new subtask</option>
+                        <option value="saab">Saab</option>
+                        <option value="opel">Opel</option>
+                        <option value="audi">Audi</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="form_spacer"></div> -->
+        <div class="form_bottom_container">
+            <p><span style="color: #ffa800;">*</span>This field is required</p>
             <div class="form_buttons">
                 <button type="button" class="clear_btn" onclick="clearTaskForm()">Clear <img src="/assets/img/close.svg"
                         alt=""></button>
-                <button class="create_btn">Create Task <img src="/assets/img/check_white.svg" alt=""></button>
+                <button class="create_btn" onclick="addNewTask()">Create Task <img src="/assets/img/check_white.svg"
+                        alt=""></button>
             </div>
-        </form>
+        </div>
     </div>
-    <p><span style="color: #ffa800;">*</span>This field is required</p>
 </div>
