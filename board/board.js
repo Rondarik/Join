@@ -1,4 +1,4 @@
-let filteredTasks=[];
+
 let allTasks = [{
     "taskID": 0,
     "processingStatus": "ToDo",
@@ -44,8 +44,6 @@ let allTasks = [{
     "prio":'/assets/img/prio_urgent.svg',
     "category":'Technical Task',
     "subtasks":[]
-
-
 }];
 
 
@@ -95,10 +93,12 @@ function updateHTML() {
     document.getElementById('done').innerHTML = '';
     for (let index = 0; index < done.length; index++) {
         const element = done[index];
-        document.getElementById('done').innerHTML += generateTodoHTML(element);
+        document.getElementById('done').innerHTML += generateTodoHTML(element,index);
     }
     // updateSummary();
 }
+
+
 
 function startDragging(taskID){
     currentDraggedElement=taskID;
@@ -112,7 +112,9 @@ function generateTodoHTML(element){
     } else if(element['category'] === 'Technical Task') {
         categoryColor = '#1FD7C1'; 
     }
-    return `<div onclick="openBigTask()" class="task_progress"draggable="true" ondragstart="startDragging(${element['taskID']})">
+
+    return `<div onclick="openBigTask(allTasks[0])" class="task_progress" draggable="true" ondragstart="startDragging(${element['taskID']})">
+
     <div>
         <span class="progress_title" style="background-color: ${categoryColor};">${element['category']}</span>
         <div class="progress_text">
@@ -130,6 +132,7 @@ function generateTodoHTML(element){
     </div>
 </div>
 </div>`
+
 }
 
 function allowDrop(ev) {
@@ -167,41 +170,59 @@ function checkEmptyDone() {
     checkEmptyColumn('done', 'No tasks Done');
 }
 
-function openBigTask(){
+function openBigTask(element){
     document.getElementById('bigTask').classList.remove('d-none');
     document.getElementById('bigTask').classList.add('show');
+    let bigTask = document.getElementById('bigTask');
+    bigTask.innerHTML =showBigTask(element);
 }
 
 function closeBigTask(){
     document.getElementById('bigTask').classList.add('d-none');
 }
-// function showBigTask(element){
-//         return /*html*/`
-//         <div>
-//             <span>${element['category']}</span>
-//             <div>
-//                 <h2>${element['title']}</h2>
-//                 <p>${element['description']}</p>
-//             </div>
-//             <span>${element['dueDate']}</span>
-//             <span>${element['priority']}</span>
-//             <div>
-//                 <h3>Assigned To:</h3>
-//                 <li>${element['assignedTo']}</li>
-//             </div>
-//             <div>
-//                 <h3>Subtasks</h3>
-//                 <input type="checkbox">
-//             </div>
-//             <div>
-//                 <div>
-//                     <img src="/assets/img/delete.svg" alt="">
-//                     <p>Delete</p>
-//                 </div>
-//                 <div>
-//                     <img src="/assets/img/edit.svg" alt="">
-//                     <p>Edit</p>
-//                 </div>
-//             </div>
-//         </div>`
-// }
+
+function showBigTask(element){
+    let categoryColor = '';
+    if(element['category'] === 'User Story') {
+        categoryColor = '#0038FF';
+    } else if(element['category'] === 'Technical Task') {
+        categoryColor = '#1FD7C1'; 
+    }
+    return /*html*/`
+        <div onclick="doNotClose(event)" class="bigTaskInner">
+        <div class="bigHeadline">
+            <p class="bigHeadlineText" style="background-color: ${categoryColor};">${element['category']}</p>
+            <img onclick="closeBigTask()" class="bigHeadlineImg" src="/assets/img/close.svg" alt="">
+        </div>
+        <div>
+            <h2 class="bigTitle">${element['title']}</h2>
+            <p class="bigInfosText">${element['description']}</p>
+        </div>
+        <div>
+            <p class="bigInfosText">Due date: ${element['dueDate']}</p>
+            <p class="bigInfosText">Priority: Medium <img src="${element['prio']}" alt=""></p>
+        </div>
+                <div class="bigInfosText">
+                    <h3 class="h3">Assigned To:</h3>
+                    <li>Max Muster</li>
+                    <li>Marcus Header</li>
+                    <li>Mevlida Salendrkovic</li>
+                </div>
+                <div class="bigInfosText">
+                    <h3 class="h3">Subtasks</h3>
+                    <input type="checkbox">Implement Recipe Recommendation<br>
+                    <input type="checkbox">Start Page Loyout
+                </div>
+                <div class="delete_edit_container">
+                    <div class="delete_container">
+                        <img class="delete_edit_img" src="/assets/img/delete.svg" alt="">
+                        <p class="delete_edit_text">Delete</p>
+                    </div>
+                    <div class="delete_edit_line"></div>
+                    <div class="edit_container">
+                        <img class="delete_edit_img" src="/assets/img/edit.svg" alt="">
+                        <p class="delete_edit_text">Edit</p>
+                    </div>
+                </div>
+</div>`
+}
