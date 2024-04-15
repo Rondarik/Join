@@ -1,12 +1,4 @@
 /* Template */
-.add_task_container {
-    /* height: 73%; */
-    /* height: 73vh; */
-    /* box-sizing: border-box; */
-    /* max-height: 747px; */
-    /* border: 1px solid black; */
-}
-
 .add_task_container h2 {
     font-family: 'Inter';
     font-style: normal;
@@ -31,7 +23,6 @@
     width: fit-content;
     max-height: 618px;
 
-    /* height: 100%; */
     /* border: 1px solid blue; */
 }
 
@@ -39,7 +30,6 @@
     margin-top: 20px;
     display: flex;
     margin-bottom: 100px;
-    /* flex-direction: column; */
 
     /* border: 1px solid red; */
 }
