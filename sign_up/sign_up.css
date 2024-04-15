@@ -127,7 +127,7 @@ body{
     align-items: center;
     width: 100%;
 
-    animation: fly 2s ease 1;
+    animation: fly 500ms ease 1;
     position: fixed;
     top: 50vh;
   
@@ -184,4 +184,14 @@ body{
     left: 262px;
     top: -50px;
     cursor: pointer;
+}
+
+input[type="password"]{
+    border:2px solid #29ABE2;
+}
+
+p{
+    font-size: 14px;
+    display: inline-block;
+    color: white;
 }

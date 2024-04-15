@@ -11,11 +11,11 @@
 </head>
 <body onload="init()">
     
-    <div class="wholeSite">
-        <img class="logoBig" src="../assets/img/logoBig.svg" alt="Logo groß">
+    <div id="whole" class="wholeSite">
+        <img id="big" class="logoBig" src="../assets/img/logoBig.svg" alt="Logo groß">
     </div>
 
-    <div class="top">
+    <div id="top" class="top">
 
         
         <div class="signUp">
@@ -24,9 +24,9 @@
         </div>
     </div>
 
-    <div class="loginForm">
+    <div id="loginForm" class="loginForm">
         <h1 id="headline">Log in</h1>
-        <form>
+        <form id="formLogin" onsubmit="saveEmailandPassword();return false;">
             <div><input required id="uEmail" class="email" type="text" placeholder="Email"></div>
 
             <div>
@@ -42,16 +42,19 @@
                 <span>Remember me</span>
             </div>
         
-        <div>
-            <button onclick="saveEmailandPassword()" class="btnBlue"><a href="../summary/summary.html">Log in</a></button>
-            <button class="btnWhite">Guest Log in</button>
-        </div>
+        
         </form>
+        
+        <div>
+            <button form="formLogin" type="submit" class="btnBlue">Log in</button>
+            <button class="btnWhite" type="button">Guest Log in</button>
+        </div>
+
     </div>
 
     <div class="links">
-    <a class="greyAnker policy" href="../privacy_policy/privacy_policy.html">Privacy Policy</a>
-    <a class="greyAnker legal" href="../legal_notice/legal_notice.html">Legal notice</a>
+    <a id="privat" class="greyAnker policy" href="../privacy_policy/privacy_policy.html">Privacy Policy</a>
+    <a id="legal" class="greyAnker legal" href="../legal_notice/legal_notice.html">Legal notice</a>
     </div>
     
 </body>

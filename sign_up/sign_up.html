@@ -8,7 +8,6 @@
     <script src="sign_up.js"></script>
     <script src="../serverCommunication.js"></script>
     <script src="../script.js"></script>
-    <script src="../login/login.js"></script>
 </head>
 <body onload="init()">
     
@@ -20,8 +19,8 @@
       
             <div><a href="../login/login.html"><img class="arrowLeft" src="../assets/img/arrowLeft.svg" alt="Pfeil zurück zum Log in"></a></div>
             <div><h1 id="headline" class="headline">Sign Up</h1></div>
-        
-        <form onsubmit="register(); return false;">
+           
+        <form id="formSignUp" onsubmit="register(); return false;">
             <label for="fullName"></label>
             <div><input required type="text" placeholder="Name" id="remoteName" class="user" name="fullName" pattern="[A-Z][a-zA-Z]* [A-Z][a-zA-Z]*" title="Bitte geben Sie Ihren Vor- und Nachnamen ein. Der erste Buchstabe jedes Namens muss großgeschrieben sein."></div>
             <div><input required id="remoteEmail" class="email" type="email" placeholder="Email"></div>
@@ -30,10 +29,10 @@
             <img onclick="eyeOn()" id="eyeOff" class="d-none" src="../assets/img/eyeOff.svg" alt="">
             <img onclick="eye()" id="eyeOpen" class="d-none" src="../assets/img/eyeOn.svg" alt="">
             <div><input required oninput="changingEyes()" id="remoteCPassword" class="password-input" type="password" placeholder="Confirm Password"></div>
+            <p id="message"></p>
             <img id="locks" src="../assets/img/passwordLock.svg" alt="">
             <img onclick="eyesOn()" id="eyesOff" class="d-none" src="../assets/img/eyeOff.svg" alt="">
             <img onclick="eyes()" id="eyesOpen" class="d-none" src="../assets/img/eyeOn.svg" alt="">
-           
            
             <div class="check">
                 <img onclick="checked()" id="checkboxOff" src="../assets/img/checkboxOff.svg" alt="">
@@ -41,17 +40,10 @@
                 <span>I accept the <a class="ankerBabyblue" href="#">Privacy policy</a></span>
             </div>
            
-           
-                
-               
-            
-
             <div>
-                <button type="submit" onclick="flyIn()" id="registerBtn" class="btnBlue">Sign up</button>
+                <button type="submit" id="registerBtn" class="btnBlue">Sign up</button>
             </div>
         </form>
-
-     
 
     </div>
    

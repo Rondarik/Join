@@ -3,11 +3,13 @@ let userEmail;
 let userPassword;
 
 function init(){
-    document.querySelector('.wholeSite').classList.add('wholeSiteStart');
-    document.querySelector('.logoBig').classList.add('logoBigStart');
+    
 
+    
+    animation();
+    
+    
     loadEmailandPassword();
-
     input = document.getElementById('password').value;
     inputE = document.getElementById('uEmail').value;
     if((input == null)||(inputE == null)){
@@ -68,7 +70,9 @@ function saveEmailandPassword(){
     userPassword = document.getElementById('password').value;
     localStorage.setItem('Email', userEmail);
     localStorage.setItem('Password', userPassword);
-    logedInAs = userEmail;}
+    logedInAs = userEmail;
+    }
+    redirectToSummary();
 }
 
 function loadEmailandPassword(){
@@ -91,3 +95,37 @@ function unchecked(){
     document.getElementById('checkboxOn').classList.add('d-none');
     on = false;
 }
+
+function redirectToSummary() {
+    const targetUrl = '../summary/summary.html';
+    window.location.href = targetUrl;
+  }
+
+  function animation(){
+ 
+    let startAnimation = localStorage.getItem('startAnimation');
+    console.log(startAnimation);
+    if(startAnimation === null){
+    document.getElementById('whole').classList.add('wholeSiteStart');
+    document.getElementById('big').classList.add('logoBigStart');
+    } else{
+        document.getElementById('whole').classList.remove('wholeSite');
+        document.getElementById('big').classList.remove('logoBig');
+
+        document.getElementById('whole').classList.add('wholeSiteStart');
+        document.getElementById('big').classList.add('logoBigStart');
+
+        document.getElementById('privat').style.opacity = '1';
+        document.getElementById('legal').style.opacity = '1';
+        document.getElementById('top').style.opacity = '1';
+        document.getElementById('loginForm').style.opacity = '1';
+
+        document.getElementById('privat').style.animation = 'unset';
+        document.getElementById('legal').style.animation = 'unset';
+        document.getElementById('top').style.animation = 'unset';
+        document.getElementById('loginForm').style.animation = 'unset';
+
+        localStorage.removeItem('startAnimation');
+    }
+}
+

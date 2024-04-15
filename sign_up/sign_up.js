@@ -1,3 +1,5 @@
+let on = false;
+
 function flyIn(){
     document.getElementById('flyer').classList.add('bottom');
     document.getElementById('flyer').classList.remove('d-none');
@@ -58,13 +60,18 @@ async function register() {
         remotePassword: remotePassword.value,
     });
     await setItem('allUser', JSON.stringify(allUser));
+    localStorage.setItem('startAnimation','true');
+    checkPassword();
     resetForm();
+    flyIn();
+    setTimeout(redirectToLogin,1000);
 }
 
 function resetForm(){
     remoteName.value ='';
     remoteEmail.value = '';
     remotePassword.value = '';
+    document.getElementById('remoteCPassword').value = '';
     registerBtn.disabled = false;
 }
 
@@ -116,5 +123,43 @@ function eyes(){
        document.getElementById('eyesOff').classList.remove('d-none');
        document.getElementById('eyesOpen').classList.add('d-none');
        document.getElementById('remoteCPassword').type = "password";
+    }
+}
+
+function redirectToLogin() {
+    const targetUrl = '../login/login.html';
+    window.location.href = targetUrl;
+  }
+
+  function checked(){
+    document.getElementById('checkboxOff').classList.add('d-none');
+    document.getElementById('checkboxOn').classList.remove('d-none');
+    on = true;
+}
+
+function unchecked(){
+    document.getElementById('checkboxOff').classList.remove('d-none');
+    document.getElementById('checkboxOn').classList.add('d-none');
+    on = false;
+}
+
+function checkPassword(){
+    let password = document.getElementById('remotePassword').value;
+    let confirmPassoword = document.getElementById('remoteCPassword').value;
+    console.log(password, confirmPassoword)
+    let message = document.getElementById('message');
+
+    if(password.length != 0){
+        if(password == confirmPassoword){
+            message.textContent = 'Passwords match';
+            message.style.color = 'green'
+        } else {
+            message.textContent = 'Passwords do not match';
+            message.style.color = 'red'
+        }
+    }
+    else {
+        alert('Passoword can not be empty!');
+        message.textContent='';
     }
 }
