@@ -12,3 +12,21 @@ body {
 
     /* border: 1px solid black; */
 }
+
+.include_mobile_menu{
+    display: none;
+}
+
+@media (max-width: 970px) {
+    .include_sidebar{
+        display: none;
+    }
+    .main_container{
+        margin-left: 10px;
+        /* justify-content: center; */
+        align-items: center;
+    }
+    .include_mobile_menu{
+        display: block;
+    }
+}

@@ -1,7 +1,7 @@
 let taskPrio = "medium";
 let assignedContacts = [];
 
-async function addNewTask() {
+async function addNewTask(processingStatus) {
     await getAllTasksFromServer();
     let taskTilte = document.getElementById('taskTitle').value;
     let taskDiscription = document.getElementById('TaskDiscription').value;
@@ -9,7 +9,7 @@ async function addNewTask() {
     let category = document.getElementById('category').value;
     let task = {
         "taskID": setTaskID(),
-        "processingStatus": "ToDo",
+        "processingStatus": processingStatus,
         "title": taskTilte,
         "description": taskDiscription,
         "assignedTo": [],
@@ -43,7 +43,6 @@ function renderAllContacts(contactsContainer) {
         const bgColor = dummyContacts[i].color;
         const userName = dummyContacts[i].name;
         const initials = makeInitials(userName);
-        console.log(initials);
         contactsContainer.innerHTML += renderAssignablContactsHTML(bgColor,initials,userName,i);
     }
 }
@@ -59,16 +58,44 @@ function makeInitials(string){
 
 function renderAssignablContactsHTML(bgColor,initials,userName,id) {
     return /*html*/ `
-        <div class="contact_to_assign_box" onclick="addContanctToTask(${id})" >
+        <div class="contact_to_assign_box" id="assignBox${id}" onclick="editContanctsInTask(${id})" >
             <div class="user_name_box">
                 <div class="user_tag" style="background-color: ${bgColor}">${initials}</div>
                 <div class="user_name">${userName}</div>
             </div>
-            <img src="/assets/img/checkboxOff.svg" alt="">
-            <img class="d-none" src="/assets/img/checkboxOn.svg" alt="">
+            <img id="assignCheckbox${id}" src="/assets/img/checkboxOff.svg" alt="">
         </div>
     `;
 }
+
+function editContanctsInTask(id) {
+    if (assignedContacts.includes(dummyContacts[id])) {
+        deleteContactFromTask(dummyContacts[id],id);
+    } else {
+        addContactToTask(id);
+    }
+}
+
+function addContactToTask(id) {
+    let contactBox = document.getElementById(`assignBox${id}`);
+    let assignCheckbox = document.getElementById(`assignCheckbox${id}`);
+    contactBox.style.backgroundColor = '#2A3647'
+    contactBox.style.color = '#ffffff';
+    assignCheckbox.src = '/assets/img/checkboxOn_white.svg';
+    assignedContacts.push(dummyContacts[id]);
+}
+
+function deleteContactFromTask(element,id) {
+    let contactBox = document.getElementById(`assignBox${id}`);
+    let assignCheckbox = document.getElementById(`assignCheckbox${id}`);
+    let index = assignedContacts.indexOf(element);
+    contactBox.style.backgroundColor = '#ffffff'
+    contactBox.style.color = '#000000';
+    assignCheckbox.src = '/assets/img/checkboxOff.svg';
+    assignedContacts.splice(index, 1);
+}
+
+
 
 
 // Hier nur für Testzwecke

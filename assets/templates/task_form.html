@@ -10,7 +10,7 @@
                 </div>
                 <div class="discripton_container">
                     <label for="TaskDiscription">Discription</label><br>
-                    <textarea class="input_styles" name="" id="taskDiscription"
+                    <textarea class="input_styles" id="taskDiscription"
                         placeholder="Enter a Discription"></textarea><br>
                 </div>
                 <div class="dropdown_container">
@@ -33,7 +33,7 @@
             <div class="form_right">
                 <div class="form_buttons">
                     <label for="dueDate">Due date<span style="color: #ffa800;">*</span></label><br>
-                    <input class="input_styles" type="date" id="dueDate" name="dueDate" required><br>
+                    <input class="input_styles" type="date" id="dueDate" required><br>
                     <p class="error_message">This field is required</p>
                     <label>Prio</label><br>
                     <div class="prio_buttons">
@@ -48,7 +48,7 @@
                         </button>
                     </div>
                     <label for="category">Category<span style="color: #ffa800;">*</span></label><br>
-                    <select class="input_styles" name="cars" id="category" required>
+                    <select class="input_styles" id="category" required>
                         <option value="" selected disabled hidden>Select task category <img
                                 src="/assets/img/event_calendar.svg" alt=""></option>
                         <option value="technikalTask">Technical Task</option>
@@ -56,7 +56,7 @@
                     </select><br>
                     <p class="error_message">This field is required</p>
                     <label for="subtasks">Subtasks</label><br>
-                    <select class="input_styles" name="cars" id="subtasks">
+                    <select class="input_styles" id="subtasks">
                         <option value="volvo">Add new subtask</option>
                         <option value="saab">Saab</option>
                         <option value="opel">Opel</option>
@@ -71,7 +71,7 @@
             <div class="form_buttons">
                 <button type="button" class="clear_btn" onclick="clearTaskForm()">Clear <img src="/assets/img/close.svg"
                         alt=""></button>
-                <button class="create_btn" onclick="addNewTask()">Create Task <img src="/assets/img/check_white.svg"
+                <button class="create_btn" onclick="addNewTask('ToDo')">Create Task <img src="/assets/img/check_white.svg"
                         alt=""></button>
             </div>
         </div>
