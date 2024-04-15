@@ -256,6 +256,106 @@ color: black;
     width: 32px;
     height: 32px;
 }
+.bigTaskOverlay{
+    position: absolute;
+    top:0;
+    width: 100%;
+    height:100vh;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bigTaskInner{
+    background-color: white;
+    width: 450px;
+    height: 700px;
+    padding: 48px 40px;
+    border-radius: 30px;
+    gap: 24px;
+}
+.bigHeadline{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.bigHeadlineText{
+    background-color:#0038FF;
+    font-family:Inter;
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 27.6px;
+    text-align: left;
+    color: white;
+    border-radius: 8px;
+    padding: 4px 24px;
+    /* margin-block-start: 0;
+    margin-block-end: 0; */
+}
+.bigHeadlineImg{
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+.bigTitle{
+font-family: Inter;
+font-size: 48px;
+font-weight: 700;
+text-align: left;
+margin-block-start: 0;
+margin-block-end: 0;
+}
+.bigInfosText{
+font-family: Inter;
+font-size: 20px;
+font-weight: 400;
+line-height: 24px;
+text-align: left;
+}
+.delete_container{
+    display: flex;
+    align-items: center;
+    gap:8px;
+}
+.edit_container{
+    display: flex;
+    align-items: center;
+    gap:8px;
+}
+.delete_edit_container{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 8px;
+}
+.delete_edit_img{
+    width: 16px;
+    height: 18px;
+}
+.delete_edit_text{
+font-family: Inter;
+font-size: 16px;
+font-weight: 400;
+line-height: 19.2px;
+text-align: left;
+}
+.delete_edit_line{
+    border: 1px solid #D1D1D1;
+    width: 0px;
+    height: 16px;
+}
+.delete_container:hover{
+    cursor: pointer;
+    color:#2AABE2; 
+    font-weight: 700;
+}
+.delete_edit_text:hover{
+    cursor: pointer;
+    color:#2AABE2;
+    font-weight: 700; 
+}
+
 .d-none {
     display: none;
 }

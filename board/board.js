@@ -112,7 +112,7 @@ function generateTodoHTML(element){
     } else if(element['category'] === 'Technical Task') {
         categoryColor = '#1FD7C1'; 
     }
-    return `<div class="task_progress"draggable="true" ondragstart="startDragging(${element['taskID']})">
+    return `<div onclick="openBigTask()" class="task_progress"draggable="true" ondragstart="startDragging(${element['taskID']})">
     <div>
         <span class="progress_title" style="background-color: ${categoryColor};">${element['category']}</span>
         <div class="progress_text">
@@ -166,16 +166,42 @@ function checkEmptyAwaitFeedback() {
 function checkEmptyDone() {
     checkEmptyColumn('done', 'No tasks Done');
 }
-function filterTasks(searchTerm) {
-    let search = document.getElementById('search').value;
-    search= search.toLowerCase(); 
-    let filteredTasks = allTasks.filter(task => {
-        // Überprüfe, ob der Titel oder die Beschreibung das Suchkriterium enthalten
-        return task.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-               task.description.toLowerCase().includes(searchTerm.toLowerCase());
-    });
 
-    return filteredTasks;
+function openBigTask(){
+    document.getElementById('bigTask').classList.remove('d-none');
+    document.getElementById('bigTask').classList.add('show');
 }
 
-
+function closeBigTask(){
+    document.getElementById('bigTask').classList.add('d-none');
+}
+// function showBigTask(element){
+//         return /*html*/`
+//         <div>
+//             <span>${element['category']}</span>
+//             <div>
+//                 <h2>${element['title']}</h2>
+//                 <p>${element['description']}</p>
+//             </div>
+//             <span>${element['dueDate']}</span>
+//             <span>${element['priority']}</span>
+//             <div>
+//                 <h3>Assigned To:</h3>
+//                 <li>${element['assignedTo']}</li>
+//             </div>
+//             <div>
+//                 <h3>Subtasks</h3>
+//                 <input type="checkbox">
+//             </div>
+//             <div>
+//                 <div>
+//                     <img src="/assets/img/delete.svg" alt="">
+//                     <p>Delete</p>
+//                 </div>
+//                 <div>
+//                     <img src="/assets/img/edit.svg" alt="">
+//                     <p>Edit</p>
+//                 </div>
+//             </div>
+//         </div>`
+// }
