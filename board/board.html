@@ -25,8 +25,11 @@
         <div class="headline">
             <h1>Board</h1>
             <div class="search_container">
-                <input class="input_container" type="text" placeholder="Find Task" id="search">
-                <button onclick="showAddTaskOverlay()" class="board_button">Add Task <img src="/assets/img/add.svg" alt=""></button>
+                <div class="form_container" id="formContainer">
+                <input class="input_container" type="text" placeholder="Find Task" id="search" >
+                <button class="search_button" onclick="findTaskFunction()"><img class="search_img" src="/assets/img/search_board.svg" alt=""></button>
+                </div>
+                <button id="submitButton" onclick="showAddTaskOverlay()" class="board_button">Add Task <img src="/assets/img/add.svg" alt=""></button>
             </div>
         </div>
         <div class="process_container">

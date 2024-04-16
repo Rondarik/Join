@@ -17,16 +17,16 @@ function greetUser(){
 //     return allTasks.filter(task => task.processingStatus === status).length;
 // }
 
-// function updateSummary() {
-//     const todoCount = countTasksByStatus('ToDo');
-//     const progressCount = countTasksByStatus('progress');
-//     const awaitFeedbackCount = countTasksByStatus('awaitFeedback');
-//     const doneCount = countTasksByStatus('done');
+// function updateSummary(){
+// let todoCount = countTasks('ToDo');
+// let progressCount = countTasks('progress');
+// let awaitFeedbackCount = countTasks('awaitFeedback');
+// let doneCount = countTasks('done');
 
-//     document.getElementById('todoCount').innerText = todoCount;
-//     document.getElementById('progressCount').innerText = progressCount;
-//     document.getElementById('awaitFeedbackCount').innerText = awaitFeedbackCount;
-//     document.getElementById('doneCount').innerText = doneCount;
+// document.getElementById('todoCount').innerHTML= todoCount.toString();
+// document.getElementById('progressCount').innerHTML = progressCount.toString();
+// document.getElementById('awaitFeedbackCount').innerHTML = awaitFeedbackCount.toString();
+// document.getElementById('doneCount').innerHTML = doneCount.toString();
 // }
 
 

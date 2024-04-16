@@ -12,7 +12,7 @@ let allTasks = [{
 
 },{
     "taskID": 1,
-    "processingStatus": "progress",
+    "processingStatus": "ToDo",
     "title": "HTML Base Template Creation",
     "description":'Create reusable HTML base templates...',
     "assignedTo":[],
@@ -46,6 +46,9 @@ let allTasks = [{
     "subtasks":[]
 }];
 
+// document.getElementById('formContainer').addEventListener('click', function() {
+//     this.style.borderColor = '#29ABE2';
+// });
 
 
 function showAddTaskOverlay() {
@@ -95,7 +98,7 @@ function updateHTML() {
         const element = done[index];
         document.getElementById('done').innerHTML += generateTodoHTML(element,index);
     }
-    // updateSummary();
+//    updateSummary();
 }
 
 
@@ -105,7 +108,7 @@ function startDragging(taskID){
 }
 
 
-function generateTodoHTML(element){
+function generateTodoHTML(element,index){
     let categoryColor = '';
     if(element['category'] === 'User Story') {
         categoryColor = '#0038FF';
@@ -113,7 +116,7 @@ function generateTodoHTML(element){
         categoryColor = '#1FD7C1'; 
     }
 
-    return `<div onclick="openBigTask(allTasks[0])" class="task_progress" draggable="true" ondragstart="startDragging(${element['taskID']})">
+    return `<div id="tasks_card_${element['taskID']}" onclick="openBigTask(allTasks[0])" class="task_progress" draggable="true" ondragstart="startDragging(${element['taskID']})">
 
     <div>
         <span class="progress_title" style="background-color: ${categoryColor};">${element['category']}</span>
@@ -171,11 +174,14 @@ function checkEmptyDone() {
 }
 
 function openBigTask(element){
-    document.getElementById('bigTask').classList.remove('d-none');
-    document.getElementById('bigTask').classList.add('show');
-    let bigTask = document.getElementById('bigTask');
-    bigTask.innerHTML =showBigTask(element);
+    if (element) {
+        document.getElementById('bigTask').classList.remove('d-none');
+        document.getElementById('bigTask').classList.add('show');
+        let bigTask = document.getElementById('bigTask');
+        bigTask.innerHTML = showBigTask(element);
+    } 
 }
+
 
 function closeBigTask(){
     document.getElementById('bigTask').classList.add('d-none');
@@ -214,15 +220,55 @@ function showBigTask(element){
                     <input type="checkbox">Start Page Loyout
                 </div>
                 <div class="delete_edit_container">
-                    <div class="delete_container">
-                        <img class="delete_edit_img" src="/assets/img/delete.svg" alt="">
+                    <div class="delete_container" onclick="deleteTasks(0)">
+                        <img class="delete_img" src="/assets/img/delete.svg" alt="">
+                        <img class="delete_img_blau" src="/assets/img/delete_blau.svg"  alt="">
                         <p class="delete_edit_text">Delete</p>
                     </div>
                     <div class="delete_edit_line"></div>
                     <div class="edit_container">
-                        <img class="delete_edit_img" src="/assets/img/edit.svg" alt="">
+                        <img class="edit_img" src="/assets/img/edit.svg" alt="">
+                        <img class="edit_img_blau" src="/assets/img/edit_blau.svg" alt="">
                         <p class="delete_edit_text">Edit</p>
                     </div>
                 </div>
 </div>`
+}
+
+function findTaskFunction() {
+    let search = document.getElementById('search').value.toLowerCase();
+    let searchArray = [];
+
+    for (let i = 0; i < allTasks.length; i++) {
+        const element = allTasks[i];
+        if (element['title'].toLowerCase().includes(search) || element['description'].toLowerCase().includes(search)) {
+            searchArray.push(element);
+        }
+    }
+    generateTodoHTML(searchArray);
+}
+
+// function countTasksByStatus(status) {
+//         return allTasks.filter(task => task.processingStatus === status).length;
+// }
+
+// function updateSummary(){
+//     let todoCount = countTasks('ToDo');
+//     let progressCount = countTasks('progress');
+//     let awaitFeedbackCount = countTasks('awaitFeedback');
+//     let doneCount = countTasks('done');
+
+//     document.getElementById('todoCount').innerHTML= todoCount.toString();
+//     document.getElementById('progressCount').innerHTML = progressCount.toString();
+//     document.getElementById('awaitFeedbackCount').innerHTML = awaitFeedbackCount.toString();
+//     document.getElementById('doneCount').innerHTML = doneCount.toString();
+// }
+
+function deleteTasks(taskID) {
+    const index = allTasks.findIndex(task => task.taskID === taskID);
+    if (index !== -1) {
+        allTasks.splice(index, 1);
+        updateHTML();
+    } 
+    closeBigTask();
 }

@@ -49,33 +49,64 @@ h1{
     gap: 32px;
 }
 .input_container{
+    box-sizing: border-box;
+    resize: none;
+    border: none;
+    outline: none;
+    padding: 8px 16px 8px 16px;
+    border: 0;
+    width: calc(100% - 48px);
+    height: 100%;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    border-radius: 10px;
+    display: flex;
+}
+.search_button{
+    margin-left: -100px;
+    width: 48px;
+    height: 32px;
+    padding-left: 16px;
+    border: 0;
+    background-color: transparent;
+    border-left: 1px solid #D1D1D1;
+    margin-right: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 48px;
-    gap:10px;
-    border-radius: 10px;
-    border:1px solid #A8A8A8;
-    background-color: white;
-    padding-left: 8px;
-    padding-right: 8px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px; 
-    line-height: 24px;
-    background-image: url(/assets/img/search.svg);
-    background-repeat: no-repeat;
-    background-position: center right 19px;
-    cursor: pointer;
 }
+
+.form_container{
+    width: 312px;
+    height: 48px;
+    border: solid 1px;
+    border-radius: 10px;
+    border-color: #A8A8A8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    flex-direction: row !important;
+}
+
+.form_container:focus-within {
+    border-color: #29ABE2;
+}
+
 input::placeholder{
     color: #D1D1D1;
 }
 .search_img{
-    width: 48px;
-    height: 32px;
+    width: 18px;
+    height: 18px;
     cursor: pointer;
+    padding: 10px;
+}
+.search_img:hover{
+    background-color: #D1D1D1;
+    border-radius: 40px;
+    
 }
 .board_button{
     width: 160px;
@@ -258,7 +289,7 @@ color: black;
     height: 32px;
 }
 .bigTaskOverlay{
-    position: absolute;
+    position: fixed;
     top:0;
     width: 100%;
     height:100vh;
@@ -330,10 +361,38 @@ text-align: left;
     align-items: center;
     gap: 8px;
 }
-.delete_edit_img{
+.delete_img{
     width: 16px;
     height: 18px;
 }
+.edit_img{
+    width: 16px;
+    height: 18px;
+}
+.delete_img_blau {
+    display: none; 
+}
+
+.delete_container:hover .delete_img {
+    display: none; 
+}
+
+.delete_container:hover .delete_img_blau {
+    display: inline-block;
+}
+
+.edit_img_blau {
+    display: none; 
+}
+
+.edit_container:hover .edit_img {
+    display: none; 
+}
+
+.edit_container:hover .edit_img_blau {
+    display: inline-block;
+}
+
 .delete_edit_text{
 font-family: Inter;
 font-size: 16px;
@@ -350,6 +409,11 @@ text-align: left;
     cursor: pointer;
     color:#2AABE2; 
     font-weight: 700;
+}
+
+.edit_container:hover{
+    cursor: pointer;
+    color:#2AABE2; 
 }
 .delete_edit_text:hover{
     cursor: pointer;
