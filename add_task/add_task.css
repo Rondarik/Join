@@ -2,11 +2,12 @@ body {
     margin: 0;
     font-size: 24px;
     background-color: #f6f7f8;
+    height: 100vh;
 }
 
 .main_container {
     margin-left: 300px;
-    margin-top: 150px;
+    margin-top: 130px;
     display: flex;
     flex-direction: column;
 

@@ -1,10 +1,11 @@
 let taskPrio = "medium";
 let assignedContacts = [];
+let subtasks = [];
 
 async function addNewTask(processingStatus) {
     await getAllTasksFromServer();
     let taskTilte = document.getElementById('taskTitle').value;
-    let taskDiscription = document.getElementById('TaskDiscription').value;
+    let taskDiscription = document.getElementById('taskDiscription').value;
     let date = document.getElementById('dueDate').value;
     let category = document.getElementById('category').value;
     let task = {
@@ -12,21 +13,26 @@ async function addNewTask(processingStatus) {
         "processingStatus": processingStatus,
         "title": taskTilte,
         "description": taskDiscription,
-        "assignedTo": [],
+        "assignedTo": assignedContacts,
         "dueDate": date,
         "prio": taskPrio,
         "category": category,
         "subtasks": []
     };
-    // allTasks.push(task);
+    allTasks.push(task);
     // await setItem('allTasks', JSON.stringify(allTasks));
     console.log(allTasks);
 }
 
-// async nur zum testen
-async function clearTaskForm() {
-    // location.reload();
-    getAllTasksFromServer();
+function clearTaskForm() {
+    document.getElementById('taskTitle').value = '';
+    document.getElementById('taskDiscription').value = '';
+    assignedContacts = [];
+    document.getElementById('dueDate').value = '';
+    setBtnCollorByPrio('medium');
+    document.getElementById('category').value = '';
+    subtasks = [];
+
 }
 
 function showAssignablContacts() {
@@ -38,25 +44,34 @@ function showAssignablContacts() {
     renderAllContacts(contactsContainer);
 }
 
+function closeAssignContactsBox() {
+    let contactsContainer = document.getElementById('contact_to_assign_containerID');
+    contactsContainer.classList.add('d-none');
+    renderUserTag();
+}
+
 function renderAllContacts(contactsContainer) {
     for (let i = 0; i < dummyContacts.length; i++) {
         const bgColor = dummyContacts[i].color;
         const userName = dummyContacts[i].name;
         const initials = makeInitials(userName);
-        contactsContainer.innerHTML += renderAssignablContactsHTML(bgColor,initials,userName,i);
+        contactsContainer.innerHTML += renderAssignablContactsHTML(bgColor, initials, userName, i);
+        if (assignedContacts.includes(dummyContacts[i])) {
+            changStyleFromAddedContact(i);
+        }
     }
 }
 
-function makeInitials(string){
-        var names = string.split(' '),
-            initials = names[0].substring(0, 1).toUpperCase();
-        if (names.length > 1) {
-            initials += names[names.length - 1].substring(0, 1).toUpperCase();
-        }
-        return initials;
+function makeInitials(string) {
+    var names = string.split(' '),
+        initials = names[0].substring(0, 1).toUpperCase();
+    if (names.length > 1) {
+        initials += names[names.length - 1].substring(0, 1).toUpperCase();
     }
+    return initials;
+}
 
-function renderAssignablContactsHTML(bgColor,initials,userName,id) {
+function renderAssignablContactsHTML(bgColor, initials, userName, id) {
     return /*html*/ `
         <div class="contact_to_assign_box" id="assignBox${id}" onclick="editContanctsInTask(${id})" >
             <div class="user_name_box">
@@ -70,22 +85,22 @@ function renderAssignablContactsHTML(bgColor,initials,userName,id) {
 
 function editContanctsInTask(id) {
     if (assignedContacts.includes(dummyContacts[id])) {
-        deleteContactFromTask(dummyContacts[id],id);
+        deleteContactFromTask(dummyContacts[id], id);
     } else {
-        addContactToTask(id);
+        changStyleFromAddedContact(id);
+        assignedContacts.push(dummyContacts[id]);
     }
 }
 
-function addContactToTask(id) {
+function changStyleFromAddedContact(id) {
     let contactBox = document.getElementById(`assignBox${id}`);
     let assignCheckbox = document.getElementById(`assignCheckbox${id}`);
     contactBox.style.backgroundColor = '#2A3647'
     contactBox.style.color = '#ffffff';
     assignCheckbox.src = '/assets/img/checkboxOn_white.svg';
-    assignedContacts.push(dummyContacts[id]);
 }
 
-function deleteContactFromTask(element,id) {
+function deleteContactFromTask(element, id) {
     let contactBox = document.getElementById(`assignBox${id}`);
     let assignCheckbox = document.getElementById(`assignCheckbox${id}`);
     let index = assignedContacts.indexOf(element);
@@ -95,17 +110,34 @@ function deleteContactFromTask(element,id) {
     assignedContacts.splice(index, 1);
 }
 
+function doNotClose(event) {
+    event.stopPropagation();
+}
+
+function renderUserTag() {
+    let userTags = document.getElementById('assignContactContainerID');
+    userTags.innerHTML = '';
+    for (let i = 0; i < assignedContacts.length; i++) {
+        const name = assignedContacts[i].name;
+        const bgColor = assignedContacts[i].color;
+        userTags.innerHTML += /*html*/ `
+             <div class="user_tag" style="background-color: ${bgColor};">${makeInitials(name)}</div>
+        `;
+    }
+
+}
+
 
 
 
 // Hier nur für Testzwecke
-async function getAllTasksFromServer() {
-    try {
-        allTasks = await getItem('allTasks');
-    } catch (e) {
-        console.error('Loading error:', e);
-    }
-}
+// async function getAllTasksFromServer() {
+//     try {
+//         allTasks = await getItem('allTasks');
+//     } catch (e) {
+//         console.error('Loading error:', e);
+//     }
+// }
 
 /**
  * This function gets a number as taskId that does not yet exist 
@@ -174,4 +206,88 @@ function setBtnCollorByPrio(prio) {
         lowBtn.classList.add('clicked');
         lowBtn.querySelector('img').src = '/assets/img/prio_low_white.svg';
     }
+}
+
+
+
+
+/**
+ *  Subtasks 
+ */
+
+function subtasksFucus() {
+    document.getElementById('subtasksCreateButtonsID').classList.remove('d-none');
+    document.getElementById('subtaskBtnAddID').classList.add('d-none');
+}
+
+function subtasksNoFucus() {
+    document.getElementById('subtasksCreateButtonsID').classList.add('d-none');
+    document.getElementById('subtaskBtnAddID').classList.remove('d-none');
+    document.getElementById('subtasks').value = '';
+}
+
+function addNewSubtask() {
+    let inputValue = document.getElementById('subtasks').value;
+    subtasks.push(inputValue);
+    renderNewSubtask();
+    subtasksNoFucus();
+
+
+    console.log('add Subtask');
+}
+
+function cancelNewSubtask() {
+    subtasksNoFucus();
+}
+
+function renderNewSubtask() {
+    let subtasksContainer = document.getElementById('allSubtasksID');
+    subtasksContainer.innerHTML = '';
+    for (let i = 0; i < subtasks.length; i++) {
+        const subtask = subtasks[i];
+        subtasksContainer.innerHTML += subtaskHTML(i);
+        document.getElementById(`inputSubtaskID${i}`).value = subtask;
+    }
+}
+
+function subtaskHTML(ID) {
+    return /*html*/ `
+        <div id="subtaskID${ID}" onmouseover="mouseoverStyleSubtaskInput()" onmouseout="mouseoutStyleSubtaskInput()">
+            <input type="text" id="inputSubtaskID${ID}" onfocus="onfocusStyleSubtaskInput()">
+            <div class="edit_buttons d-none" id="substaskEditButtonsID">
+                <img class="subtask_btn_edit" src="/assets/img/edit.svg" alt="">
+                <div class="substask_seperator"></div>
+                <img class="subtask_btn_delete" src="/assets/img/delete.svg" alt="">
+            </div>
+            <div class="edit_buttons d-none" id="substaskConfirmButtonsID">
+                <img class="subtask_btn_delete" src="/assets/img/delete.svg" alt="">
+                <div class="substask_seperator"></div>
+                <img class="subtask_btn_check" src="/assets/img/check.svg" alt="">
+            </div>
+        </div>
+    `;
+}
+
+
+
+
+let subtaskIsFocused = false;
+function mouseoverStyleSubtaskInput() {
+    if (!subtaskIsFocused) {
+        document.getElementById('substaskConfirmButtonsID').classList.remove('d-none');
+    }
+
+}
+
+function mouseoutStyleSubtaskInput() {
+    document.getElementById('substaskConfirmButtonsID').classList.add('d-none');
+}
+
+
+function onfocusStyleSubtaskInput() {
+    subtaskIsFocused = true;
+    document.getElementById('subtaskID').style.backgroundColor = '#ffffff';
+    document.getElementById('substaskEditButtonsID').classList.remove('d-none');
+    document.getElementById('substaskConfirmButtonsID').classList.add('d-none');
+
 }

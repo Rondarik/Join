@@ -29,7 +29,7 @@
 .form_inner {
     margin-top: 20px;
     display: flex;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 
     /* border: 1px solid red; */
 }
@@ -38,8 +38,6 @@
     font-family: 'Inter';
     font-size: 20px;
     font-weight: 400;
-    /* line-height: 24px; */
-    /* text-align: left; */
 }
 
 .input_styles {
@@ -55,10 +53,11 @@
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 50px white inset;
-  }
-  input:-webkit-autofill:focus {
+}
+
+input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 50px white inset;
-  }
+}
 
 .error_message {
     font-size: 16px !important;
@@ -88,7 +87,7 @@ input:-webkit-autofill {
     cursor: pointer;
 }
 
-.discripton_container{
+.discripton_container {
     height: 168px;
     margin-bottom: 32px;
 }
@@ -114,11 +113,11 @@ input:-webkit-autofill {
     justify-content: space-between;
 }
 
-#assignedTo img{
+#assignedTo img {
     margin-right: 24px;
 }
 
-.dropdown{
+.dropdown {
     margin-bottom: 8px;
 }
 
@@ -136,7 +135,7 @@ input:-webkit-autofill {
     font-size: 20px;
 }
 
-.contact_to_assign_box{
+.contact_to_assign_box {
     height: 56px;
     display: flex;
     align-items: center;
@@ -146,34 +145,37 @@ input:-webkit-autofill {
     cursor: pointer;
 }
 
-.contact_to_assign_box:hover{
+.contact_to_assign_box:hover {
     background-color: #f0f0f0;
 }
 
-.contact_to_assign_box img{
+.contact_to_assign_box img {
     height: 24px;
-    width:  24px;
+    width: 24px;
 }
 
-.user_name_box{
+.user_name_box {
     display: flex;
     align-items: center;
     gap: 16px;
 
 }
 
-.user_tag{
+.user_tag {
     height: 38px;
     width: 38px;
     border-radius: 100%;
     border: 2px solid #ffffff;
-    /* background-color: #9327FF; */
     font-family: 'Inter';
     font-size: 12px;
     font-weight: 400;
     color: #ffffff;
     text-align: center;
     line-height: 42px;
+}
+
+.assign_contact_container {
+    display: flex;
 }
 
 /* width */
@@ -215,7 +217,7 @@ input:-webkit-autofill {
     width: calc(100% - 13px);
     background-image: url('/assets/img/event_calendar.svg');
     background-repeat: no-repeat;
-    background-position: center right 19px;    
+    background-position: center right 19px;
     cursor: pointer;
     display: block;
 }
@@ -248,26 +250,105 @@ input:-webkit-autofill {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
-    background: url('/assets/img/arrow_drop_down.svg') no-repeat right;
+    background: url('/assets/img/arrow_drop_down.svg') no-repeat center right 19px;
     background-size: 7.2px 4.6px;
     background-color: white;
     background-position: 420px;
     cursor: pointer;
 }
 
-#subtasks {
-    width: 100%;
+.subtasks_container {
+    width: calc(100% - 12px);
     height: 48px;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    background: url('/assets/img/add.svg') no-repeat right;
-    background-size: 14px 14px;
-    background-color: white;
-    background-position: 416px;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
     cursor: pointer;
 }
 
+#subtasks {
+    border: none;
+    width: 100%;
+    height: 24px;
+    font-family: 'inter';
+    font-size: 20px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+#subtasks:focus {
+    outline: none;
+}
+
+.subtask_btn_add {
+    margin-right: 20px;
+}
+
+.subtasks_create_buttons {
+    display: flex;
+    align-items: center;
+     margin-right: 20px;
+}
+
+.subtask_btn_close {
+    width: 13.5px;
+    height: 13.5px;
+}
+
+.substask_seperator {
+    height: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-inline: 8px;
+}
+
+.subtask_btn_check {
+    width: 15.5px;
+    height: 11.2px;
+}
+
+.subtasks_container img {
+    width: 14px;
+    height: 14px;
+    /* margin-right: 16px; */
+}
+
+#subtaskID {
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #f8f7f8;
+}
+
+#inputSubtaskID {
+    border: none;
+    background-color: transparent;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 400;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.edit_buttons {
+    display: flex;
+    margin-right: 16px;
+    align-items: center;
+}
+
+.subtask_btn_edit {
+    height: 18.2px;
+    width: 18.2px;
+}
+
+.subtask_btn_delete {
+    height: 16px;
+    width: 16px;
+}
+
+/* ------------ Clear and Create Button--------------- */
 .form_bottom_container {
     display: flex;
     justify-content: space-between;
@@ -280,7 +361,6 @@ input:-webkit-autofill {
 
 .form_buttons {
     align-self: end;
-
 }
 
 .clear_btn,
@@ -346,26 +426,58 @@ input:-webkit-autofill {
     .form_left {
         width: 300px;
     }
+
     .form_right {
         width: 300px;
     }
-    .prio_buttons button{
-       width: auto;
+
+    .prio_buttons button {
+        width: auto;
     }
+
     .contact_to_assign_container {
         width: 300px;
     }
 }
 
 @media (max-width: 970px) {
-    .form_inner{
+    .form_inner {
         flex-direction: column;
     }
-    .separator{
+
+    .separator {
         display: none;
     }
-    .clear_btn{
+
+    .clear_btn {
         display: none;
+    }
+
+    .form_left {
+        width: 440px;
+    }
+
+    .form_right {
+        width: 440px;
+    }
+
+    .form_bottom_container {
+        align-items: center;
+    }
+
+    .form_bottom_container p {
+        margin-bottom: 0;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 500px) {
+    .form_left {
+        width: 300px;
+    }
+
+    .form_right {
+        width: 300px;
     }
 
 }

@@ -10,22 +10,24 @@
                 </div>
                 <div class="discripton_container">
                     <label for="TaskDiscription">Discription</label><br>
-                    <textarea class="input_styles" id="taskDiscription"
+                    <textarea class="input_styles" name="" id="taskDiscription"
                         placeholder="Enter a Discription"></textarea><br>
                 </div>
                 <div class="dropdown_container">
                     <label for="assignedTo">Assigned to</label><br>
                     <div class="dropdown">
-                        <div class="input_styles" id="assignedTo" onclick="showAssignablContacts()">Select contacts to assign
+                        <div class="input_styles" id="assignedTo" onclick="showAssignablContacts(), doNotClose(event)">
+                            Select contacts to assign
                             <img id="assign_arrow_down" src="/assets/img/arrow_drop_down.svg" alt="">
                             <img id="assign_arrow_up" class="d-none" src="/assets/img/arrow_up_drop_down.svg" alt="">
                         </div>
-                        <div class="contact_to_assign_container d-none" id="contact_to_assign_containerID">
-                        <!-- render content -->
+                        <div class="contact_to_assign_container d-none" id="contact_to_assign_containerID"
+                            onclick="doNotClose(event)">
+                            <!-- render content -->
                         </div>
                     </div>
-                    <div class="assign_contact_container">
-                        <div class="user_tag">BB</div>
+                    <div class="assign_contact_container" id="assignContactContainerID">
+                        <!-- render content -->
                     </div>
                 </div>
             </div>
@@ -56,12 +58,31 @@
                     </select><br>
                     <p class="error_message">This field is required</p>
                     <label for="subtasks">Subtasks</label><br>
-                    <select class="input_styles" id="subtasks">
-                        <option value="volvo">Add new subtask</option>
-                        <option value="saab">Saab</option>
-                        <option value="opel">Opel</option>
-                        <option value="audi">Audi</option>
-                    </select>
+                    <div class="subtasks_container input_styles">
+                        <!-- <input type="text" id="subtasks" onfocus="subtasksFucus()" onblur="subtasksNoFucus()"> -->
+                        <input type="text" id="subtasks" onfocus="subtasksFucus()">
+                        <img class="subtask_btn_add" id="subtaskBtnAddID" src="/assets/img/add.svg" alt="">
+                        <div class="subtasks_create_buttons d-none" id="subtasksCreateButtonsID">
+                            <img class="subtask_btn_close" src="/assets/img/close.svg" alt="" onclick="cancelNewSubtask()">
+                            <div class="substask_seperator"></div>
+                            <img class="subtask_btn_check" src="/assets/img/check.svg" alt="" onclick="addNewSubtask()">
+                        </div>
+                    </div>
+                    <div id="allSubtasksID">
+                        <!-- <div id="subtaskID" onmouseover="mouseoverStyleSubtaskInput()" onmouseout="mouseoutStyleSubtaskInput()">
+                            <input type="text" id="inputSubtaskID" onfocus="onfocusStyleSubtaskInput()">
+                            <div class="edit_buttons d-none" id="substaskEditButtonsID">
+                                <img class="subtask_btn_edit" src="/assets/img/edit.svg" alt="">
+                                <div class="substask_seperator"></div>
+                                <img class="subtask_btn_delete" src="/assets/img/delete.svg" alt="">
+                            </div>
+                            <div class="edit_buttons d-none" id="substaskConfirmButtonsID">
+                                <img class="subtask_btn_delete" src="/assets/img/delete.svg" alt="">
+                                <div class="substask_seperator"></div>
+                                <img class="subtask_btn_check" src="/assets/img/check.svg" alt="">
+                            </div>
+                        </div> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,8 +92,8 @@
             <div class="form_buttons">
                 <button type="button" class="clear_btn" onclick="clearTaskForm()">Clear <img src="/assets/img/close.svg"
                         alt=""></button>
-                <button class="create_btn" onclick="addNewTask('ToDo')">Create Task <img src="/assets/img/check_white.svg"
-                        alt=""></button>
+                <button class="create_btn" onclick="addNewTask('ToDo')">Create Task <img
+                        src="/assets/img/check_white.svg" alt=""></button>
             </div>
         </div>
     </div>
