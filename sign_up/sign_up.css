@@ -186,8 +186,19 @@ body{
     cursor: pointer;
 }
 
-input[type="password"]{
+.blueBorder{
+    outline: none;
     border:2px solid #29ABE2;
+}
+
+.greenBorder{
+    outline: none;
+    border:2px solid green;
+}
+
+.redBorder{
+    outline: none;
+    border:2px solid red;
 }
 
 p{

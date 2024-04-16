@@ -4,11 +4,8 @@ let userPassword;
 
 function init(){
     
-
-    
     animation();
-    
-    
+
     loadEmailandPassword();
     input = document.getElementById('password').value;
     inputE = document.getElementById('uEmail').value;
@@ -29,6 +26,7 @@ function init(){
 }
 
 function changingEye(){
+    
     document.getElementById('lock').classList.add('d-none');
 
     if(document.getElementById('password').type =="password"){
@@ -64,7 +62,10 @@ function eye(){
     }
 }
 
-function saveEmailandPassword(){
+async function saveEmailandPassword(){
+    const isChecked = await checkUser();
+    if(isChecked){
+
     if(on){
     userEmail = document.getElementById('uEmail').value;
     userPassword = document.getElementById('password').value;
@@ -73,6 +74,8 @@ function saveEmailandPassword(){
     logedInAs = userEmail;
     }
     redirectToSummary();
+
+    }
 }
 
 function loadEmailandPassword(){
@@ -129,3 +132,39 @@ function redirectToSummary() {
     }
 }
 
+async function checkUser(){
+    let inputE = document.getElementById('uEmail').value;
+
+    allUser = await getItem('allUser');
+ 
+    const filteredUser = allUser.find(filterFunction);
+    
+    function filterFunction(allUser){
+        return allUser['remoteEmail'] == inputE;
+    };
+
+    console.log(filteredUser);
+    debugger;
+    if (filteredUser == undefined){
+
+        alert ('User bitte registrieren!');
+        return false;
+    } else {
+        if(checkPassword(filteredUser)){
+        return true;
+        } else {
+            alert ('Falsches Passwort!')
+            return false;
+        }
+    }
+}
+
+function checkPassword(filteredUser){
+    let pw = document.getElementById('password').value;
+    let filteredRemotePassword = filteredUser['remotePassword'];
+    if(pw == filteredRemotePassword){
+        return true;
+    } else {
+        return false;
+    }
+}

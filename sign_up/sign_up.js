@@ -1,4 +1,5 @@
 let on = false;
+let confirmed;
 
 function flyIn(){
     document.getElementById('flyer').classList.add('bottom');
@@ -12,12 +13,14 @@ async function init(){
     if((input == null)||(inputE == null)){
         document.getElementById('remoteEmail').value = '';
         document.getElementById('remotePassword').value = '';
-    } else {
+    } 
+    else {
         changingEye();
     }  
 }
 
 function changingEye(){
+    
     document.getElementById('lock').classList.add('d-none');
     if(document.getElementById('remotePassword').type =="password"){
         document.getElementById('eyeOff').classList.remove('d-none');
@@ -32,7 +35,10 @@ function changingEye(){
         document.getElementById('eyeOff').classList.add('d-none');
         document.getElementById('eyeOpen').classList.add('d-none');
         document.getElementById('remotePassword').type = "password";
-    } 
+        document.getElementById('remotePassword').classList.remove('blueBorder');
+    } else {
+        document.getElementById('remotePassword').classList.add('blueBorder');
+    }
 }
 
 function eyeOn(){
@@ -52,7 +58,9 @@ function eye(){
 }
 
 async function register() {
-    registerBtn.disabled = true;
+    const isChecked = await checkUser();
+    if(isChecked){
+    if(on && confirmed){
     console.log(allUser);
     allUser.push({
         remoteName: remoteName.value,
@@ -61,10 +69,14 @@ async function register() {
     });
     await setItem('allUser', JSON.stringify(allUser));
     localStorage.setItem('startAnimation','true');
-    checkPassword();
+    
     resetForm();
     flyIn();
     setTimeout(redirectToLogin,1000);
+    } else {
+        alert('Please accept the Privacy policy!');
+    }
+    }
 }
 
 function resetForm(){
@@ -72,25 +84,40 @@ function resetForm(){
     remoteEmail.value = '';
     remotePassword.value = '';
     document.getElementById('remoteCPassword').value = '';
-    registerBtn.disabled = false;
 }
 
 async function loadUsers(){
     allUser = await getItem('allUser');
 }
 
-// alle Mails vom Server downloaden
+// alle EMails vom Server downloaden
 // vergleichen ob Email bereits vorhanden ist
 //wennn ja dann Fehlermeldung -> rote Schrift darunter
 // wenn richtig neuen User anlegen
 
-// async function checkUser(){
-//     if('remoteEmail' = true){
+async function checkUser(){
+    let inputE = document.getElementById('remoteEmail').value;
+    allUser = await getItem('allUser');
+ 
+    const filtedUser = allUser.filter(filterFunction);
+    
+    function filterFunction(allUser){
+        return allUser['remoteEmail'] == inputE;
+    };
 
-//     } else {
+    if (filtedUser.length == 0){
 
-//     }
-// }
+        // allUser.push({
+        //     remoteName: remoteName.value,
+        //     remoteEmail: remoteEmail.value,
+        //     remotePassword: remotePassword.value,
+        // });
+        return true;
+    } else {
+        alert ('User bereits registriert.');
+        return false;
+    }
+}
 
 function changingEyes(){ 
     document.getElementById('locks').classList.add('d-none');
@@ -108,6 +135,7 @@ function changingEyes(){
         document.getElementById('eyesOpen').classList.add('d-none');
         document.getElementById('remoteCPassword').type = "password";
     } 
+    checkPassword();
 }
 
 function eyesOn(){
@@ -152,14 +180,24 @@ function checkPassword(){
     if(password.length != 0){
         if(password == confirmPassoword){
             message.textContent = 'Passwords match';
-            message.style.color = 'green'
+            message.style.color = 'green';
+            document.getElementById('remoteCPassword').classList.remove('redBorder');
+            document.getElementById('remoteCPassword').classList.add('greenBorder');
+            confirmed = true;
         } else {
-            message.textContent = 'Passwords do not match';
-            message.style.color = 'red'
+            message.textContent = `Passwords don't match`;
+            message.style.color = 'red';
+            document.getElementById('remoteCPassword').classList.remove('greenBorder');
+            document.getElementById('remoteCPassword').classList.add('redBorder');
+            confirmed = false;
         }
     }
-    else {
-        alert('Passoword can not be empty!');
-        message.textContent='';
-    }
+}
+
+
+
+async function arrowLeft(){
+    await setItem('allUser', JSON.stringify(allUser));
+    localStorage.setItem('startAnimation','true');
+    redirectToLogin();
 }

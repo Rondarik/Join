@@ -17,12 +17,15 @@
 
     <div class="loginForm">
       
-            <div><a href="../login/login.html"><img class="arrowLeft" src="../assets/img/arrowLeft.svg" alt="Pfeil zurück zum Log in"></a></div>
+            <div> 
+                    <img onclick="arrowLeft()" class="arrowLeft" src="../assets/img/arrowLeft.svg" alt="Pfeil zurück zum Log in">
+            </div>
+
             <div><h1 id="headline" class="headline">Sign Up</h1></div>
            
         <form id="formSignUp" onsubmit="register(); return false;">
-            <label for="fullName"></label>
-            <div><input required type="text" placeholder="Name" id="remoteName" class="user" name="fullName" pattern="[A-Z][a-zA-Z]* [A-Z][a-zA-Z]*" title="Bitte geben Sie Ihren Vor- und Nachnamen ein. Der erste Buchstabe jedes Namens muss großgeschrieben sein."></div>
+           
+            <div><input required type="text" placeholder="Name" id="remoteName" class="user"  pattern="[A-Z][a-zA-Z]* [A-Z][a-zA-Z]*" title="Bitte geben Sie Ihren Vor- und Nachnamen ein. Der erste Buchstabe jedes Namens muss großgeschrieben sein."></div>
             <div><input required id="remoteEmail" class="email" type="email" placeholder="Email"></div>
             <input required oninput="changingEye()" type="password" id="remotePassword" class="password-input" placeholder="Password">
             <img id="lock" src="../assets/img/passwordLock.svg" alt="">
