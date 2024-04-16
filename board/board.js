@@ -1,11 +1,11 @@
-
+let currentDraggedElement;
 let allTasks = [{
     "taskID": 0,
     "processingStatus": "ToDo",
     "title": "Kochwelt Page & Recipe Recommender",
     "description":'Build start page with recipe recommendation...',
     "assignedTo":[],
-    "dueDate":10/5/2023,
+    "dueDate":'10/5/2023',
     "prio":'/assets/img/prio_medium.svg',
     "category":'User Story',
     "subtasks":['Start Page Loyout', 'Implement Recipe Recommendation']
@@ -16,7 +16,7 @@ let allTasks = [{
     "title": "HTML Base Template Creation",
     "description":'Create reusable HTML base templates...',
     "assignedTo":[],
-    "dueDate":10/5/2023,
+    "dueDate":'10/5/2023',
     "prio":'/assets/img/prio_low.svg',
     "category":'Technical Task',
     "subtasks":[]
@@ -28,7 +28,7 @@ let allTasks = [{
     "title": "Daily Kochwelt Recipe",
     "description":'Implement daily recipe and portion calculator....',
     "assignedTo":[],
-    "dueDate":10/5/2023,
+    "dueDate":'10/5/2023',
     "prio":'/assets/img/prio_medium.svg',
     "category":'User Story',
     "subtasks":['Start Page Loyout', 'Implement Recipe Recommendation']
@@ -40,7 +40,7 @@ let allTasks = [{
     "title": "CSS Architecture Planning",
     "description":'Define CSS naming conventions and structure...',
     "assignedTo":[],
-    "dueDate":10/5/2023,
+    "dueDate":'10/5/2023',
     "prio":'/assets/img/prio_urgent.svg',
     "category":'Technical Task',
     "subtasks":[]
@@ -64,42 +64,26 @@ function doNotClose(event) {
     event.stopPropagation();
 }
 
-let currentDraggedElement;
+
 
 function updateHTML() {
-    let toDo = allTasks.filter(t => t['processingStatus'] == 'ToDo');
+    const statuses = ['ToDo', 'progress', 'awaitFeedback', 'done'];
 
-    document.getElementById('todo').innerHTML = '';
-    for (let index = 0; index < toDo.length; index++) {
-        const element = toDo[index];
-        document.getElementById('todo').innerHTML += generateTodoHTML(element);
+    for (let i = 0; i < statuses.length; i++) {
+        const status = statuses[i];
+        const tasks = allTasks.filter(task => task['processingStatus'] === status);
+        const container = document.getElementById(status.toLowerCase());
+
+        container.innerHTML = '';
+        for (let j = 0; j < tasks.length; j++) {
+            container.innerHTML += generateTodoHTML(tasks[j]);
+        }
     }
 
-    let progress = allTasks.filter(t => t['processingStatus'] == 'progress');
-
-    document.getElementById('progress').innerHTML = '';
-    for (let index = 0; index < progress.length; index++) {
-        const element = progress[index];
-        document.getElementById('progress').innerHTML += generateTodoHTML(element);
-    }
-
-    let awaitFeedback = allTasks.filter(t => t['processingStatus'] == 'awaitFeedback');
-
-    document.getElementById('awaitFeedback').innerHTML = '';
-    for (let index = 0; index < awaitFeedback.length; index++) {
-        const element = awaitFeedback[index];
-        document.getElementById('awaitFeedback').innerHTML += generateTodoHTML(element);
-    }
-
-    let done = allTasks.filter(t => t['processingStatus'] == 'done');
-
-    document.getElementById('done').innerHTML = '';
-    for (let index = 0; index < done.length; index++) {
-        const element = done[index];
-        document.getElementById('done').innerHTML += generateTodoHTML(element,index);
-    }
-//    updateSummary();
+    // updateSummary();
 }
+
+
 
 
 
@@ -108,7 +92,7 @@ function startDragging(taskID){
 }
 
 
-function generateTodoHTML(element,index){
+function generateTodoHTML(element){
     let categoryColor = '';
     if(element['category'] === 'User Story') {
         categoryColor = '#0038FF';
@@ -238,31 +222,58 @@ function showBigTask(element){
 function findTaskFunction() {
     let search = document.getElementById('search').value.toLowerCase();
     let searchArray = [];
-
+    document.getElementById('todo').innerHTML = '';
+    document.getElementById('progress').innerHTML = '';
+    document.getElementById('awaitfeedback').innerHTML = '';
+    document.getElementById('done').innerHTML = '';
     for (let i = 0; i < allTasks.length; i++) {
         const element = allTasks[i];
         if (element['title'].toLowerCase().includes(search) || element['description'].toLowerCase().includes(search)) {
             searchArray.push(element);
         }
     }
-    generateTodoHTML(searchArray);
+    for (let index = 0; index < searchArray.length; index++) {
+        const element = searchArray[index];
+        if (element['processingStatus'] === 'ToDo') {
+            document.getElementById('todo').innerHTML += generateTodoHTML(element);
+        } else if (element['processingStatus'] === 'progress') {
+            document.getElementById('progress').innerHTML += generateTodoHTML(element);
+        } else if (element['processingStatus'] === 'awaitFeedback') {
+            document.getElementById('awaitfeedback').innerHTML += generateTodoHTML(element);
+        } else if (element['processingStatus'] === 'done') {
+            document.getElementById('done').innerHTML += generateTodoHTML(element);
+        }
+    }
 }
 
-// function countTasksByStatus(status) {
-//         return allTasks.filter(task => task.processingStatus === status).length;
-// }
+function updateSummary() {
+    let todoCount = countTasksByStatus('ToDo');
+    let progressCount = countTasksByStatus('progress');
+    let awaitFeedbackCount = countTasksByStatus('awaitFeedback');
+    let doneCount = countTasksByStatus('done');
+    let urgentCount = countTasksByPriority('Urgent');
+    let urgentTask = getUrgentTask();
+    let totalCount = todoCount + progressCount + awaitFeedbackCount + doneCount;
 
-// function updateSummary(){
-//     let todoCount = countTasks('ToDo');
-//     let progressCount = countTasks('progress');
-//     let awaitFeedbackCount = countTasks('awaitFeedback');
-//     let doneCount = countTasks('done');
+    document.getElementById('todoCount').innerText = todoCount.toString();
+    document.getElementById('progressCount').innerText = progressCount.toString();
+    document.getElementById('awaitFeedbackCount').innerText = awaitFeedbackCount.toString();
+    document.getElementById('doneCount').innerText = doneCount.toString();
+    document.getElementById('urgentCount').innerText = urgentCount.toString();
+    document.getElementById('urgentDate').innerText = urgentTask ? urgentTask.dueDate : '';
+    document.getElementById('allTasksCount').innerText = totalCount.toString();
+}
 
-//     document.getElementById('todoCount').innerHTML= todoCount.toString();
-//     document.getElementById('progressCount').innerHTML = progressCount.toString();
-//     document.getElementById('awaitFeedbackCount').innerHTML = awaitFeedbackCount.toString();
-//     document.getElementById('doneCount').innerHTML = doneCount.toString();
-// }
+function countTasksByStatus(status) {
+    return allTasks.filter(task => task.processingStatus === status).length;
+}
+function countTasksByPriority(priority) {
+    return allTasks.filter(task => task.prio.includes(priority)).length;
+}
+
+function getUrgentTask() {
+    return allTasks.find(task => task.prio.includes('Urgent'));
+}
 
 function deleteTasks(taskID) {
     const index = allTasks.findIndex(task => task.taskID === taskID);
