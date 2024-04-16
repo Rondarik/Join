@@ -12,7 +12,7 @@
     <script src="summary.js"></script>
     <script src="/board/board.js"></script>
 </head>
-<body onload="includeHTML(), greetUser()">
+<body onload="includeHTML(), greetUser(), updateSummary()">
     <div w3-include-html="/assets/templates/side_menu.html"></div>
     <div w3-include-html="/assets/templates/header.html"></div>
     <div class="summary_container">
@@ -43,20 +43,20 @@
                 <div class="prio_container">
                     <img class="summary_img" src="/assets/img/prio.svg" alt="">
                     <div>
-                        <h2>1</h2>
+                        <h2 id="urgentCount">1</h2>
                         <p class="text_below">Urgent</p>
                     </div>
                 </div>
                 <div class="line_grey"></div>
                 <div class="date_container">
-                    <h3>April 24, 2024</h3>
+                    <h3 id="urgentDate">April 24, 2024</h3>
                     <p style="font-size: 16px;" class="text_below">Upcoming Deadline</p>
                 </div>
             </a>
         <div class="tasks_container">
             <a href="/board/board.html" class="tasks_row">
                 <div class="text_container">
-                <h2>5</h2>
+                <h2 id="allTasksCount">5</h2>
                 <p class="text_below">Tasks in Board</p>
                 </div>
             </a>

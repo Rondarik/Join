@@ -88,9 +88,11 @@ font-weight: 700;
     align-items: center;
     gap:4px;  
 }
-.sideMenuLinkActive {
+.sidenavLinkActive {
     background-color: #091931;
+    color: white !important;
 }
+
 
 header{
     height: 96px;
