@@ -13,21 +13,4 @@ function greetUser(){
             greet.innerHTML=greeting;
 }
 
-// function countTasksByStatus(status) {
-//     return allTasks.filter(task => task.processingStatus === status).length;
-// }
-
-// function updateSummary(){
-// let todoCount = countTasks('ToDo');
-// let progressCount = countTasks('progress');
-// let awaitFeedbackCount = countTasks('awaitFeedback');
-// let doneCount = countTasks('done');
-
-// document.getElementById('todoCount').innerHTML= todoCount.toString();
-// document.getElementById('progressCount').innerHTML = progressCount.toString();
-// document.getElementById('awaitFeedbackCount').innerHTML = awaitFeedbackCount.toString();
-// document.getElementById('doneCount').innerHTML = doneCount.toString();
-// }
-
-
 

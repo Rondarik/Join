@@ -301,11 +301,14 @@ color: black;
 }
 .bigTaskInner{
     background-color: white;
-    width: 450px;
-    height: 700px;
+    width: 525px;
+    height: 931px;
     padding: 48px 40px;
     border-radius: 30px;
     gap: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .bigHeadline{
     display: flex;
@@ -332,7 +335,7 @@ color: black;
 }
 .bigTitle{
 font-family: Inter;
-font-size: 48px;
+font-size: 61px;
 font-weight: 700;
 text-align: left;
 margin-block-start: 0;
@@ -340,6 +343,24 @@ margin-block-end: 0;
 }
 .bigInfosText{
 font-family: Inter;
+font-size: 20px;
+font-weight: 400;
+line-height: 24px;
+text-align: left;
+gap:25px;
+display: flex;
+justify-content: flex-start;
+align-items: center;
+}
+.bigInfosContacts{
+    font-family: Inter;
+font-size: 20px;
+font-weight: 400;
+line-height: 24px;
+text-align: left;
+}
+.bigInfosSubtasks{
+    font-family: Inter;
 font-size: 20px;
 font-weight: 400;
 line-height: 24px;
