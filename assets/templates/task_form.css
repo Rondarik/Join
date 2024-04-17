@@ -29,7 +29,7 @@
 .form_inner {
     margin-top: 20px;
     display: flex;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
 
     /* border: 1px solid red; */
 }
@@ -209,17 +209,28 @@ input:-webkit-autofill:focus {
     /* border: 1px solid black; */
 }
 
-#dueDate[type="date"]::-webkit-calendar-picker-indicator {
-    display: none;
+.due_date_contaier{
+    height: 96px;
+    margin-bottom: 16px;
 }
 
 #dueDate {
     width: calc(100% - 13px);
-    background-image: url('/assets/img/event_calendar.svg');
-    background-repeat: no-repeat;
+    /* background-image: url('/assets/img/event_calendar.svg');
+    background-repeat: no-repeat; */
     background-position: center right 19px;
     cursor: pointer;
     display: block;
+}
+#dueDate[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    display: block;
+    background: url(/assets/img/event_calendar.svg) no-repeat;
+    width: 32px;
+    height: 20px;
+    border-width: thin;
+    cursor: pointer;
 }
 
 .prio_buttons {
@@ -242,6 +253,11 @@ input:-webkit-autofill:focus {
     text-align: center;
     box-shadow: 0 0 6px -4px;
     cursor: pointer;
+}
+
+.category_container{
+    height: 96px;
+    margin-bottom: 16px;
 }
 
 #category {
@@ -267,6 +283,11 @@ input:-webkit-autofill:focus {
     cursor: pointer;
 }
 
+#allSubtasksID {
+    height: 60px;
+
+}
+
 #subtasks {
     border: none;
     width: 100%;
@@ -288,7 +309,7 @@ input:-webkit-autofill:focus {
 .subtasks_create_buttons {
     display: flex;
     align-items: center;
-     margin-right: 20px;
+    margin-right: 20px;
 }
 
 .subtask_btn_close {
@@ -310,17 +331,17 @@ input:-webkit-autofill:focus {
 .subtasks_container img {
     width: 14px;
     height: 14px;
-    /* margin-right: 16px; */
 }
 
-#subtaskID {
-    height: 32px;
+.subtask_box {
+    height: 28px;
     display: flex;
     justify-content: space-between;
     background-color: #f8f7f8;
+    cursor: pointer;
 }
 
-#inputSubtaskID {
+.input_subtask {
     border: none;
     background-color: transparent;
     font-family: 'Inter';
@@ -357,10 +378,6 @@ input:-webkit-autofill:focus {
 
 .form_bottom_container p {
     margin-bottom: -10px;
-}
-
-.form_buttons {
-    align-self: end;
 }
 
 .clear_btn,

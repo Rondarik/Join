@@ -4,24 +4,26 @@ let subtasks = [];
 
 async function addNewTask(processingStatus) {
     await getAllTasksFromServer();
-    let taskTilte = document.getElementById('taskTitle').value;
-    let taskDiscription = document.getElementById('taskDiscription').value;
-    let date = document.getElementById('dueDate').value;
-    let category = document.getElementById('category').value;
-    let task = {
-        "taskID": setTaskID(),
-        "processingStatus": processingStatus,
-        "title": taskTilte,
-        "description": taskDiscription,
-        "assignedTo": assignedContacts,
-        "dueDate": date,
-        "prio": taskPrio,
-        "category": category,
-        "subtasks": []
-    };
-    allTasks.push(task);
-    // await setItem('allTasks', JSON.stringify(allTasks));
-    console.log(allTasks);
+    if (checkInputForNewTask()) {
+        let taskTilte = document.getElementById('taskTitle').value;
+        let taskDiscription = document.getElementById('taskDiscription').value;
+        let date = document.getElementById('dueDate').value;
+        let category = document.getElementById('category').value;
+        let task = {
+            "taskID": setTaskID(),
+            "processingStatus": processingStatus,
+            "title": taskTilte,
+            "description": taskDiscription,
+            "assignedTo": assignedContacts,
+            "dueDate": date,
+            "prio": taskPrio,
+            "category": category,
+            "subtasks": []
+        };
+        allTasks.push(task);
+        // await setItem('allTasks', JSON.stringify(allTasks));
+        console.log(allTasks);
+    }
 }
 
 function clearTaskForm() {
@@ -32,7 +34,7 @@ function clearTaskForm() {
     setBtnCollorByPrio('medium');
     document.getElementById('category').value = '';
     subtasks = [];
-
+    renderNewSubtask();
 }
 
 function showAssignablContacts() {
@@ -42,6 +44,7 @@ function showAssignablContacts() {
     contactsContainer.classList.toggle('d-none');
     contactsContainer.innerHTML = '';
     renderAllContacts(contactsContainer);
+    renderUserTag();
 }
 
 function closeAssignContactsBox() {
@@ -233,7 +236,7 @@ function addNewSubtask() {
     subtasksNoFucus();
 
 
-    console.log('add Subtask');
+    console.log('add Subtask ' + subtasks);
 }
 
 function cancelNewSubtask() {
@@ -245,49 +248,90 @@ function renderNewSubtask() {
     subtasksContainer.innerHTML = '';
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
-        subtasksContainer.innerHTML += subtaskHTML(i);
-        document.getElementById(`inputSubtaskID${i}`).value = subtask;
+        subtasksContainer.innerHTML += subtaskHTML(i, subtask);
     }
 }
 
-function subtaskHTML(ID) {
+function subtaskHTML(ID, text) {
     return /*html*/ `
-        <div id="subtaskID${ID}" onmouseover="mouseoverStyleSubtaskInput()" onmouseout="mouseoutStyleSubtaskInput()">
-            <input type="text" id="inputSubtaskID${ID}" onfocus="onfocusStyleSubtaskInput()">
-            <div class="edit_buttons d-none" id="substaskEditButtonsID">
-                <img class="subtask_btn_edit" src="/assets/img/edit.svg" alt="">
+        <div id="subtaskID${ID}" class="subtask_box" onmouseover="mouseoverStyleSubtaskInput(${ID})" onmouseout="mouseoutStyleSubtaskInput(${ID})">
+            <input type="text" id="inputSubtaskID${ID}" value="${text}" class="input_subtask" onfocus="onfocusStyleSubtaskInput(${ID})">
+            <div class="edit_buttons d-none" id="substaskEditButtonsID${ID}">
+                <img class="subtask_btn_edit" src="/assets/img/edit.svg" alt="" onclick="editSubtask(${ID})">
                 <div class="substask_seperator"></div>
-                <img class="subtask_btn_delete" src="/assets/img/delete.svg" alt="">
+                <img class="subtask_btn_delete" src="/assets/img/delete.svg" alt="" onclick="deleteSubtask(${ID})">
             </div>
-            <div class="edit_buttons d-none" id="substaskConfirmButtonsID">
-                <img class="subtask_btn_delete" src="/assets/img/delete.svg" alt="">
+            <div class="edit_buttons d-none" id="substaskConfirmButtonsID${ID}">
+                <img class="subtask_btn_delete" src="/assets/img/delete.svg" alt="" onclick="deleteSubtask(${ID})">
                 <div class="substask_seperator"></div>
-                <img class="subtask_btn_check" src="/assets/img/check.svg" alt="">
+                <img class="subtask_btn_check" src="/assets/img/check.svg" alt="" onclick="saveChangedSubtask(${ID})">
             </div>
         </div>
     `;
 }
 
 
-
-
 let subtaskIsFocused = false;
-function mouseoverStyleSubtaskInput() {
+function mouseoverStyleSubtaskInput(ID) {
     if (!subtaskIsFocused) {
-        document.getElementById('substaskConfirmButtonsID').classList.remove('d-none');
+        document.getElementById(`substaskEditButtonsID${ID}`).classList.remove('d-none');
     }
-
 }
 
-function mouseoutStyleSubtaskInput() {
-    document.getElementById('substaskConfirmButtonsID').classList.add('d-none');
+function mouseoutStyleSubtaskInput(ID) {
+    document.getElementById(`substaskEditButtonsID${ID}`).classList.add('d-none');
 }
 
 
-function onfocusStyleSubtaskInput() {
+function onfocusStyleSubtaskInput(ID) {
     subtaskIsFocused = true;
-    document.getElementById('subtaskID').style.backgroundColor = '#ffffff';
-    document.getElementById('substaskEditButtonsID').classList.remove('d-none');
-    document.getElementById('substaskConfirmButtonsID').classList.add('d-none');
+    document.getElementById(`subtaskID${ID}`).style.backgroundColor = '#ffffff';
+    document.getElementById(`substaskEditButtonsID${ID}`).classList.add('d-none');
+    document.getElementById(`substaskConfirmButtonsID${ID}`).classList.remove('d-none');
+}
 
+function editSubtask(ID) {
+    let inputField = document.getElementById(`inputSubtaskID${ID}`);
+    inputField.focus();
+    inputField.setSelectionRange(inputField.value.length, inputField.value.length);
+}
+
+function deleteSubtask(ID) {
+    subtasks.splice(ID, 1);
+    renderNewSubtask();
+    subtaskIsFocused = false;
+}
+
+function saveChangedSubtask(ID) {
+    let inputValue = document.getElementById(`inputSubtaskID${ID}`).value;
+    subtasks.splice(ID, 1, inputValue);
+    renderNewSubtask();
+    subtaskIsFocused = false;
+}
+
+function checkInputForNewTask() {
+    let taskTilte = document.getElementById('taskTitle').value;
+    let date = document.getElementById('dueDate').value;
+    let category = document.getElementById('category').value;
+    let errorTitle = document.getElementById('errorTitleID');
+    let errorDate = document.getElementById('errorDueDateID');
+    let errorCategory = document.getElementById('errorCategoryID');
+    let allFieldsAreEmpty = false;
+
+    taskTilte == '' ? errorTitle.classList.remove('d-none') : errorTitle.classList.add('d-none');
+    date == '' ? errorDate.classList.remove('d-none') : errorDate.classList.add('d-none');
+    category == '' ? errorCategory.classList.remove('d-none') : errorCategory.classList.add('d-none');
+
+
+    if ((taskTilte != '') && (date != '') && (category != '')) {
+        allFieldsAreEmpty = true;
+    }
+    console.log(allFieldsAreEmpty);
+    return allFieldsAreEmpty;
+}
+
+function setDate() {
+    var today = new Date().toISOString().split('T')[0];
+    var dateInput = document.getElementById('dueDate');
+    dateInput.setAttribute('min', today);
 }

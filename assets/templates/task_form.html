@@ -6,7 +6,7 @@
                 <div class="title_container">
                     <label for="taskTitle">Title<span style="color: #ffa800;">*</span></label><br>
                     <input class="input_styles" type="text" id="taskTitle" placeholder="Enter a title" required><br>
-                    <p class="error_message">This field is required</p>
+                    <p class="error_message d-none" id="errorTitleID">This field is required</p>
                 </div>
                 <div class="discripton_container">
                     <label for="TaskDiscription">Discription</label><br>
@@ -33,22 +33,24 @@
             </div>
             <div class="separator"></div>
             <div class="form_right">
-                <div class="form_buttons">
+                <div class="due_date_contaier">
                     <label for="dueDate">Due date<span style="color: #ffa800;">*</span></label><br>
-                    <input class="input_styles" type="date" id="dueDate" required><br>
-                    <p class="error_message">This field is required</p>
-                    <label>Prio</label><br>
-                    <div class="prio_buttons">
-                        <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('urgent')">
-                            Urgent <img src="/assets/img/prio_urgent.svg" alt="">
-                        </button>
-                        <button type="button" class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('medium')">
-                            Medium <img src="/assets/img/prio_medium.svg" alt="">
-                        </button>
-                        <button type="button" class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('low')">
-                            Low <img src="/assets/img/prio_low.svg" alt="">
-                        </button>
-                    </div>
+                    <input class="input_styles" type="date" id="dueDate" required onclick="setDate()">
+                    <p class="error_message d-none" id="errorDueDateID">This field is required</p>
+                </div>
+                <label>Prio</label><br>
+                <div class="prio_buttons">
+                    <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('urgent')">
+                        Urgent <img src="/assets/img/prio_urgent.svg" alt="">
+                    </button>
+                    <button type="button" class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('medium')">
+                        Medium <img src="/assets/img/prio_medium.svg" alt="">
+                    </button>
+                    <button type="button" class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('low')">
+                        Low <img src="/assets/img/prio_low.svg" alt="">
+                    </button>
+                </div>
+                <div class="category_container">
                     <label for="category">Category<span style="color: #ffa800;">*</span></label><br>
                     <select class="input_styles" id="category" required>
                         <option value="" selected disabled hidden>Select task category <img
@@ -56,33 +58,20 @@
                         <option value="technikalTask">Technical Task</option>
                         <option value="userStory">User Story</option>
                     </select><br>
-                    <p class="error_message">This field is required</p>
-                    <label for="subtasks">Subtasks</label><br>
-                    <div class="subtasks_container input_styles">
-                        <!-- <input type="text" id="subtasks" onfocus="subtasksFucus()" onblur="subtasksNoFucus()"> -->
-                        <input type="text" id="subtasks" onfocus="subtasksFucus()">
-                        <img class="subtask_btn_add" id="subtaskBtnAddID" src="/assets/img/add.svg" alt="">
-                        <div class="subtasks_create_buttons d-none" id="subtasksCreateButtonsID">
-                            <img class="subtask_btn_close" src="/assets/img/close.svg" alt="" onclick="cancelNewSubtask()">
-                            <div class="substask_seperator"></div>
-                            <img class="subtask_btn_check" src="/assets/img/check.svg" alt="" onclick="addNewSubtask()">
-                        </div>
+                    <p class="error_message d-none" id="errorCategoryID">This field is required</p>
+                </div>
+                <label for="subtasks">Subtasks</label><br>
+                <div class="subtasks_container input_styles">
+                    <!-- <input type="text" id="subtasks" onfocus="subtasksFucus()" onblur="subtasksNoFucus()"> -->
+                    <input type="text" id="subtasks" onfocus="subtasksFucus()">
+                    <img class="subtask_btn_add" id="subtaskBtnAddID" src="/assets/img/add.svg" alt="">
+                    <div class="subtasks_create_buttons d-none" id="subtasksCreateButtonsID">
+                        <img class="subtask_btn_close" src="/assets/img/close.svg" alt="" onclick="cancelNewSubtask()">
+                        <div class="substask_seperator"></div>
+                        <img class="subtask_btn_check" src="/assets/img/check.svg" alt="" onclick="addNewSubtask()">
                     </div>
-                    <div id="allSubtasksID">
-                        <!-- <div id="subtaskID" onmouseover="mouseoverStyleSubtaskInput()" onmouseout="mouseoutStyleSubtaskInput()">
-                            <input type="text" id="inputSubtaskID" onfocus="onfocusStyleSubtaskInput()">
-                            <div class="edit_buttons d-none" id="substaskEditButtonsID">
-                                <img class="subtask_btn_edit" src="/assets/img/edit.svg" alt="">
-                                <div class="substask_seperator"></div>
-                                <img class="subtask_btn_delete" src="/assets/img/delete.svg" alt="">
-                            </div>
-                            <div class="edit_buttons d-none" id="substaskConfirmButtonsID">
-                                <img class="subtask_btn_delete" src="/assets/img/delete.svg" alt="">
-                                <div class="substask_seperator"></div>
-                                <img class="subtask_btn_check" src="/assets/img/check.svg" alt="">
-                            </div>
-                        </div> -->
-                    </div>
+                </div>
+                <div id="allSubtasksID">
                 </div>
             </div>
         </div>
