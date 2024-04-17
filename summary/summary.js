@@ -12,13 +12,8 @@ function greetUser(){
             } else {
                 greeting = 'Good evening,';
             }
-            if (logedInAs) {
-                greeting += logedInAs; 
-                nameElement.innerHTML = logedInAs; 
-            } else {
-                nameElement.innerHTML = 'Guest'; 
-            }
-         greet.innerHTML=greeting;
-}
-
-
+        
+            greet.innerHTML = greeting;
+        }
+        
+    

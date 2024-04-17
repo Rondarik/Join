@@ -1,5 +1,5 @@
 let currentDraggedElement;
-let allTasksJson = [{
+let allTasks= [{
     "taskID": 0,
     "processingStatus": "ToDo",
     "title": "Kochwelt Page & Recipe Recommender",
@@ -46,9 +46,6 @@ let allTasksJson = [{
     "subtasks":[]
 }];
 
-// document.getElementById('formContainer').addEventListener('click', function() {
-//     this.style.borderColor = '#29ABE2';
-// });
 
 
 function showAddTaskOverlay() {
@@ -71,7 +68,7 @@ function updateHTML() {
 
     for (let i = 0; i < statuses.length; i++) {
         const status = statuses[i];
-        const tasks = allTasksJson.filter(task => task['processingStatus'] === status);
+        const tasks = allTasks.filter(task => task['processingStatus'] === status);
         const container = document.getElementById(status.toLowerCase());
 
         container.innerHTML = '';
@@ -80,47 +77,63 @@ function updateHTML() {
         }
     }
 
-    // updateSummary();
 }
-
-
-
 
 
 function startDragging(taskID){
     currentDraggedElement=taskID;
 }
 
+function calculateProgress(subtasks) {
+    let progressValue = 0;
+    let completedSubtasks = 0; // Hier definieren wir die Variablen in der calculateProgress Funktion
+    let totalSubtasks = 0;
+    if (subtasks) {
+        const totalSubtasks = subtasks.length;
+        const completedSubtasks = subtasks.filter(subtask => subtask.completed).length;
+        if (totalSubtasks > 0) {
+            progressValue = (completedSubtasks / totalSubtasks) * 100;
+        }
+    }
+    return { progressValue, completedSubtasks, totalSubtasks }; 
+}
 
-function generateTodoHTML(element){
+function generateTodoHTML(element) {
     let id = element['taskID'];
     let categoryColor = '';
-    if(element['category'] === 'User Story') {
+    if (element['category'] === 'User Story') {
         categoryColor = '#0038FF';
-    } else if(element['category'] === 'Technical Task') {
-        categoryColor = '#1FD7C1'; 
+    } else if (element['category'] === 'Technical Task') {
+        categoryColor = '#1FD7C1';
     }
 
+    let subtaskHTML = ''; 
+    let totalSubtasks = 0; 
+    if (element['subtasks']) {
+        totalSubtasks = element['subtasks'].length;
+    }
+
+    if (totalSubtasks > 0) {
+        subtaskHTML = `
+            <div class="progress_container">
+                <progress id="file" max="100" value="0">0%</progress> <!-- Hier wird der Wert des Fortschritts auf 0 gesetzt -->
+                <p class="progress_text">0/${totalSubtasks} Subtasks</p>
+            </div>`;
+    }
     return `<div id="tasks_card_${element['taskID']}" onclick="openBigTask(${id})" class="task_progress" draggable="true" ondragstart="startDragging(${element['taskID']})">
-
-    <div>
-        <span class="progress_title" style="background-color: ${categoryColor};">${element['category']}</span>
-        <div class="progress_text">
-            <p class="text_headline">${element['title']}</p>
-            <p class="text_description">${element['description']}</p>
+        <div>
+            <span class="progress_title" style="background-color: ${categoryColor};">${element['category']}</span>
+            <div class="progress_text">
+                <p class="text_headline">${element['title']}</p>
+                <p class="text_description">${element['description']}</p>
+            </div>
+            ${subtaskHTML} 
+            <div class="contacts_container">
+                <img class="contacts_img" src="/assets/img/contacts_board.svg" alt="">
+                <img class="prio_img" src="${element['prio'][0]}" alt="">
+            </div>
         </div>
-        <div class="progress_container">
-            <progress id="file" max="100" value="50">50%</progress>
-            <p class="progress_text">1/2 Subtasks</p>
-        </div>
-        <div class="contacts_container">
-            <img class="contacts_img" src="/assets/img/contacts_board.svg" alt="">
-            <img class="prio_img" src="${element['prio'][0]}" alt="">
-        </div>
-    </div>
-</div>
-</div>`
-
+    </div>`;
 }
 
 function allowDrop(ev) {
@@ -128,7 +141,7 @@ function allowDrop(ev) {
 }
 
 function moveTo(processingStatus) {
-    allTasksJson[currentDraggedElement]['processingStatus'] = processingStatus;
+    allTasks[currentDraggedElement]['processingStatus'] = processingStatus;
     updateHTML();
     checkEmptyToDo();
     checkEmptyDone();
@@ -159,13 +172,13 @@ function checkEmptyDone() {
 }
 
 function openBigTask(id){
-    for (let i=0; i<allTasksJson.length; i++){
-            const task=allTasksJson[i]['taskID'];
+    for (let i=0; i<allTasks.length; i++){
+            const task=allTasks[i]['taskID'];
     if (task==id) {
         document.getElementById('bigTask').classList.remove('d-none');
         document.getElementById('bigTask').classList.add('show');
         let bigTask = document.getElementById('bigTask');
-        bigTask.innerHTML = showBigTask(allTasksJson[i]);
+        bigTask.innerHTML = showBigTask(allTasks[i]);
     } 
 }
 }
@@ -233,8 +246,8 @@ function findTaskFunction() {
     document.getElementById('progress').innerHTML = '';
     document.getElementById('awaitfeedback').innerHTML = '';
     document.getElementById('done').innerHTML = '';
-    for (let i = 0; i < allTasksJson.length; i++) {
-        const element = allTasksJson[i];
+    for (let i = 0; i < allTasks.length; i++) {
+        const element = allTasks[i];
         if (element['title'].toLowerCase().includes(search) || element['description'].toLowerCase().includes(search)) {
             searchArray.push(element);
         }
@@ -272,20 +285,20 @@ function updateSummary() {
 }
 
 function countTasksByStatus(status) {
-    return allTasksJson.filter(task => task.processingStatus === status).length;
+    return allTasks.filter(task => task.processingStatus === status).length;
 }
 function countTasksByPriority(priority) {
-    return allTasksJson.filter(task => task.prio.includes(priority)).length;
+    return allTasks.filter(task => task.prio.includes(priority)).length;
 }
 
 function getUrgentTask() {
-    return allTasksJson.find(task => task.prio.includes('Urgent'));
+    return allTasks.find(task => task.prio.includes('Urgent'));
 }
 
 function deleteTasks(taskID) {
-    const index = allTasksJson.findIndex(task => task.taskID === taskID);
+    const index = allTasks.findIndex(task => task.taskID === taskID);
     if (index !== -1) {
-        allTasksJson.splice(index, 1);
+        allTasks.splice(index, 1);
         updateHTML();
     } 
     closeBigTask();

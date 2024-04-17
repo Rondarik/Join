@@ -72,6 +72,7 @@ async function saveEmailandPassword(){
     localStorage.setItem('Email', userEmail);
     localStorage.setItem('Password', userPassword);
     logedInAs = userEmail;
+    
     }
     redirectToSummary();
 

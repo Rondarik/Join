@@ -67,6 +67,12 @@ async function register() {
         remoteEmail: remoteEmail.value,
         remotePassword: remotePassword.value,
     });
+    logedInAs = [];
+    logedInAs.push({
+        remoteName: remoteName.value,
+        remoteEmail: remoteEmail.value,
+        remotePassword: remotePassword.value,
+    });
     await setItem('allUser', JSON.stringify(allUser));
     localStorage.setItem('startAnimation','true');
     

@@ -39,16 +39,11 @@ for (let i = 0; i < links.length; i++) {
     }
 }
 
-
-// function makeNavbarActive(page) {
-//   deactivateNavbar();
-//   document.getElementById(page).classList.add('sidenavLinkActive');
-// }
-
-
-// function deactivateNavbar(){
-//   document.getElementById('summary').classList.remove('sidenavLinkActive');
-//   document.getElementById('addTask').classList.remove('sidenavLinkActive');
-//   document.getElementById('board').classList.remove('sidenavLinkActive');
-//   document.getElementById('contacts').classList.remove('sidenavLinkActive');
+// function makeInitials(string) {
+//   let names = string.split(' '),
+//       initials = names[0].substring(0, 1).toUpperCase();
+//   if (names.length > 1) {
+//       initials += names[names.length - 1].substring(0, 1).toUpperCase();
+//   }
+//   return initials;
 // }

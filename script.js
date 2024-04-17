@@ -1,4 +1,4 @@
-let logedInAs = [];
+let logedInAs =[];
 let allTasks = [];
 let allUser = [];
 let allContacts = [];
