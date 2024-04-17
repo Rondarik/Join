@@ -12,6 +12,7 @@
     <script src="summary.js"></script>
     <script src="/board/board.js"></script>
     <script src="/script.js"></script>
+    <script src="/dummyData.js"></script>
 </head>
 <body onload="includeHTML(), greetUser(), updateSummary()">
     <div w3-include-html="/assets/templates/side_menu.html"></div>
@@ -76,8 +77,8 @@
             </div>
         </div>
             <div class="summary_greet">
-                <span id="greeting" class="greet_container">Good morning,</span>
-                <span id="activeUser" class="name_container">Mevlida Salendrkovic</span>
+                <span id="greeting" class="greet_container"></span>
+                <span id="activeUser" class="name_container"></span>
             </div>
         </div>
         
