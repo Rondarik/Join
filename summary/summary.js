@@ -18,8 +18,7 @@ function greetUser(){
             } else {
                 nameElement.innerHTML = 'Guest'; 
             }
-
-            greet.innerHTML=greeting;
+         greet.innerHTML=greeting;
 }
 
 
