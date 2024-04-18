@@ -1,4 +1,15 @@
+function init(){
+    updateSummary();
+    greetUser();
+    setInitials();
+}
 
+function getUserName(){
+    const userName = localStorage.getItem('logedInUser');
+    return userName;
+}
+
+let logedInUser='';
 function greetUser(){
     const now = new Date();
             const hour = now.getHours();
@@ -12,8 +23,39 @@ function greetUser(){
             } else {
                 greeting = 'Good evening,';
             }
-        
+            const userName = getUserName();
+            if(userName){
+            nameElement.innerHTML = userName;
+            }else{
+                nameElement.innerHTML ='Guest'
+            }
             greet.innerHTML = greeting;
-        }
+}
+
+function setInitials() {
+    const userActive = getUserName();
+    const initials = makeInitials(userActive);
+    document.getElementById('activeUserInitial').innerHTML= initials;
+  }
+  
+  function makeInitials(string) {
+    let names = string.split(' '),
+        initials = names[0].substring(0, 1).toUpperCase();
+    if (names.length > 1) {
+        initials += names[names.length - 1].substring(0, 1).toUpperCase();
+    }
+    return initials;
+  }
+  
+  function getUserInitials() {
+    const userActive = localStorage.getItem('logedInUser');
+    if (userActive) {
+      return userActive;
+  } else {
+      return 'Guest';
+  }
+  }
+           
+
         
-    
+  
