@@ -22,6 +22,8 @@ async function addNewTask(processingStatus) {
         };
         allTasks.push(task);
         // await setItem('allTasks', JSON.stringify(allTasks));
+        showToastMessage();
+        switchToBaordSide();
         console.log(allTasks);
     }
 }
@@ -130,7 +132,13 @@ function renderUserTag() {
 
 }
 
+function showToastMessage() {
+    document.getElementById('messageAddedTask').classList.remove('d-none');
+}
 
+function switchToBaordSide() {
+    
+}
 
 
 // Hier nur für Testzwecke
@@ -170,6 +178,7 @@ function IdAlreadyExists(ID) {
     }
     return false;
 }
+
 
 /**
  * this function set the selected priority in the clobal variable for the new task
@@ -228,6 +237,7 @@ function subtasksNoFucus() {
     document.getElementById('subtaskBtnAddID').classList.remove('d-none');
     document.getElementById('subtasks').value = '';
 }
+
 
 function addNewSubtask() {
     let inputValue = document.getElementById('subtasks').value;
