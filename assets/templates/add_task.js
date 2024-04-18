@@ -2,6 +2,12 @@ let taskPrio = "medium";
 let assignedContacts = [];
 let subtasks = [];
 
+async function addTaskInit() {
+    await includeHTML();
+    clearTaskForm();
+}
+
+
 async function addNewTask(processingStatus) {
     await getAllTasksFromServer();
     if (checkInputForNewTask()) {
@@ -137,7 +143,7 @@ function showToastMessage() {
 }
 
 function switchToBaordSide() {
-    
+
 }
 
 

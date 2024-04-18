@@ -1,4 +1,5 @@
-function init(){
+async function init(){
+    await includeHTML();
     updateSummary();
     greetUser();
     setInitials();
