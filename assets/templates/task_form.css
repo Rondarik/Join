@@ -49,6 +49,7 @@
     font-family: "Inter";
     border-color: rgb(0, 0, 0, 0.2);
     padding-left: 10px;
+    outline: none;
 }
 
 input:-webkit-autofill {
@@ -69,11 +70,17 @@ input:-webkit-autofill:focus {
     color: lightgray;
 }
 
+.input_styles:focus {
+    border: 3px solid #29abe2;
+}
+
+.red_border {
+    border: 3px solid #FF8190;
+}
+
 /* --------- Left Container --------- */
 .form_left {
     width: 440px;
-
-    /* border: 1px solid red; */
 }
 
 .title_container {
@@ -86,6 +93,10 @@ input:-webkit-autofill:focus {
     height: 48px;
     cursor: pointer;
 }
+
+/* #taskTitle[type=text]:focus {
+    border: 1px solid #29abe2;
+} */
 
 .discripton_container {
     height: 168px;
@@ -209,19 +220,18 @@ input:-webkit-autofill:focus {
     /* border: 1px solid black; */
 }
 
-.due_date_contaier{
+.due_date_contaier {
     height: 96px;
     margin-bottom: 16px;
 }
 
 #dueDate {
     width: calc(100% - 13px);
-    /* background-image: url('/assets/img/event_calendar.svg');
-    background-repeat: no-repeat; */
     background-position: center right 19px;
     cursor: pointer;
     display: block;
 }
+
 #dueDate[type="date"]::-webkit-calendar-picker-indicator {
     color: rgba(0, 0, 0, 0);
     opacity: 1;
@@ -255,7 +265,7 @@ input:-webkit-autofill:focus {
     cursor: pointer;
 }
 
-.category_container{
+.category_container {
     height: 96px;
     margin-bottom: 16px;
 }
@@ -281,6 +291,11 @@ input:-webkit-autofill:focus {
     display: flex;
     align-items: center;
     cursor: pointer;
+    outline: none;
+}
+
+.subtasks_container:focus{
+    border: 1px solid #29ABE2;
 }
 
 #allSubtasksID {
@@ -453,9 +468,9 @@ input:-webkit-autofill:focus {
     z-index: 999;
 }
 
-@keyframes fly{
-    0%{
-       transform: translate(0,150vh);
+@keyframes fly {
+    0% {
+        transform: translate(0, 150vh);
     }
 }
 

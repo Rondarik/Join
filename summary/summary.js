@@ -1,9 +1,9 @@
 async function init(){
-        await includeHTML();
-        updateSummary();
-        greetUser();
-        setInitials();
-  }
+    await includeHTML();
+    updateSummary();
+    greetUser();
+    setInitials();
+}
 
 function getUserName(){
     const userName = localStorage.getItem('logedInUser');
