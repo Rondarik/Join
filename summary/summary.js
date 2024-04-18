@@ -56,7 +56,3 @@ function setInitials() {
       return 'Guest';
   }
   }
-           
-
-        
-  

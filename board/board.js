@@ -123,7 +123,7 @@ function generateTodoHTML(element) {
     if (totalSubtasks > 0) {
         subtaskHTML = `
             <div class="progress_container">
-                <progress id="file" max="100" value="0">0%</progress> <!-- Hier wird der Wert des Fortschritts auf 0 gesetzt -->
+                <progress id="file" max="100" value="0">0%</progress>
                 <p class="progress_text">0/${totalSubtasks} Subtasks</p>
             </div>`;
     }
@@ -190,65 +190,9 @@ function openBigTask(id){
 }
 }
 
-
 function closeBigTask(){
     document.getElementById('bigTask').classList.add('d-none');
 }
-
-// function showBigTask(element){
-//     let id= element['taskID'];
-//     let categoryColor = '';
-//     if(element['category'] === 'User Story') {
-//         categoryColor = '#0038FF';
-//     } else if(element['category'] === 'Technical Task') {
-//         categoryColor = '#1FD7C1'; 
-//     }
-//     return /*html*/`
-//         <div onclick="doNotClose(event)" class="bigTaskInner">
-//         <div class="bigHeadline">
-//             <p class="bigHeadlineText" style="background-color: ${categoryColor};">${element['category']}</p>
-//             <img onclick="closeBigTask()" class="bigHeadlineImg" src="/assets/img/close.svg" alt="">
-//         </div>
-//         <div>
-//             <h2 class="bigTitle">${element['title']}</h2>
-//             <p class="bigInfosText">${element['description']}</p>
-//         </div>
-//         <div>
-//             <div class="bigInfosText"><p>Due date:</p> ${element['dueDate']}</div>
-//             <div class="bigInfosText"><p>Priority:</p> ${element['prio'][1]} <img src="${element['prio'][0]}" alt=""></div>
-//         </div>
-//                 <div class="bigInfosContacts">
-//                     <h3 class="h3">Assigned To:</h3>
-//                     <li>${element['assignedTo']}</li>
-//                 </div>
-//                 <div class="bigInfosSubtasks">
-//                     <h3 class="h3">Subtasks</h3>
-//                     <div class="bigSubtasksContainer">
-//                     <img  onclick="checked()" id="checkboxOff" src="../assets/img/checkboxOff.svg" alt="" style="cursor:pointer;">
-//                     <img  onclick="unchecked()" id="checkboxOn" class="d-none" src="../assets/img/checkboxOn.svg" alt="" style="cursor:pointer;">
-//                     <p class="bigInfosContacts" >${element['subtasks'][0]}</p> 
-//                     </div>
-//                 </div>
-//                 <div class="delete_edit_container">
-//                     <div class="delete_container" onclick="deleteTasks(${id})">
-//                         <img class="delete_img" src="/assets/img/delete.svg" alt="">
-//                         <img class="delete_img_blau" src="/assets/img/delete_blau.svg"  alt="">
-//                         <p class="delete_edit_text">Delete</p>
-//                     </div>
-//                     <div class="delete_edit_line"></div>
-//                     <div class="edit_container">
-//                         <img class="edit_img" src="/assets/img/edit.svg" alt="">
-//                         <img class="edit_img_blau" src="/assets/img/edit_blau.svg" alt="">
-//                         <p class="delete_edit_text">Edit</p>
-//                     </div>
-//                 </div>
-// </div>`
-// }
-
-// function toggleSubtask(taskID, subtaskIndex) {
-//     // Code zur Toggle-Logik hier einfügen
-// }
-
 
 function showBigTask(element){
     let id = element['taskID'];
@@ -271,7 +215,6 @@ function showBigTask(element){
                 </div>`;
         }
     }
-
     return /*html*/`
         <div onclick="doNotClose(event)" class="bigTaskInner">
             <div class="bigHeadline">
@@ -290,7 +233,7 @@ function showBigTask(element){
                 <h3 class="h3">Assigned To:</h3>
                 <li>${element['assignedTo']}</li>
             </div>
-            ${subtasksHTML} <!-- Hier fügen wir den HTML-Code der Subtasks ein -->
+            <div> ${subtasksHTML}</div>
             <div class="delete_edit_container">
                 <div class="delete_container" onclick="deleteTasks(${id})">
                     <img class="delete_img" src="/assets/img/delete.svg" alt="">
@@ -298,7 +241,7 @@ function showBigTask(element){
                     <p class="delete_edit_text">Delete</p>
                 </div>
                 <div class="delete_edit_line"></div>
-                <div class="edit_container">
+                <div class="edit_container" onclick="openEditTasks(${id})">
                     <img class="edit_img" src="/assets/img/edit.svg" alt="">
                     <img class="edit_img_blau" src="/assets/img/edit_blau.svg" alt="">
                     <p class="delete_edit_text">Edit</p>
@@ -307,7 +250,6 @@ function showBigTask(element){
         </div>
     `;
 }
-
 
 function findTaskFunction() {
     let search = document.getElementById('search').value.toLowerCase();
@@ -376,4 +318,9 @@ function deleteTasks(taskID) {
         updateHTML();
     } 
     closeBigTask();
+}
+
+function openEditTasks(){
+    document.getElementById('editTask').classList.remove('d-none');
+    document.getElementById('editTask').classList.add('show');
 }
