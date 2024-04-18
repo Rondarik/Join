@@ -62,44 +62,68 @@ let dummyTasks = [
 let dummyContacts = [
     {
         "name": "Max Mustermann",
-        "eMail": "max.mustermann@example.com",
+        "eMail": "max_mustermann@gmail.com",
         "password":"pw11",
-        "tel": "+1234567890",
-        "color": "#acb123",
-        "Tasks": []
-    },
-    {
-        "name": "Maria Müller",
-        "eMail": "maria.mueller@example.com",
-        "password":"pw22",
-        "tel": "+1987654321",
-        "color": "#456def",
+        "tel": "+49151234567",
+        "color": "#FF6699",
         "Tasks": []
     },
     {
         "name": "John Doe",
-        "eMail": "john.doe@example.com",
+        "eMail": "john_doe@outlook.com",
         "password":"pw33",
-        "tel": "+1122334455",
-        "color": "#789abc",
+        "tel": "+49173456789",
+        "color": "#00FFCC",
         "Tasks": []
     },
     {
         "name": "Jane Smith",
-        "eMail": "jane.smith@example.com",
+        "eMail": "jane.smith@gmail.com",
         "password":"pw44",
-        "tel": "+1555666777",
-        "color": "#f0a1b2",
+        "tel": "+49174567890",
+        "color": "#9966FF",
         "Tasks": []
     },
     {
         "name": "Anna Schmidt",
-        "eMail": "anna.schmidt@example.com",
+        "eMail": "anna_schmidt@hotmail.com",
         "password":"pw55",
-        "tel": "+1444333222",
-        "color": "#fedcba",
+        "tel": "+49176678901",
+        "color": "#FF9966",
         "Tasks": []
-    }
+    },
+    {
+        "name": "Leonie Wagner",
+        "eMail": "leonie.wagner@hotmail.com",
+        "password":"pw66",
+        "tel": "+49177789012",
+        "color": "#FF0006",
+        "Tasks": []
+    },
+    {
+        "name": "Jonas Keller",
+        "eMail": "jonas_keller@outlook.com",
+        "password":"pw77",
+        "tel": "+49178890123",
+        "color": "#999999",
+        "Tasks": []
+    },
+    {
+        "name": "Niklas Braun",
+        "eMail": "niklas.braun@gmail.com",
+        "password":"pw55",
+        "tel": "+49179901234",
+        "color": "#CC99FF",
+        "Tasks": []
+    },
+    {
+        "name": "Maria Fischer",
+        "eMail": "maria.fischer@hotmail..com",
+        "password":"pw22",
+        "tel": "+49162345678",
+        "color": "#00CCFF",
+        "Tasks": []
+    },
 ];
 
 let dummyUser = [

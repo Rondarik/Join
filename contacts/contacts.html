@@ -10,10 +10,11 @@
     <link rel="stylesheet" href="/assets/fonts.css">
     <link rel="stylesheet" href="/contacts/contacts.css">
     <script src="/contacts/contacts.js"></script>
+    <script src="/dummyData.js"></script>
     <script src="/assets/templates/template_script.js"></script>
 </head>
 
-<body onload="includeHTML()">
+<body onload="includeHTML(), init()">
     <div w3-include-html="/assets/templates/side_menu.html"></div>
     <div w3-include-html="/assets/templates/header.html"></div>
 
@@ -30,159 +31,6 @@
                 </button>
             </div>
             <div class="contact_list">
-                <div class="letter_a">
-                    <div class="letter_a_layout">
-                        <span>A</span>
-                    </div>
-                </div>
-                <div class="divding_line_container">
-                    <div class="dividing_line_contacts"></div>
-                </div>
-
-                <div class="contact_dummy_1">
-                    <div class="contact_dummy_border_layout">
-                        <div class="contact_dummy_border">
-                            AM
-                        </div>
-                    </div>
-                    <div class="contact_dummy_info_layout">
-                        <div class="contact_dummy_info">
-                            <span class="contact_dummy_name">Anton Mayer</span>
-                            <span class="contact_dummy_mail">antom@gmail.com</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact_dummy_1">
-                    <div class="contact_dummy_border_layout">
-                        <div class="contact_dummy2_border">
-                            AS
-                        </div>
-                    </div>
-                    <div class="contact_dummy_info_layout">
-                        <div class="contact_dummy_info">
-                            <span class="contact_dummy_name">Anja Schulz</span>
-                            <span class="contact_dummy_mail">schulz@hotmail.com</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="letter_b">
-                    <div class="letter_b_layout">
-                        <span>B</span>
-                    </div>
-                </div>
-                <div class="divding_line_container">
-                    <div class="dividing_line_contacts"></div>
-                </div>
-                <div class="contact_dummy_1">
-                    <div class="contact_dummy_border_layout">
-                        <div class="contact_dummy2_border">
-                            BZ
-                        </div>
-                    </div>
-                    <div class="contact_dummy_info_layout">
-                        <div class="contact_dummy_info">
-                            <span class="contact_dummy_name">Benedikt Ziegler</span>
-                            <span class="contact_dummy_mail">benedikt@gmail.com</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="letter_b">
-                    <div class="letter_b_layout">
-                        <span>D</span>
-                    </div>
-                </div>
-                <div class="divding_line_container">
-                    <div class="dividing_line_contacts"></div>
-                </div>
-                <div class="contact_dummy_1">
-                    <div class="contact_dummy_border_layout">
-                        <div class="contact_dummy2_border">
-                            DE
-                        </div>
-                    </div>
-                    <div class="contact_dummy_info_layout">
-                        <div class="contact_dummy_info">
-                            <span class="contact_dummy_name">David Eisenberg</span>
-                            <span class="contact_dummy_mail">davidberg@gmail.com</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="letter_b">
-                    <div class="letter_b_layout">
-                        <span>E</span>
-                    </div>
-                </div>
-                <div class="divding_line_container">
-                    <div class="dividing_line_contacts"></div>
-                </div>
-                <div class="contact_dummy_1">
-                    <div class="contact_dummy_border_layout">
-                        <div class="contact_dummy2_border">
-                            EF
-                        </div>
-                    </div>
-                    <div class="contact_dummy_info_layout">
-                        <div class="contact_dummy_info">
-                            <span class="contact_dummy_name">Eva Fischer</span>
-                            <span class="contact_dummy_mail">eva@gmail.com</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact_dummy_1">
-                    <div class="contact_dummy_border_layout">
-                        <div class="contact_dummy2_border">
-                            EM
-                        </div>
-                    </div>
-                    <div class="contact_dummy_info_layout">
-                        <div class="contact_dummy_info">
-                            <span class="contact_dummy_name">Emmanuel Mauer</span>
-                            <span class="contact_dummy_mail">emmanuelma@gmail.com</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="letter_b">
-                    <div class="letter_b_layout">
-                        <span>M</span>
-                    </div>
-                </div>
-                <div class="divding_line_container">
-                    <div class="dividing_line_contacts"></div>
-                </div>
-                <div class="contact_dummy_1">
-                    <div class="contact_dummy_border_layout">
-                        <div class="contact_dummy2_border">
-                            MB
-                        </div>
-                    </div>
-                    <div class="contact_dummy_info_layout">
-                        <div class="contact_dummy_info">
-                            <span class="contact_dummy_name">Marcel Bauer</span>
-                            <span class="contact_dummy_mail">bauer@gmail.com</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="letter_b">
-                    <div class="letter_b_layout">
-                        <span>T</span>
-                    </div>
-                </div>
-                <div class="divding_line_container">
-                    <div class="dividing_line_contacts"></div>
-                </div>
-                <div class="contact_dummy_1">
-                    <div class="contact_dummy_border_layout">
-                        <div class="contact_dummy2_border">
-                            TW
-                        </div>
-                    </div>
-                    <div class="contact_dummy_info_layout">
-                        <div class="contact_dummy_info">
-                            <span class="contact_dummy_name">Tatjana Wolf</span>
-                            <span class="contact_dummy_mail">wolf@gmail.com</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="contact_layout">
@@ -195,4 +43,5 @@
         </div>
     </div>
 </body>
+
 </html>
