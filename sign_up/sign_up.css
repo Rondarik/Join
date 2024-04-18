@@ -37,6 +37,15 @@ body{
     border-radius: 30px;
     gap: 32px;
     margin:auto;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
 }
 
 .arrowLeft{
@@ -68,6 +77,7 @@ body{
     border-radius: 5px;
     padding: 8px;
     width: 280px;
+    outline: none;
 }
 
 .email{
@@ -77,6 +87,7 @@ body{
     border-radius: 5px;
     padding: 8px;
     width: 280px;
+    outline: none;
 }
 
 .password-input{
@@ -86,6 +97,7 @@ body{
     border-radius: 5px;
     padding: 8px;
     width: 280px;
+    outline: none;
 }
 
 .check{
@@ -167,21 +179,21 @@ body{
 
 #eyesOff{
     position: relative;
-    left: 262px;
+    left: 148px;
     top: -50px;
     cursor: pointer;
 }
 
 #eyesOpen{
     position: relative;
-    left: 262px;
+    left: 62px;
     top: -50px;
     cursor: pointer;
 }
 
 #locks {
     position: relative;
-    left: 262px;
+    left: 62px;
     top: -50px;
     cursor: pointer;
 }

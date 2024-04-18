@@ -51,6 +51,14 @@ body{
     margin:auto;
     opacity: 0;
     animation: fade-in 1s ease 1s forwards;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .btnBlue{
@@ -75,6 +83,7 @@ body{
     border-radius: 5px;
     padding: 8px;
     width: 280px;
+    outline: none;
 }
 
 .password-input{
@@ -84,6 +93,7 @@ body{
     border-radius: 5px;
     padding: 8px;
     width: 280px;
+    outline: none;
 }
 
 #lock{
@@ -182,5 +192,8 @@ body{
     top: 3px;
 }
 
-
+.redBorder{
+    outline: none;
+    border:2px solid red;
+}
 

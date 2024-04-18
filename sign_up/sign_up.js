@@ -67,12 +67,7 @@ async function register() {
         remoteEmail: remoteEmail.value,
         remotePassword: remotePassword.value,
     });
-    logedInAs = [];
-    logedInAs.push({
-        remoteName: remoteName.value,
-        remoteEmail: remoteEmail.value,
-        remotePassword: remotePassword.value,
-    });
+
     await setItem('allUser', JSON.stringify(allUser));
     localStorage.setItem('startAnimation','true');
     
@@ -185,13 +180,13 @@ function checkPassword(){
 
     if(password.length != 0){
         if(password == confirmPassoword){
-            message.textContent = 'Passwords match';
+            message.textContent = `Passwords match`;
             message.style.color = 'green';
             document.getElementById('remoteCPassword').classList.remove('redBorder');
             document.getElementById('remoteCPassword').classList.add('greenBorder');
             confirmed = true;
         } else {
-            message.textContent = `Passwords don't match`;
+            message.textContent = `Ups! your password don't match`;
             message.style.color = 'red';
             document.getElementById('remoteCPassword').classList.remove('greenBorder');
             document.getElementById('remoteCPassword').classList.add('redBorder');

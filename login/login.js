@@ -65,17 +65,14 @@ function eye(){
 async function saveEmailandPassword(){
     const isChecked = await checkUser();
     if(isChecked){
-
     if(on){
     userEmail = document.getElementById('uEmail').value;
     userPassword = document.getElementById('password').value;
     localStorage.setItem('Email', userEmail);
     localStorage.setItem('Password', userPassword);
-    logedInAs = userEmail;
-    
+
     }
     redirectToSummary();
-
     }
 }
 
@@ -144,17 +141,19 @@ async function checkUser(){
         return allUser['remoteEmail'] == inputE;
     };
 
-    console.log(filteredUser);
-    debugger;
     if (filteredUser == undefined){
 
         alert ('User bitte registrieren!');
         return false;
     } else {
         if(checkPassword(filteredUser)){
+        saveCurrentUser(filteredUser);
         return true;
         } else {
-            alert ('Falsches Passwort!')
+            // alert ('Wrong password Ups! Try again.');
+            message.textContent = `Wrong password Ups! Try again.`;
+            message.style.color = 'red';
+            document.getElementById('password').classList.add('redBorder');
             return false;
         }
     }
@@ -168,4 +167,8 @@ function checkPassword(filteredUser){
     } else {
         return false;
     }
+}
+
+function saveCurrentUser(filteredUser){
+    localStorage.setItem('logedInUser', filteredUser['remoteName']);
 }
