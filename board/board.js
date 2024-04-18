@@ -190,7 +190,6 @@ function openBigTask(id){
 }
 }
 
-
 function closeBigTask(){
     document.getElementById('bigTask').classList.add('d-none');
 }
@@ -208,18 +207,14 @@ function showBigTask(element){
     if (element['subtasks'] && element['subtasks'].length > 0) {
         subtasksHTML += '<h3 class="h3">Subtasks</h3>';
         for (let i = 0; i < element['subtasks'].length; i++) {
-            const subtask = element['subtasks'][i];
-            const isChecked = subtask.completed ? 'd-none' : '';
-            const isUnchecked = subtask.completed ? '' : 'd-none';
             subtasksHTML += `
                 <div class="bigSubtasksContainer">
                 <img  onclick="checked(${id},${i})" id="checkboxOff" src="../assets/img/checkboxOff.svg" alt="" style="cursor:pointer;">
-                <img  onclick="unchecked(${id},${i})" id="checkboxOn" class="d-none ${isChecked}" src="../assets/img/checkboxOn.svg" alt="" style="cursor:pointer;">
+                <img  onclick="unchecked(${id},${i})" id="checkboxOn" class="d-none" src="../assets/img/checkboxOn.svg" alt="" style="cursor:pointer;">
                 <p class="bigInfosContacts">${element['subtasks'][i].name}</p>
                 </div>`;
         }
     }
-
     return /*html*/`
         <div onclick="doNotClose(event)" class="bigTaskInner">
             <div class="bigHeadline">
@@ -238,7 +233,7 @@ function showBigTask(element){
                 <h3 class="h3">Assigned To:</h3>
                 <li>${element['assignedTo']}</li>
             </div>
-            <div >${subtasksHTML}</div>
+            <div> ${subtasksHTML}</div>
             <div class="delete_edit_container">
                 <div class="delete_container" onclick="deleteTasks(${id})">
                     <img class="delete_img" src="/assets/img/delete.svg" alt="">
@@ -255,8 +250,6 @@ function showBigTask(element){
         </div>
     `;
 }
-
-
 
 function findTaskFunction() {
     let search = document.getElementById('search').value.toLowerCase();
