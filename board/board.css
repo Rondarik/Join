@@ -447,6 +447,9 @@ text-align: left;
     color:#2AABE2;
     font-weight: 700; 
 }
+.editTaskOverlay{
+    background-color:red;
+}
 
 .d-none {
     display: none;

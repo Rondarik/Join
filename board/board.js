@@ -123,7 +123,7 @@ function generateTodoHTML(element) {
     if (totalSubtasks > 0) {
         subtaskHTML = `
             <div class="progress_container">
-                <progress id="file" max="100" value="0">0%</progress> <!-- Hier wird der Wert des Fortschritts auf 0 gesetzt -->
+                <progress id="file" max="100" value="0">0%</progress>
                 <p class="progress_text">0/${totalSubtasks} Subtasks</p>
             </div>`;
     }
@@ -241,7 +241,7 @@ function showBigTask(element){
                     <p class="delete_edit_text">Delete</p>
                 </div>
                 <div class="delete_edit_line"></div>
-                <div class="edit_container">
+                <div class="edit_container" onclick="openEditTasks(${id})">
                     <img class="edit_img" src="/assets/img/edit.svg" alt="">
                     <img class="edit_img_blau" src="/assets/img/edit_blau.svg" alt="">
                     <p class="delete_edit_text">Edit</p>
@@ -318,4 +318,9 @@ function deleteTasks(taskID) {
         updateHTML();
     } 
     closeBigTask();
+}
+
+function openEditTasks(){
+    document.getElementById('editTask').classList.remove('d-none');
+    document.getElementById('editTask').classList.add('show');
 }
