@@ -1,5 +1,5 @@
 let currentDraggedElement;
-let allTasks= [{
+let allTasksJson= [{
     "taskID": 0,
     "processingStatus": "ToDo",
     "title": "Kochwelt Page & Recipe Recommender",
@@ -8,7 +8,10 @@ let allTasks= [{
     "dueDate":'10/5/2023',
     "prio":['/assets/img/prio_medium.svg','Medium'],
     "category":'User Story',
-    "subtasks":['Start Page Loyout', 'Implement Recipe Recommendation']
+    "subtasks": [
+        {"name": "Start Page Layout", "checked": false},
+        {"name": "Implement Recipe Recommendation", "checked": false}
+    ]
 
 },{
     "taskID": 1,
@@ -31,7 +34,10 @@ let allTasks= [{
     "dueDate":'10/5/2023',
     "prio":['/assets/img/prio_medium.svg','Medium'],
     "category":'User Story',
-    "subtasks":['Start Page Loyout', 'Implement Recipe Recommendation']
+    "subtasks": [
+        {"name": "Start Page Layout", "checked": false},
+        {"name": "Implement Recipe Recommendation", "checked": false}
+    ]
 
 },
 {
@@ -68,7 +74,7 @@ function updateHTML() {
 
     for (let i = 0; i < statuses.length; i++) {
         const status = statuses[i];
-        const tasks = allTasks.filter(task => task['processingStatus'] === status);
+        const tasks = allTasksJson.filter(task => task['processingStatus'] === status);
         const container = document.getElementById(status.toLowerCase());
 
         container.innerHTML = '';
@@ -141,7 +147,7 @@ function allowDrop(ev) {
 }
 
 function moveTo(processingStatus) {
-    allTasks[currentDraggedElement]['processingStatus'] = processingStatus;
+    allTasksJson[currentDraggedElement]['processingStatus'] = processingStatus;
     updateHTML();
     checkEmptyToDo();
     checkEmptyDone();
@@ -172,13 +178,13 @@ function checkEmptyDone() {
 }
 
 function openBigTask(id){
-    for (let i=0; i<allTasks.length; i++){
-            const task=allTasks[i]['taskID'];
+    for (let i=0; i<allTasksJson.length; i++){
+            const task=allTasksJson[i]['taskID'];
     if (task==id) {
         document.getElementById('bigTask').classList.remove('d-none');
         document.getElementById('bigTask').classList.add('show');
         let bigTask = document.getElementById('bigTask');
-        bigTask.innerHTML = showBigTask(allTasks[i]);
+        bigTask.innerHTML = showBigTask(allTasksJson[i]);
     } 
 }
 }
@@ -188,55 +194,123 @@ function closeBigTask(){
     document.getElementById('bigTask').classList.add('d-none');
 }
 
+// function showBigTask(element){
+//     let id= element['taskID'];
+//     let categoryColor = '';
+//     if(element['category'] === 'User Story') {
+//         categoryColor = '#0038FF';
+//     } else if(element['category'] === 'Technical Task') {
+//         categoryColor = '#1FD7C1'; 
+//     }
+//     return /*html*/`
+//         <div onclick="doNotClose(event)" class="bigTaskInner">
+//         <div class="bigHeadline">
+//             <p class="bigHeadlineText" style="background-color: ${categoryColor};">${element['category']}</p>
+//             <img onclick="closeBigTask()" class="bigHeadlineImg" src="/assets/img/close.svg" alt="">
+//         </div>
+//         <div>
+//             <h2 class="bigTitle">${element['title']}</h2>
+//             <p class="bigInfosText">${element['description']}</p>
+//         </div>
+//         <div>
+//             <div class="bigInfosText"><p>Due date:</p> ${element['dueDate']}</div>
+//             <div class="bigInfosText"><p>Priority:</p> ${element['prio'][1]} <img src="${element['prio'][0]}" alt=""></div>
+//         </div>
+//                 <div class="bigInfosContacts">
+//                     <h3 class="h3">Assigned To:</h3>
+//                     <li>${element['assignedTo']}</li>
+//                 </div>
+//                 <div class="bigInfosSubtasks">
+//                     <h3 class="h3">Subtasks</h3>
+//                     <div class="bigSubtasksContainer">
+//                     <img  onclick="checked()" id="checkboxOff" src="../assets/img/checkboxOff.svg" alt="" style="cursor:pointer;">
+//                     <img  onclick="unchecked()" id="checkboxOn" class="d-none" src="../assets/img/checkboxOn.svg" alt="" style="cursor:pointer;">
+//                     <p class="bigInfosContacts" >${element['subtasks'][0]}</p> 
+//                     </div>
+//                 </div>
+//                 <div class="delete_edit_container">
+//                     <div class="delete_container" onclick="deleteTasks(${id})">
+//                         <img class="delete_img" src="/assets/img/delete.svg" alt="">
+//                         <img class="delete_img_blau" src="/assets/img/delete_blau.svg"  alt="">
+//                         <p class="delete_edit_text">Delete</p>
+//                     </div>
+//                     <div class="delete_edit_line"></div>
+//                     <div class="edit_container">
+//                         <img class="edit_img" src="/assets/img/edit.svg" alt="">
+//                         <img class="edit_img_blau" src="/assets/img/edit_blau.svg" alt="">
+//                         <p class="delete_edit_text">Edit</p>
+//                     </div>
+//                 </div>
+// </div>`
+// }
+
+// function toggleSubtask(taskID, subtaskIndex) {
+//     // Code zur Toggle-Logik hier einfügen
+// }
+
+
 function showBigTask(element){
-    let id= element['taskID'];
+    let id = element['taskID'];
     let categoryColor = '';
     if(element['category'] === 'User Story') {
         categoryColor = '#0038FF';
     } else if(element['category'] === 'Technical Task') {
         categoryColor = '#1FD7C1'; 
     }
+
+    let subtasksHTML = ''; // Hier initialisieren wir die Variable für den HTML-Code der Subtasks
+
+    // Überprüfen, ob Subtasks vorhanden sind
+    if (element['subtasks'] && element['subtasks'].length > 0) {
+        subtasksHTML += '<h3 class="h3">Subtasks</h3>'; // Überschrift für die Subtasks
+
+        // Iteration durch alle Subtasks des Elements
+        for (let i = 0; i < element['subtasks'].length; i++) {
+            // Erstellen des HTML-Codes für jeden Subtask
+            subtasksHTML += `
+                <div class="bigSubtasksContainer">
+                <img  onclick="checked(${id},${i})" id="checkboxOff" src="../assets/img/checkboxOff.svg" alt="" style="cursor:pointer;">
+                <img  onclick="unchecked(${id},${i})" id="checkboxOn" class="d-none" src="../assets/img/checkboxOn.svg" alt="" style="cursor:pointer;">
+                <p class="bigInfosContacts">${element['subtasks'][i].name}</p>
+                </div>`;
+        }
+    }
+
     return /*html*/`
         <div onclick="doNotClose(event)" class="bigTaskInner">
-        <div class="bigHeadline">
-            <p class="bigHeadlineText" style="background-color: ${categoryColor};">${element['category']}</p>
-            <img onclick="closeBigTask()" class="bigHeadlineImg" src="/assets/img/close.svg" alt="">
-        </div>
-        <div>
-            <h2 class="bigTitle">${element['title']}</h2>
-            <p class="bigInfosText">${element['description']}</p>
-        </div>
-        <div>
-            <div class="bigInfosText"><p>Due date:</p> ${element['dueDate']}</div>
-            <div class="bigInfosText"><p>Priority:</p> ${element['prio'][1]} <img src="${element['prio'][0]}" alt=""></div>
-        </div>
-                <div class="bigInfosContacts">
-                    <h3 class="h3">Assigned To:</h3>
-                    <li>${element['assignedTo']}</li>
+            <div class="bigHeadline">
+                <p class="bigHeadlineText" style="background-color: ${categoryColor};">${element['category']}</p>
+                <img onclick="closeBigTask()" class="bigHeadlineImg" src="/assets/img/close.svg" alt="">
+            </div>
+            <div>
+                <h2 class="bigTitle">${element['title']}</h2>
+                <p class="bigInfosText">${element['description']}</p>
+            </div>
+            <div>
+                <div class="bigInfosText"><p>Due date:</p> ${element['dueDate']}</div>
+                <div class="bigInfosText"><p>Priority:</p> ${element['prio'][1]} <img src="${element['prio'][0]}" alt=""></div>
+            </div>
+            <div class="bigInfosContacts">
+                <h3 class="h3">Assigned To:</h3>
+                <li>${element['assignedTo']}</li>
+            </div>
+            ${subtasksHTML} <!-- Hier fügen wir den HTML-Code der Subtasks ein -->
+            <div class="delete_edit_container">
+                <div class="delete_container" onclick="deleteTasks(${id})">
+                    <img class="delete_img" src="/assets/img/delete.svg" alt="">
+                    <img class="delete_img_blau" src="/assets/img/delete_blau.svg"  alt="">
+                    <p class="delete_edit_text">Delete</p>
                 </div>
-                <div class="bigInfosSubtasks">
-                    <h3 class="h3">Subtasks</h3>
-                    <div>
-                    <img onclick="checked()" id="checkboxOff" src="../assets/img/checkboxOff.svg" alt=""> ${element['subtasks'][0]}
-                    <img onclick="unchecked()" id="checkboxOn" class="d-none" src="../assets/img/checkboxOn.svg" alt="">
-                    </div>
+                <div class="delete_edit_line"></div>
+                <div class="edit_container">
+                    <img class="edit_img" src="/assets/img/edit.svg" alt="">
+                    <img class="edit_img_blau" src="/assets/img/edit_blau.svg" alt="">
+                    <p class="delete_edit_text">Edit</p>
                 </div>
-                <div class="delete_edit_container">
-                    <div class="delete_container" onclick="deleteTasks(${id})">
-                        <img class="delete_img" src="/assets/img/delete.svg" alt="">
-                        <img class="delete_img_blau" src="/assets/img/delete_blau.svg"  alt="">
-                        <p class="delete_edit_text">Delete</p>
-                    </div>
-                    <div class="delete_edit_line"></div>
-                    <div class="edit_container">
-                        <img class="edit_img" src="/assets/img/edit.svg" alt="">
-                        <img class="edit_img_blau" src="/assets/img/edit_blau.svg" alt="">
-                        <p class="delete_edit_text">Edit</p>
-                    </div>
-                </div>
-</div>`
+            </div>
+        </div>
+    `;
 }
-
 
 
 function findTaskFunction() {
@@ -246,8 +320,8 @@ function findTaskFunction() {
     document.getElementById('progress').innerHTML = '';
     document.getElementById('awaitfeedback').innerHTML = '';
     document.getElementById('done').innerHTML = '';
-    for (let i = 0; i < allTasks.length; i++) {
-        const element = allTasks[i];
+    for (let i = 0; i < allTasksJson.length; i++) {
+        const element = allTasksJson[i];
         if (element['title'].toLowerCase().includes(search) || element['description'].toLowerCase().includes(search)) {
             searchArray.push(element);
         }
@@ -285,20 +359,20 @@ function updateSummary() {
 }
 
 function countTasksByStatus(status) {
-    return allTasks.filter(task => task.processingStatus === status).length;
+    return allTasksJson.filter(task => task.processingStatus === status).length;
 }
 function countTasksByPriority(priority) {
-    return allTasks.filter(task => task.prio.includes(priority)).length;
+    return allTasksJson.filter(task => task.prio.includes(priority)).length;
 }
 
 function getUrgentTask() {
-    return allTasks.find(task => task.prio.includes('Urgent'));
+    return allTasksJson.find(task => task.prio.includes('Urgent'));
 }
 
 function deleteTasks(taskID) {
-    const index = allTasks.findIndex(task => task.taskID === taskID);
+    const index = allTasksJson.findIndex(task => task.taskID === taskID);
     if (index !== -1) {
-        allTasks.splice(index, 1);
+        allTasksJson.splice(index, 1);
         updateHTML();
     } 
     closeBigTask();

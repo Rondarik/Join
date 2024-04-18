@@ -47,3 +47,12 @@ for (let i = 0; i < links.length; i++) {
 //   }
 //   return initials;
 // }
+
+// function showUserInitials() {
+//   const dummyContactInitial = dummyContacts[0];
+
+//   const userName = dummyContactInitial.name;
+//   const initials = makeInitials(userName);
+//   const initialElement = document.getElementById('activeUserInitial');
+//   initialElement.innerHTML = initials;
+// }

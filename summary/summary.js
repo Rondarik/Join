@@ -12,8 +12,16 @@ function greetUser(){
             } else {
                 greeting = 'Good evening,';
             }
-        
+            const dummyContact = dummyContacts[0];
+            if(dummyContact.name){
+            nameElement.innerHTML = dummyContact.name;
+            }else{
+                nameElement.innerHTML ='Guest'
+            }
             greet.innerHTML = greeting;
         }
+           
+
         
-    
+     
+  
