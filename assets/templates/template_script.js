@@ -57,8 +57,9 @@ function makeInitials(string) {
 function getUserInitials() {
   const userActive = localStorage.getItem('logedInUser');
   if (userActive) {
-      return makeInitials(logedName);
-  } else {
-      return 'Guest'; 
-  }
+    return userActive;
+} else {
+    return 'Guest';
 }
+}
+
