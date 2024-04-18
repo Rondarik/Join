@@ -36,6 +36,7 @@ let allTasksJson= [{
     "category":'User Story',
     "subtasks": [
         {"name": "Start Page Layout", "checked": false},
+        {"name": "Implement Recipe Recommendation", "checked": false},
         {"name": "Implement Recipe Recommendation", "checked": false}
     ]
 
@@ -92,7 +93,7 @@ function startDragging(taskID){
 
 function calculateProgress(subtasks) {
     let progressValue = 0;
-    let completedSubtasks = 0; // Hier definieren wir die Variablen in der calculateProgress Funktion
+    let completedSubtasks = 0;
     let totalSubtasks = 0;
     if (subtasks) {
         const totalSubtasks = subtasks.length;
@@ -258,15 +259,10 @@ function showBigTask(element){
         categoryColor = '#1FD7C1'; 
     }
 
-    let subtasksHTML = ''; // Hier initialisieren wir die Variable für den HTML-Code der Subtasks
-
-    // Überprüfen, ob Subtasks vorhanden sind
+    let subtasksHTML = ''; 
     if (element['subtasks'] && element['subtasks'].length > 0) {
-        subtasksHTML += '<h3 class="h3">Subtasks</h3>'; // Überschrift für die Subtasks
-
-        // Iteration durch alle Subtasks des Elements
+        subtasksHTML += '<h3 class="h3">Subtasks</h3>';
         for (let i = 0; i < element['subtasks'].length; i++) {
-            // Erstellen des HTML-Codes für jeden Subtask
             subtasksHTML += `
                 <div class="bigSubtasksContainer">
                 <img  onclick="checked(${id},${i})" id="checkboxOff" src="../assets/img/checkboxOff.svg" alt="" style="cursor:pointer;">
@@ -354,7 +350,11 @@ function updateSummary() {
     document.getElementById('awaitFeedbackCount').innerText = awaitFeedbackCount.toString();
     document.getElementById('doneCount').innerText = doneCount.toString();
     document.getElementById('urgentCount').innerText = urgentCount.toString();
-    document.getElementById('urgentDate').innerText = urgentTask ? urgentTask.dueDate : '';
+    if (urgentTask) {
+        document.getElementById('urgentDate').innerText = urgentTask.dueDate;
+    } else {
+        document.getElementById('urgentDate').innerText = '';
+    }
     document.getElementById('allTasksCount').innerText = totalCount.toString();
 }
 

@@ -1,4 +1,9 @@
+function getUserName(){
+    const userName = localStorage.getItem('logedInUser');
+    return userName;
+}
 
+let logedInUser='';
 function greetUser(){
     const now = new Date();
             const hour = now.getHours();
@@ -12,9 +17,9 @@ function greetUser(){
             } else {
                 greeting = 'Good evening,';
             }
-            const dummyContact = dummyContacts[0];
-            if(dummyContact.name){
-            nameElement.innerHTML = dummyContact.name;
+            const userName = getUserName();
+            if(userName){
+            nameElement.innerHTML = userName;
             }else{
                 nameElement.innerHTML ='Guest'
             }
