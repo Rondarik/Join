@@ -150,6 +150,57 @@ function displayContacts() {
 }
 
 
+function openContactDialog() {
+    let dialog = document.getElementById('contactDialog');
+    dialog.innerHTML = '';
+    dialog.innerHTML = `
+        <div class="contact_dialog active">
+            <div class="dialog_left_area">
+                <div class="dialog_left_area_container">
+                    <div class="dialog_left_area_logo_container">
+                        <div class="dialog_left_area_logo">
+                            <img src="/assets/img/Joinlogo.svg">
+                        </div>
+                    </div>
+                    <div class="dialog_left_area_all_container">
+                        <div class="dialog_left_area_text_container">
+                            <div class="dialog_left_area_span">
+                                <span>Add contact</span>
+                            </div>
+                            <div class="dialog_left_area_span_small">
+                                <span>Tasks are better with a team!</span>
+                            </div>
+                        </div>   
+                        <div class="dividing_line_vertical">
+                        </div> 
+                    </div>    
+                </div>
+            </div>
+            <div class="dialog_right_area">
+            </div>
+        </div>
+    `
+    dialog.style.display = 'block';
+    dialog.querySelector('.contact_dialog').style.left = '2800px';
+    setTimeout(() => {
+        dialog.querySelector('.contact_dialog').style.left = '50%';
+    }, );
+}
+
+function closeContactDialog(event) {
+    if (event.target === document.getElementById('contactDialog')) {
+        let dialog = document.getElementById('contactDialog');
+        dialog.querySelector('.contact_dialog').style.left = '2800px';
+        setTimeout(() => {
+            dialog.querySelector('.contact_dialog').classList.remove('active');
+            setTimeout(() => {
+                dialog.style.display = 'none';
+            }, 0); 
+        }, 400);
+    }
+}
+
+
 function getInitials(name) {
     let words = name.split(' ');
     let initials = '';

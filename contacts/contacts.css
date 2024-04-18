@@ -497,3 +497,107 @@ button:hover{
 .clicked:hover {
     background: #2A3647;
 }
+
+.contact_dialog_bg{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.d_none{
+    display: none;
+}
+
+.contact_dialog {
+    width: 1189px;
+    height: 594px;
+    position: fixed;
+    top: 50%;
+    left: -50;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 30px;
+    z-index: 99;
+    transition: left 0.6s ease;
+}
+
+.contact_dialog.active {
+    left: 50%;
+}
+
+.dialog_left_area{
+    width: 467px;
+    height: 594px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    background-color: #2A3647;
+}
+
+.dialog_left_area_container{
+    width: 371px;
+    height: 208px;
+    gap: 12px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 90px;
+}
+
+.dialog_left_area_logo_container{
+    height: 67px;
+    width: 371px;
+}
+
+.dialog_left_area_logo{
+    height: 67px;
+}
+
+.dialog_left_area_logo img{
+    height: 67px;
+}
+
+.dialog_left_area_all_container{
+    width: 371px;
+    height: 129px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.dialog_left_area_text_container{
+    width: 371px;
+    height: 113px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dialog_left_area_span{
+    width: 366px;
+    height: 73px;
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 73.2px;
+    color: white;
+}
+
+.dialog_left_area_span_small{
+    width: 371px;
+    height: 32px;
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 32.4px;
+    color: white;
+}
+
+.dividing_line_vertical{
+    width: 90px;
+    height: 3px;
+    background-color: #29ABE2;
+    border-radius: 3px;
+}

@@ -17,11 +17,12 @@
 <body onload="includeHTML(), init()">
     <div w3-include-html="/assets/templates/side_menu.html"></div>
     <div w3-include-html="/assets/templates/header.html"></div>
-
+    <div id="contactDialog" onclick="closeContactDialog(event)" class="contact_dialog_bg d_none">
+    </div>
     <div class="content">
         <div class="contacts">
             <div class="btn_container">
-                <button>
+                <button onclick="openContactDialog()">
                     <div class="btn_span">
                         <span>Add new contact</span>
                     </div>
