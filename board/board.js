@@ -53,8 +53,6 @@ let allTasksJson= [{
     "subtasks":[]
 }];
 
-
-
 function showAddTaskOverlay() {
     document.getElementById('addTaskOverlayID').classList.remove('d-none');
 }
@@ -278,27 +276,6 @@ function findTaskFunction() {
     }
 }
 
-function updateSummary() {
-    let todoCount = countTasksByStatus('ToDo');
-    let progressCount = countTasksByStatus('progress');
-    let awaitFeedbackCount = countTasksByStatus('awaitFeedback');
-    let doneCount = countTasksByStatus('done');
-    let urgentCount = countTasksByPriority('Urgent');
-    let urgentTask = getUrgentTask();
-    let totalCount = todoCount + progressCount + awaitFeedbackCount + doneCount;
-
-    document.getElementById('todoCount').innerText = todoCount.toString();
-    document.getElementById('progressCount').innerText = progressCount.toString();
-    document.getElementById('awaitFeedbackCount').innerText = awaitFeedbackCount.toString();
-    document.getElementById('doneCount').innerText = doneCount.toString();
-    document.getElementById('urgentCount').innerText = urgentCount.toString();
-    if (urgentTask) {
-        document.getElementById('urgentDate').innerText = urgentTask.dueDate;
-    } else {
-        document.getElementById('urgentDate').innerText = '';
-    }
-    document.getElementById('allTasksCount').innerText = totalCount.toString();
-}
 
 function countTasksByStatus(status) {
     return allTasksJson.filter(task => task.processingStatus === status).length;
@@ -320,7 +297,106 @@ function deleteTasks(taskID) {
     closeBigTask();
 }
 
-function openEditTasks(){
-    document.getElementById('editTask').classList.remove('d-none');
-    document.getElementById('editTask').classList.add('show');
+// function openEditTasks(){
+//     document.getElementById('editTask').classList.remove('d-none');
+// }
+
+function openEditTasks(taskID) {
+    const task = allTasksJson.find(task => task.taskID === taskID);
+    if (task) {
+        const editPopupContent = `
+        <div id="editTask" class="editTaskInner">
+        <div class="form_inner_edit">
+            <div class="editHeadline">
+                <img onclick="closeEditTask()" class="editHeadlineImg"  src="/assets/img/close.svg" alt="">
+            </div>
+            <div class="form_left_edit">
+                <div class="title_container">
+                    <label for="taskTitle">Title<span style="color: #ffa800;"></span></label><br>
+                    <input class="input_styles" type="text" id="taskTitle" placeholder="Enter a title" required>${task.title}<br>
+                    <p class="error_message d-none" id="errorTitleID">This field is required</p>
+                </div>
+                <div class="discripton_container">
+                    <label for="TaskDiscription">Discription</label><br>
+                    <textarea class="input_styles" name="" id="taskDiscription"
+                        placeholder="Enter a Discription">${task.description}</textarea><br>
+                </div>
+                <div class="dropdown_container">
+                    <label for="assignedTo">Assigned to</label><br>
+                    <div class="dropdown">
+                        <div class="input_styles" id="assignedTo" onclick="showAssignablContacts(), doNotClose(event)">
+                            Select contacts to assign
+                            <img id="assign_arrow_down" src="/assets/img/arrow_drop_down.svg" alt="">
+                            <img id="assign_arrow_up" class="d-none" src="/assets/img/arrow_up_drop_down.svg" alt="">
+                        </div>
+                        <div class="contact_to_assign_container d-none" id="contact_to_assign_containerID"
+                            onclick="doNotClose(event)">
+                            <!-- render content -->
+                        </div>
+                    </div>
+                    <div class="assign_contact_container" id="assignContactContainerID">
+                        <!-- render content -->
+                    </div>
+                </div>
+            </div>
+            <div class="form_right_edit">
+                <div class="due_date_contaier">
+                    <label for="dueDate">Due date<span style="color: #ffa800;"></span></label><br>
+                    <input class="input_styles" type="date" id="dueDate" required onclick="setDate()">
+                    <p class="error_message d-none" id="errorDueDateID">This field is required</p>
+                </div>
+                <label>Prio</label><br>
+                <div class="prio_buttons">
+                    <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('urgent')">
+                        Urgent <img src="/assets/img/prio_urgent.svg" alt="">
+                    </button>
+                    <button type="button" class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('medium')">
+                        Medium <img src="/assets/img/prio_medium.svg" alt="">
+                    </button>
+                    <button type="button" class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('low')">
+                        Low <img src="/assets/img/prio_low.svg" alt="">
+                    </button>
+                </div>
+                <div class="category_container">
+                    <label for="category">Category<span style="color: #ffa800;"></span></label><br>
+                    <select class="input_styles" id="category" required>
+                        <option value="" selected disabled hidden>Select task category <img
+                                src="/assets/img/event_calendar.svg" alt=""></option>
+                        <option value="technikalTask">Technical Task</option>
+                        <option value="userStory">User Story</option>
+                    </select><br>
+                    <p class="error_message d-none" id="errorCategoryID">This field is required</p>
+                </div>
+                <label for="subtasks">Subtasks</label><br>
+                <div class="subtasks_container input_styles">
+                    <!-- <input type="text" id="subtasks" onfocus="subtasksFucus()" onblur="subtasksNoFucus()"> -->
+                    <input type="text" id="subtasks" onfocus="subtasksFucus()">
+                    <img class="subtask_btn_add" id="subtaskBtnAddID" src="/assets/img/add.svg" alt="">
+                    <div class="subtasks_create_buttons d-none" id="subtasksCreateButtonsID">
+                        <img class="subtask_btn_close" src="/assets/img/close.svg" alt="" onclick="cancelNewSubtask()">
+                        <div class="substask_seperator"></div>
+                        <img class="subtask_btn_check" src="/assets/img/check.svg" alt="" onclick="addNewSubtask()">
+                    </div>
+                </div>
+                <div id="allSubtasksID">
+                </div>
+            </div>
+            <div class="edit_button_container">
+                <button class="edit_button">Ok <img class="edit_button_img" src="/assets/img/check_weiß.svg" alt=""> </button>
+            </div>
+        </div>
+        `;
+        openPopup(editPopupContent);
+    }
+}
+
+function openPopup(content) {
+    const editPopup = document.getElementById('editTask');
+    editPopup.innerHTML = content;
+    editPopup.classList.remove('d-none');
+}
+
+function closePopup() {
+    const editPopup = document.getElementById('editTask');
+    editPopup.classList.add('d-none');
 }

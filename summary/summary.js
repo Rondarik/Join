@@ -56,3 +56,25 @@ function setInitials() {
       return 'Guest';
   }
   }
+
+  function updateSummary() {
+    let todoCount = countTasksByStatus('ToDo');
+    let progressCount = countTasksByStatus('progress');
+    let awaitFeedbackCount = countTasksByStatus('awaitFeedback');
+    let doneCount = countTasksByStatus('done');
+    let urgentCount = countTasksByPriority('Urgent');
+    let urgentTask = getUrgentTask();
+    let totalCount = todoCount + progressCount + awaitFeedbackCount + doneCount;
+
+    document.getElementById('todoCount').innerText = todoCount.toString();
+    document.getElementById('progressCount').innerText = progressCount.toString();
+    document.getElementById('awaitFeedbackCount').innerText = awaitFeedbackCount.toString();
+    document.getElementById('doneCount').innerText = doneCount.toString();
+    document.getElementById('urgentCount').innerText = urgentCount.toString();
+    if (urgentTask) {
+        document.getElementById('urgentDate').innerText = urgentTask.dueDate;
+    } else {
+        document.getElementById('urgentDate').innerText = '';
+    }
+    document.getElementById('allTasksCount').innerText = totalCount.toString();
+}
