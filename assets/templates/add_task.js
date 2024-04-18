@@ -7,7 +7,6 @@ async function addTaskInit() {
     clearTaskForm();
 }
 
-
 async function addNewTask(processingStatus) {
     await getAllTasksFromServer();
     if (checkInputForNewTask()) {
@@ -24,15 +23,15 @@ async function addNewTask(processingStatus) {
             "dueDate": date,
             "prio": taskPrio,
             "category": category,
-            "subtasks": []
+            "subtasks": subtasks
         };
         allTasks.push(task);
-        // await setItem('allTasks', JSON.stringify(allTasks));
-        showToastMessage();
-        switchToBaordSide();
+        await setItem('allTasks', JSON.stringify(allTasks));
+        // showToastMessage();
         console.log(allTasks);
     }
 }
+
 
 function clearTaskForm() {
     document.getElementById('taskTitle').value = '';
@@ -140,21 +139,12 @@ function renderUserTag() {
 
 function showToastMessage() {
     document.getElementById('messageAddedTask').classList.remove('d-none');
+    const myTimeout = setTimeout(switchToBaordSide, 1000);
 }
 
 function switchToBaordSide() {
-
+    window.location.href = '../board/board.html';
 }
-
-
-// Hier nur für Testzwecke
-// async function getAllTasksFromServer() {
-//     try {
-//         allTasks = await getItem('allTasks');
-//     } catch (e) {
-//         console.error('Loading error:', e);
-//     }
-// }
 
 /**
  * This function gets a number as taskId that does not yet exist 
@@ -184,7 +174,6 @@ function IdAlreadyExists(ID) {
     }
     return false;
 }
-
 
 /**
  * this function set the selected priority in the clobal variable for the new task
@@ -226,9 +215,6 @@ function setBtnCollorByPrio(prio) {
     }
 }
 
-
-
-
 /**
  *  Subtasks 
  */
@@ -268,6 +254,12 @@ function renderNewSubtask() {
     }
 }
 
+/**
+ * 
+ * @param {Number} ID 
+ * @param {String} text 
+ * @returns HTML-Code
+ */
 function subtaskHTML(ID, text) {
     return /*html*/ `
         <div id="subtaskID${ID}" class="subtask_box" onmouseover="mouseoverStyleSubtaskInput(${ID})" onmouseout="mouseoutStyleSubtaskInput(${ID})">
@@ -326,24 +318,61 @@ function saveChangedSubtask(ID) {
 }
 
 function checkInputForNewTask() {
-    let taskTilte = document.getElementById('taskTitle').value;
-    let date = document.getElementById('dueDate').value;
-    let category = document.getElementById('category').value;
+    let taskTilte = document.getElementById('taskTitle');
+    let date = document.getElementById('dueDate');
+    let category = document.getElementById('category');
     let errorTitle = document.getElementById('errorTitleID');
     let errorDate = document.getElementById('errorDueDateID');
     let errorCategory = document.getElementById('errorCategoryID');
     let allFieldsAreEmpty = false;
 
-    taskTilte == '' ? errorTitle.classList.remove('d-none') : errorTitle.classList.add('d-none');
-    date == '' ? errorDate.classList.remove('d-none') : errorDate.classList.add('d-none');
-    category == '' ? errorCategory.classList.remove('d-none') : errorCategory.classList.add('d-none');
+    if (taskTilte.value == '') {
+        errorTitle.classList.remove('d-none');
+        taskTilte.classList.add('red_border');
+    } else {
+        errorTitle.classList.add('d-none');
+    }
+    if (date.value == '') {
+        errorDate.classList.remove('d-none');
+        date.classList.add('red_border');
+    } else {
+        errorDate.classList.add('d-none');
+    }
+    if (category.value == '') {
+        errorCategory.classList.remove('d-none');
+        category.classList.add('red_border');
+    } else {
+        errorCategory.classList.add('d-none');
+    }
 
-
-    if ((taskTilte != '') && (date != '') && (category != '')) {
+    if ((taskTilte.value != '') && (date.value != '') && (category.value != '')) {
         allFieldsAreEmpty = true;
     }
     console.log(allFieldsAreEmpty);
     return allFieldsAreEmpty;
+}
+
+function clearError(inputField) {
+    let taskTilte = document.getElementById('taskTitle');
+    let date = document.getElementById('dueDate');
+    let category = document.getElementById('category');
+    let errorTitle = document.getElementById('errorTitleID');
+    let errorDate = document.getElementById('errorDueDateID');
+    let errorCategory = document.getElementById('errorCategoryID');
+
+    if (inputField == 'titel') {
+        taskTilte.classList.remove('red_border');
+        errorTitle.classList.add('d-none');
+    }
+    if (inputField == 'dueDate') {
+        date.classList.remove('red_border');
+        errorDate.classList.add('d-none');
+    }
+    if (inputField == 'category') {
+        category.classList.remove('red_border');
+        errorCategory.classList.add('d-none');
+    }
+    
 }
 
 function setDate() {

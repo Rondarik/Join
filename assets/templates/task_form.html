@@ -5,7 +5,7 @@
             <div class="form_left">
                 <div class="title_container">
                     <label for="taskTitle">Title<span style="color: #ffa800;">*</span></label><br>
-                    <input class="input_styles" type="text" id="taskTitle" placeholder="Enter a title" required><br>
+                    <input class="input_styles" type="text" id="taskTitle" placeholder="Enter a title" required onchange="clearError('titel')"><br>
                     <p class="error_message d-none" id="errorTitleID">This field is required</p>
                 </div>
                 <div class="discripton_container">
@@ -35,7 +35,7 @@
             <div class="form_right">
                 <div class="due_date_contaier">
                     <label for="dueDate">Due date<span style="color: #ffa800;">*</span></label><br>
-                    <input class="input_styles" type="date" id="dueDate" required onclick="setDate()">
+                    <input class="input_styles" type="date" id="dueDate" required onclick="setDate()" onkeyup="clearError('dueDate')" onchange="clearError('dueDate')">
                     <p class="error_message d-none" id="errorDueDateID">This field is required</p>
                 </div>
                 <label>Prio</label><br>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="category_container">
                     <label for="category">Category<span style="color: #ffa800;">*</span></label><br>
-                    <select class="input_styles" id="category" required>
+                    <select class="input_styles" id="category" required onchange="clearError('category')">
                         <option value="" selected disabled hidden>Select task category <img
                                 src="/assets/img/event_calendar.svg" alt=""></option>
                         <option value="technikalTask">Technical Task</option>
