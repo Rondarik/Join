@@ -4,7 +4,9 @@ let subtasks = [];
 
 async function addTaskInit() {
     await includeHTML();
-    clearTaskForm();
+    setInitials();
+
+    clearTaskForm(); 
 }
 
 async function addNewTask(processingStatus) {
@@ -27,7 +29,7 @@ async function addNewTask(processingStatus) {
         };
         allTasks.push(task);
         await setItem('allTasks', JSON.stringify(allTasks));
-        // showToastMessage();
+        showToastMessage();
         console.log(allTasks);
     }
 }
