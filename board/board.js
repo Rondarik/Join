@@ -146,12 +146,30 @@ function generateTodoHTML(element) {
             </div>
             ${subtaskHTML} 
             <div class="contacts_container">
-                <img class="contacts_img" src="/assets/img/contacts_board.svg" alt="">
+                <div class="small_card_users_area">` +
+                getAssignedToIconsHTML(element['assignedTo']) +
+                /*html*/ `
+                </div>
                 <img class="prio_img" src="${element['prio'][0]}" alt="">
             </div>
         </div>
     </div>`;
 }
+
+function getAssignedToIconsHTML(contacts) {
+    let html = /*html*/ `<div class="overlapped_contact_icons">`;
+    let shift = 0;
+    
+    contacts.forEach(contact => {
+        let initials = makeInitials(contact.name);
+        html += /*html*/ `<div class='contacts_icon' style="background-color: ${contact.color}; transform: translateX(${shift}px);">${initials}</div>`;
+        shift -= 10;
+    });
+
+    html += /*html*/`</div>`;
+    return html;
+}
+
 
 function allowDrop(ev) {
     ev.preventDefault();
@@ -229,6 +247,7 @@ function showBigTask(element){
     }
     return /*html*/`
         <div onclick="doNotClose(event)" class="bigTaskInner">
+            <div class="scroll_container">
             <div class="bigHeadline">
                 <p class="bigHeadlineText" style="background-color: ${categoryColor};">${element['category']}</p>
                 <img onclick="closeBigTask()" class="bigHeadlineImg" src="/assets/img/close.svg" alt="">
@@ -243,9 +262,12 @@ function showBigTask(element){
             </div>
             <div class="bigInfosContacts">
                 <h3 class="h3">Assigned To:</h3>
-                <li>${element['assignedTo']}</li>
-            </div>
+                <div>` +
+                    getAssignedToHTML(element.assignedTo) +
+                    /*html*/ `</div>
+                </div>
             <div> ${subtasksHTML}</div>
+            </div>
             <div class="delete_edit_container">
                 <div class="delete_container" onclick="deleteTasks(${id})">
                     <img class="delete_img" src="/assets/img/delete.svg" alt="">
@@ -262,6 +284,31 @@ function showBigTask(element){
         </div>
     `;
 }
+
+function getContactForBigCardHTML(contact) {
+    return (
+      /*html*/ `
+        <div class='bigTaskAssignedTo'>` +
+      getContactLogoHTML(contact) +
+      /*html*/ `  
+          <div>${contact.name}</div>
+        </div>
+      `
+    );
+  }
+
+function getAssignedToHTML(contacts) {
+    let html = "";
+    contacts.forEach((contact) => (html += getContactForBigCardHTML(contact)));
+    return html;
+}
+
+function getContactLogoHTML(contact) {
+    return /*html*/ `
+        <div class='contacts_icon' style="background-color: ${contact.color}">${makeInitials(contact.name)}</div>
+      `;
+}
+
 
 function findTaskFunction() {
     let search = document.getElementById('search').value.toLowerCase();
@@ -290,6 +337,15 @@ function findTaskFunction() {
     }
 }
 
+// function formateDate(date) {
+//     const yyyy = date.getFullYear();
+//     let mm = date.getMonth() + 1; // Months start at 0!
+//     let dd = date.getDate();
+//     if (dd < 10) dd = "0" + dd;
+//     if (mm < 10) mm = "0" + mm;
+//     return dd + "/" + mm + "/" + yyyy;
+//   }
+
 
 function countTasksByStatus(status) {
     return allTasksJson.filter(task => task.processingStatus === status).length;
@@ -302,13 +358,14 @@ function getUrgentTask() {
     return allTasksJson.find(task => task.prio.includes('Urgent'));
 }
 
-function deleteTasks(taskID) {
+async function deleteTasks(taskID) {
     const index = allTasksJson.findIndex(task => task.taskID === taskID);
     if (index !== -1) {
         allTasksJson.splice(index, 1);
         updateHTML();
     } 
     closeBigTask();
+    await setItem('allTasks', JSON.stringify(allTasks));
 }
 
 // function openEditTasks(){

@@ -1,8 +1,8 @@
-async function init() {
+async function contactsInit() {
     await includeHTML();
-    getUserName();
+    setInitials();
  
-    bindContactItemClickEvents();
+
 }
 
 function generateContactHTML(name, email, profileBadge, color, tel) {
@@ -18,8 +18,8 @@ function generateContactHTML(name, email, profileBadge, color, tel) {
                 <div class="contact_info_onclick_name">
                     <span>${name}</span>
                 </div>
-                <div class="contact_info_onclick_edit_delete">
-                    <div class="contact_info_onclick_edit">
+                <div class="contact_info_onclick_edit_delete" onclick="openEditContactDialog('${email}')">
+                    <div class="contact_info_onclick_edit" on>
                         <img class="edit_icon" src="/assets/img/edit.svg" alt="">
                         <img class="edit_hover_icon" src="/assets/img/editHover.svg" alt="">
                         <span>Edit</span>
@@ -95,9 +95,9 @@ function filterByFirstLetter(letter) {
 
 function renderContact(contact) {
          return /*html*/ `
-            <div class="contact_dummy" id="${contact.eMail}" onclick="displayContactInfo(${contact.eMail})">
+            <div class="contact_dummy" id="${contact.eMail}" onclick="displayContactInfo('${contact.eMail}')">
                 <div class="contact_dummy_border_layout">
-                    <div class="contact_dummy_border" style="background-color: ${contact.color};">
+                    <div class="contact_dummy_border" style="background-color: ${contact.color}">
                     ${getInitials(contact.name)}
                     </div>
                 </div>
@@ -125,11 +125,35 @@ function getFirstLetters() {
     return firstLetterList;
 }
 
-function displayContactInfo(id){
-    let clickedContact = du
-    generateContactHTML(name, email, profileBadge, color, tel);
+async function displayContactInfo(id){
+    let contactContainer = document.getElementById('contact');
+    let clickedContact = await filterByFirstMail(id);
+    let name = clickedContact.name;
+    let email = clickedContact.eMail;
+    let profileBadge = getInitials(name);
+    let color = clickedContact.color;
+    let tel = clickedContact.tel;
+
+    contactContainer.innerHTML = generateContactHTML(name, email, profileBadge, color, tel);
+    let contactInfoOnClick = document.querySelector('.contact_info_onclick');
+        if (contactInfoOnClick) {
+            contactInfoOnClick.style.display = 'flex';
+            setTimeout(() => { contactInfoOnClick.classList.add('show'); }, 50);
+        }
 
 }
+
+async function filterByFirstMail(Mail) {
+    return dummyContacts.find(contact => contact.eMail === Mail);
+}
+
+function openEditContactDialog(id) {
+    openContactDialog(); // nur zum testen
+}
+
+
+
+
 
 // function bindContactItemClickEvents() {
 //     let contactItems = document.querySelectorAll('.contact_dummy');
@@ -226,9 +250,7 @@ function displayContactInfo(id){
 // }
 
 
-function openEditContactDialog(id) {
-    openContactDialog(); // nur zum testen
-}
+
 
 function openContactDialog() {
     let dialog = document.getElementById('contactDialog');
