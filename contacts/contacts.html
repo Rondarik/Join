@@ -12,9 +12,10 @@
     <script src="/contacts/contacts.js"></script>
     <script src="/dummyData.js"></script>
     <script src="/assets/templates/template_script.js"></script>
+    <script src="/script.js"></script>
 </head>
 
-<body onload="includeHTML(), init()">
+<body onload="init()">
     <div w3-include-html="/assets/templates/side_menu.html"></div>
     <div w3-include-html="/assets/templates/header.html"></div>
     <div id="contactDialog" onclick="closeContactDialog(event)" class="contact_dialog_bg d_none">
@@ -31,7 +32,8 @@
                     </div>
                 </button>
             </div>
-            <div class="contact_list">
+            <div class="contact_list" id="contactListID">
+                
             </div>
         </div>
         <div class="contact_layout">

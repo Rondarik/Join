@@ -1,7 +1,7 @@
 let logedInAs =[];
 let allTasks = [];
 let allUser = [];
-let allContacts = [];
+// let allContacts = [];
 
 async function getAllTasksFromServer(){
     try {

@@ -1,62 +1,9 @@
-function init() {
+async function init() {
+    await includeHTML();
+    getUserName();
+ 
     bindContactItemClickEvents();
 }
-
-
-function bindContactItemClickEvents() {
-    let contactItems = document.querySelectorAll('.contact_dummy');
-    contactItems.forEach(item => {
-        item.addEventListener('click', handleContactItemClick);
-    });
-}
-
-
-function handleContactItemClick(event) {
-    let alreadyClicked = this.classList.contains('clicked');
-    removeClickedClassFromItems();
-    if (!alreadyClicked) {
-        this.classList.add('clicked');
-        displayContactInfo(this);
-        displayEditDeleteImages();
-    } else {
-        hideContactInfoOnClick();
-    }
-}
-
-
-function removeClickedClassFromItems() {
-    let contactItems = document.querySelectorAll('.contact_dummy');
-    contactItems.forEach(item => {
-        item.classList.remove('clicked');
-    });
-}
-
-
-function hideContactInfoOnClick() {
-    let contactInfoOnClick = document.querySelector('.contact_info_onclick');
-    if (contactInfoOnClick) {
-        contactInfoOnClick.style.display = 'none';
-    }
-}
-
-
-function displayContactInfo(item) {
-    let contactContainer = document.getElementById('contact');
-    let name = item.querySelector('.contact_dummy_name').textContent;
-    let email = item.querySelector('.contact_dummy_mail').textContent;
-    let profileBadge = item.querySelector('.contact_dummy_border').textContent;
-    let index = Array.from(item.parentNode.children).indexOf(item);
-    let color = dummyContacts[index].color;
-    let tel = dummyContacts[index].tel;
-    let contactHTML = generateContactHTML(name, email, profileBadge, color, tel);
-    contactContainer.innerHTML = contactHTML;
-    let contactInfoOnClick = document.querySelector('.contact_info_onclick');
-    if (contactInfoOnClick) {
-        contactInfoOnClick.style.display = 'flex';
-        setTimeout(() => { contactInfoOnClick.classList.add('show'); }, 50);
-    }
-}
-
 
 function generateContactHTML(name, email, profileBadge, color, tel) {
     return `
@@ -112,43 +59,176 @@ function generateContactHTML(name, email, profileBadge, color, tel) {
 
 
 function displayContacts() {
-    let contactListContainer = document.querySelector('.contact_list');
+    let contactListContainer = document.getElementById('contactListID');
+    let firstLetterList = getFirstLetters();
     let contactsHTML = '';
 
-    for (let i = 0; i < dummyContacts.length; i++) {
-        let contact = dummyContacts[i];
-        console.log(contact)
-        let {name, eMail, color} = contact;
-        let initials = getInitials(name);
+    for (let i = 0; i < firstLetterList.length; i++) {
+        const letter = firstLetterList[i];
+        const headlineHTML = renderAlphabetHeadline(letter,i);
+        const contactsByLetterList = filterByFirstLetter(letter);
+        let contactHTML ="";
+        for (let j = 0; j < contactsByLetterList.length; j++) {
+            const contact = contactsByLetterList[j];
+            contactHTML += renderContact(contact);
+        }
+        contactListContainer.innerHTML += headlineHTML +contactHTML;
+    }
+}
 
-        let contactHTML = `
+function renderAlphabetHeadline(letter){
+    return /*html*/ `
         <div class="letter_a">
-        <div class="letter_a_layout">
-            <span>A</span>
+            <div class="letter_a_layout">
+                <span>${letter}</span>
+            </div>
+         </div>
+        <div class="divding_line_container">
+            <div class="dividing_line_contacts"></div>
         </div>
-    </div>
-    <div class="divding_line_container">
-        <div class="dividing_line_contacts"></div>
-    </div>
-            <div class="contact_dummy">
+    `;
+}
+
+function filterByFirstLetter(letter) {
+    return dummyContacts.filter(contact => contact.name.charAt(0).toUpperCase() === letter.toUpperCase());
+}
+
+function renderContact(contact) {
+         return /*html*/ `
+            <div class="contact_dummy" id="${contact.eMail}" onclick="displayContactInfo(${contact.eMail})">
                 <div class="contact_dummy_border_layout">
-                    <div class="contact_dummy_border" style="background-color: ${color};">
-                    ${initials}
+                    <div class="contact_dummy_border" style="background-color: ${contact.color};">
+                    ${getInitials(contact.name)}
                     </div>
                 </div>
                 <div class="contact_dummy_info_layout">
                     <div class="contact_dummy_info">
-                        <span class="contact_dummy_name">${name}</span>
-                        <span class="contact_dummy_mail">${eMail}</span>
+                        <span class="contact_dummy_name">${contact.name}</span>
+                        <span class="contact_dummy_mail">${contact.eMail}</span>
                     </div>
                 </div>
             </div>
         `;
-        contactsHTML += contactHTML;
-    }
-    contactListContainer.innerHTML = contactsHTML;
 }
 
+function getFirstLetters() {
+    let firstLetterList = [];
+
+    for (let i = 0; i < dummyContacts.length; i++) {
+        const name = dummyContacts[i].name;
+        const firstLetter = name.charAt(0);
+        if (!firstLetterList.includes(firstLetter)) {
+            firstLetterList.push(firstLetter);
+            firstLetterList.sort();
+        }
+    }
+    return firstLetterList;
+}
+
+function displayContactInfo(id){
+    let clickedContact = du
+    generateContactHTML(name, email, profileBadge, color, tel);
+
+}
+
+// function bindContactItemClickEvents() {
+//     let contactItems = document.querySelectorAll('.contact_dummy');
+//     contactItems.forEach(item => {
+//         item.addEventListener('click', handleContactItemClick);
+//     });
+// }
+
+
+// function handleContactItemClick(event) {
+//     let alreadyClicked = this.classList.contains('clicked');
+//     removeClickedClassFromItems();
+//     if (!alreadyClicked) {
+//         this.classList.add('clicked');
+//         displayContactInfo(this);
+//         displayEditDeleteImages();
+//     } else {
+//         hideContactInfoOnClick();
+//     }
+// }
+
+
+// function removeClickedClassFromItems() {
+//     let contactItems = document.querySelectorAll('.contact_dummy');
+//     contactItems.forEach(item => {
+//         item.classList.remove('clicked');
+//     });
+// }
+
+
+// function hideContactInfoOnClick() {
+//     let contactInfoOnClick = document.querySelector('.contact_info_onclick');
+//     if (contactInfoOnClick) {
+//         contactInfoOnClick.style.display = 'none';
+//     }
+// }
+
+
+// function displayContactInfo(item) {
+//     let contactContainer = document.getElementById('contact');
+//     let name = item.querySelector('.contact_dummy_name').textContent;
+//     let email = item.querySelector('.contact_dummy_mail').textContent;
+//     let profileBadge = item.querySelector('.contact_dummy_border').textContent;
+//     let index = Array.from(item.parentNode.children).indexOf(item);
+//     let color = dummyContacts[index].color;
+//     let tel = dummyContacts[index].tel;
+//     let contactHTML = generateContactHTML(name, email, profileBadge, color, tel);
+//     contactContainer.innerHTML = contactHTML;
+//     let contactInfoOnClick = document.querySelector('.contact_info_onclick');
+//     if (contactInfoOnClick) {
+//         contactInfoOnClick.style.display = 'flex';
+//         setTimeout(() => { contactInfoOnClick.classList.add('show'); }, 50);
+//     }
+// }
+
+
+
+// function displayContacts() {
+//     let contactListContainer = document.getElementById('contactListID');
+//     let contactsHTML = '';
+
+//     for (let i = 0; i < dummyContacts.length; i++) {
+//         let contact = dummyContacts[i];
+//         console.log(contact)
+//         let {name, eMail, color} = contact;
+//         let initials = getInitials(name);
+
+//         let contactHTML = `
+//         <div class="letter_a">
+//         <div class="letter_a_layout">
+//             <span>A</span>
+//         </div>
+//     </div>
+//     <div class="divding_line_container">
+//         <div class="dividing_line_contacts"></div>
+//     </div>
+//             <div class="contact_dummy">
+//                 <div class="contact_dummy_border_layout">
+//                     <div class="contact_dummy_border" style="background-color: ${color};">
+//                     ${initials}
+//                     </div>
+//                 </div>
+//                 <div class="contact_dummy_info_layout">
+//                     <div class="contact_dummy_info">
+//                         <span class="contact_dummy_name">${name}</span>
+//                         <span class="contact_dummy_mail">${eMail}</span>
+//                     </div>
+//                 </div>
+//             </div>
+//         `;
+//         contactsHTML += contactHTML;
+//     }
+//     contactListContainer.innerHTML = contactsHTML;
+// }
+
+
+function openEditContactDialog(id) {
+    openContactDialog(); // nur zum testen
+}
 
 function openContactDialog() {
     let dialog = document.getElementById('contactDialog');
