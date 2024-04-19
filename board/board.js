@@ -146,12 +146,30 @@ function generateTodoHTML(element) {
             </div>
             ${subtaskHTML} 
             <div class="contacts_container">
-                <img class="contacts_img" src="/assets/img/contacts_board.svg" alt="">
+                <div class="small_card_users_area">` +
+                getAssignedToIconsHTML(element['assignedTo']) +
+                /*html*/ `
+                </div>
                 <img class="prio_img" src="${element['prio'][0]}" alt="">
             </div>
         </div>
     </div>`;
 }
+
+function getAssignedToIconsHTML(contacts) {
+    let html = /*html*/ `<div class="overlapped_contact_icons">`;
+    let shift = 0;
+    
+    contacts.forEach(contact => {
+        let initials = makeInitials(contact.name);
+        html += /*html*/ `<div class='contacts_icon' style="background-color: ${contact.color}; transform: translateX(${shift}px);">${initials}</div>`;
+        shift -= 10;
+    });
+
+    html += /*html*/`</div>`;
+    return html;
+}
+
 
 function allowDrop(ev) {
     ev.preventDefault();
@@ -302,13 +320,14 @@ function getUrgentTask() {
     return allTasksJson.find(task => task.prio.includes('Urgent'));
 }
 
-function deleteTasks(taskID) {
+async function deleteTasks(taskID) {
     const index = allTasksJson.findIndex(task => task.taskID === taskID);
     if (index !== -1) {
         allTasksJson.splice(index, 1);
         updateHTML();
     } 
     closeBigTask();
+    await setItem('allTasks', JSON.stringify(allTasks));
 }
 
 // function openEditTasks(){

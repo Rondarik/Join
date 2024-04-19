@@ -279,6 +279,21 @@ color: black;
     align-items: center;
     margin-top: 16px;
 }
+.overlapped_contact_icons{
+    display: flex;
+}
+.contacts_icon{
+    height: 32px;
+    width: 32px;
+    border-radius: 45px;
+    color: white;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white;
+    font-family: Inter;
+}
 .contacts_img{
     width: 80px;
     height: 32px;
