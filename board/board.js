@@ -1,57 +1,67 @@
 let currentDraggedElement;
-let allTasksJson= [{
-    "taskID": 0,
-    "processingStatus": "ToDo",
-    "title": "Kochwelt Page & Recipe Recommender",
-    "description":'Build start page with recipe recommendation...',
-    "assignedTo":[],
-    "dueDate":'2023-05-10',
-    "prio":['/assets/img/prio_medium.svg','Medium'],
-    "category":'User Story',
-    "subtasks": [
-        {"name": "Start Page Layout", "checked": false},
-        {"name": "Implement Recipe Recommendation", "checked": false}
-    ]
+// let allTasksJson= [{
+//     "taskID": 0,
+//     "processingStatus": "ToDo",
+//     "title": "Kochwelt Page & Recipe Recommender",
+//     "description":'Build start page with recipe recommendation...',
+//     "assignedTo":[],
+//     "dueDate":'2023-05-10',
+//     "prio":['/assets/img/prio_medium.svg','Medium'],
+//     "category":'User Story',
+//     "subtasks": [
+//         {"name": "Start Page Layout", "checked": false},
+//         {"name": "Implement Recipe Recommendation", "checked": false}
+//     ]
 
-},{
-    "taskID": 1,
-    "processingStatus": "ToDo",
-    "title": "HTML Base Template Creation",
-    "description":'Create reusable HTML base templates...',
-    "assignedTo":[],
-    "dueDate":'10/5/2023',
-    "prio":['/assets/img/prio_low.svg','Low'],
-    "category":'Technical Task',
-    "subtasks":[]
+// },{
+//     "taskID": 1,
+//     "processingStatus": "ToDo",
+//     "title": "HTML Base Template Creation",
+//     "description":'Create reusable HTML base templates...',
+//     "assignedTo":[],
+//     "dueDate":'10/5/2023',
+//     "prio":['/assets/img/prio_low.svg','Low'],
+//     "category":'Technical Task',
+//     "subtasks":[]
 
-},
-{
-    "taskID": 2,
-    "processingStatus": "progress",
-    "title": "Daily Kochwelt Recipe",
-    "description":'Implement daily recipe and portion calculator....',
-    "assignedTo":[],
-    "dueDate":'10/5/2023',
-    "prio":['/assets/img/prio_medium.svg','Medium'],
-    "category":'User Story',
-    "subtasks": [
-        {"name": "Start Page Layout", "checked": false},
-        {"name": "Implement Recipe Recommendation", "checked": false},
-        {"name": "Implement Recipe Recommendation", "checked": false}
-    ]
+// },
+// {
+//     "taskID": 2,
+//     "processingStatus": "progress",
+//     "title": "Daily Kochwelt Recipe",
+//     "description":'Implement daily recipe and portion calculator....',
+//     "assignedTo":[],
+//     "dueDate":'10/5/2023',
+//     "prio":['/assets/img/prio_medium.svg','Medium'],
+//     "category":'User Story',
+//     "subtasks": [
+//         {"name": "Start Page Layout", "checked": false},
+//         {"name": "Implement Recipe Recommendation", "checked": false},
+//         {"name": "Implement Recipe Recommendation", "checked": false}
+//     ]
 
-},
-{
-    "taskID": 3,
-    "processingStatus": "awaitFeedback",
-    "title": "CSS Architecture Planning",
-    "description":'Define CSS naming conventions and structure...',
-    "assignedTo":[],
-    "dueDate":'10/5/2023',
-    "prio":['/assets/img/prio_urgent.svg','Urgent'],
-    "category":'Technical Task',
-    "subtasks":[]
-}];
+// },
+// {
+//     "taskID": 3,
+//     "processingStatus": "awaitFeedback",
+//     "title": "CSS Architecture Planning",
+//     "description":'Define CSS naming conventions and structure...',
+//     "assignedTo":[],
+//     "dueDate":'10/5/2023',
+//     "prio":['/assets/img/prio_urgent.svg','Urgent'],
+//     "category":'Technical Task',
+//     "subtasks":[]
+// }];
+
+async function boardInit(){
+    await includeHTML();
+    await getAllTasksFromServer();
+    updateHTML();
+    setInitials();
+    allTasksJson = allTasks;
+
+    console.log (allTasks);
+}
 
 function showAddTaskOverlay() {
     document.getElementById('addTaskOverlayID').classList.remove('d-none');
@@ -84,11 +94,7 @@ function updateHTML() {
 
 }
 
-async function boardInit(){
-    await includeHTML();
-    updateHTML();
-    setInitials();
-}
+
 
 function startDragging(taskID){
     currentDraggedElement=taskID;
@@ -349,7 +355,7 @@ function openEditTasks(taskID) {
                     <input class="input_styles" type="date" value="${task.dueDate}" id="dueDate" required onclick="setDate()">
                 </div>
                 <label>Prio</label><br>
-                <div class="prio_buttons">
+                <div class="prio_buttons" >
                     <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('urgent')">
                         Urgent <img src="/assets/img/prio_urgent.svg" alt="">
                     </button>
@@ -362,7 +368,7 @@ function openEditTasks(taskID) {
                 </div>
                 <label for="subtasks">Subtasks</label><br>
                 <div class="subtasks_container input_styles">
-                    <input type="text" id="subtasks" onfocus="subtasksFucus()">
+                    <input type="text" id="subtasks" value="${task['subtasks'].name}"  onfocus="subtasksFucus()">
                     <img class="subtask_btn_add" id="subtaskBtnAddID" src="/assets/img/add.svg" alt="">
                     <div class="subtasks_create_buttons d-none" id="subtasksCreateButtonsID">
                         <img class="subtask_btn_close" src="/assets/img/close.svg" alt="" onclick="cancelNewSubtask()">
@@ -398,7 +404,7 @@ function saveEditedTask(taskID) {
         taskID: taskID,
         title: document.getElementById('taskTitle').value,
         description: document.getElementById('taskDiscription').value,
-       assignedTo: document.getElementById('assignedTo').value,
+        assignedTo: document.getElementById('assignedTo').value,
         dueDate: document.getElementById('dueDate').value,
         subtasks:[]
     };
