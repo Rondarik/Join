@@ -56,9 +56,10 @@ let currentDraggedElement;
 async function boardInit(){
     await includeHTML();
     await getAllTasksFromServer();
+    allTasksJson = allTasks;
     updateHTML();
     setInitials();
-    allTasksJson = allTasks;
+   
 
     console.log (allTasks);
 }
@@ -156,13 +157,15 @@ function allowDrop(ev) {
     ev.preventDefault();
 }
 
-function moveTo(processingStatus) {
+async function moveTo(processingStatus) {
     allTasksJson[currentDraggedElement]['processingStatus'] = processingStatus;
     updateHTML();
+    await setItem('allTasks', JSON.stringify(allTasks));
     checkEmptyToDo();
     checkEmptyDone();
     checkEmptyProgress();
     checkEmptyAwaitFeedback();
+    
 }
 function checkEmptyColumn(columnId, message) {
     let column = document.getElementById(columnId);
