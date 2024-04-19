@@ -1,57 +1,67 @@
 let currentDraggedElement;
-let allTasksJson= [{
-    "taskID": 0,
-    "processingStatus": "ToDo",
-    "title": "Kochwelt Page & Recipe Recommender",
-    "description":'Build start page with recipe recommendation...',
-    "assignedTo":[],
-    "dueDate":'10/5/2023',
-    "prio":['/assets/img/prio_medium.svg','Medium'],
-    "category":'User Story',
-    "subtasks": [
-        {"name": "Start Page Layout", "checked": false},
-        {"name": "Implement Recipe Recommendation", "checked": false}
-    ]
+// let allTasksJson= [{
+//     "taskID": 0,
+//     "processingStatus": "ToDo",
+//     "title": "Kochwelt Page & Recipe Recommender",
+//     "description":'Build start page with recipe recommendation...',
+//     "assignedTo":[],
+//     "dueDate":'2023-05-10',
+//     "prio":['/assets/img/prio_medium.svg','Medium'],
+//     "category":'User Story',
+//     "subtasks": [
+//         {"name": "Start Page Layout", "checked": false},
+//         {"name": "Implement Recipe Recommendation", "checked": false}
+//     ]
 
-},{
-    "taskID": 1,
-    "processingStatus": "ToDo",
-    "title": "HTML Base Template Creation",
-    "description":'Create reusable HTML base templates...',
-    "assignedTo":[],
-    "dueDate":'10/5/2023',
-    "prio":['/assets/img/prio_low.svg','Low'],
-    "category":'Technical Task',
-    "subtasks":[]
+// },{
+//     "taskID": 1,
+//     "processingStatus": "ToDo",
+//     "title": "HTML Base Template Creation",
+//     "description":'Create reusable HTML base templates...',
+//     "assignedTo":[],
+//     "dueDate":'10/5/2023',
+//     "prio":['/assets/img/prio_low.svg','Low'],
+//     "category":'Technical Task',
+//     "subtasks":[]
 
-},
-{
-    "taskID": 2,
-    "processingStatus": "progress",
-    "title": "Daily Kochwelt Recipe",
-    "description":'Implement daily recipe and portion calculator....',
-    "assignedTo":[],
-    "dueDate":'10/5/2023',
-    "prio":['/assets/img/prio_medium.svg','Medium'],
-    "category":'User Story',
-    "subtasks": [
-        {"name": "Start Page Layout", "checked": false},
-        {"name": "Implement Recipe Recommendation", "checked": false},
-        {"name": "Implement Recipe Recommendation", "checked": false}
-    ]
+// },
+// {
+//     "taskID": 2,
+//     "processingStatus": "progress",
+//     "title": "Daily Kochwelt Recipe",
+//     "description":'Implement daily recipe and portion calculator....',
+//     "assignedTo":[],
+//     "dueDate":'10/5/2023',
+//     "prio":['/assets/img/prio_medium.svg','Medium'],
+//     "category":'User Story',
+//     "subtasks": [
+//         {"name": "Start Page Layout", "checked": false},
+//         {"name": "Implement Recipe Recommendation", "checked": false},
+//         {"name": "Implement Recipe Recommendation", "checked": false}
+//     ]
 
-},
-{
-    "taskID": 3,
-    "processingStatus": "awaitFeedback",
-    "title": "CSS Architecture Planning",
-    "description":'Define CSS naming conventions and structure...',
-    "assignedTo":[],
-    "dueDate":'10/5/2023',
-    "prio":['/assets/img/prio_urgent.svg','Urgent'],
-    "category":'Technical Task',
-    "subtasks":[]
-}];
+// },
+// {
+//     "taskID": 3,
+//     "processingStatus": "awaitFeedback",
+//     "title": "CSS Architecture Planning",
+//     "description":'Define CSS naming conventions and structure...',
+//     "assignedTo":[],
+//     "dueDate":'10/5/2023',
+//     "prio":['/assets/img/prio_urgent.svg','Urgent'],
+//     "category":'Technical Task',
+//     "subtasks":[]
+// }];
+
+async function boardInit(){
+    await includeHTML();
+    await getAllTasksFromServer();
+    updateHTML();
+    setInitials();
+    allTasksJson = allTasks;
+
+    console.log (allTasks);
+}
 
 function showAddTaskOverlay() {
     document.getElementById('addTaskOverlayID').classList.remove('d-none');
@@ -83,6 +93,7 @@ function updateHTML() {
     }
 
 }
+
 
 
 function startDragging(taskID){
@@ -305,16 +316,15 @@ function openEditTasks(taskID) {
     const task = allTasksJson.find(task => task.taskID === taskID);
     if (task) {
         const editPopupContent = `
-        <div id="editTask" class="editTaskInner">
+        <div id="editTask" class="editTaskInner" onclick="doNotClose(event)">
         <div class="form_inner_edit">
             <div class="editHeadline">
-                <img onclick="closeEditTask()" class="editHeadlineImg"  src="/assets/img/close.svg" alt="">
+                <img onclick="closePopup()" class="editHeadlineImg"  src="/assets/img/close.svg" alt="">
             </div>
             <div class="form_left_edit">
                 <div class="title_container">
                     <label for="taskTitle">Title<span style="color: #ffa800;"></span></label><br>
-                    <input class="input_styles" type="text" id="taskTitle" placeholder="Enter a title" required>${task.title}<br>
-                    <p class="error_message d-none" id="errorTitleID">This field is required</p>
+                    <input class="input_styles" type="text" id="taskTitle" value="${task.title}" placeholder="Enter a title" required><br>
                 </div>
                 <div class="discripton_container">
                     <label for="TaskDiscription">Discription</label><br>
@@ -342,11 +352,10 @@ function openEditTasks(taskID) {
             <div class="form_right_edit">
                 <div class="due_date_contaier">
                     <label for="dueDate">Due date<span style="color: #ffa800;"></span></label><br>
-                    <input class="input_styles" type="date" id="dueDate" required onclick="setDate()">
-                    <p class="error_message d-none" id="errorDueDateID">This field is required</p>
+                    <input class="input_styles" type="date" value="${task.dueDate}" id="dueDate" required onclick="setDate()">
                 </div>
                 <label>Prio</label><br>
-                <div class="prio_buttons">
+                <div class="prio_buttons" >
                     <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('urgent')">
                         Urgent <img src="/assets/img/prio_urgent.svg" alt="">
                     </button>
@@ -357,20 +366,9 @@ function openEditTasks(taskID) {
                         Low <img src="/assets/img/prio_low.svg" alt="">
                     </button>
                 </div>
-                <div class="category_container">
-                    <label for="category">Category<span style="color: #ffa800;"></span></label><br>
-                    <select class="input_styles" id="category" required>
-                        <option value="" selected disabled hidden>Select task category <img
-                                src="/assets/img/event_calendar.svg" alt=""></option>
-                        <option value="technikalTask">Technical Task</option>
-                        <option value="userStory">User Story</option>
-                    </select><br>
-                    <p class="error_message d-none" id="errorCategoryID">This field is required</p>
-                </div>
                 <label for="subtasks">Subtasks</label><br>
                 <div class="subtasks_container input_styles">
-                    <!-- <input type="text" id="subtasks" onfocus="subtasksFucus()" onblur="subtasksNoFucus()"> -->
-                    <input type="text" id="subtasks" onfocus="subtasksFucus()">
+                    <input type="text" id="subtasks" value="${task['subtasks'].name}"  onfocus="subtasksFucus()">
                     <img class="subtask_btn_add" id="subtaskBtnAddID" src="/assets/img/add.svg" alt="">
                     <div class="subtasks_create_buttons d-none" id="subtasksCreateButtonsID">
                         <img class="subtask_btn_close" src="/assets/img/close.svg" alt="" onclick="cancelNewSubtask()">
@@ -382,7 +380,7 @@ function openEditTasks(taskID) {
                 </div>
             </div>
             <div class="edit_button_container">
-                <button class="edit_button">Ok <img class="edit_button_img" src="/assets/img/check_weiß.svg" alt=""> </button>
+                <button class="edit_button" onclick="saveEditedTask('${taskID}')">Ok <img class="edit_button_img" src="/assets/img/check_weiß.svg" alt=""> </button>
             </div>
         </div>
         `;
@@ -391,12 +389,38 @@ function openEditTasks(taskID) {
 }
 
 function openPopup(content) {
-    const editPopup = document.getElementById('editTask');
+    const editPopup = document.getElementById('editTaskOverlay');
     editPopup.innerHTML = content;
     editPopup.classList.remove('d-none');
 }
 
 function closePopup() {
-    const editPopup = document.getElementById('editTask');
+    const editPopup = document.getElementById('editTaskOverlay');
     editPopup.classList.add('d-none');
+}
+
+function saveEditedTask(taskID) {
+    const editedTask = {
+        taskID: taskID,
+        title: document.getElementById('taskTitle').value,
+        description: document.getElementById('taskDiscription').value,
+        assignedTo: document.getElementById('assignedTo').value,
+        dueDate: document.getElementById('dueDate').value,
+        subtasks:[]
+    };
+    updateTask(editedTask);
+
+    closePopup();
+}
+
+function updateTask(editedTask) {
+    for (let i = 0; i < allTasksJson.length; i++) {
+        if (allTasksJson[i].taskID === editedTask.taskID) {
+            allTasksJson[i].title = editedTask.title;
+            allTasksJson[i].description = editedTask.description;
+            allTasksJson[i].dueDate = editedTask.dueDate;
+            allTasksJson[i].assignedTo = editedTask.assignedTo;
+            allTasksJson[i].subtasks = editedTask.subtasks;
+        }
+    }
 }

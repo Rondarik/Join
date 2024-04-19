@@ -329,6 +329,6 @@ function hideDeleteHoverIcon() {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    init();
+    contactsInit();
     displayContacts();
 });
