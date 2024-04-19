@@ -5,7 +5,7 @@ let allTasksJson= [{
     "title": "Kochwelt Page & Recipe Recommender",
     "description":'Build start page with recipe recommendation...',
     "assignedTo":[],
-    "dueDate":'10/5/2023',
+    "dueDate":'2023-05-10',
     "prio":['/assets/img/prio_medium.svg','Medium'],
     "category":'User Story',
     "subtasks": [
@@ -319,7 +319,6 @@ function openEditTasks(taskID) {
                 <div class="title_container">
                     <label for="taskTitle">Title<span style="color: #ffa800;"></span></label><br>
                     <input class="input_styles" type="text" id="taskTitle" value="${task.title}" placeholder="Enter a title" required><br>
-                    <p class="error_message d-none" id="errorTitleID">This field is required</p>
                 </div>
                 <div class="discripton_container">
                     <label for="TaskDiscription">Discription</label><br>
@@ -348,7 +347,6 @@ function openEditTasks(taskID) {
                 <div class="due_date_contaier">
                     <label for="dueDate">Due date<span style="color: #ffa800;"></span></label><br>
                     <input class="input_styles" type="date" value="${task.dueDate}" id="dueDate" required onclick="setDate()">
-                    <p class="error_message d-none" id="errorDueDateID">This field is required</p>
                 </div>
                 <label>Prio</label><br>
                 <div class="prio_buttons">
@@ -364,7 +362,6 @@ function openEditTasks(taskID) {
                 </div>
                 <label for="subtasks">Subtasks</label><br>
                 <div class="subtasks_container input_styles">
-                    <!-- <input type="text" id="subtasks" onfocus="subtasksFucus()" onblur="subtasksNoFucus()"> -->
                     <input type="text" id="subtasks" onfocus="subtasksFucus()">
                     <img class="subtask_btn_add" id="subtaskBtnAddID" src="/assets/img/add.svg" alt="">
                     <div class="subtasks_create_buttons d-none" id="subtasksCreateButtonsID">
@@ -377,7 +374,7 @@ function openEditTasks(taskID) {
                 </div>
             </div>
             <div class="edit_button_container">
-                <button class="edit_button">Ok <img class="edit_button_img" src="/assets/img/check_weiß.svg" alt=""> </button>
+                <button class="edit_button" onclick="saveEditedTask('${taskID}')">Ok <img class="edit_button_img" src="/assets/img/check_weiß.svg" alt=""> </button>
             </div>
         </div>
         `;
@@ -394,4 +391,30 @@ function openPopup(content) {
 function closePopup() {
     const editPopup = document.getElementById('editTaskOverlay');
     editPopup.classList.add('d-none');
+}
+
+function saveEditedTask(taskID) {
+    const editedTask = {
+        taskID: taskID,
+        title: document.getElementById('taskTitle').value,
+        description: document.getElementById('taskDiscription').value,
+       assignedTo: document.getElementById('assignedTo').value,
+        dueDate: document.getElementById('dueDate').value,
+        subtasks:[]
+    };
+    updateTask(editedTask);
+
+    closePopup();
+}
+
+function updateTask(editedTask) {
+    for (let i = 0; i < allTasksJson.length; i++) {
+        if (allTasksJson[i].taskID === editedTask.taskID) {
+            allTasksJson[i].title = editedTask.title;
+            allTasksJson[i].description = editedTask.description;
+            allTasksJson[i].dueDate = editedTask.dueDate;
+            allTasksJson[i].assignedTo = editedTask.assignedTo;
+            allTasksJson[i].subtasks = editedTask.subtasks;
+        }
+    }
 }

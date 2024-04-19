@@ -5,10 +5,10 @@ async function init(){
     setInitials();
 }
 
-function getUserName(){
-    const userName = localStorage.getItem('logedInUser');
-    return userName;
-}
+// function getUserName(){
+//     const userName = localStorage.getItem('logedInUser');
+//     return userName;
+// }
 
 let logedInUser='';
 function greetUser(){
