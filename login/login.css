@@ -17,13 +17,23 @@ body{
     animation: fade-in 1s ease 1s forwards;
 }
 
+#privat:hover{
+    color:#29ABE2;
+    font-weight: bold;
+}
+
 .legal{
     opacity: 0;
     animation: fade-in 1s ease 1s forwards;
 }
 
+#legal:hover{
+    color:#29ABE2;
+    font-weight: bold;
+}
+
 #headline{
-    font-weight: 700;
+    font-weight: bolder;
     display: inline-block;
     position: relative;
 }
@@ -67,6 +77,12 @@ body{
     border-radius: 3px;
     border-width: 0px;
     padding: 8px;
+    font-weight: bold;
+}
+
+.btnBlue:hover{
+    background-color: #29ABE2;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
 }
 
 .btnWhite{
@@ -74,6 +90,13 @@ body{
     border: solid 1px #2A3647;
     border-radius: 3px;
     padding: 8px;
+    font-weight: bold;
+}
+
+.btnWhite:hover{
+    color: #29ABE2;
+    border:#29ABE2 solid 2px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
 }
 
 .email{
@@ -103,9 +126,16 @@ body{
 }
 
 
-
 .check{
     justify-content: flex-start;
+}
+
+#checkboxOff{
+    cursor: pointer;
+}
+
+#checkboxOn{
+    cursor: pointer;
 }
 
 .greyAnker{
@@ -148,10 +178,10 @@ body{
 
 .wholeSiteStart{
     position: absolute;
-    top: 16px;
-    left: 16px;
-    height: 160px;
-    width: 160px;
+    top: 80px;
+    left: 77px;
+    height: 122px;
+    width: 100px;
 }
 
 @keyframes fade-in{
@@ -171,8 +201,8 @@ body{
 }
 
 .logoBigStart{
-    height: 80px;
-    width: auto;
+    height: 122px;
+    width: 100px;
 }
 
 .d-none{
@@ -190,10 +220,23 @@ body{
     position: relative;
     left: -42px;
     top: 3px;
+    cursor: pointer;
 }
 
 .redBorder{
     outline: none;
     border:2px solid red;
+}
+
+#loginBtn{
+    cursor: pointer;
+}
+
+#guestLoginBtn{
+    cursor: pointer;
+}
+
+#signUpLinkBtn{
+    cursor: pointer; 
 }
 

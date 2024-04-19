@@ -8,6 +8,7 @@
     <script src="sign_up.js"></script>
     <script src="../serverCommunication.js"></script>
     <script src="../script.js"></script>
+    <link rel="stylesheet" href="/assets/fonts.css">
 </head>
 <body onload="init()">
     
@@ -15,35 +16,53 @@
         <div><img src="../assets/img/logo.svg" alt="Logo"></div>
     </div>
 
+   
+
     <div class="loginForm">
+
+        
       
             <div> 
                     <img onclick="arrowLeft()" class="arrowLeft" src="../assets/img/arrowLeft.svg" alt="Pfeil zurück zum Log in">
             </div>
 
-            <div><h1 id="headline" class="headline">Sign Up</h1></div>
+            <h1 id="headline" class="headline">Sign Up</h1>
            
         <form id="formSignUp" onsubmit="register(); return false;">
            
-            <div><input required type="text" placeholder="Name" id="remoteName" class="user"  pattern="[A-Z][a-zA-Z]* [A-Z][a-zA-Z]*" title="Bitte geben Sie Ihren Vor- und Nachnamen ein. Der erste Buchstabe jedes Namens muss großgeschrieben sein."></div>
-            <div><input required id="remoteEmail" class="email" type="email" placeholder="Email"></div>
-            <input required oninput="changingEye()" type="password" id="remotePassword" class="password-input" placeholder="Password">
-            <img id="lock" src="../assets/img/passwordLock.svg" alt="">
-            <img onclick="eyeOn()" id="eyeOff" class="d-none" src="../assets/img/eyeOff.svg" alt="">
-            <img onclick="eye()" id="eyeOpen" class="d-none" src="../assets/img/eyeOn.svg" alt="">
-            <div><input required oninput="changingEyes()" id="remoteCPassword" class="password-input" type="password" placeholder="Confirm Password"></div>
-            <p id="message"></p>
+            <div class="formName"><input required type="text" placeholder="Name" id="remoteName" class="user"  pattern="[A-Z][a-zA-Z]* [A-Z][a-zA-Z]*" title="Bitte geben Sie Ihren Vor- und Nachnamen ein. Der erste Buchstabe jedes Namens muss großgeschrieben sein."></div>
+            
+            <div class="formEmail"><input required id="remoteEmail" class="email" type="email" placeholder="Email"></div>
+           
+
+
+
+    <div class="formPassword">
+        
+        <input required oninput="changingEye()" type="password" id="remotePassword" class="password-input" placeholder="Password">
+        <img id="lock" src="../assets/img/passwordLock.svg" alt="">
+        <img onclick="eyeOn()" id="eyeOff" class="d-none" src="../assets/img/eyeOff.svg" alt="">
+        <img onclick="eye()" id="eyeOpen" class="d-none" src="../assets/img/eyeOn.svg" alt="">
+    </div>
+
+
+            <div class="formConfirm"><input required oninput="changingEyes()" id="remoteCPassword" class="password-input" type="password" placeholder="Confirm Password"></div>
+            
+
             <img id="locks" src="../assets/img/passwordLock.svg" alt="">
             <img onclick="eyesOn()" id="eyesOff" class="d-none" src="../assets/img/eyeOff.svg" alt="">
             <img onclick="eyes()" id="eyesOpen" class="d-none" src="../assets/img/eyeOn.svg" alt="">
-           
+            <p id="message"></p>
+
+            
+
             <div class="check">
                 <img onclick="checked()" id="checkboxOff" src="../assets/img/checkboxOff.svg" alt="">
                 <img onclick="unchecked()" id="checkboxOn" class="d-none" src="../assets/img/checkboxOn.svg" alt="">
-                <span>I accept the <a class="ankerBabyblue" href="../privacy_policy/privacy_policy.html">Privacy policy</a></span>
+                <span>I accept the <a id="privat" class="ankerBabyblue" href="../privacy_policy/privacy_policy.html"> Privacy policy</a></span>
             </div>
            
-            <div>
+            <div class="registerButton">
                 <button type="submit" id="registerBtn" class="btnBlue">Sign up</button>
             </div>
         </form>
@@ -51,8 +70,8 @@
     </div>
    
     <div class="links">
-    <a class="greyAnker" href="../privacy_policy/privacy_policy.html">Privacy Policy</a>
-    <a class="greyAnker" href="../legal_notice/legal_notice.html">Legal notice</a>
+    <a id="policy" class="greyAnker" href="../privacy_policy/privacy_policy.html">Privacy Policy</a>
+    <a id="legal" class="greyAnker" href="../legal_notice/legal_notice.html">Legal notice</a>
     </div>
     
     <div id="flyer" class="flyer d-none">

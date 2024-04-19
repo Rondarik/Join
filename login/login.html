@@ -8,6 +8,7 @@
     <script src="./login.js"></script>
     <script src="../script.js"></script>
     <script src="../serverCommunication.js"></script>
+    <link rel="stylesheet" href="/assets/fonts.css">
 </head>
 <body onload="init()">
     
@@ -19,7 +20,7 @@
 
         <div class="signUp">
             <span>Not a Join user?</span>
-            <a href="../sign_up/sign_up.html"><button class="btnBlue">Sign up</button></a>
+            <a href="../sign_up/sign_up.html"><button id="signUpLinkBtn" class="btnBlue">Sign up</button></a>
         </div>
     </div>
 
@@ -46,8 +47,8 @@
         </form>
         
         <div>
-            <button form="formLogin" type="submit" class="btnBlue">Log in</button>
-            <button class="btnWhite" type="button">Guest Log in</button>
+            <button form="formLogin" type="submit" id="loginBtn" class="btnBlue">Log in</button>
+            <button id="guestLoginBtn" class="btnWhite" type="button">Guest Log in</button>
         </div>
 
     </div>
