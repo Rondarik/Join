@@ -1,4 +1,6 @@
-function init() {
+async function contactsInit() {
+    await includeHTML();
+    setInitials();
     bindContactItemClickEvents();
 }
 
@@ -117,7 +119,6 @@ function displayContacts() {
 
     for (let i = 0; i < dummyContacts.length; i++) {
         let contact = dummyContacts[i];
-        console.log(contact)
         let {name, eMail, color} = contact;
         let initials = getInitials(name);
 
@@ -249,6 +250,6 @@ function hideDeleteHoverIcon() {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    init();
+    contactsInit();
     displayContacts();
 });
