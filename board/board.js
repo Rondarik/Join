@@ -84,6 +84,11 @@ function updateHTML() {
 
 }
 
+async function boardInit(){
+    await includeHTML();
+    updateHTML();
+    setInitials();
+}
 
 function startDragging(taskID){
     currentDraggedElement=taskID;
@@ -305,15 +310,15 @@ function openEditTasks(taskID) {
     const task = allTasksJson.find(task => task.taskID === taskID);
     if (task) {
         const editPopupContent = `
-        <div id="editTask" class="editTaskInner">
+        <div id="editTask" class="editTaskInner" onclick="doNotClose(event)">
         <div class="form_inner_edit">
             <div class="editHeadline">
-                <img onclick="closeEditTask()" class="editHeadlineImg"  src="/assets/img/close.svg" alt="">
+                <img onclick="closePopup()" class="editHeadlineImg"  src="/assets/img/close.svg" alt="">
             </div>
             <div class="form_left_edit">
                 <div class="title_container">
                     <label for="taskTitle">Title<span style="color: #ffa800;"></span></label><br>
-                    <input class="input_styles" type="text" id="taskTitle" placeholder="Enter a title" required>${task.title}<br>
+                    <input class="input_styles" type="text" id="taskTitle" value="${task.title}" placeholder="Enter a title" required><br>
                     <p class="error_message d-none" id="errorTitleID">This field is required</p>
                 </div>
                 <div class="discripton_container">
@@ -342,7 +347,7 @@ function openEditTasks(taskID) {
             <div class="form_right_edit">
                 <div class="due_date_contaier">
                     <label for="dueDate">Due date<span style="color: #ffa800;"></span></label><br>
-                    <input class="input_styles" type="date" id="dueDate" required onclick="setDate()">
+                    <input class="input_styles" type="date" value="${task.dueDate}" id="dueDate" required onclick="setDate()">
                     <p class="error_message d-none" id="errorDueDateID">This field is required</p>
                 </div>
                 <label>Prio</label><br>
@@ -356,16 +361,6 @@ function openEditTasks(taskID) {
                     <button type="button" class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('low')">
                         Low <img src="/assets/img/prio_low.svg" alt="">
                     </button>
-                </div>
-                <div class="category_container">
-                    <label for="category">Category<span style="color: #ffa800;"></span></label><br>
-                    <select class="input_styles" id="category" required>
-                        <option value="" selected disabled hidden>Select task category <img
-                                src="/assets/img/event_calendar.svg" alt=""></option>
-                        <option value="technikalTask">Technical Task</option>
-                        <option value="userStory">User Story</option>
-                    </select><br>
-                    <p class="error_message d-none" id="errorCategoryID">This field is required</p>
                 </div>
                 <label for="subtasks">Subtasks</label><br>
                 <div class="subtasks_container input_styles">
@@ -391,12 +386,12 @@ function openEditTasks(taskID) {
 }
 
 function openPopup(content) {
-    const editPopup = document.getElementById('editTask');
+    const editPopup = document.getElementById('editTaskOverlay');
     editPopup.innerHTML = content;
     editPopup.classList.remove('d-none');
 }
 
 function closePopup() {
-    const editPopup = document.getElementById('editTask');
+    const editPopup = document.getElementById('editTaskOverlay');
     editPopup.classList.add('d-none');
 }

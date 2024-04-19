@@ -20,7 +20,7 @@
     <script src="/summary/summary.js"></script>
 </head>
 
-<body onload="includeHTML(), updateHTML()">
+<body onload="boardInit()">
     <div w3-include-html="/assets/templates/side_menu.html"></div>
     <div w3-include-html="/assets/templates/header.html"></div>
     <div class="board_container">
@@ -60,7 +60,7 @@
     </div>
 
     <div id="bigTask" onclick="closeBigTask()"  class="bigTaskOverlay d-none"></div>
-    
+    <div id="editTaskOverlay" onclick="closePopup()" class="editTaskOverlay d-none"></div>
 </div>
     
    
