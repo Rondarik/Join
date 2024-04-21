@@ -21,6 +21,26 @@
     align-items: center;
     border-radius: 30px;
 }
+/* 
+.form_container{
+    width: 312px;
+    height: 48px;
+    border: solid 1px;
+    border-radius: 10px;
+    border-color: #A8A8A8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    flex-direction: row !important;
+}
+
+.form_container:focus-within {
+    border-color: #29ABE2;
+} */
+
+
+/* Boardpage */
 .board_container{
     padding-left: 232px;
     padding-top: 96px;
@@ -75,23 +95,6 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.form_container{
-    width: 312px;
-    height: 48px;
-    border: solid 1px;
-    border-radius: 10px;
-    border-color: #A8A8A8;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: white;
-    flex-direction: row !important;
-}
-
-.form_container:focus-within {
-    border-color: #29ABE2;
 }
 
 input::placeholder{

@@ -283,6 +283,10 @@ function showBigTask(element){
     `;
 }
 
+function checked(id,i) {
+    
+}
+
 function getContactForBigCardHTML(contact) {
     return (
       /*html*/ `
