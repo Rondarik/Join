@@ -1,4 +1,9 @@
 /* Template */
+.add_task_container{
+
+}
+
+
 .add_task_container h2 {
     font-family: 'Inter';
     font-style: normal;
@@ -52,6 +57,7 @@
 .form_inner {
     margin-top: 20px;
     display: flex;
+    /* flex-direction: column; */
     /* margin-bottom: 50px; */
 
     /* border: 1px solid red; */
@@ -323,7 +329,7 @@ input:-webkit-autofill:focus {
 
 #allSubtasksID {
     height: 60px;
-
+    overflow: auto;
 }
 
 #subtasks {
