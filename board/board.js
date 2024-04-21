@@ -56,10 +56,8 @@ let currentDraggedElement;
 async function boardInit(){
     await includeHTML();
     await getAllTasksFromServer();
-    allTasksJson = allTasks;
     updateHTML();
     setInitials();
-   
 
     console.log (allTasks);
 }
@@ -84,7 +82,7 @@ function updateHTML() {
 
     for (let i = 0; i < statuses.length; i++) {
         const status = statuses[i];
-        const tasks = allTasksJson.filter(task => task['processingStatus'] === status);
+        const tasks = allTasks.filter(task => task['processingStatus'] === status);
         const container = document.getElementById(status.toLowerCase());
 
         container.innerHTML = '';
@@ -176,7 +174,7 @@ function allowDrop(ev) {
 }
 
 async function moveTo(processingStatus) {
-    allTasksJson[currentDraggedElement]['processingStatus'] = processingStatus;
+    allTasks[currentDraggedElement]['processingStatus'] = processingStatus;
     updateHTML();
     await setItem('allTasks', JSON.stringify(allTasks));
     checkEmptyToDo();
@@ -209,13 +207,13 @@ function checkEmptyDone() {
 }
 
 function openBigTask(id){
-    for (let i=0; i<allTasksJson.length; i++){
-            const task=allTasksJson[i]['taskID'];
+    for (let i=0; i<allTasks.length; i++){
+            const task=allTasks[i]['taskID'];
     if (task==id) {
         document.getElementById('bigTask').classList.remove('d-none');
         document.getElementById('bigTask').classList.add('show');
         let bigTask = document.getElementById('bigTask');
-        bigTask.innerHTML = showBigTask(allTasksJson[i]);
+        bigTask.innerHTML = showBigTask(allTasks[i]);
     } 
 }
 }
@@ -317,8 +315,8 @@ function findTaskFunction() {
     document.getElementById('progress').innerHTML = '';
     document.getElementById('awaitfeedback').innerHTML = '';
     document.getElementById('done').innerHTML = '';
-    for (let i = 0; i < allTasksJson.length; i++) {
-        const element = allTasksJson[i];
+    for (let i = 0; i < allTasks.length; i++) {
+        const element = allTasks[i];
         if (element['title'].toLowerCase().includes(search) || element['description'].toLowerCase().includes(search)) {
             searchArray.push(element);
         }
@@ -348,20 +346,20 @@ function findTaskFunction() {
 
 
 function countTasksByStatus(status) {
-    return allTasksJson.filter(task => task.processingStatus === status).length;
+    return allTasks.filter(task => task.processingStatus === status).length;
 }
 function countTasksByPriority(priority) {
-    return allTasksJson.filter(task => task.prio.includes(priority)).length;
+    return allTasks.filter(task => task.prio.includes(priority)).length;
 }
 
 function getUrgentTask() {
-    return allTasksJson.find(task => task.prio.includes('Urgent'));
+    return allTasks.find(task => task.prio.includes('Urgent'));
 }
 
 async function deleteTasks(taskID) {
-    const index = allTasksJson.findIndex(task => task.taskID === taskID);
+    const index = allTasks.findIndex(task => task.taskID === taskID);
     if (index !== -1) {
-        allTasksJson.splice(index, 1);
+        allTasks.splice(index, 1);
         updateHTML();
     } 
     closeBigTask();
@@ -373,7 +371,7 @@ async function deleteTasks(taskID) {
 // }
 
 function openEditTasks(taskID) {
-    const task = allTasksJson.find(task => task.taskID === taskID);
+    const task = allTasks.find(task => task.taskID === taskID);
     if (task) {
         const editPopupContent = `
         <div id="editTask" class="editTaskInner" onclick="doNotClose(event)">
@@ -474,13 +472,13 @@ function saveEditedTask(taskID) {
 }
 
 function updateTask(editedTask) {
-    for (let i = 0; i < allTasksJson.length; i++) {
-        if (allTasksJson[i].taskID === editedTask.taskID) {
-            allTasksJson[i].title = editedTask.title;
-            allTasksJson[i].description = editedTask.description;
-            allTasksJson[i].dueDate = editedTask.dueDate;
-            allTasksJson[i].assignedTo = editedTask.assignedTo;
-            allTasksJson[i].subtasks = editedTask.subtasks;
+    for (let i = 0; i < allTasks.length; i++) {
+        if (allTasks[i].taskID === editedTask.taskID) {
+            allTasks[i].title = editedTask.title;
+            allTasks[i].description = editedTask.description;
+            allTasks[i].dueDate = editedTask.dueDate;
+            allTasks[i].assignedTo = editedTask.assignedTo;
+            allTasks[i].subtasks = editedTask.subtasks;
         }
     }
 }

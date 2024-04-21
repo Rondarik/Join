@@ -19,13 +19,14 @@
     <div id="top" class="top">
 
         <div class="signUp">
-            <span>Not a Join user?</span>
+            <span class="not">Not a Join user?</span>
             <a href="../sign_up/sign_up.html"><button id="signUpLinkBtn" class="btnBlue">Sign up</button></a>
         </div>
     </div>
 
     <div id="loginForm" class="loginForm">
         <h1 id="headline">Log in</h1>
+        
         <form id="formLogin" onsubmit="saveEmailandPassword();return false;">
             <div><input required id="uEmail" class="email" type="text" placeholder="Email"></div>
 
@@ -40,13 +41,13 @@
             <div class="check">
                 <img onclick="checked()" id="checkboxOff" src="../assets/img/checkboxOff.svg" alt="">
                 <img onclick="unchecked()" id="checkboxOn" class="d-none" src="../assets/img/checkboxOn.svg" alt="">
-                <span>Remember me</span>
+                <span class="rememberMe">Remember me</span>
             </div>
         
         
         </form>
         
-        <div>
+        <div class="buttons">
             <button form="formLogin" type="submit" id="loginBtn" class="btnBlue">Log in</button>
             <button id="guestLoginBtn" class="btnWhite" type="button">Guest Log in</button>
         </div>
