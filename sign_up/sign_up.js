@@ -198,7 +198,6 @@ function checkPassword(){
 
 
 async function arrowLeft(){
-    await setItem('allUser', JSON.stringify(allUser));
     localStorage.setItem('startAnimation','true');
     redirectToLogin();
 }

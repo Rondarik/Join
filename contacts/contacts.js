@@ -1,8 +1,6 @@
 async function contactsInit() {
     await includeHTML();
     setInitials();
- 
-
 }
 
 function generateContactHTML(name, email, profileBadge, color, tel) {
@@ -18,8 +16,8 @@ function generateContactHTML(name, email, profileBadge, color, tel) {
                 <div class="contact_info_onclick_name">
                     <span>${name}</span>
                 </div>
-                <div class="contact_info_onclick_edit_delete" onclick="openEditContactDialog('${email}')">
-                    <div class="contact_info_onclick_edit" on>
+                <div class="contact_info_onclick_edit_delete">
+                    <div class="contact_info_onclick_edit" onclick="openEditContactDialog('${email}')">
                         <img class="edit_icon" src="/assets/img/edit.svg" alt="">
                         <img class="edit_hover_icon" src="/assets/img/editHover.svg" alt="">
                         <span>Edit</span>
@@ -65,21 +63,44 @@ function displayContacts() {
 
     for (let i = 0; i < firstLetterList.length; i++) {
         const letter = firstLetterList[i];
-        const headlineHTML = renderAlphabetHeadline(letter,i);
+        const headlineHTML = renderAlphabetHeadline(letter, i);
         const contactsByLetterList = filterByFirstLetter(letter);
-        let contactHTML ="";
+        let contactHTML = "";
         for (let j = 0; j < contactsByLetterList.length; j++) {
             const contact = contactsByLetterList[j];
             contactHTML += renderContact(contact);
         }
-        contactListContainer.innerHTML += headlineHTML +contactHTML;
+        contactListContainer.innerHTML += headlineHTML + contactHTML;
     }
 }
 
+
+function checkIfContactIsClicked(element) {
+    let contactInfoOnClick = element.querySelector('.contact_info_onclick');
+    if (element.classList.contains('clicked')) {
+        element.classList.remove('clicked');
+        if (contactInfoOnClick) {
+            contactInfoOnClick.classList.add('d_none');
+            contactInfoOnClick.classList.remove('show');
+        }
+    } else {
+        let allContactDummies = document.querySelectorAll('.contact_dummy');
+        allContactDummies.forEach(dummy => {
+            dummy.classList.remove('clicked');
+        });
+        element.classList.add('clicked');
+        if (contactInfoOnClick) {
+            contactInfoOnClick.classList.remove('d_none');
+            contactInfoOnClick.classList.add('show');
+        }
+    }
+}
+
+
 function renderAlphabetHeadline(letter){
     return /*html*/ `
-        <div class="letter_a">
-            <div class="letter_a_layout">
+        <div class="letter">
+            <div class="letter_layout">
                 <span>${letter}</span>
             </div>
          </div>
@@ -95,7 +116,7 @@ function filterByFirstLetter(letter) {
 
 function renderContact(contact) {
          return /*html*/ `
-            <div class="contact_dummy" id="${contact.eMail}" onclick="displayContactInfo('${contact.eMail}')">
+            <div class="contact_dummy" id="${contact.eMail}" onclick="displayContactInfo('${contact.eMail}'), checkIfContactIsClicked(this)">
                 <div class="contact_dummy_border_layout">
                     <div class="contact_dummy_border" style="background-color: ${contact.color}">
                     ${getInitials(contact.name)}
@@ -125,7 +146,7 @@ function getFirstLetters() {
     return firstLetterList;
 }
 
-async function displayContactInfo(id){
+async function displayContactInfo(id) {
     let contactContainer = document.getElementById('contact');
     let clickedContact = await filterByFirstMail(id);
     let name = clickedContact.name;
@@ -136,11 +157,20 @@ async function displayContactInfo(id){
 
     contactContainer.innerHTML = generateContactHTML(name, email, profileBadge, color, tel);
     let contactInfoOnClick = document.querySelector('.contact_info_onclick');
-        if (contactInfoOnClick) {
-            contactInfoOnClick.style.display = 'flex';
-            setTimeout(() => { contactInfoOnClick.classList.add('show'); }, 50);
-        }
 
+    let clickedContactDummy = document.querySelector('.clicked');
+    if (clickedContactDummy) {
+        if (contactInfoOnClick) {
+            setTimeout(() => { contactInfoOnClick.classList.add('show'); }, 50);
+            contactInfoOnClick.classList.remove('d_none');
+            contactInfoOnClick.style.display = 'flex';
+        }
+    } else {
+        if (contactInfoOnClick) {
+            contactInfoOnClick.classList.remove('show');
+            contactInfoOnClick.classList.add('d_none');
+        }
+    }
 }
 
 async function filterByFirstMail(Mail) {
@@ -148,110 +178,8 @@ async function filterByFirstMail(Mail) {
 }
 
 function openEditContactDialog(id) {
-    openContactDialog(); // nur zum testen
+    openEditDialog(); // nur zum testen
 }
-
-
-
-
-
-// function bindContactItemClickEvents() {
-//     let contactItems = document.querySelectorAll('.contact_dummy');
-//     contactItems.forEach(item => {
-//         item.addEventListener('click', handleContactItemClick);
-//     });
-// }
-
-
-// function handleContactItemClick(event) {
-//     let alreadyClicked = this.classList.contains('clicked');
-//     removeClickedClassFromItems();
-//     if (!alreadyClicked) {
-//         this.classList.add('clicked');
-//         displayContactInfo(this);
-//         displayEditDeleteImages();
-//     } else {
-//         hideContactInfoOnClick();
-//     }
-// }
-
-
-// function removeClickedClassFromItems() {
-//     let contactItems = document.querySelectorAll('.contact_dummy');
-//     contactItems.forEach(item => {
-//         item.classList.remove('clicked');
-//     });
-// }
-
-
-// function hideContactInfoOnClick() {
-//     let contactInfoOnClick = document.querySelector('.contact_info_onclick');
-//     if (contactInfoOnClick) {
-//         contactInfoOnClick.style.display = 'none';
-//     }
-// }
-
-
-// function displayContactInfo(item) {
-//     let contactContainer = document.getElementById('contact');
-//     let name = item.querySelector('.contact_dummy_name').textContent;
-//     let email = item.querySelector('.contact_dummy_mail').textContent;
-//     let profileBadge = item.querySelector('.contact_dummy_border').textContent;
-//     let index = Array.from(item.parentNode.children).indexOf(item);
-//     let color = dummyContacts[index].color;
-//     let tel = dummyContacts[index].tel;
-//     let contactHTML = generateContactHTML(name, email, profileBadge, color, tel);
-//     contactContainer.innerHTML = contactHTML;
-//     let contactInfoOnClick = document.querySelector('.contact_info_onclick');
-//     if (contactInfoOnClick) {
-//         contactInfoOnClick.style.display = 'flex';
-//         setTimeout(() => { contactInfoOnClick.classList.add('show'); }, 50);
-//     }
-// }
-
-
-
-// function displayContacts() {
-//     let contactListContainer = document.getElementById('contactListID');
-//     let contactsHTML = '';
-
-//     for (let i = 0; i < dummyContacts.length; i++) {
-//         let contact = dummyContacts[i];
-//         console.log(contact)
-//         let {name, eMail, color} = contact;
-//         let initials = getInitials(name);
-
-//         let contactHTML = `
-//         <div class="letter_a">
-//         <div class="letter_a_layout">
-//             <span>A</span>
-//         </div>
-//     </div>
-//     <div class="divding_line_container">
-//         <div class="dividing_line_contacts"></div>
-//     </div>
-//             <div class="contact_dummy">
-//                 <div class="contact_dummy_border_layout">
-//                     <div class="contact_dummy_border" style="background-color: ${color};">
-//                     ${initials}
-//                     </div>
-//                 </div>
-//                 <div class="contact_dummy_info_layout">
-//                     <div class="contact_dummy_info">
-//                         <span class="contact_dummy_name">${name}</span>
-//                         <span class="contact_dummy_mail">${eMail}</span>
-//                     </div>
-//                 </div>
-//             </div>
-//         `;
-//         contactsHTML += contactHTML;
-//     }
-//     contactListContainer.innerHTML = contactsHTML;
-// }
-
-
-
-
 function openContactDialog() {
     let dialog = document.getElementById('contactDialog');
     dialog.innerHTML = '';
@@ -278,7 +206,100 @@ function openContactDialog() {
                     </div>    
                 </div>
             </div>
+            <div class="profilebadge_layout">
+                <div class="addcontact_profilebadge_layout">
+                    <div class="addcontact_profilebadge">
+                        <img src="/assets/img/person.svg" alt="">
+                    </div>    
+                </div>
+            </div>    
             <div class="dialog_right_area">
+                    <div class="dialog_right_area_close">
+                        <img onclick="closeContactDialogFromButton()" src="/assets/img/close.svg">
+                    </div>
+                    <div class="form_container">
+                        <input class="input_style" id="taskTitle" type="text" placeholder="Name" required onchange="clearError()">
+                        <input class="input_style" id="taskTitle" type="text" placeholder="Email" required onchange="clearError()">
+                        <input class="input_style" id="taskTitle" type="text" placeholder="Phone" required onchange="clearError()">
+                    </div>                      
+                    <div class="form_buttons">
+                        <div class="cancel_btn">
+                            <button>
+                                <span>Cancel</span>
+                                <img class="close_icon" src="/assets/img/close.svg">
+                                <img class="close_hover_icon" src="/assets/img/closeHover.svg">
+                            </button>
+                        </div>
+                        <div class="create_contact_btn">
+                            <button>
+                                <span>Create contact</span>
+                                <img src="/assets/img/check_white.svg">
+                            </button>
+                        </div>
+                    </div> 
+            </div>
+        </div>
+    `
+    dialog.style.display = 'block';
+    dialog.querySelector('.contact_dialog').style.left = '2800px';
+    setTimeout(() => {
+        dialog.querySelector('.contact_dialog').style.left = '50%';
+    }, );
+}
+
+
+function openEditDialog() {
+    let dialog = document.getElementById('contactDialog');
+    dialog.innerHTML = '';
+    dialog.innerHTML = `
+        <div class="contact_dialog active">
+            <div class="dialog_left_area">
+                <div class="dialog_left_area_container">
+                    <div class="dialog_left_area_logo_container">
+                        <div class="dialog_left_area_logo">
+                            <img src="/assets/img/Joinlogo.svg">
+                        </div>
+                    </div>
+                    <div class="dialog_left_area_all_container">
+                        <div class="dialog_left_area_text_container">
+                            <div class="dialog_left_area_span">
+                                <span>Edit contact</span>
+                            </div>
+                        </div>   
+                        <div class="dividing_line_vertical">
+                        </div> 
+                    </div>    
+                </div>
+            </div>
+            <div class="profilebadge_layout">
+                <div class="addcontact_profilebadge_layout">
+                    <div class="addcontact_profilebadge">
+                        <img src="/assets/img/person.svg" alt="">
+                    </div>    
+                </div>
+            </div>    
+            <div class="dialog_right_area">
+                    <div class="dialog_right_area_close">
+                        <img onclick="closeContactDialogFromButton()" src="/assets/img/close.svg">
+                    </div>
+                    <div class="form_container">
+                        <input class="input_style" id="taskTitle" type="text" placeholder="Name" required onchange="clearError()">
+                        <input class="input_style" id="taskTitle" type="text" placeholder="Email" required onchange="clearError()">
+                        <input class="input_style" id="taskTitle" type="text" placeholder="Phone" required onchange="clearError()">
+                    </div>                      
+                    <div class="form_buttons_edit">
+                        <div class="cancel_btn">
+                            <button>
+                                <span>Delete</span>
+                            </button>
+                        </div>
+                        <div class="save_btn">
+                            <button>
+                                <span>Save</span>
+                                <img src="/assets/img/check_white.svg">
+                            </button>
+                        </div>
+                    </div> 
             </div>
         </div>
     `
@@ -302,6 +323,17 @@ function closeContactDialog(event) {
     }
 }
 
+function closeContactDialogFromButton() {
+    let dialog = document.getElementById('contactDialog');
+    dialog.querySelector('.contact_dialog').style.left = '2800px';
+    setTimeout(() => {
+        dialog.querySelector('.contact_dialog').classList.remove('active');
+        setTimeout(() => {
+            dialog.style.display = 'none';
+        }, 0); 
+    }, 400);
+}
+
 
 function getInitials(name) {
     let words = name.split(' ');
@@ -309,44 +341,6 @@ function getInitials(name) {
     words.forEach(word => {initials += word.charAt(0);
     });
     return initials.toUpperCase(); 
-}
-
-
-function displayEditDeleteImages() {
-    let editContainer = document.querySelector('.contact_info_onclick_edit');
-    let deleteContainer = document.querySelector('.contact_info_onclick_delete');
-    editContainer.addEventListener('mouseenter', showEditHoverIcon);
-    editContainer.addEventListener('mouseleave', hideEditHoverIcon);
-    deleteContainer.addEventListener('mouseenter', showDeleteHoverIcon);
-    deleteContainer.addEventListener('mouseleave', hideDeleteHoverIcon);
-    editContainer.querySelector('.edit_icon').style.display = 'block';
-    editContainer.querySelector('.edit_hover_icon').style.display = 'none';
-    deleteContainer.querySelector('.delete_icon').style.display = 'block';
-    deleteContainer.querySelector('.delete_hover_icon').style.display = 'none';
-}
-
-
-function showEditHoverIcon() {
-    this.querySelector('.edit_hover_icon').style.display = 'block';
-    this.querySelector('.edit_icon').style.display = 'none';
-}
-
-
-function hideEditHoverIcon() {
-    this.querySelector('.edit_hover_icon').style.display = 'none';
-    this.querySelector('.edit_icon').style.display = 'block';
-}
-
-
-function showDeleteHoverIcon() {
-    this.querySelector('.delete_hover_icon').style.display = 'block';
-    this.querySelector('.delete_icon').style.display = 'none';
-}
-
-
-function hideDeleteHoverIcon() {
-    this.querySelector('.delete_hover_icon').style.display = 'none';
-    this.querySelector('.delete_icon').style.display = 'block';
 }
 
 

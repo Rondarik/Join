@@ -54,6 +54,20 @@ function getUserName(){
 }
 
 
+async function backToLogin() {
+      localStorage.setItem('startAnimation','true');
+      localStorage.setItem('Password','');
+      localStorage.setItem('logedInUser','');
+      localStorage.setItem('Email','');
+      redirectToLogin();
+    }
+
+    function redirectToLogin() {
+        const targetUrl = '../login/login.html';
+        window.location.href = targetUrl;
+      }
+
+
 
 
 
