@@ -57,6 +57,18 @@ function greetUser(){
 //   }
 //   }
 
+function countTasksByStatus(status) {
+    return allTasksJson.filter(task => task.processingStatus === status).length;
+}
+function countTasksByPriority(priority) {
+    return allTasksJson.filter(task => task.prio.includes(priority)).length;
+}
+
+function getUrgentTask() {
+    return allTasksJson.find(task => task.prio.includes('Urgent'));
+}
+
+
   function updateSummary() {
     let todoCount = countTasksByStatus('ToDo');
     let progressCount = countTasksByStatus('progress');

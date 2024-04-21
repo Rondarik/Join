@@ -1,4 +1,5 @@
 let currentDraggedElement;
+
 // let allTasksJson= [{
 //     "taskID": 0,
 //     "processingStatus": "ToDo",
@@ -483,4 +484,5 @@ function updateTask(editedTask) {
             allTasksJson[i].subtasks = editedTask.subtasks;
         }
     }
+   
 }
