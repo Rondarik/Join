@@ -16,8 +16,8 @@ function generateContactHTML(name, email, profileBadge, color, tel) {
                 <div class="contact_info_onclick_name">
                     <span>${name}</span>
                 </div>
-                <div class="contact_info_onclick_edit_delete" onclick="openEditContactDialog('${email}')">
-                    <div class="contact_info_onclick_edit" on>
+                <div class="contact_info_onclick_edit_delete">
+                    <div class="contact_info_onclick_edit" onclick="openEditContactDialog('${email}')">
                         <img class="edit_icon" src="/assets/img/edit.svg" alt="">
                         <img class="edit_hover_icon" src="/assets/img/editHover.svg" alt="">
                         <span>Edit</span>
@@ -178,7 +178,7 @@ async function filterByFirstMail(Mail) {
 }
 
 function openEditContactDialog(id) {
-    openContactDialog(); // nur zum testen
+    openEditDialog(); // nur zum testen
 }
 function openContactDialog() {
     let dialog = document.getElementById('contactDialog');
@@ -206,7 +206,100 @@ function openContactDialog() {
                     </div>    
                 </div>
             </div>
+            <div class="profilebadge_layout">
+                <div class="addcontact_profilebadge_layout">
+                    <div class="addcontact_profilebadge">
+                        <img src="/assets/img/person.svg" alt="">
+                    </div>    
+                </div>
+            </div>    
             <div class="dialog_right_area">
+                    <div class="dialog_right_area_close">
+                        <img onclick="closeContactDialogFromButton()" src="/assets/img/close.svg">
+                    </div>
+                    <div class="form_container">
+                        <input class="input_style" id="taskTitle" type="text" placeholder="Name" required onchange="clearError()">
+                        <input class="input_style" id="taskTitle" type="text" placeholder="Email" required onchange="clearError()">
+                        <input class="input_style" id="taskTitle" type="text" placeholder="Phone" required onchange="clearError()">
+                    </div>                      
+                    <div class="form_buttons">
+                        <div class="cancel_btn">
+                            <button>
+                                <span>Cancel</span>
+                                <img class="close_icon" src="/assets/img/close.svg">
+                                <img class="close_hover_icon" src="/assets/img/closeHover.svg">
+                            </button>
+                        </div>
+                        <div class="create_contact_btn">
+                            <button>
+                                <span>Create contact</span>
+                                <img src="/assets/img/check_white.svg">
+                            </button>
+                        </div>
+                    </div> 
+            </div>
+        </div>
+    `
+    dialog.style.display = 'block';
+    dialog.querySelector('.contact_dialog').style.left = '2800px';
+    setTimeout(() => {
+        dialog.querySelector('.contact_dialog').style.left = '50%';
+    }, );
+}
+
+
+function openEditDialog() {
+    let dialog = document.getElementById('contactDialog');
+    dialog.innerHTML = '';
+    dialog.innerHTML = `
+        <div class="contact_dialog active">
+            <div class="dialog_left_area">
+                <div class="dialog_left_area_container">
+                    <div class="dialog_left_area_logo_container">
+                        <div class="dialog_left_area_logo">
+                            <img src="/assets/img/Joinlogo.svg">
+                        </div>
+                    </div>
+                    <div class="dialog_left_area_all_container">
+                        <div class="dialog_left_area_text_container">
+                            <div class="dialog_left_area_span">
+                                <span>Edit contact</span>
+                            </div>
+                        </div>   
+                        <div class="dividing_line_vertical">
+                        </div> 
+                    </div>    
+                </div>
+            </div>
+            <div class="profilebadge_layout">
+                <div class="addcontact_profilebadge_layout">
+                    <div class="addcontact_profilebadge">
+                        <img src="/assets/img/person.svg" alt="">
+                    </div>    
+                </div>
+            </div>    
+            <div class="dialog_right_area">
+                    <div class="dialog_right_area_close">
+                        <img onclick="closeContactDialogFromButton()" src="/assets/img/close.svg">
+                    </div>
+                    <div class="form_container">
+                        <input class="input_style" id="taskTitle" type="text" placeholder="Name" required onchange="clearError()">
+                        <input class="input_style" id="taskTitle" type="text" placeholder="Email" required onchange="clearError()">
+                        <input class="input_style" id="taskTitle" type="text" placeholder="Phone" required onchange="clearError()">
+                    </div>                      
+                    <div class="form_buttons_edit">
+                        <div class="cancel_btn">
+                            <button>
+                                <span>Delete</span>
+                            </button>
+                        </div>
+                        <div class="save_btn">
+                            <button>
+                                <span>Save</span>
+                                <img src="/assets/img/check_white.svg">
+                            </button>
+                        </div>
+                    </div> 
             </div>
         </div>
     `
@@ -228,6 +321,17 @@ function closeContactDialog(event) {
             }, 0); 
         }, 400);
     }
+}
+
+function closeContactDialogFromButton() {
+    let dialog = document.getElementById('contactDialog');
+    dialog.querySelector('.contact_dialog').style.left = '2800px';
+    setTimeout(() => {
+        dialog.querySelector('.contact_dialog').classList.remove('active');
+        setTimeout(() => {
+            dialog.style.display = 'none';
+        }, 0); 
+    }, 400);
 }
 
 
