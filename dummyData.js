@@ -69,6 +69,22 @@ let dummyContacts = [
         "Tasks": []
     },
     {
+        "name": "Bernd Richter",
+        "eMail": "bernd_richter@gmail.com",
+        "password":"pw11",
+        "tel": "+49154533567",
+        "color": "#436699",
+        "Tasks": []
+    },
+    {
+        "name": "Zoe Wiliams",
+        "eMail": "zoe_wiliams@gmail.com",
+        "password":"pw11",
+        "tel": "+49174535367",
+        "color": "#666699",
+        "Tasks": []
+    },
+    {
         "name": "John Doe",
         "eMail": "john_doe@outlook.com",
         "password":"pw33",
