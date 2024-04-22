@@ -248,7 +248,7 @@ function toggleSubtask(taskID, subtaskIndex) {
 
 
 
-function updateProgress(taskID) {
+async function updateProgress(taskID) {
     const task = allTasks.find(task => task.taskID === taskID);
     if (task) {
         const { progressValue, completedSubtasks, totalSubtasks } = calculateProgress(task.subtasks);
@@ -260,6 +260,7 @@ function updateProgress(taskID) {
             progressText.innerText = `${completedSubtasks}/${totalSubtasks} Subtasks`;
         }
     }
+    await setItem('allTasks', JSON.stringify(allTasks));
 }
 
 
@@ -347,83 +348,176 @@ async function deleteTasks(taskID) {
     await setItem('allTasks', JSON.stringify(allTasks));
 }
 
+// function openEditTasks(taskID) {
+//     const task = allTasks.find(task => task.taskID === taskID);
+//     const editPopupContent = `
+//            <div id="editTask" class="editTaskInner" onclick="doNotClose(event)">
+//                <div class="form_inner_edit">
+//                     <div class="editHeadline">
+//                         <img onclick="closePopup()" class="editHeadlineImg"  src="/assets/img/close.svg" alt="">
+//                     </div>
+//                      <div class="form_left_edit">
+//                     <div class="title_container">
+//                     <label for="taskTitle">Title<span style="color: #ffa800;"></span></label><br>
+//                     <input class="input_styles" type="text" id="taskTitle" value="${task.title}" placeholder="Enter a title" required><br>
+//                 </div>
+//                 <div class="discripton_container">
+//                     <label for="TaskDiscription">Description</label><br>
+//                      <textarea class="input_styles" name="" id="taskDiscription"
+//                        placeholder="Enter a Description">${task.description}</textarea><br>
+//                </div>
+//                         <div class="due_date_contaier">
+//                         <label for="dueDate">Due date<span style="color: #ffa800;"></span></label><br>
+//                         <input class="input_styles" type="date" value="${task.dueDate}" id="dueDate" required onclick="setDate()">
+//                     </div>
+//                     </div>
+//                     <label>Priority</label><br>
+//                         <div class="prio_buttons" >
+//                             <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('urgent')">
+//                                 Urgent <img src="/assets/img/prio_urgent.svg" alt="">
+//                             </button>
+//                             <button type="button" class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('medium')">
+//                                 Medium <img src="/assets/img/prio_medium.svg" alt="">
+//                             </button>
+//                             <button type="button" class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('low')">
+//                                 Low <img src="/assets/img/prio_low.svg" alt="">
+//                             </button>
+//                         </div>
+//                         <div class="dropdown_container">
+//                             <label for="assignedTo">Assigned to</label><br>
+//                             <div class="dropdown">
+//                                <div class="input_styles" id="assignedTo" onclick="showAssignablContacts(), doNotClose(event)">
+//                                    Select contacts to assign
+//                                   <img id="assign_arrow_down" src="/assets/img/arrow_drop_down.svg" alt="">
+//                                     <img id="assign_arrow_up" class="d-none" src="/assets/img/arrow_up_drop_down.svg" alt="">
+//                                  </div>
+//                                 <div class="contact_to_assign_container d-none" id="contact_to_assign_containerID" onclick="doNotClose(event)">
+//                                    ${getAssignedToHTML(task.assignedTo)}
+//                                 </div>
+//                                 <div class="contacts_container">
+//                                 <div class="small_card_users_area">` +
+//                                      getAssignedToIconsHTML(task['assignedTo']) +
+//                                     /*html*/ `
+//                                 </div>
+//                             </div>
+//                        </div>
+//                     <div class="form_right_edit">
+//                     <label for="subtasks">Subtasks</label><br>
+//                     <div class="subtasks_container input_styles">
+//                         <!-- <input type="text" id="subtasks" onfocus="subtasksFucus()" onblur="subtasksNoFucus()"> -->
+//                         <input type="text" id="subtasks" placeholder="Add new Subtask" onfocus="subtasksFucus()">
+//                         <img class="subtask_btn_add" id="subtaskBtnAddID" src="/assets/img/add.svg" alt="">
+//                         <div class="subtasks_create_buttons d-none" id="subtasksCreateButtonsID">
+//                             <img class="subtask_btn_close" src="/assets/img/close.svg" alt="" onclick="cancelNewSubtask()">
+//                             <div class="substask_seperator"></div>
+//                             <img class="subtask_btn_check" src="/assets/img/check.svg" alt="" onclick="addNewSubtask()">
+//                         </div>
+//                     </div>
+//                     <div id="allSubtasksID"> ${getSubtasksHTML(task.subtasks)}
+//                     </div>
+//                 </div>
+//                     <div class="edit_button_container">
+//                         <button class="edit_button" onclick="saveEditedTask('${taskID}')">Ok <img class="edit_button_img" src="/assets/img/check_weiß.svg" alt=""> </button>
+//                     </div>
+//                 </div>
+//             </div>
+//         `;
+//         openPopup(editPopupContent);
+//     }
+
 function openEditTasks(taskID) {
     const task = allTasks.find(task => task.taskID === taskID);
     const editPopupContent = `
-           <div id="editTask" class="editTaskInner" onclick="doNotClose(event)">
-               <div class="form_inner_edit">
-                    <div class="editHeadline">
-                        <img onclick="closePopup()" class="editHeadlineImg"  src="/assets/img/close.svg" alt="">
-                    </div>
-                     <div class="form_left_edit">
-                    <div class="title_container">
-                    <label for="taskTitle">Title<span style="color: #ffa800;"></span></label><br>
-                    <input class="input_styles" type="text" id="taskTitle" value="${task.title}" placeholder="Enter a title" required><br>
+        <div id="editTask" class="editTaskInner" onclick="doNotClose(event)">
+            <div class="form_inner_edit">
+                <div class="editHeadline">
+                    <img onclick="closePopup()" class="editHeadlineImg" src="/assets/img/close.svg" alt="">
                 </div>
-                <div class="discripton_container">
-                    <label for="TaskDiscription">Description</label><br>
-                     <textarea class="input_styles" name="" id="taskDiscription"
-                       placeholder="Enter a Description">${task.description}</textarea><br>
-               </div>
-                        <div class="due_date_contaier">
+                <div class="form_left_edit">
+                    <div class="title_container">
+                        <label for="taskTitle">Title<span style="color: #ffa800;"></span></label><br>
+                        <input class="input_styles" type="text" id="taskTitle" value="${task.title}" placeholder="Enter a title" required><br>
+                    </div>
+                    <div class="discripton_container">
+                        <label for="TaskDiscription">Description</label><br>
+                        <textarea class="input_styles" name="" id="taskDiscription" placeholder="Enter a Description">${task.description}</textarea><br>
+                    </div>
+                    <div class="due_date_contaier">
                         <label for="dueDate">Due date<span style="color: #ffa800;"></span></label><br>
                         <input class="input_styles" type="date" value="${task.dueDate}" id="dueDate" required onclick="setDate()">
                     </div>
-                    </div>
-                    <label>Priority</label><br>
-                        <div class="prio_buttons" >
-                            <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('urgent')">
-                                Urgent <img src="/assets/img/prio_urgent.svg" alt="">
-                            </button>
-                            <button type="button" class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('medium')">
-                                Medium <img src="/assets/img/prio_medium.svg" alt="">
-                            </button>
-                            <button type="button" class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('low')">
-                                Low <img src="/assets/img/prio_low.svg" alt="">
-                            </button>
+                </div>
+                <label>Priority</label><br>
+                <div class="prio_buttons" >
+                    <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('urgent')">
+                        Urgent <img src="/assets/img/prio_urgent.svg" alt="">
+                    </button>
+                    <button type="button" class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('medium')">
+                        Medium <img src="/assets/img/prio_medium.svg" alt="">
+                    </button>
+                    <button type="button" class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('low')">
+                        Low <img src="/assets/img/prio_low.svg" alt="">
+                    </button>
+                </div>
+                <div class="dropdown_container">
+                    <label for="assignedTo">Assigned to</label><br>
+                    <div class="dropdown">
+                        <div class="input_styles" id="assignedTo" onclick="showAssignablContacts(), doNotClose(event)">
+                            Select contacts to assign
+                            <img id="assign_arrow_down" src="/assets/img/arrow_drop_down.svg" alt="">
+                            <img id="assign_arrow_up" class="d-none" src="/assets/img/arrow_up_drop_down.svg" alt="">
                         </div>
-                        <div class="dropdown_container">
-                            <label for="assignedTo">Assigned to</label><br>
-                            <div class="dropdown">
-                               <div class="input_styles" id="assignedTo" onclick="showAssignablContacts(), doNotClose(event)">
-                                   Select contacts to assign
-                                  <img id="assign_arrow_down" src="/assets/img/arrow_drop_down.svg" alt="">
-                                    <img id="assign_arrow_up" class="d-none" src="/assets/img/arrow_up_drop_down.svg" alt="">
-                                 </div>
-                                                                 <div class="contact_to_assign_container d-none" id="contact_to_assign_containerID" onclick="doNotClose(event)">
-                                    <!-- Hier werden die bearbeiteten Kontakte mit Initialen und Icons gerendert -->
-                                   ${getAssignedToHTML(task.assignedTo)}
-                                </div>
+                        <div class="contact_to_assign_container d-none" id="contact_to_assign_containerID" onclick="doNotClose(event)">
+                            ${getAssignedToHTML(task.assignedTo)}
+                        </div>
+                        <div class="contacts_container">
+                            <div class="small_card_users_area">
+                                ${getAssignedToIconsHTML(task['assignedTo'])}
                             </div>
-                       </div>
+                        </div>
+                    </div>
                     <div class="form_right_edit">
+                        <label for="subtasks">Subtasks</label><br>
                         <div class="subtasks_container input_styles">
-                            <label for="subtasks">Subtasks</label><br>
-                            <input type="text" id="subtasks"  onfocus="subtasksFucus()">
+                            <input type="text" id="subtasks" placeholder="Add new Subtask" onfocus="subtasksFucus()">
                             <img class="subtask_btn_add" id="subtaskBtnAddID" src="/assets/img/add.svg" alt="">
                             <div class="subtasks_create_buttons d-none" id="subtasksCreateButtonsID">
                                 <img class="subtask_btn_close" src="/assets/img/close.svg" alt="" onclick="cancelNewSubtask()">
                                 <div class="substask_seperator"></div>
                                 <img class="subtask_btn_check" src="/assets/img/check.svg" alt="" onclick="addNewSubtask()">
                             </div>
-                         
                         </div>
-                        <div id="allSubtasksID"> ${getSubtasksHTML(task.subtasks)}
-                        </div> 
+                        <div id="allSubtasksID">${getSubtasksHTML(task.subtasks)}</div>
                     </div>
                     <div class="edit_button_container">
                         <button class="edit_button" onclick="saveEditedTask('${taskID}')">Ok <img class="edit_button_img" src="/assets/img/check_weiß.svg" alt=""> </button>
                     </div>
                 </div>
             </div>
-        `;
-        openPopup(editPopupContent);
-        renderAssignedContacts(task);
-        renderPriority(task);
-        setTaskPriority(priority);
-        saveEditedTask(taskID);
-        // Hier könnte der Code hinzugefügt werden, um die markierten Kontakte und die Priorität zu aktualisieren
-    }
+        </div>
+    `;
+
+    openPopup(editPopupContent);
+
+    // Jetzt die Prioritätstaste markieren
+    markPriorityButton(task.prio);
+}
+
+function markPriorityButton(prio) {
+    const prioButtons = document.querySelectorAll('.prio_buttons button');
+    prioButtons.forEach(button => {
+        const buttonPrio = button.textContent.trim().toLowerCase();
+        if (prio.includes(buttonPrio)) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
+}
+
+
+
+
 
 function getAssignedToHTML(contacts) {
     let html = "";
@@ -448,31 +542,13 @@ function getContactLogoHTML(contact) {
     `;
 }
 
-// function getPriorityIconsHTML(prio) {
-//     let iconsHTML = "";
-//     prio.forEach(priority => {
-//         let imgSrc = '';
-//         if (priority === 'Urgent') {
-//             imgSrc = '/assets/img/prio_urgent.svg';
-//         } else if (priority === 'Medium') {
-//             imgSrc = '/assets/img/prio_medium.svg';
-//         } else if (priority === 'Low') {
-//             imgSrc = '/assets/img/prio_low.svg';
-//         }
-//         iconsHTML += `
-//             <img src="${imgSrc}" alt="${priority}">
-//         `;
-//     });
-//     return iconsHTML;
-// }
-
 function getSubtasksHTML(subtasks) {
-    let subtasksHTML = "";
+    let subtasksHTML="";
     subtasks.forEach(subtask => {
         subtasksHTML += `
-            <div class="bigSubtasksContainer">
+            <ul class="bigSubtasksContainer">
                 <li class="bigInfosContacts">${subtask.name}</li>
-            </div>
+            </ul>
         `;
     });
     return subtasksHTML;
@@ -489,3 +565,20 @@ function closePopup() {
     const editPopup = document.getElementById('editTaskOverlay');
     editPopup.classList.add('d-none');
 }
+function saveEditedTask(taskID) {
+    const editedTaskIndex = allTasks.findIndex(task => task.taskID === taskID);
+    if (editedTaskIndex !== -1) {
+        const editedTask = allTasks[editedTaskIndex];
+        editedTask.title = document.getElementById('taskTitle').value;
+        editedTask.description = document.getElementById('taskDiscription').value;
+        editedTask.dueDate = document.getElementById('dueDate').value;
+        editedTask.assignedTo = getAssignedToContactsFromPopup();
+        editedTask.prio = getSelectedPriority();
+        allTasks[editedTaskIndex] = editedTask;
+        setItem('allTasks', JSON.stringify(allTasks));
+        updateHTML();
+        document.getElementById('bigTask').innerHTML = showBigTask(editedTask);
+    }
+    closePopup();
+}
+

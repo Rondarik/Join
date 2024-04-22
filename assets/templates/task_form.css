@@ -163,6 +163,7 @@ input:-webkit-autofill:focus {
 
 .contact_to_assign_container {
     position: absolute;
+    z-index: 99;
     width: 440px;
     max-height: 168px;
     border-radius: 0 0 10px 10px;
