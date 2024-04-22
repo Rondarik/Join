@@ -69,7 +69,7 @@ function generateTodoHTML(element) {
     }
 
     let subtaskHTML = ''; 
-    let { completedSubtasks, totalSubtasks } = calculateProgress(element['subtasks']); 
+    let { completedSubtasks, totalSubtasks } = calculateProgress(element['subtasks']); // Calculate progress
 
     let progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
 
@@ -346,10 +346,6 @@ async function deleteTasks(taskID) {
     closeBigTask();
     await setItem('allTasks', JSON.stringify(allTasks));
 }
-
-// function openEditTasks(){
-//     document.getElementById('editTask').classList.remove('d-none');
-// }
 
 function openEditTasks(taskID) {
     const task = allTasks.find(task => task.taskID === taskID);
