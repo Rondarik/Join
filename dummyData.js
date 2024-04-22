@@ -7,7 +7,7 @@ let dummyTasks = [
         "assignedTo": [],
         "dueDate": "2024-04-10",
         "prio": "urgent",
-        "category": "technical task",
+        "category": "Technical Task",
         "subtasks": []
     },
     {
@@ -18,7 +18,7 @@ let dummyTasks = [
         "assignedTo": [],
         "dueDate": "2024-04-12",
         "prio": "medium",
-        "category": "user story",
+        "category": "User Story",
         "subtasks": []
     },
     {

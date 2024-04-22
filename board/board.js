@@ -200,7 +200,7 @@ function checkEmptyProgress() {
 }
 
 function checkEmptyAwaitFeedback() {
-    checkEmptyColumn('awaitFeedback', 'No tasks in Await Feedback');
+    checkEmptyColumn('awaitfeedback', 'No tasks in Await Feedback');
 }
 
 function checkEmptyDone() {
@@ -284,9 +284,6 @@ function showBigTask(element){
     `;
 }
 
-function checked(id,i) {
-    
-}
 
 function getContactForBigCardHTML(contact) {
     return (

@@ -204,17 +204,17 @@ function setTaskPrio(prio) {
         lowBtn.querySelector('img').src = '/assets/img/prio_low.svg';
     });
     if (prio === 'urgent') {
-        taskPrio = ['/assets/img/prio_urgent.svg','urgent'];
+        taskPrio = ['/assets/img/prio_urgent.svg','Urgent'];
         urgentBtn.classList.add('clicked');
         urgentBtn.querySelector('img').src = '/assets/img/prio_urgent_white.svg';
     }
     if (prio === 'medium') {
-        taskPrio = ['/assets/img/prio_medium.svg','medium'];
+        taskPrio = ['/assets/img/prio_medium.svg','Medium'];
         mediumBtn.classList.add('clicked');
         mediumBtn.querySelector('img').src = '/assets/img/prio_medium_white.svg';
     }
     if (prio === 'low') {
-        taskPrio = ['/assets/img/prio_low.svg','low'];
+        taskPrio = ['/assets/img/prio_low.svg','Low'];
         lowBtn.classList.add('clicked');
         lowBtn.querySelector('img').src = '/assets/img/prio_low_white.svg';
     }

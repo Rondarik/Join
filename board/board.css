@@ -93,10 +93,12 @@ h1{
     max-height: 618px; 
 
 }
-
-.form_container:focus-within {
-    border-color: #29ABE2;
+.find_task_container:focus-within{
+    border-color: #29ABE2 ;
 }
+/* .form_container:focus-within{
+    border-color: #29ABE2 ;
+} */
 
 input::placeholder{
     color: #D1D1D1;
@@ -183,13 +185,13 @@ input::placeholder{
     color: #2AABE2;
 }
 .content_container{
-    max-height: 100vh;
+    min-height: 100vh;
     padding-left: 64px;
     padding-right: 64px;
     gap:26px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
 }
 .content_column{
     width:246px;

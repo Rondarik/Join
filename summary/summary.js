@@ -1,4 +1,4 @@
-async function init(){
+async function summaryInit(){
     await includeHTML();
     updateSummary();
     greetUser();
@@ -58,14 +58,14 @@ function greetUser(){
 //   }
 
 function countTasksByStatus(status) {
-    return allTasksJson.filter(task => task.processingStatus === status).length;
+    return allTasks.filter(task => task.processingStatus === status).length;
 }
 function countTasksByPriority(priority) {
-    return allTasksJson.filter(task => task.prio.includes(priority)).length;
+    return allTasks.filter(task => task.prio.includes(priority)).length;
 }
 
 function getUrgentTask() {
-    return allTasksJson.find(task => task.prio.includes('Urgent'));
+    return allTasks.find(task => task.prio.includes('Urgent'));
 }
 
 
