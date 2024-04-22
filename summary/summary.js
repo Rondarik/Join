@@ -1,5 +1,6 @@
 async function summaryInit(){
     await includeHTML();
+    await getAllTasksFromServer();
     updateSummary();
     greetUser();
     setInitials();
