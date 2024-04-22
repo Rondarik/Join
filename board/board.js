@@ -1,59 +1,4 @@
 let currentDraggedElement;
-
-// let allTasksJson= [{
-//     "taskID": 0,
-//     "processingStatus": "ToDo",
-//     "title": "Kochwelt Page & Recipe Recommender",
-//     "description":'Build start page with recipe recommendation...',
-//     "assignedTo":[],
-//     "dueDate":'2023-05-10',
-//     "prio":['/assets/img/prio_medium.svg','Medium'],
-//     "category":'User Story',
-//     "subtasks": [
-//         {"name": "Start Page Layout", "checked": false},
-//         {"name": "Implement Recipe Recommendation", "checked": false}
-//     ]
-
-// },{
-//     "taskID": 1,
-//     "processingStatus": "ToDo",
-//     "title": "HTML Base Template Creation",
-//     "description":'Create reusable HTML base templates...',
-//     "assignedTo":[],
-//     "dueDate":'10/5/2023',
-//     "prio":['/assets/img/prio_low.svg','Low'],
-//     "category":'Technical Task',
-//     "subtasks":[]
-
-// },
-// {
-//     "taskID": 2,
-//     "processingStatus": "progress",
-//     "title": "Daily Kochwelt Recipe",
-//     "description":'Implement daily recipe and portion calculator....',
-//     "assignedTo":[],
-//     "dueDate":'10/5/2023',
-//     "prio":['/assets/img/prio_medium.svg','Medium'],
-//     "category":'User Story',
-//     "subtasks": [
-//         {"name": "Start Page Layout", "checked": false},
-//         {"name": "Implement Recipe Recommendation", "checked": false},
-//         {"name": "Implement Recipe Recommendation", "checked": false}
-//     ]
-
-// },
-// {
-//     "taskID": 3,
-//     "processingStatus": "awaitFeedback",
-//     "title": "CSS Architecture Planning",
-//     "description":'Define CSS naming conventions and structure...',
-//     "assignedTo":[],
-//     "dueDate":'10/5/2023',
-//     "prio":['/assets/img/prio_urgent.svg','Urgent'],
-//     "category":'Technical Task',
-//     "subtasks":[]
-// }];
-
 async function boardInit(){
     await includeHTML();
     await getAllTasksFromServer();
@@ -105,8 +50,8 @@ function calculateProgress(subtasks) {
     let completedSubtasks = 0;
     let totalSubtasks = 0;
     if (subtasks) {
-        const totalSubtasks = subtasks.length;
-        const completedSubtasks = subtasks.filter(subtask => subtask.completed).length;
+        totalSubtasks = subtasks.length;
+        completedSubtasks = subtasks.filter(subtask => subtask.completed).length;
         if (totalSubtasks > 0) {
             progressValue = (completedSubtasks / totalSubtasks) * 100;
         }
@@ -124,16 +69,15 @@ function generateTodoHTML(element) {
     }
 
     let subtaskHTML = ''; 
-    let totalSubtasks = 0; 
-    if (element['subtasks']) {
-        totalSubtasks = element['subtasks'].length;
-    }
+    let { completedSubtasks, totalSubtasks } = calculateProgress(element['subtasks']); 
+
+    let progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
 
     if (totalSubtasks > 0) {
         subtaskHTML = `
             <div class="progress_container">
-                <progress id="file" max="100" value="0">0%</progress>
-                <p class="progress_text">0/${totalSubtasks} Subtasks</p>
+                <progress id="progress_${id}" max="100" value="${progressPercentage}">${progressPercentage}%</progress>
+                <p class="progress_text">${completedSubtasks}/${totalSubtasks} Subtasks</p>
             </div>`;
     }
     return `<div id="tasks_card_${element['taskID']}" onclick="openBigTask(${id})" class="task_progress" draggable="true" ondragstart="startDragging(${element['taskID']})">
@@ -236,10 +180,10 @@ function showBigTask(element){
     if (element['subtasks'] && element['subtasks'].length > 0) {
         subtasksHTML += '<h3 class="h3">Subtasks</h3>';
         for (let i = 0; i < element['subtasks'].length; i++) {
+            const checked = element['subtasks'][i].completed ? 'checked' : ''; // Determine if subtask is checked
             subtasksHTML += `
                 <div class="bigSubtasksContainer">
-                <img  onclick="checked(${id},${i})" id="checkboxOff" src="../assets/img/checkboxOff.svg" alt="" style="cursor:pointer;">
-                <img  onclick="unchecked(${id},${i})" id="checkboxOn" class="d-none" src="../assets/img/checkboxOn.svg" alt="" style="cursor:pointer;">
+                <img  onclick="toggleSubtask(${id},${i})" id="checkbox_${id}_${i}" src="../assets/img/${checked ? 'checkboxOn' : 'checkboxOff'}.svg" alt="" style="cursor:pointer;">
                 <p class="bigInfosContacts">${element['subtasks'][i].name}</p>
                 </div>`;
         }
@@ -283,6 +227,41 @@ function showBigTask(element){
         </div>
     `;
 }
+
+function toggleSubtask(taskID, subtaskIndex) {
+    const task = allTasks.find(task => task.taskID === taskID);
+    if (task && task.subtasks && task.subtasks[subtaskIndex]) {
+        task.subtasks[subtaskIndex].completed = !task.subtasks[subtaskIndex].completed;
+        const checkbox = document.getElementById(`checkbox_${taskID}_${subtaskIndex}`);
+        checkbox.src = `../assets/img/${task.subtasks[subtaskIndex].completed ? 'checkboxOn' : 'checkboxOff'}.svg`;
+        
+        task.completedSubtasks = task.subtasks.filter(subtask => subtask.completed).length;
+
+        updateProgress(taskID);
+        const subtasksDisplay = document.getElementById(`subtasks_${taskID}`);
+        if (subtasksDisplay) {
+            subtasksDisplay.textContent = `${task.completedSubtasks}/${task.subtasks.length} Subtasks`;
+        }
+    }
+}
+
+
+
+
+function updateProgress(taskID) {
+    const task = allTasks.find(task => task.taskID === taskID);
+    if (task) {
+        const { progressValue, completedSubtasks, totalSubtasks } = calculateProgress(task.subtasks);
+        const progressBar = document.getElementById(`progress_${taskID}`);
+        progressBar.value = progressValue;
+        progressBar.innerText = `${progressValue}%`;
+        const progressText = document.querySelector(`#progress_${taskID} + .progress_text`);
+        if (progressText) {
+            progressText.innerText = `${completedSubtasks}/${totalSubtasks} Subtasks`;
+        }
+    }
+}
+
 
 
 function getContactForBigCardHTML(contact) {
