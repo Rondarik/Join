@@ -331,6 +331,7 @@ input:-webkit-autofill:focus {
 #allSubtasksID {
     height: 60px;
     overflow: auto;
+    scrollbar-width: none;
 }
 
 #subtasks {
@@ -552,7 +553,7 @@ input:-webkit-autofill:focus {
     }
 
     .form_bottom_container p {
-        margin-bottom: 0;
+        margin-top: 0px;
         font-size: 18px;
     }
 }

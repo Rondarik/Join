@@ -9,9 +9,6 @@
     justify-content: center;
     align-items: center;
 }
-.scroll_container{
-    overflow-y: scroll;
-}
 .bigTaskInner{
     background-color: white;
     width: 525px;
@@ -23,6 +20,7 @@
     flex-direction: column;
     justify-content: space-between;
     overflow-y: auto;
+    scrollbar-width: none;
     
 }
 .bigHeadline{
@@ -211,6 +209,7 @@ text-align: left;
     line-height: 24px;
     text-align: left;
     overflow-y: auto;
+    scrollbar-width: none;
 }
 .editHeadline{
     width: 445px;
@@ -275,13 +274,13 @@ text-align: left;
 @media(max-width:620px){
     .bigTaskInner{
         width: 425px;
-        height: 731px;
+        height: 931px;
     }
     .bigTitle{
         font-size: 47px;
     }
     .editTaskInner{
-        width: 450px;
+        width: 425px;
         height: 931px;
     }
     .form_left {
@@ -294,7 +293,7 @@ text-align: left;
 }
 @media(max-width:550px){
     .editTaskInner{
-        width: 400px;
+        width: 425px;
         height: 931px;
         padding: 20px;
        
@@ -336,7 +335,7 @@ text-align: left;
 @media(max-width:520px){
     .bigTaskInner{
         width: 325px;
-        height: 631px;
+        height: 931px;
     }
     .bigTitle{
         font-size: 36px;
@@ -345,7 +344,7 @@ text-align: left;
 }
 @media(max-width:450px){
     .editHeadline{
-        width: 350px;
+        width: 325px;
     }
     .editTaskInner{
         width: 325px;
@@ -359,7 +358,7 @@ text-align: left;
 @media(max-width:420px){
     .bigTaskInner{
         width: 300px;
-        height: 631px;
+        height: 931px;
         padding: 20px;
     }
     .input_styles{
