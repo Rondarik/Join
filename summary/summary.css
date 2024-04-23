@@ -289,7 +289,7 @@ h3{
         flex-direction: column;
         align-items: unset;
         gap:0;
-        padding: 40px;
+        padding: 20px;
     }
    .line_blue{
     display: none;
@@ -312,7 +312,7 @@ h3{
    .summary_main{
     display: flex;
     justify-content: flex-start;
-    padding: 20px;
+    padding: 10px;
    }
    .todo_container:hover{
     background-color:#2A3647;
@@ -361,9 +361,16 @@ h3{
         display: flex;
         justify-content: space-between;
     }
+    .summary_main{
+        display: flex;
+        justify-content: center;
+    }
    }
 
 @media(max-width:480px){
+    .summary_tasks{
+        width: 350px;
+    }
     .row_container{
         width: 350px;
         height: 168px;
@@ -381,4 +388,55 @@ h3{
         display: flex;
         justify-content: space-between;
     }
+    .summary_main{
+        display: flex;
+        justify-content: center;
+    }
+}
+@media(max-width:380px){
+    .summary_img{
+        width: 40px;
+        height: 40px;
+    }
+    h1{
+        font-size: 47px;
+    }
+    h2{
+        font-size: 47px;
+    }
+    .subtitle{
+        font-size: 20px;
+        width:290px;
+    }
+    .text_below{
+        font-size: 16px;
+    }
+    .summary_tasks{
+        width: 290px;
+    }
+    .row_container{
+        width: 290px;
+        height: 168px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .prio_row_container{
+        width: 290px;
+        height: 168px;
+        gap:20px;
+    }
+    .tasks_container{
+        width: 290px;
+        height: 168px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .text{
+        font-size: 14px;
+    }
+    .summary_main{
+        display: flex;
+        justify-content: center;
+    }
+
 }
