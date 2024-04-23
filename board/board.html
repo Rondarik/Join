@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/assets/templates/task_form.css">
 
     <link rel="stylesheet" href="/board/board.css">
+    <link rel="stylesheet" href="/board/board_big_card.css">
     <script src="/assets/templates/add_task.js"></script>
     <script src="/script.js"></script>
     <script src="/dummyData.js"></script>
@@ -28,34 +29,40 @@
             <h1>Board</h1>
             <div class="search_container">
                 <div class="find_task_container" id="formContainer">
-                <input class="input_container" type="text" placeholder="Find Task" id="search" onkeydown="findTaskFunction()">
-                <button class="search_button" onclick="findTaskFunction()"><img class="search_img" src="/assets/img/search_board.svg" alt=""></button>
+                    <input class="input_container" type="text" placeholder="Find Task" id="search" onkeydown="findTaskFunction()">
+                    <button class="search_button" onclick="findTaskFunction()"><img class="search_img" src="/assets/img/search_board.svg" alt=""></button>
                 </div>
-                <button id="submitButton" onclick="showAddTaskOverlay()" class="board_button">Add Task <img src="/assets/img/add.svg" alt=""></button>
-            </div>
-        </div>
-        <div class="process_container">
-            <div class="container_row">
-                <p class="container_row_text">To do</p>
-                <button class="plus_button" onclick="showAddTaskOverlay()"><b>+</b></button>
-            </div>
-            <div class="container_row">
-                <p class="container_row_text">In progress</p>
-                <button class="plus_button"onclick="showAddTaskOverlay()"><b>+</b></button>
-            </div>
-            <div class="container_row">
-                <p class="container_row_text">Await Feedback</p>
-                <button class="plus_button" onclick="showAddTaskOverlay()"><b>+</b></button>
-            </div>
-            <div class="container_row">
-                <p class="container_row_text">Done</p>
+                <button id="submitButton" onclick="showAddTaskOverlay()" class="board_button"><p class="board_add_task_text">Add Task</p> <img src="/assets/img/add.svg" alt=""></button>
             </div>
         </div>
         <div class="content_container">
-            <div class="content_column" id="todo" ondrop="moveTo('ToDo')" ondragover="allowDrop(event)"></div>
-            <div class="content_column" id="progress" ondrop="moveTo('progress')" ondragover="allowDrop(event)"></div>
-            <div class="content_column" id="awaitfeedback"ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)"></div>
-            <div class="content_column" id="done"ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
+            <div class="content_column">
+                <div class="container_row">
+                    <p class="container_row_text">To do</p>
+                    <button class="plus_button" onclick="showAddTaskOverlay()"><b>+</b></button>
+                </div>
+                <div  class="drag_area"  id="todo" ondrop="moveTo('ToDo')" ondragover="allowDrop(event)"></div>
+            </div>
+            <div class="content_column">
+                <div class="container_row">
+                    <p class="container_row_text">In progress</p>
+                    <button class="plus_button"onclick="showAddTaskOverlay()"><b>+</b></button>
+                </div>
+                <div class="drag_area"   id="progress" ondrop="moveTo('progress')" ondragover="allowDrop(event)"></div>
+            </div>
+            <div class="content_column">
+                <div class="container_row">
+                    <p class="container_row_text">Await Feedback</p>
+                    <button class="plus_button" onclick="showAddTaskOverlay()"><b>+</b></button>
+                </div>
+                <div class="drag_area"   id="awaitfeedback"ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)"></div>
+            </div>
+            <div class="content_column" >
+                <div class="container_row">
+                    <p class="container_row_text">Done</p>
+                </div>
+                <div class="drag_area"  id="done"ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
+            </div>
         </div>
     </div>
 

@@ -314,10 +314,7 @@ color: #A8A8A8;
     justify-content: center;
     align-items: center;
 }
-.scroll_container{
-    overflow-y: scroll;
-}
-.bigTaskInner{
+/* .bigTaskInner{
     background-color: white;
     width: 525px;
     height: 931px;
@@ -344,8 +341,7 @@ color: #A8A8A8;
     color: white;
     border-radius: 8px;
     padding: 4px 24px;
-    /* margin-block-start: 0;
-    margin-block-end: 0; */
+  
 }
 .bigHeadlineImg{
     width: 24px;
@@ -510,13 +506,13 @@ text-align: left;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* margin-left: 700px; */
+   
     font-family: Inter;
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
     text-align: left;
-    /* overflow-y: scroll; */  
+    
 }
 .editHeadline{
     width: 445px;
@@ -576,4 +572,64 @@ text-align: left;
 }
 .d-none {
     display: none;
+} */
+
+.d-none{
+    display: none;
+}
+
+@media(max-width:1400px){
+    .board_container{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .headline{
+        padding: 0;
+    }
+    .content_container{
+        padding: 0;
+    }
+    .process_container{
+        padding: 0;
+    }
+}
+
+@media(max-width:1100px){
+    .content_container{
+        display: flex;
+        flex-direction: column;
+    }
+    .content_column{
+        width: 100%;
+    }
+    .container_row{
+        width: 100%;
+    }
+    .drag_area{
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+    .task_progress{
+        margin-right: 10px;
+    }
+    .board_add_task_text{
+        display: none;
+    }
+    .board_button{
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top:150px;
+        right: 40px;
+    }
+   .headline{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+   }
+   .find_task_container{
+    width: 100%;
+   }
 }
