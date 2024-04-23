@@ -551,6 +551,15 @@ button:hover{
     margin-bottom: 90px;
 }
 
+.dialog_left_area_container_edit{
+    width: 371px;
+    height: 208px;
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 90px;
+}
+
 .dialog_left_area_logo_container{
     height: 67px;
     width: 371px;
@@ -562,6 +571,21 @@ button:hover{
 
 .dialog_left_area_logo img{
     height: 67px;
+}
+
+.dialog_left_area_all_container_edit{
+    width: 371px;
+    height: 113px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.dialog_left_area_text_container_edit{
+    width: 371px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .dialog_left_area_all_container{
@@ -606,7 +630,7 @@ button:hover{
 }
 
 .dialog_right_area{
-    width: 482px;
+    width: 435px;
     height: 594px;
     display: flex;
     justify-content: space-evenly;
@@ -672,13 +696,47 @@ button:hover{
 
 .input_style {
     height: 50px;
-    width: 415px;
+    width: 400px;
     border-radius: 10px;
     font-size: 20px;
     font-family: "Inter";
+    border: 2px solid #D1D1D1;
     border-color: rgb(0, 0, 0, 0.2);
     padding-left: 10px;
     outline: none;
+    padding-left: 28px;
+    outline: none;
+    cursor: pointer;
+}
+
+.input_style:focus {
+    border: 2px solid #29ABE2;
+    outline: thin;
+}
+
+::placeholder {
+    color: #D1D1D1;
+  }
+
+.person{
+    background-image: url('/assets/img/personGrey.svg');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 14px) center;
+    background-size: 16px 16px;
+}
+
+.mail{
+    background-image: url('/assets/img/mail.svg');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 14px) center;
+    background-size: 20px 16px;
+}
+
+.phone{
+    background-image: url('/assets/img/call.svg');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 14px) center;
+    background-size: 18px 18px;
 }
 
 .form_buttons{
@@ -695,6 +753,7 @@ button:hover{
     display: flex;
     justify-content: space-between;
     margin-bottom: 90px;
+    gap: 25px;
 }
 
 .cancel_btn{
@@ -703,10 +762,28 @@ button:hover{
     transition: all 0.1s ease-in-out;
 }
 
+.delete_btn{
+    width: 113px;
+    height: 56px;
+    transition: all 0.1s ease-in-out;
+}
+
 .cancel_btn button{
-    background-color: #f6f7f8 !important;
+    background-color: #f6f7f8;
     border: 1px solid #2a3647;
     width: 126px;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.1s ease-in-out;
+}
+
+.delete_btn button{
+    background-color: #f6f7f8;
+    border: 1px solid #2a3647;
+    width: 113px;
     height: 56px;
     display: flex;
     justify-content: center;
@@ -721,12 +798,23 @@ button:hover{
     color: #29ABE2;
 }
 
+.delete_btn button:hover{
+    border: 2px solid #29ABE2;
+    transition: all 0.1s ease-in-out;
+    color: #29ABE2;
+}
+
 .close_hover_icon {
     display: none; 
     transition: all 0.1s ease-in-out;
 }
 
 .cancel_btn button:hover span{
+    color: #29ABE2;
+    transition: all 0.1s ease-in-out;
+}
+
+.delete_btn button:hover span{
     color: #29ABE2;
     transition: all 0.1s ease-in-out;
 }
@@ -744,6 +832,14 @@ button:hover{
 }
 
 .cancel_btn button span{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #2a3647;
+    transition: all 0.1s ease-in-out;
+}
+
+.delete_btn button span{
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
