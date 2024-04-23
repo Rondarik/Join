@@ -306,7 +306,7 @@ function openEditDialog(id) {
                     </div>                      
                     <div class="form_buttons_edit">
                         <div class="delete_btn">
-                            <button>
+                        <button>
                                 <span>Delete</span>
                             </button>
                         </div>
@@ -333,15 +333,13 @@ function openEditDialog(id) {
     }, );
 }
 
+
 function closeContactDialog(event) {
     if (event.target === document.getElementById('contactDialog')) {
         let dialog = document.getElementById('contactDialog');
         dialog.querySelector('.contact_dialog').style.left = '2800px';
         setTimeout(() => {
-            dialog.querySelector('.contact_dialog').classList.remove('active');
-            setTimeout(() => {
-                dialog.style.display = 'none';
-            }, 0); 
+            dialog.querySelector('.contact_dialog').clas
         }, 400);
     }
 }

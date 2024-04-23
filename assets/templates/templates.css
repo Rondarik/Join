@@ -124,7 +124,7 @@ padding-left: 80px;
     gap: 16px;
     height:56px;
     width:104px;
-    padding-right: 40px;
+    padding-right: 20px;
 }
 .initial_text:hover{
    background-color:  #0C2E621F ;
@@ -216,6 +216,8 @@ align-items: center;
 .mobile_img_header{
     width: 32px;
     height: 40px;
+    display: none;
+    padding: 40px;
 }
 .link_container_mobile{
     height: 80px;
@@ -256,3 +258,58 @@ align-items: center;
 .link_mobile:hover{
     background-color:#2E3D5A;
 }
+
+@media(max-width:1400px){
+    .side_container{
+        width: 100%;
+        background-color: #2A3647;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        /* bottom: 0; */
+        right: 0;
+        top:900px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+    }
+    .help_img{
+        display: none;
+    }
+    .link_container{
+        display: flex;
+       flex-direction: row;
+       justify-content: space-between;
+       align-items: center;
+       width:80%;
+    }
+    .link{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 76px;
+    height: 80px;
+    padding: 8px 0 8px 0;
+    gap: 10px;
+    text-decoration: none;
+    color: #CDCDCD;
+    text-align: center;
+    }
+    .logo_img{
+        display: none;
+    }
+    .policy_container{
+        display: none;
+    }
+    header{
+        left:0;
+    }
+    .header_text{
+        display: none;
+    }
+    .mobile_img_header{
+        display: flex;
+    }
+}
+        

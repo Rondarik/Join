@@ -34,6 +34,21 @@ function greetUser(){
             greet.innerHTML = greeting;
 }
 
+// function greetMobile() {
+//     let divElement = document.getElementById('summaryGreet');
+//     if (window.innerWidth <= 720) {
+//         setTimeout(function() {
+//             divElement.classList.add('d-none');
+//         }, 2500);
+//     } else {
+//         divElement.classList.remove('d-none');
+//     }
+// }
+
+// document.addEventListener('DOMContentLoaded', greetMobile);
+
+// window.addEventListener('resize', greetMobile);
+
 // function setInitials() {
 //     const userActive = getUserName();
 //     const initials = makeInitials(userActive);
