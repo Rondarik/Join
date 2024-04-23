@@ -116,14 +116,6 @@ h2{
     .arrow_img{
         margin-right: 10px;
     }
-    .invisible_logo{
-        display: block;
-        position: fixed;
-        top: 16px;
-        left: 16px;
-        height: 40px;
-        width: 32px;
-    }
     .initial_container{
         width: 100%;
         justify-content: end;
