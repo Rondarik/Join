@@ -1,0 +1,122 @@
+@media (max-width: 1400px) {
+    .contacts{
+        left: 0px;
+        height: 841px
+    }
+    .contact_layout{
+        left: 512px
+    }
+    .contact{
+        left: 512px
+    }
+}
+
+@media (max-width: 1100px) {
+    .contacts{
+        width: 400px;
+    }
+    .contact_layout{
+        left: 430px
+    }
+    .contact{
+        left: 430px
+    }
+    .btn_container{
+        width: 389px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .contact{
+        display: none;
+    }
+    .contact_layout{
+        top: 180px;
+    }
+    .contactResponsive{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .contact_info_onclick{
+        margin-top: 40px;
+    }
+    .contact_headline{
+        height: 70px;
+    }
+    .contact_info_onclick_title{
+        gap: 25px;
+        flex-direction: column;
+    }
+    .contact_info_onclick_edit_delete{
+        width: auto;
+        justify-content: center;
+    }
+    .contact_info_onclick_text{
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+@media (max-width: 800px) {
+    .contact_layout{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: initial;
+        width: 100%;
+        height: auto;
+        margin-top: 96px;
+    }
+    .contacts{
+        width: 100%;
+        position: initial;
+        height: 940px;
+    }
+    .btn_container{
+        display: none;
+    }
+    .contact_list{
+        margin: 0;
+        align-items: start;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 80px;
+        margin-top: 100px;
+    }
+    .divding_line_container{
+        width: 100%;
+    }
+    .dividing_line_contacts{
+        width: 100%;
+    }
+    .contact_dummy{
+        width: 100%;
+    }
+    .contactResponsive{
+        justify-content: center;
+    }
+    #contact{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .contact_info_onclick{
+        height: auto;
+        justify-content: center;
+        width: auto;
+    }
+    .contact_info_onclick_title{
+        flex-direction: unset;
+        width: 100%;
+    }
+    .contact_info_onclick_name{
+        text-align: center;
+    }
+    .responsive_contact_text{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+}

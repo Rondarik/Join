@@ -1,8 +1,9 @@
-body {
+body{
     margin: 0;
     background-color: #F6F7F8;
     cursor: default;
     font-family: 'Inter';
+    overflow: hidden;
 }
 
 .contacts{
@@ -18,6 +19,7 @@ body {
 
 .contact_list{
     margin-top: 81px;
+    margin-bottom: 40px;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -61,7 +63,6 @@ button{
     height: 56px;
     border-radius: 10px;
     border: 1px solid #2A3647;
-    padding: 12px 0px 12px 0px;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -88,8 +89,6 @@ button:hover{
 }
 
 .btn_img{
-    width: 32px;
-    height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -101,30 +100,23 @@ button:hover{
 }
 
 .contact{
-    width: 569px;
-    height: 73px;
     position: fixed;
     top: 206px;
     left: 743px;
     gap: 30px;
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
 .contact_layout{
-    width: 569px;
-    height: 465px;
+    height: 665px;
     position: fixed;
     top: 206px;
     left: 743px;
-    display: flex;
-    flex-direction: column;
 }
 
 .contact_headline{
     width: 274px;
-    height: 73px;
     font-weight: 700;
     font-size: 61px;
     line-height: 73.2px;
@@ -138,7 +130,6 @@ button:hover{
 
 .contact_text{
     width: 235px;
-    height: 32px;
     font-weight: 400;
     font-size: 26px;
     line-height: 32.4px;
@@ -149,20 +140,17 @@ button:hover{
     width: 352px;
     height: 16px;
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
 .dividing_line_contacts{
-    width: 352px;
+    width: 349px;
     border: 1px solid #D1D1D1;
 }
 
 .contact_dummy{
     display: flex;
     align-items: center;
-    width: 352px;
-    height: 78px;
     cursor: pointer;
 }
 
@@ -171,7 +159,7 @@ button:hover{
     justify-content: center;
     flex-direction: column;
     gap: 5px;
-    width: 200px;
+    width: 262px;
     height: 48px;
 }
 
@@ -180,19 +168,6 @@ button:hover{
     height: 42px;
     border-radius: 45px;
     background-color: #FF7A00;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    line-height: 14.4px;
-    color: white;
-}
-
-.contact_dummy2_border{
-    width: 42px;
-    height: 42px;
-    border-radius: 45px;
-    background-color: #9327ff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -210,25 +185,23 @@ button:hover{
 }
 
 .contact_dummy_info_layout{
-    min-width: 262px;
-    max-width: 262px;
+    width: 262px;
     height: 78px;
     display: flex;
     align-items: center;
     margin-bottom: -4px;
 }
 
-.contact_info_onclick {
+.contact_info_onclick{
     margin-top: 100px;
     margin-left: calc(100vw - 461px);
-    width: 461px;
+    width: 560px;
     height: 364px;
     display: flex;
     flex-direction: column;
     gap: 21px;
     transition: margin-left 0.2s ease-in-out;
 }
-
 
 .contact_info_onclick.show {
     margin-left: 10px;
@@ -238,13 +211,7 @@ button:hover{
     display: flex;
     align-items: center;
     width: max-content;
-    height: 120px;
     gap: 54px;
-}
-
-.contact_info_onclick_profilebadge_layout{
-    width: 120px;
-    height: 120px;
 }
 
 .contact_info_onclick_profilebadge{
@@ -271,8 +238,6 @@ button:hover{
 }
 
 .contact_info_onclick_name_edit{
-    width: auto;
-    height: 88px;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -294,7 +259,6 @@ button:hover{
 
 .contact_info_onclick_edit{
     width: 62px;
-    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -304,43 +268,40 @@ button:hover{
 
 .contact_info_onclick_edit img{
     height: 18.28px;
-    width: 18.25px;
 }
 
 .contact_info_onclick_edit span{
-    width: 30px;
-    height: 19px;
     font-size: 16px;
     font-weight: 400;
     line-height: 19.2px;
     color: #2A3647;
 }
 
-.edit_hover_icon {
+.edit_hover_icon{
     display: none; 
 }
 
-.contact_info_onclick_edit:hover .edit_icon {
+.contact_info_onclick_edit:hover .edit_icon{
     display: none;
 }
 
-.contact_info_onclick_edit:hover .edit_hover_icon {
+.contact_info_onclick_edit:hover .edit_hover_icon{
     display: block;
 }
 
-.delete_hover_icon {
+.delete_hover_icon{
     display: none; 
 }
 
-.contact_info_onclick_delete:hover .delete_icon {
+.contact_info_onclick_delete:hover .delete_icon{
     display: none;
 }
 
-.contact_info_onclick_delete:hover .delete_hover_icon {
+.contact_info_onclick_delete:hover .delete_hover_icon{
     display: block;
 }
 
-.contact_info_onclick_edit:hover span {
+.contact_info_onclick_edit:hover span{
     font-size: 16px;
     font-weight: 700;
     line-height: 19.2px;
@@ -349,7 +310,6 @@ button:hover{
 
 .contact_info_onclick_delete{
     width: 81px;
-    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -363,8 +323,6 @@ button:hover{
 }
 
 .contact_info_onclick_delete span{
-    width: 49px;
-    height: 19px;
     font-size: 16px;
     font-weight: 400;
     line-height: 19.2px;
@@ -379,7 +337,6 @@ button:hover{
 }
 
 .contact_info_onclick_text{
-    width: 207px;
     height: 74px;
     display: flex;
     align-items: center;
@@ -390,32 +347,24 @@ button:hover{
 }
 
 .contact_info_onclick_email_phone{
-    width: 140px;
-    height: 128px;
     display: flex;
     flex-direction: column;
     gap: 22px;   
 }
 
 .contact_info_onclick_email{
-    width: 140px;
-    height: 53px;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
 .contact_info_onclick_phone{
-    width: 124px;
-    height: 53px;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
 .email_text span{
-    width: 43px;
-    height: 19px;
     font-size: 16px;
     font-weight: 700;
     line-height: 19.2px;
@@ -429,20 +378,9 @@ button:hover{
 }
 
 .phone_text span{
-    width: 50px;
-    height: 19px;
     font-size: 16px;
     font-weight: 700;
     line-height: 19.2px;
-}
-
-.phone{
-    width: 124px;
-    height: 19px;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19.2px;
-    color: #007CEE;
 }
 
 .contact_dummy_name{
@@ -487,11 +425,6 @@ button:hover{
     border-radius: 50%;
 }
 
-.clicked .contact_dummy2_border {
-    border: 3px solid white;
-    border-radius: 50%;
-}
-
 .clicked .contact_dummy_name {
     color: white;
 }
@@ -520,7 +453,6 @@ button:hover{
 
 .contact_dialog {
     width: 1189px;
-    height: 594px;
     position: fixed;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -533,7 +465,6 @@ button:hover{
 
 .dialog_left_area{
     width: 467px;
-    height: 594px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -543,8 +474,6 @@ button:hover{
 }
 
 .dialog_left_area_container{
-    width: 371px;
-    height: 208px;
     gap: 12px;
     display: flex;
     flex-direction: column;
@@ -560,11 +489,6 @@ button:hover{
     margin-bottom: 90px;
 }
 
-.dialog_left_area_logo_container{
-    height: 67px;
-    width: 371px;
-}
-
 .dialog_left_area_logo{
     height: 67px;
 }
@@ -575,38 +499,24 @@ button:hover{
 
 .dialog_left_area_all_container_edit{
     width: 371px;
-    height: 113px;
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.dialog_left_area_text_container_edit{
-    width: 371px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
 .dialog_left_area_all_container{
-    width: 371px;
-    height: 129px;
     display: flex;
     flex-direction: column;
     gap: 13px;
 }
 
 .dialog_left_area_text_container{
-    width: 371px;
-    height: 113px;
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
 .dialog_left_area_span{
-    width: 366px;
-    height: 73px;
     font-size: 61px;
     font-weight: 700;
     line-height: 73.2px;
@@ -614,8 +524,6 @@ button:hover{
 }
 
 .dialog_left_area_span_small{
-    width: 371px;
-    height: 32px;
     font-size: 27px;
     font-weight: 400;
     line-height: 32.4px;
@@ -661,14 +569,11 @@ button:hover{
 }
 
 .addcontact_profilebadge_layout{
-    width: 120px;
-    height: 120px;
     margin-bottom: 80px;
 }
 
 .profilebadge_layout{
     width: 240px;
-    height: 592px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -687,7 +592,6 @@ button:hover{
 }
 
 .form_container{
-    width: 430px;
     height: 215px;
     display: flex;
     flex-direction: column;
@@ -702,8 +606,6 @@ button:hover{
     font-family: "Inter";
     border: 2px solid #D1D1D1;
     border-color: rgb(0, 0, 0, 0.2);
-    padding-left: 10px;
-    outline: none;
     padding-left: 28px;
     outline: none;
     cursor: pointer;
@@ -741,7 +643,6 @@ button:hover{
 
 .form_buttons{
     width: 364px;
-    height: 57px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 90px;
@@ -756,72 +657,38 @@ button:hover{
     gap: 25px;
 }
 
-.cancel_btn{
-    width: 126px;
-    height: 56px;
-    transition: all 0.1s ease-in-out;
-}
-
-.delete_btn{
-    width: 113px;
-    height: 56px;
-    transition: all 0.1s ease-in-out;
-}
-
 .cancel_btn button{
     background-color: #f6f7f8;
     border: 1px solid #2a3647;
     width: 126px;
-    height: 56px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 8px;
     transition: all 0.1s ease-in-out;
 }
 
-.delete_btn button{
-    background-color: #f6f7f8;
-    border: 1px solid #2a3647;
-    width: 113px;
-    height: 56px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+.cancel_btn button span{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #2a3647;
+}
+
+.cancel_btn button img{
+    width: 13px;
+    height: 13px;
     transition: all 0.1s ease-in-out;
 }
 
 .cancel_btn button:hover{
     border: 2px solid #29ABE2;
-    transition: all 0.1s ease-in-out;
     color: #29ABE2;
-}
-
-.delete_btn button:hover{
-    border: 2px solid #29ABE2;
-    transition: all 0.1s ease-in-out;
-    color: #29ABE2;
-}
-
-.close_hover_icon {
-    display: none; 
-    transition: all 0.1s ease-in-out;
 }
 
 .cancel_btn button:hover span{
     color: #29ABE2;
-    transition: all 0.1s ease-in-out;
-}
-
-.delete_btn button:hover span{
-    color: #29ABE2;
-    transition: all 0.1s ease-in-out;
 }
 
 .cancel_btn button:hover .close_icon{
     display: none;
-    transition: all 0.1s ease-in-out;
 }
 
 .cancel_btn button:hover .close_hover_icon{
@@ -831,32 +698,8 @@ button:hover{
     width: 14px;
 }
 
-.cancel_btn button span{
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 24px;
-    color: #2a3647;
-    transition: all 0.1s ease-in-out;
-}
-
-.delete_btn button span{
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 24px;
-    color: #2a3647;
-    transition: all 0.1s ease-in-out;
-}
-
-.cancel_btn button img{
-    width: 13px;
-    height: 13px;
-    transition: all 0.1s ease-in-out;
-}
-
-.create_contact_btn{
-    width: 214px;
-    height: 57px;
-    transition: all 0.1s ease-in-out;
+.close_hover_icon {
+    display: none; 
 }
 
 .create_contact_btn button{
@@ -864,9 +707,6 @@ button:hover{
     border: 1px solid #2a3647;
     width: 214px;
     height: 57px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 8px;
     transition: all 0.1s ease-in-out;
 }
@@ -886,12 +726,29 @@ button:hover{
 
 .create_contact_btn button img{
     width: 15px;
-    height: 12px;
 }
 
-.save_btn{
-    width: 111px;
-    height: 57px;
+.delete_btn button{
+    background-color: #f6f7f8;
+    border: 1px solid #2a3647;
+    width: 113px;
+}
+
+.delete_btn button span{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #2a3647;
+}
+
+.delete_btn button:hover{
+    border: 2px solid #29ABE2;
+    transition: all 0.1s ease-in-out;
+    color: #29ABE2;
+}
+
+.delete_btn button:hover span{
+    color: #29ABE2;
     transition: all 0.1s ease-in-out;
 }
 
@@ -900,9 +757,6 @@ button:hover{
     border: 1px solid #2a3647;
     width: 111px;
     height: 57px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 8px;
     transition: all 0.1s ease-in-out;
 }
@@ -918,4 +772,73 @@ button:hover{
     background-color: #29ABE2;
     border: 1px solid #29ABE2;
     transition: all 0.1s ease-in-out;
+}
+
+.fade_away{
+    animation: fadeOut 0.3s forwards;
+}
+
+@keyframes fadeOut{
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes slideInRight{
+    from { right: -30%; }
+    to { right: 25%; }
+}
+
+@keyframes slideOutRight{
+    from { right: 25%; }
+    to { right: -30%; }
+}
+
+.contact_added{
+    position: absolute;
+    top: auto;
+    bottom: 200px;
+    height: 74px;
+    width: 326px;
+    background-color: #2A3647;
+    display: none;
+    animation: slideInRight 0.6s forwards;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.contact_added span{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 74px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.hide_animation{
+    animation: slideOutRight 0.6s forwards;
+}
+
+.contactResponsive{
+    display: none;
+}
+
+.dividing_line_responsive{
+    border: 2px solid #29ABE2;
+    border-radius: 3px;
+    width: 90px;
+}
+
+.responsive_contact_text{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
