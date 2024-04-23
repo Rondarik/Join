@@ -1,3 +1,5 @@
+let allAddedContacts = [];
+
 async function contactsInit() {
     await includeHTML();
     setInitials();
@@ -17,7 +19,7 @@ function generateContactHTML(name, email, profileBadge, color, tel) {
                     <span>${name}</span>
                 </div>
                 <div class="contact_info_onclick_edit_delete">
-                    <div class="contact_info_onclick_edit" onclick="openEditContactDialog('${email}')">
+                    <div class="contact_info_onclick_edit" onclick="openEditDialog('${email}')">
                         <img class="edit_icon" src="/assets/img/edit.svg" alt="">
                         <img class="edit_hover_icon" src="/assets/img/editHover.svg" alt="">
                         <span>Edit</span>
@@ -177,9 +179,6 @@ async function filterByFirstMail(Mail) {
     return dummyContacts.find(contact => contact.eMail === Mail);
 }
 
-function openEditContactDialog(id) {
-    openEditDialog(); // nur zum testen
-}
 function openContactDialog() {
     let dialog = document.getElementById('contactDialog');
     dialog.innerHTML = '';
@@ -218,20 +217,20 @@ function openContactDialog() {
                         <img onclick="closeContactDialogFromButton()" src="/assets/img/close.svg">
                     </div>
                     <div class="form_container">
-                        <input class="input_style" id="taskTitle" type="text" placeholder="Name" required onchange="clearError()">
-                        <input class="input_style" id="taskTitle" type="text" placeholder="Email" required onchange="clearError()">
-                        <input class="input_style" id="taskTitle" type="text" placeholder="Phone" required onchange="clearError()">
+                        <input class="input_style person" id="addContactName" type="text" placeholder="Name">
+                        <input class="input_style mail" id="addContactMail" type="text" placeholder="Email">
+                        <input class="input_style phone" id="addContactPhone" type="text" placeholder="Phone">
                     </div>                      
                     <div class="form_buttons">
                         <div class="cancel_btn">
-                            <button>
+                            <button onclick="closeContactDialogFromButton()">
                                 <span>Cancel</span>
                                 <img class="close_icon" src="/assets/img/close.svg">
                                 <img class="close_hover_icon" src="/assets/img/closeHover.svg">
                             </button>
                         </div>
                         <div class="create_contact_btn">
-                            <button>
+                            <button onclick="addContact()">
                                 <span>Create contact</span>
                                 <img src="/assets/img/check_white.svg">
                             </button>
@@ -247,21 +246,39 @@ function openContactDialog() {
     }, );
 }
 
+function addContact(){
+    let name = document.getElementById('addContactName').value;
+    let mail = document.getElementById('addContactMail').value;
+    let phone = document.getElementById('addContactPhone').value;
 
-function openEditDialog() {
+    let addedContact = {
+        'name': name,
+        'mail': mail,
+        'phone': phone,
+    };
+
+    allAddedContacts.push(addedContact);
+
+    let allContactsAsString = JSON.stringify(allAddedContacts);
+
+}
+
+
+function openEditDialog(id) {
+    let currentContact = dummyContacts.filter(contacts => contacts.eMail === id)[0];
     let dialog = document.getElementById('contactDialog');
     dialog.innerHTML = '';
     dialog.innerHTML = `
         <div class="contact_dialog active">
             <div class="dialog_left_area">
-                <div class="dialog_left_area_container">
+                <div class="dialog_left_area_container_edit">
                     <div class="dialog_left_area_logo_container">
                         <div class="dialog_left_area_logo">
                             <img src="/assets/img/Joinlogo.svg">
                         </div>
                     </div>
-                    <div class="dialog_left_area_all_container">
-                        <div class="dialog_left_area_text_container">
+                    <div class="dialog_left_area_all_container_edit">
+                        <div class="dialog_left_area_text_container_edit">
                             <div class="dialog_left_area_span">
                                 <span>Edit contact</span>
                             </div>
@@ -283,13 +300,13 @@ function openEditDialog() {
                         <img onclick="closeContactDialogFromButton()" src="/assets/img/close.svg">
                     </div>
                     <div class="form_container">
-                        <input class="input_style" id="taskTitle" type="text" placeholder="Name" required onchange="clearError()">
-                        <input class="input_style" id="taskTitle" type="text" placeholder="Email" required onchange="clearError()">
-                        <input class="input_style" id="taskTitle" type="text" placeholder="Phone" required onchange="clearError()">
+                        <input class="input_style person" id="editContactName" type="text" placeholder="Name" required onchange="clearError()">
+                        <input class="input_style mail" id="editContactMail" type="text" placeholder="Email" required onchange="clearError()">
+                        <input class="input_style phone" id="editContactPhone" type="text" placeholder="Phone" required onchange="clearError()">
                     </div>                      
                     <div class="form_buttons_edit">
-                        <div class="cancel_btn">
-                            <button>
+                        <div class="delete_btn">
+                        <button>
                                 <span>Delete</span>
                             </button>
                         </div>
@@ -303,6 +320,12 @@ function openEditDialog() {
             </div>
         </div>
     `
+    let name = document.getElementById('editContactName');
+    let mail = document.getElementById('editContactMail');
+    let phone = document.getElementById('editContactPhone');
+    name.value = currentContact.name;
+    mail.value = currentContact.eMail;
+    phone.value = currentContact.tel;
     dialog.style.display = 'block';
     dialog.querySelector('.contact_dialog').style.left = '2800px';
     setTimeout(() => {
@@ -310,15 +333,13 @@ function openEditDialog() {
     }, );
 }
 
+
 function closeContactDialog(event) {
     if (event.target === document.getElementById('contactDialog')) {
         let dialog = document.getElementById('contactDialog');
         dialog.querySelector('.contact_dialog').style.left = '2800px';
         setTimeout(() => {
-            dialog.querySelector('.contact_dialog').classList.remove('active');
-            setTimeout(() => {
-                dialog.style.display = 'none';
-            }, 0); 
+            dialog.querySelector('.contact_dialog').clas
         }, 400);
     }
 }

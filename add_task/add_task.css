@@ -17,16 +17,26 @@ body {
     display: none;
 }
 
-@media (max-width: 970px) {
+@media(max-width:1400px){
+    .main_container{
+        margin-left:40px;
+    }
+}
+@media(max-width:380px){
+    .main_container{
+        margin-left: 10px;
+    }
+}
+/* @media (max-width: 970px) {
     .include_sidebar{
         display: none;
     }
     .main_container{
         margin-left: 10px;
-        /* justify-content: center; */
+        justify-content: center;
         align-items: center;
     }
     .include_mobile_menu{
         display: block;
     }
-}
+} */
