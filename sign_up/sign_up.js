@@ -67,7 +67,6 @@ async function register() {
         remoteEmail: remoteEmail.value,
         remotePassword: remotePassword.value,
     });
-
     await setItem('allUser', JSON.stringify(allUser));
     localStorage.setItem('startAnimation','true');
     
@@ -174,28 +173,28 @@ function unchecked(){
 
 function checkPassword(){
     let password = document.getElementById('remotePassword').value;
-    let confirmPassoword = document.getElementById('remoteCPassword').value;
-    console.log(password, confirmPassoword)
+    let confirmPassword = document.getElementById('remoteCPassword').value;
+    console.log(password, confirmPassword)
     let message = document.getElementById('message');
 
-    if(password.length != 0){
-        if(password == confirmPassoword){
+    if(password.length != 0 && confirmPassword.length != 0){
+        if(password == confirmPassword){
             message.textContent = `Passwords match`;
             message.style.color = 'green';
             document.getElementById('remoteCPassword').classList.remove('redBorder');
             document.getElementById('remoteCPassword').classList.add('greenBorder');
+            document.getElementById('remoteCPassword').style.borderColor = "green";
             confirmed = true;
         } else {
             message.textContent = `Ups! your password don't match`;
             message.style.color = 'red';
             document.getElementById('remoteCPassword').classList.remove('greenBorder');
             document.getElementById('remoteCPassword').classList.add('redBorder');
+            document.getElementById('remoteCPassword').style.borderColor = "red";
             confirmed = false;
         }
     }
 }
-
-
 
 async function arrowLeft(){
     localStorage.setItem('startAnimation','true');

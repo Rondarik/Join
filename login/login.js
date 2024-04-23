@@ -3,9 +3,7 @@ let userEmail;
 let userPassword;
 
 function init(){
-    
     animation();
-
     loadEmailandPassword();
     input = document.getElementById('password').value;
     inputE = document.getElementById('uEmail').value;
@@ -15,17 +13,16 @@ function init(){
     } else {
         changingEye();
     }
-
-    // if((input.length >= 1)||(inputE != null)){
-    //     changingEye();
-    // } else{
-    //     document.getElementById('uEmail').value = '';
-    //     document.getElementById('password').value = '';
-    // }
     getAllUserFromServer();
 }
 
 function changingEye(){
+    iput = document.getElementById('password').value;
+
+    if(iput.length <= 0){
+    document.getElementById('message').classList.add('d-none');
+    document.getElementById('password').classList.remove('redBorder');
+}
     
     document.getElementById('lock').classList.add('d-none');
 
@@ -37,7 +34,7 @@ function changingEye(){
         document.getElementById('eyeOff').classList.add('d-none');
     }
     
-    iput = document.getElementById('password').value;
+ 
     if(iput.length < 1){
         document.getElementById('lock').classList.remove('d-none'); 
         document.getElementById('eyeOff').classList.add('d-none');
@@ -142,15 +139,15 @@ async function checkUser(){
     };
 
     if (filteredUser == undefined){
-
         alert ('User bitte registrieren!');
         return false;
     } else {
         if(checkPassword(filteredUser)){
         saveCurrentUser(filteredUser);
         return true;
-        } else {
-            // alert ('Wrong password Ups! Try again.');
+        } 
+        else {
+            document.getElementById('message').classList.remove('d-none');
             message.textContent = `Wrong password Ups! Try again.`;
             message.style.color = 'red';
             document.getElementById('password').classList.add('redBorder');
