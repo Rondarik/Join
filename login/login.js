@@ -22,6 +22,7 @@ function changingEye(){
     if(iput.length <= 0){
     document.getElementById('message').classList.add('d-none');
     document.getElementById('password').classList.remove('redBorder');
+    document.getElementById('password').classList.add('marginB');
 }
     
     document.getElementById('lock').classList.add('d-none');
@@ -148,6 +149,7 @@ async function checkUser(){
         } 
         else {
             document.getElementById('message').classList.remove('d-none');
+            document.getElementById('password').classList.remove('marginB');
             message.textContent = `Wrong password Ups! Try again.`;
             message.style.color = 'red';
             document.getElementById('password').classList.add('redBorder');
