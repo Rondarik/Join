@@ -26,7 +26,9 @@
     flex-direction: column;
     justify-content: space-between;
     width: fit-content;
-    max-height: 618px;
+    height: 70vh;
+    overflow-y: auto;
+    scrollbar-width: none;
 }
 
 .close_img_container{
@@ -550,6 +552,13 @@ input:-webkit-autofill:focus {
 
     .form_bottom_container {
         align-items: center;
+        /* justify-content: space-between;
+        position: fixed;
+        bottom: 80px;
+        z-index: 999;
+        width: 90%;
+        height: 80px;
+        background-color: #f6f7f8; */
     }
 
     .form_bottom_container p {
