@@ -19,7 +19,7 @@ let randomColors = ['#D10000',
     '#E30B5C',
     '#007FFF',
     '#EAE0C8']
-
+    
 async function contactsInit() {
     await getAllContactsFromServer();
     displayContacts();

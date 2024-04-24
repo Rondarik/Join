@@ -31,7 +31,6 @@ async function getAllUserFromServer(){
     console.log(allUser); // nur zur Kontrolle!
 }
 
-<<<<<<< HEAD
 async function getAllContactsFromServer(){
     try {
         dummyContacts = await getItem('allContacts');
@@ -41,13 +40,6 @@ async function getAllContactsFromServer(){
     console.log(dummyContacts);
 }
 
-=======
-/**
- * Asynchronously deletes all users by setting 'allUser' key to an empty array in the server.
- *
- * @return {Promise<void>} A promise that resolves after deleting all users or handles errors.
- */
->>>>>>> e00e646e3198d12d4be082d52142f31cbb03bc25
 async function deleteAllUser(){
     await setItem('allUser', JSON.stringify([]));
 }
