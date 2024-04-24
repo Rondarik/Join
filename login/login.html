@@ -11,25 +11,19 @@
     <link rel="stylesheet" href="/assets/fonts.css">
 </head>
 <body onload="init()">
-    
     <div id="whole" class="wholeSite">
         <img id="big" class="logoBig" src="../assets/img/logoBig.svg" alt="Logo groß">
     </div>
-
     <div id="top" class="top">
-
         <div class="signUp">
             <span class="not">Not a Join user?</span>
             <a href="../sign_up/sign_up.html"><button id="signUpLinkBtn" class="btnBlue">Sign up</button></a>
         </div>
     </div>
-
     <div id="loginForm" class="loginForm">
-        <h1 id="headline">Log in</h1>
-        
+        <h1 id="headline">Log in</h1> 
         <form id="formLogin" onsubmit="saveEmailandPassword();return false;">
             <div><input required id="uEmail" class="email" type="text" placeholder="Email"></div>
-
             <div>
                 <input required oninput="changingEye()" type="password" id="password" class="password-input marginB" placeholder="Password">
                 <img id="lock" src="../assets/img/passwordLock.svg" alt="">
@@ -37,27 +31,20 @@
                 <img onclick="eye()" id="eyeOpen" class="d-none" src="../assets/img/eyeOn.svg" alt="">
                 <p id="message"></p>
             </div>
-
             <div class="check">
                 <img onclick="checked()" id="checkboxOff" src="../assets/img/checkboxOff.svg" alt="">
                 <img onclick="unchecked()" id="checkboxOn" class="d-none" src="../assets/img/checkboxOn.svg" alt="">
                 <span class="rememberMe">Remember me</span>
             </div>
-        
-        
-        </form>
-        
+        </form> 
         <div class="buttons">
             <button form="formLogin" type="submit" id="loginBtn" class="btnBlue">Log in</button>
             <button id="guestLoginBtn" class="btnWhite" type="button">Guest Log in</button>
         </div>
-
     </div>
-
     <div class="links">
-    <a id="privat" class="greyAnker policy" href="../privacy_policy/privacy_policy.html">Privacy Policy</a>
-    <a id="legal" class="greyAnker legal" href="../legal_notice/legal_notice.html">Legal notice</a>
-    </div>
-    
+        <a id="privat" class="greyAnker policy" href="../privacy_policy/privacy_policy.html">Privacy Policy</a>
+        <a id="legal" class="greyAnker legal" href="../legal_notice/legal_notice.html">Legal notice</a>
+    </div>   
 </body>
 </html>
