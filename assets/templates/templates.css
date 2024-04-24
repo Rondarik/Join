@@ -37,8 +37,6 @@ body{
 }
 .link:hover{
     background-color:#2E3D5A;
-    /* background-color: rgb(9,25,49); */
-    /* filter: brightness(150%); */
 }
 .logo_img{
     width: 100.03px;
@@ -70,7 +68,7 @@ body{
 }
 .policy_text:hover{
     color: #2AABE2;
-font-weight: 700;
+    font-weight: 700;
 }
 .policy_link{
     text-decoration: none;
@@ -78,7 +76,6 @@ font-weight: 700;
     height: 35px;
     display: flex;
     align-items: center;
-   
 }
 .policy_container{
     width: 232px;
@@ -93,8 +90,6 @@ font-weight: 700;
     background-color: #091931;
     color: white !important;
 }
-
-
 header{
     height: 96px;
     position: fixed;
@@ -109,13 +104,13 @@ header{
     box-shadow: 0px 4px 4px 0px #0000001A;
 }
 .header_text{
-font-family: "Inter", sans-serif;
-font-size: 20px;
-font-weight: 400;
-line-height: 24px;
-width: 319px;
-height: 24px;
-padding-left: 80px;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    width: 319px;
+    line-height: 24px;
+    padding-left: 80px;
 }
 .initial_container{
     display: flex;
