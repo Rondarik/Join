@@ -28,9 +28,7 @@ function showAddTaskOverlay() {
  */
 function closeAddTaskOverlay(){
     document.getElementById('addTaskOverlayID').classList.add('d-none');
-
 }
-
 function doNotClose(event) {
     event.stopPropagation();
 }
@@ -47,7 +45,6 @@ function updateHTML() {
         const status = statuses[i];
         const tasks = allTasks.filter(task => task['processingStatus'] === status);
         const container = document.getElementById(status.toLowerCase());
-
         container.innerHTML = '';
         for (let j = 0; j < tasks.length; j++) {
             container.innerHTML += generateTodoHTML(tasks[j]);
@@ -98,7 +95,6 @@ function generateTodoHTML(element) {
     } else if (element['category'] === 'Technical Task') {
         categoryColor = '#1FD7C1';
     }
-
     let subtaskHTML = ''; 
     let { completedSubtasks, totalSubtasks } = calculateProgress(element['subtasks']); // Calculate progress
 
@@ -145,11 +141,9 @@ function getAssignedToIconsHTML(contacts) {
         html += /*html*/ `<div class='contacts_icon' style="background-color: ${contact.color}; transform: translateX(${shift}px);">${initials}</div>`;
         shift -= 10;
     });
-
     html += /*html*/`</div>`;
     return html;
 }
-
 
 /**
  * Prevents the default behavior of the drop event.
@@ -361,7 +355,7 @@ function getContactForBigCardHTML(contact) {
           <div>${contact.name}</div>
           </div>`
     );
-  }
+}
 
 /**
  * Generates the HTML for the assigned contacts based on the provided contacts array.
@@ -530,10 +524,9 @@ function openEditTasks(taskID) {
                         <button class="edit_button" onclick="saveEditedTask('${taskID}')">Ok <img class="edit_button_img" src="/assets/img/check_weiß.svg" alt=""> </button>
                     </div>
                 </div>
-            </div>
-        `;
-        openPopup(editPopupContent);
-    }
+            </div>`;
+    openPopup(editPopupContent);
+}
 
 /**
  * Generates the HTML for the subtasks of a task.
