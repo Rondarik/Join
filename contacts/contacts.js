@@ -1,6 +1,27 @@
 let allAddedContacts = [];
+let randomColors = ['#D10000',
+    '#082D6C',
+    '#00FF00',
+    '#FFFF00',
+    '#800080',
+    '#40E0D0',
+    '#FF4500',
+    '#50C878',
+    '#4169E1',
+    '#B76E79',
+    '#FFF44F',
+    '#4B0082',
+    '#9ACD32',
+    '#E6E6FA',
+    '#B87333',
+    '#FFE5B4',
+    '#808000',
+    '#E30B5C',
+    '#007FFF',
+    '#EAE0C8']
 
 async function contactsInit() {
+    await getAllContactsFromServer();
     displayContacts();
     await includeHTML();
     setInitials();
@@ -144,7 +165,7 @@ function generateContactInfoHTML(name, email, profileBadge, color, tel) {
                         <img class="edit_hover_icon" src="/assets/img/editHover.svg" alt="">
                         <span>Edit</span>
                     </div>
-                    <div class="contact_info_onclick_delete">
+                    <div onclick="deleteContact('${email}')" class="contact_info_onclick_delete">
                         <img class="delete_icon" src="/assets/img/delete.svg" alt="">
                         <img class="delete_hover_icon" src="/assets/img/deleteHover.svg" alt="">
                         <span>Delete</span>
@@ -225,9 +246,12 @@ function openAddNewContactDialogHTML(){
                     <img onclick="closeContactDialogFromButton()" src="/assets/img/close.svg">
                 </div>
                 <div class="form_container">
-                    <input class="input_style person" id="addContactName" type="text" placeholder="Name">
-                    <input class="input_style mail" id="addContactMail" type="text" placeholder="Email">
-                    <input class="input_style phone" id="addContactPhone" type="text" placeholder="Phone">
+                    <input class="input_style person" id="addContactName" type="text" onchange="clearErrorAddContact('name')" placeholder="Name">
+                    <span class="error d_none" id="errorContactName">This field is required</span>
+                    <input class="input_style mail" id="addContactMail" type="text" onchange="clearErrorAddContact('mail')" placeholder="Email">
+                    <span class="error d_none" id="errorContactMail">This field is required</span>
+                    <input class="input_style phone" id="addContactPhone" type="text" onchange="clearErrorAddContact('phone')" placeholder="Phone">
+                    <span class="error d_none" id="errorContactPhone">This field is required</span>
                 </div>                      
                 <div class="form_buttons">
                     <div class="cancel_btn">
@@ -249,29 +273,44 @@ function openAddNewContactDialogHTML(){
     `;
 }
 
-function addContact(){
+async function addContact(){
     let name = document.getElementById('addContactName').value;
     let mail = document.getElementById('addContactMail').value;
     let phone = document.getElementById('addContactPhone').value;
-
     let addedContact = {
         'name': name,
         'eMail': mail,
         'tel': phone,
+        'color': randomColor()
     };
+    if (checkInputFieldAddContactIfEmpty()) {
+        let filteredContacts = dummyContacts.filter(filterFunction);
+        function filterFunction(allContacts){
+            return allContacts['eMail'] == mail;
+        };
+        if (filteredContacts.length == 0){
+            dummyContacts.push(addedContact);
+            animateDivContainer();
+            let contactDialog = document.getElementById('contactDialog');
+            contactDialog.classList.add('fade_away');
+            await setItem('allContacts',JSON.stringify(dummyContacts));
+            displayContacts()
+        } else {
+            alert('Contact already exist');
+        }
+    }
+}
 
-    dummyContacts.push(addedContact);
-    displayContacts();
-    animateDivContainer();
-    let contactDialog = document.getElementById('contactDialog');
-    contactDialog.classList.add('fade_away');
+function randomColor(){
+   let color = randomColors[Math.floor(Math.random()*randomColors.length)];
+    return color;
 }
 
 function openEditDialog(id) {
     let currentContact = dummyContacts.filter(contacts => contacts.eMail === id)[0];
     let dialog = document.getElementById('contactDialog');
     dialog.innerHTML = '';
-    dialog.innerHTML = openEditDialogHTML();
+    dialog.innerHTML = openEditDialogHTML(currentContact.color, currentContact.name, currentContact.eMail);
     let name = document.getElementById('editContactName');
     let mail = document.getElementById('editContactMail');
     let phone = document.getElementById('editContactPhone');
@@ -286,7 +325,8 @@ function openEditDialog(id) {
     dialog.classList.remove('fade_away');
 }
 
-function openEditDialogHTML(){
+function openEditDialogHTML(color, name, email){
+    let initials = getInitials(name);
     return /*html*/ `
     <div class="contact_dialog active">
         <div class="dialog_left_area">
@@ -309,8 +349,8 @@ function openEditDialogHTML(){
         </div>
         <div class="profilebadge_layout">
             <div class="addcontact_profilebadge_layout">
-                <div class="addcontact_profilebadge">
-                    <img src="/assets/img/person.svg" alt="">
+                <div class="addcontact_profilebadge" style="background-color: ${color};">
+                    <span>${initials}</span>
                 </div>    
             </div>
         </div>    
@@ -319,18 +359,21 @@ function openEditDialogHTML(){
                     <img onclick="closeContactDialogFromButton()" src="/assets/img/close.svg">
                 </div>
                 <div class="form_container">
-                    <input class="input_style person" id="editContactName" type="text" placeholder="Name" required onchange="clearError()">
-                    <input class="input_style mail" id="editContactMail" type="text" placeholder="Email" required onchange="clearError()">
-                    <input class="input_style phone" id="editContactPhone" type="text" placeholder="Phone" required onchange="clearError()">
+                    <input class="input_style person" id="editContactName" type="text" onchange="clearErrorEditContact('name')" placeholder="Name">
+                    <div class="error d_none" id="errorContactName">This field is required</div>
+                    <input class="input_style mail" id="editContactMail" type="text" onchange="clearErrorEditContact('mail')" placeholder="Email">
+                    <div class="error d_none" id="errorContactMail">This field is required</div>
+                    <input class="input_style phone" id="editContactPhone" type="text" onchange="clearErrorEditContact('phone')" placeholder="Phone">
+                    <div class="error d_none" id="errorContactPhone">This field is required</div>
                 </div>                      
                 <div class="form_buttons_edit">
                     <div class="delete_btn">
-                    <button>
+                    <button onclick="deleteContact('${email}'), closeContactDialogFromButton()">
                             <span>Delete</span>
                         </button>
                     </div>
                     <div class="save_btn">
-                        <button>
+                        <button onclick="saveEditedContact('${email}')">
                             <span>Save</span>
                             <img src="/assets/img/check_white.svg">
                         </button>
@@ -339,6 +382,29 @@ function openEditDialogHTML(){
         </div>
     </div>
     `;
+}
+
+async function saveEditedContact(id){
+    let currentContact = dummyContacts.filter(contacts => contacts.eMail === id)[0];
+    let name = document.getElementById('editContactName');
+    let mail = document.getElementById('editContactMail');
+    let phone = document.getElementById('editContactPhone');
+    currentContact.name = name.value;
+    currentContact.eMail = mail.value;
+    currentContact.tel = phone.value;
+    if (checkInputFieldEditIfEmpty()) {
+        await setItem('allContacts',JSON.stringify(dummyContacts));
+        await contactsInit();
+    }
+    closeContactDialogFromButton();
+}
+
+async function deleteContact(id){
+    let currentContact = dummyContacts.filter(contacts => contacts.eMail === id)[0];
+    let index = dummyContacts.indexOf(currentContact);
+    dummyContacts.splice(index, 1);
+    await setItem('allContacts',JSON.stringify(dummyContacts));
+    await contactsInit();
 }
 
 function closeContactDialog(event) {
@@ -392,5 +458,112 @@ function handleContactDummyClick() {
         document.querySelector('.contact_layout').style.display = 'flex';
         document.querySelector('.contact_layout').style.height = '730px';
         document.querySelector('.contacts').style.height = '0px';
+    }
+}
+
+function backPageButton() {
+    const contactContainer = document.querySelector('.contacts');
+    const contactLayoutContainer = document.querySelector('.contact_layout');
+    const contactDummyElements = document.querySelectorAll('.contact_dummy');
+    contactContainer.style.display = 'block';
+    contactLayoutContainer.style.display = 'none';
+    document.querySelector('.contacts').style.height = '940px';
+    document.querySelector('.contact_list').style.display = 'block';
+    contactDummyElements.forEach(element => {
+        element.classList.remove('clicked');
+    });
+}
+
+
+function checkInputFieldAddContactIfEmpty() {
+    const addContactName = document.getElementById('addContactName');
+    const addContactMail = document.getElementById('addContactMail');
+    const addContactPhone = document.getElementById('addContactPhone');
+    const errorName = document.getElementById('errorContactName');
+    const errorMail = document.getElementById('errorContactMail');
+    const errorPhone = document.getElementById('errorContactPhone');
+    let allFieldsAreNotEmpty = true;
+    const validateField = (field, errorElement) => {
+        if (field.value.trim() === '') {
+            errorElement.classList.remove('d_none');
+            field.classList.add('red_border');
+            allFieldsAreNotEmpty = false;
+        } else {
+            errorElement.classList.add('d_none');
+            field.classList.remove('red_border');
+        }
+    };
+    validateField(addContactName, errorName);
+    validateField(addContactMail, errorMail);
+    validateField(addContactPhone, errorPhone);
+    return allFieldsAreNotEmpty;
+}
+
+
+function checkInputFieldEditIfEmpty() {
+    const editContactName = document.getElementById('editContactName');
+    const editContactMail = document.getElementById('editContactMail');
+    const editContactPhone = document.getElementById('editContactPhone');
+    const errorName = document.getElementById('errorContactName');
+    const errorMail = document.getElementById('errorContactMail');
+    const errorPhone = document.getElementById('errorContactPhone');
+    let allFieldsAreNotEmpty = true;
+    const validateField = (field, errorElement) => {
+        if (field.value.trim() === '') {
+            errorElement.classList.remove('d_none');
+            field.classList.add('red_border');
+            allFieldsAreNotEmpty = false;
+        } else {
+            errorElement.classList.add('d_none');
+            field.classList.remove('red_border');
+        }
+    };
+    validateField(editContactName, errorName);
+    validateField(editContactMail, errorMail);
+    validateField(editContactPhone, errorPhone);
+    return allFieldsAreNotEmpty;
+}
+
+
+function clearErrorAddContact(inputField) {
+    let addContactName = document.getElementById('addContactName');
+    let addContactMail = document.getElementById('addContactMail');
+    let addContactPhone = document.getElementById('addContactPhone');
+    let errorName = document.getElementById('errorContactName');
+    let errorMail = document.getElementById('errorContactMail');
+    let errorPhone = document.getElementById('errorContactPhone');
+    if (inputField == 'name') {
+        addContactName.classList.remove('red_border');
+        errorName.classList.add('d_none');
+    }
+    if (inputField == 'mail') {
+        addContactMail.classList.remove('red_border');
+        errorMail.classList.add('d_none');
+    }
+    if (inputField == 'phone') {
+        addContactPhone.classList.remove('red_border');
+        errorPhone.classList.add('d_none');
+    }
+}
+
+
+function clearErrorEditContact(inputField){
+    let editContactName = document.getElementById('editContactName');
+    let editContactMail = document.getElementById('editContactMail');
+    let editContactPhone = document.getElementById('editContactPhone');
+    let errorName = document.getElementById('errorContactName');
+    let errorMail = document.getElementById('errorContactMail');
+    let errorPhone = document.getElementById('errorContactPhone');
+    if (inputField == 'name') {
+        editContactName.classList.remove('red_border');
+        errorName.classList.add('d_none');
+    }
+    if (inputField == 'mail') {
+        editContactMail.classList.remove('red_border');
+        errorMail.classList.add('d_none');
+    }
+    if (inputField == 'phone') {
+        editContactPhone.classList.remove('red_border');
+        errorPhone.classList.add('d_none');
     }
 }
