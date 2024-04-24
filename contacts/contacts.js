@@ -20,6 +20,11 @@ let randomColors = ['#D10000',
     '#007FFF',
     '#EAE0C8']
     
+/**
+ * Initializes contacts by fetching them from the server, displaying them, including HTML, and setting initials.
+ *
+ * @return {Promise<void>} A promise that resolves after the contacts initialization is complete.
+ */
 async function contactsInit() {
     await getAllContactsFromServer();
     displayContacts();
@@ -27,6 +32,12 @@ async function contactsInit() {
     setInitials();
 }
 
+/**
+ * Displays the contacts in the contact list container.
+ *
+ * @param {type} paramName - description of parameter
+ * @return {type} description of return value
+ */
 function displayContacts() {
     let contactListContainer = document.getElementById('contactListID');
     let firstLetterList = getFirstLetters();
@@ -44,6 +55,12 @@ function displayContacts() {
     }
 }
 
+/**
+ * Renders a contact as an HTML element.
+ *
+ * @param {Object} contact - The contact object to render.
+ * @return {string} The rendered HTML element.
+ */
 function renderContact(contact) {
     return /*html*/ `
     <div class="contact_dummy" id="${contact.eMail}" onclick="displayContactInfo('${contact.eMail}'), checkIfContactIsClicked(this), handleContactDummyClick()">
@@ -62,6 +79,12 @@ function renderContact(contact) {
     `;
 }
 
+/**
+ * Renders an alphabet headline with the provided letter.
+ *
+ * @param {string} letter - The letter to render in the headline.
+ * @return {string} The HTML element representing the alphabet headline.
+ */
 function renderAlphabetHeadline(letter){
     return /*html*/ `
     <div class="letter">
@@ -75,6 +98,10 @@ function renderAlphabetHeadline(letter){
     `;
 }
 
+/**
+ * Adds a clicked class to contacts and adjusts the display properties of the contact info.
+ *
+ */
 function addClickedClassToContacts(){
     let contactInfoOnClick = document.querySelector('.contact_info_onclick');
     let clickedContactDummy = document.querySelector('.clicked');
@@ -92,6 +119,11 @@ function addClickedClassToContacts(){
     }
 }
 
+/**
+ * A function that checks if a contact is clicked, toggles classes, and adjusts display properties.
+ *
+ * @param {Element} element - The element representing the contact being clicked.
+ */
 function checkIfContactIsClicked(element) {
     let contactInfoOnClick = element.querySelector('.contact_info_onclick');
     if (element.classList.contains('clicked')) {
@@ -113,14 +145,31 @@ function checkIfContactIsClicked(element) {
     }
 }
 
+/**
+ * Filters the dummyContacts array based on the provided letter.
+ *
+ * @param {string} letter - The letter to filter the contacts by.
+ * @return {Array} An array of contacts whose first letter of the name matches the provided letter.
+ */
 function filterByFirstLetter(letter) {
     return dummyContacts.filter(contact => contact.name.charAt(0).toUpperCase() === letter.toUpperCase());
 }
 
+/**
+ * Filters the dummyContacts array based on the provided email address.
+ *
+ * @param {string} Mail - The email address to filter the contacts by.
+ * @return {Object | undefined} The contact object with the matching email address, if found.
+ */
 async function filterByFirstMail(Mail) {
     return dummyContacts.find(contact => contact.eMail === Mail);
 }
 
+/**
+ * Generates an array of unique first letters extracted from the names in the dummyContacts array.
+ *
+ * @return {Array} An array of unique first letters.
+ */
 function getFirstLetters() {
     let firstLetterList = [];
     for (let i = 0; i < dummyContacts.length; i++) {
@@ -134,6 +183,12 @@ function getFirstLetters() {
     return firstLetterList;
 }
 
+/**
+ * Displays the contact information for a given contact ID.
+ *
+ * @param {string} id - The ID of the contact to display.
+ * @return {Promise<void>} A promise that resolves when the contact information is displayed.
+ */
 async function displayContactInfo(id) {
     let contactContainer = document.getElementById('contact');
     let clickedContact = await filterByFirstMail(id);
@@ -146,6 +201,16 @@ async function displayContactInfo(id) {
     addClickedClassToContacts();
 }
 
+/**
+ * Generates the HTML content for displaying contact information.
+ *
+ * @param {string} name - The name of the contact.
+ * @param {string} email - The email address of the contact.
+ * @param {string} profileBadge - The profile badge of the contact.
+ * @param {string} color - The color for styling.
+ * @param {string} tel - The phone number of the contact.
+ * @return {string} The HTML content for the contact information.
+ */
 function generateContactInfoHTML(name, email, profileBadge, color, tel) {
     return /*html*/ `
     <div class="contact_info_onclick">
@@ -198,6 +263,11 @@ function generateContactInfoHTML(name, email, profileBadge, color, tel) {
     `;
 }
 
+/**
+ * Opens the dialog for adding a new contact. 
+ *
+ * @return {void} No return value
+ */
 function openAddNewContactDialog() {
     let contactDialog = document.getElementById('contactDialog');
     contactDialog.style.display = 'block';
@@ -212,6 +282,11 @@ function openAddNewContactDialog() {
     contactDialog.classList.remove('fade_away');
 }
 
+/**
+ * Generates the HTML for the dialog for adding a new contact.
+ *
+ * @return {string} The HTML for the dialog.
+ */
 function openAddNewContactDialogHTML(){
     return /*html*/ `
     <div class="contact_dialog active">
@@ -273,6 +348,11 @@ function openAddNewContactDialogHTML(){
     `;
 }
 
+/**
+ * Adds a new contact to the list of dummy contacts.
+ *
+ * @return {Promise<void>} A promise that resolves when the contact is added.
+ */
 async function addContact(){
     let name = document.getElementById('addContactName').value;
     let mail = document.getElementById('addContactMail').value;
@@ -301,11 +381,22 @@ async function addContact(){
     }
 }
 
+/**
+ * Generates a random color from the predefined list of colors.
+ *
+ * @return {string} The randomly selected color.
+ */
 function randomColor(){
    let color = randomColors[Math.floor(Math.random()*randomColors.length)];
     return color;
 }
 
+/**
+ * Opens the dialog for editing a contact.
+ *
+ * @param {string} id - The ID of the contact to edit.
+ * @return {void} No return value.
+ */
 function openEditDialog(id) {
     let currentContact = dummyContacts.filter(contacts => contacts.eMail === id)[0];
     let dialog = document.getElementById('contactDialog');
@@ -325,6 +416,14 @@ function openEditDialog(id) {
     dialog.classList.remove('fade_away');
 }
 
+/**
+ * Generates the HTML content for the edit contact dialog.
+ *
+ * @param {string} color - The color of the profile badge.
+ * @param {string} name - The name of the contact.
+ * @param {string} email - The email address of the contact.
+ * @return {string} The HTML content for the edit contact dialog.
+ */
 function openEditDialogHTML(color, name, email){
     let initials = getInitials(name);
     return /*html*/ `
@@ -384,6 +483,12 @@ function openEditDialogHTML(color, name, email){
     `;
 }
 
+/**
+ * Saves the edited contact information.
+ *
+ * @param {string} id - The ID of the contact to be edited.
+ * @return {Promise<void>} A promise that resolves when the contact is saved.
+ */
 async function saveEditedContact(id){
     let currentContact = dummyContacts.filter(contacts => contacts.eMail === id)[0];
     let name = document.getElementById('editContactName');
@@ -394,11 +499,19 @@ async function saveEditedContact(id){
     currentContact.tel = phone.value;
     if (checkInputFieldEditIfEmpty()) {
         await setItem('allContacts',JSON.stringify(dummyContacts));
-        await contactsInit();
+        await displayContactInfo(id)
+        displayContacts()
     }
     closeContactDialogFromButton();
 }
 
+/**
+ * Deletes a contact with the specified ID from the dummyContacts array,
+ * updates the local storage, and initializes the contacts.
+ *
+ * @param {string} id - The ID of the contact to delete.
+ * @return {Promise<void>} A promise that resolves once the contact is deleted.
+ */
 async function deleteContact(id){
     let currentContact = dummyContacts.filter(contacts => contacts.eMail === id)[0];
     let index = dummyContacts.indexOf(currentContact);
@@ -407,6 +520,12 @@ async function deleteContact(id){
     await contactsInit();
 }
 
+/**
+ * Closes the contact dialog if the event target matches the 'contactDialog' element.
+ *
+ * @param {Event} event - The event that triggered the function.
+ * @return {void} No return value
+ */
 function closeContactDialog(event) {
     if (event.target === document.getElementById('contactDialog')) {
         let dialog = document.getElementById('contactDialog');
@@ -421,6 +540,11 @@ function closeContactDialog(event) {
     }
 }
 
+/**
+ * Closes the contact dialog by moving the dialog element to the right and hiding it.
+ *
+ * @return {void} This function does not return anything.
+ */
 function closeContactDialogFromButton() {
     let dialog = document.getElementById('contactDialog');
     dialog.querySelector('.contact_dialog').style.left = '2800px';
@@ -432,6 +556,12 @@ function closeContactDialogFromButton() {
     }, 400);
 }
 
+/**
+ * Splits a name into words, extracts the first letter of each word, and returns the uppercase initials.
+ *
+ * @param {string} name - The input name to extract initials from.
+ * @return {string} The uppercase initials extracted from the input name.
+ */
 function getInitials(name) {
     let words = name.split(' ');
     let initials = '';
@@ -440,6 +570,14 @@ function getInitials(name) {
     return initials.toUpperCase(); 
 }
 
+/**
+ * Animates the display of a container element with the ID 'contactAdded'.
+ * The container is initially set to display 'block', then it is given the 'hide_animation' class
+ * after a 1500ms delay. After another 1500ms delay, the container is set to display 'none'
+ * and the 'hide_animation' class is removed.
+ *
+ * @return {void} This function does not return anything.
+ */
 function animateDivContainer() {
     let contactAdded = document.getElementById('contactAdded');
     contactAdded.style.display = 'block';
@@ -452,6 +590,11 @@ function animateDivContainer() {
     }, 1500); 
 }
 
+/**
+ * Handles the click event for the contact dummy element based on window width.
+ *
+ * @return {void} No return value
+ */
 function handleContactDummyClick() {
     if (window.matchMedia("(max-width: 800px)").matches) {
         document.querySelector('.contact_list').style.display = 'none';
@@ -461,6 +604,11 @@ function handleContactDummyClick() {
     }
 }
 
+/**
+ * Sets the display properties of contact elements and removes a class from each element.
+ *
+ * @return {void} No return value.
+ */
 function backPageButton() {
     const contactContainer = document.querySelector('.contacts');
     const contactLayoutContainer = document.querySelector('.contact_layout');
@@ -475,6 +623,11 @@ function backPageButton() {
 }
 
 
+/**
+ * Checks if the input fields for adding a contact are empty and displays error messages if necessary.
+ *
+ * @return {boolean} Returns true if all input fields are not empty, false otherwise.
+ */
 function checkInputFieldAddContactIfEmpty() {
     const addContactName = document.getElementById('addContactName');
     const addContactMail = document.getElementById('addContactMail');
@@ -500,6 +653,17 @@ function checkInputFieldAddContactIfEmpty() {
 }
 
 
+/**
+ * Checks input fields for editing a contact, displays error messages if necessary, and returns a boolean indicating if all fields are not empty.
+ *
+ * @param {HTMLElement} editContactName - The input field for the contact name.
+ * @param {HTMLElement} editContactMail - The input field for the contact email.
+ * @param {HTMLElement} editContactPhone - The input field for the contact phone number.
+ * @param {HTMLElement} errorName - The element to display error message for the contact name.
+ * @param {HTMLElement} errorMail - The element to display error message for the contact email.
+ * @param {HTMLElement} errorPhone - The element to display error message for the contact phone number.
+ * @return {boolean} Returns true if all input fields are not empty, false otherwise.
+ */
 function checkInputFieldEditIfEmpty() {
     const editContactName = document.getElementById('editContactName');
     const editContactMail = document.getElementById('editContactMail');
@@ -525,6 +689,12 @@ function checkInputFieldEditIfEmpty() {
 }
 
 
+/**
+ * Clears the error and removes the red border from the specified input field in the add contact form.
+ *
+ * @param {string} inputField - The type of input field ('name', 'mail', or 'phone').
+ * @return {void} This function does not return a value.
+ */
 function clearErrorAddContact(inputField) {
     let addContactName = document.getElementById('addContactName');
     let addContactMail = document.getElementById('addContactMail');
@@ -547,6 +717,12 @@ function clearErrorAddContact(inputField) {
 }
 
 
+/**
+ * Clears the error and removes the red border from the specified input field in the edit contact form.
+ *
+ * @param {string} inputField - The type of input field ('name', 'mail', or 'phone').
+ * @return {void} This function does not return a value.
+ */
 function clearErrorEditContact(inputField){
     let editContactName = document.getElementById('editContactName');
     let editContactMail = document.getElementById('editContactMail');
