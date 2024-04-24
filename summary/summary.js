@@ -6,11 +6,6 @@ async function summaryInit(){
     setInitials();
 }
 
-// function getUserName(){
-//     const userName = localStorage.getItem('logedInUser');
-//     return userName;
-// }
-
 let logedInUser='';
 function greetUser(){
     const now = new Date();
@@ -33,45 +28,6 @@ function greetUser(){
             }
             greet.innerHTML = greeting;
 }
-
-// function greetMobile() {
-//     let divElement = document.getElementById('summaryGreet');
-//     if (window.innerWidth <= 720) {
-//         setTimeout(function() {
-//             divElement.classList.add('d-none');
-//         }, 2500);
-//     } else {
-//         divElement.classList.remove('d-none');
-//     }
-// }
-
-// document.addEventListener('DOMContentLoaded', greetMobile);
-
-// window.addEventListener('resize', greetMobile);
-
-// function setInitials() {
-//     const userActive = getUserName();
-//     const initials = makeInitials(userActive);
-//     document.getElementById('activeUserInitial').innerHTML= initials;
-//   }
-  
-//   function makeInitials(string) {
-//     let names = string.split(' '),
-//         initials = names[0].substring(0, 1).toUpperCase();
-//     if (names.length > 1) {
-//         initials += names[names.length - 1].substring(0, 1).toUpperCase();
-//     }
-//     return initials;
-//   }
-  
-//   function getUserInitials() {
-//     const userActive = localStorage.getItem('logedInUser');
-//     if (userActive) {
-//       return userActive;
-//   } else {
-//       return 'Guest';
-//   }
-//   }
 
 function countTasksByStatus(status) {
     return allTasks.filter(task => task.processingStatus === status).length;
@@ -106,3 +62,21 @@ function getUrgentTask() {
     }
     document.getElementById('allTasksCount').innerText = totalCount.toString();
 }
+
+function greetMobile() {
+    let divElement = document.getElementById('summaryGreet');
+    if (window.innerWidth <= 950) {
+        setTimeout(function() {
+            divElement.classList.add('d_none');
+        }, 2500);
+    } else {
+        divElement.classList.remove('d_none');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    greetMobile();
+    summaryInit();
+});
+
+window.addEventListener('resize', greetMobile);

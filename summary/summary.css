@@ -182,6 +182,7 @@ h3{
     font-size: 47px; 
     color: #2A3647;
     line-height: 56.4px;
+   
 }
 .summary_greet{
     gap:3px;
@@ -266,8 +267,18 @@ h3{
 
 @media(max-width:950px){
     .summary_greet{
-        display: none;
+        align-items: center;
+        position: fixed;
+        top: 90px;
+        bottom: 80px;
+        left: 0;
+        right: 0;
+        background-color: white;
+        text-align: center;
+        /* display: flex;
+        align-items: center; */
     }
+
     .summary_main{
         display: flex;
         justify-content: center;
@@ -284,6 +295,7 @@ h3{
     }
 }
 @media( max-width:650px){
+   
     .headline_summary{
         display: flex;
         flex-direction: column;
