@@ -21,6 +21,15 @@ async function getAllUserFromServer(){
     console.log(allUser); // nur zur Kontrolle!
 }
 
+async function getAllContactsFromServer(){
+    try {
+        dummyContacts = await getItem('allContacts');
+    } catch(e){
+        console.error('Loading error:', e);
+    }
+    console.log(dummyContacts);
+}
+
 async function deleteAllUser(){
     await setItem('allUser', JSON.stringify([]));
 }

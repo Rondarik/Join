@@ -599,7 +599,7 @@ button:hover{
 }
 
 .input_style {
-    height: 50px;
+    min-height: 50px;
     width: 400px;
     border-radius: 10px;
     font-size: 20px;
@@ -645,6 +645,7 @@ button:hover{
     width: 364px;
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
     margin-bottom: 90px;
 }
 
@@ -841,4 +842,27 @@ button:hover{
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+.back_arrow{
+    display: none;
+}
+
+.red_border{
+    border: 3px solid #FF8190;
+}
+
+.addcontact_profilebadge span{
+    font-size: 47px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+}
+
+.error{
+    color: red;
+    font-weight: 400;
+    font-size: 16px;
+    margin-top: -30px;
+    height: 0;
 }
