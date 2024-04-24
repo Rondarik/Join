@@ -234,7 +234,7 @@ h3{
 .tasks_row:hover p {
     color: white;
 }
-.d_none{
+.d-none{
     display: none;
 }
 @media(max-width:1400px){

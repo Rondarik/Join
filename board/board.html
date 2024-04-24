@@ -13,12 +13,13 @@
     <link rel="stylesheet" href="/board/board.css">
     <link rel="stylesheet" href="/board/board_big_card.css">
     <script src="/assets/templates/add_task.js"></script>
+    <script src="/summary/summary.js"></script>
     <script src="/script.js"></script>
     <script src="/dummyData.js"></script>
     <script src="/board/board.js"></script>
     <script src="/serverCommunication.js"></script>
     <script src="/assets/templates/template_script.js"></script>
-    <script src="/summary/summary.js"></script>
+   
 </head>
 
 <body onload="boardInit()">
@@ -39,7 +40,7 @@
             <div class="content_column">
                 <div class="container_row">
                     <p class="container_row_text">To do</p>
-                    <button class="plus_button" onclick="showAddTaskOverlay()"><b>+</b></button>
+                    <button class="plus_button" onclick="showAddTaskOverlay('ToDo')"><b>+</b></button>
                 </div>
                 <div  class="drag_area" id="todo" ondrop="moveTo('ToDo')" ondragover="allowDrop(event)"></div>
                 
@@ -47,14 +48,14 @@
             <div class="content_column">
                 <div class="container_row">
                     <p class="container_row_text">In progress</p>
-                    <button class="plus_button"onclick="showAddTaskOverlay()"><b>+</b></button>
+                    <button class="plus_button"onclick="showAddTaskOverlay('progress')"><b>+</b></button>
                 </div>
                 <div class="drag_area"  id="progress" ondrop="moveTo('progress')" ondragover="allowDrop(event)"></div>
             </div>
             <div class="content_column">
                 <div class="container_row">
                     <p class="container_row_text">Await Feedback</p>
-                    <button class="plus_button" onclick="showAddTaskOverlay()"><b>+</b></button>
+                    <button class="plus_button" onclick="showAddTaskOverlay('awaitFeedback')"><b>+</b></button>
                 </div>
                 <div class="drag_area"   id="awaitfeedback"ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)"></div>
             </div>

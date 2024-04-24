@@ -390,3 +390,31 @@ function setDate() {
     var dateInput = document.getElementById('dueDate');
     dateInput.setAttribute('min', today);
 }
+
+function showAddTaskOverlay(status) {
+    document.getElementById('addTaskOverlayID').classList.remove('d-none');
+    document.getElementById('addTaskForm').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        const title = document.getElementById('taskTitle').value;
+        const description = document.getElementById('taskDescription').value;
+        const dueDate = document.getElementById('dueDate').value;
+        const category = document.getElementById('taskCategory').value;
+        const priority = document.getElementById('taskPriority').value;
+        const assignedTo = []; 
+        const newTask = {
+            taskID: generateTaskID(), 
+            title: title,
+            description: description,
+            dueDate: dueDate,
+            category: category,
+            prio: priority,
+            assignedTo: assignedTo,
+            processingStatus: status 
+        };
+        const container = document.getElementById(status.toLowerCase());
+        container.innerHTML += generateTodoHTML(newTask);
+        closeAddTaskOverlay();
+        allTasks.push(newTask);
+        setItem('allTasks', JSON.stringify(allTasks));
+    });
+}

@@ -1,17 +1,31 @@
 let currentDraggedElement;
+/**
+ * Initializes the board by including HTML, fetching tasks from the server, updating the HTML, and setting initial values.
+ *
+ * @return {Promise<void>} A promise that resolves when the board initialization is complete.
+ */
 async function boardInit(){
     await includeHTML();
     await getAllTasksFromServer();
     updateHTML();
     setInitials();
-
-    console.log (allTasks);
 }
 
+/**
+ * Shows the add task overlay by removing the 'd-none' class from the 'addTaskOverlayID' element.
+ *
+ * @param {type} paramName - description of parameter
+ * @return {type} description of return value
+ */
 function showAddTaskOverlay() {
     document.getElementById('addTaskOverlayID').classList.remove('d-none');
 }
 
+/**
+ * Closes the add task overlay by adding a 'd-none' class to the element with the ID 'addTaskOverlayID'.
+ *
+ * @return {void} 
+ */
 function closeAddTaskOverlay(){
     document.getElementById('addTaskOverlayID').classList.add('d-none');
 
@@ -21,8 +35,11 @@ function doNotClose(event) {
     event.stopPropagation();
 }
 
-
-
+/**
+ * Updates the HTML of the page by rendering the tasks based on their processing status.
+ *
+ * @return {void} This function does not return anything.
+ */
 function updateHTML() {
     const statuses = ['ToDo', 'progress', 'awaitFeedback', 'done'];
 
@@ -36,15 +53,23 @@ function updateHTML() {
             container.innerHTML += generateTodoHTML(tasks[j]);
         }
     }
-
 }
 
-
-
+/**
+ * Sets the currentDraggedElement to the provided taskID.
+ *
+ * @param {number} taskID - The ID of the task being dragged.
+ */
 function startDragging(taskID){
     currentDraggedElement=taskID;
 }
 
+/**
+ * Calculates the progress value based on the completed subtasks and total subtasks.
+ *
+ * @param {Array} subtasks - The list of subtasks to calculate progress from.
+ * @return {Object} An object containing the progress value, completed subtasks count, and total subtasks count.
+ */
 function calculateProgress(subtasks) {
     let progressValue = 0;
     let completedSubtasks = 0;
@@ -59,6 +84,12 @@ function calculateProgress(subtasks) {
     return { progressValue, completedSubtasks, totalSubtasks }; 
 }
 
+/**
+ * Generates the HTML for a todo item based on the given element.
+ *
+ * @param {Object} element - The element object containing the task details.
+ * @return {string} The generated HTML for the todo item.
+ */
 function generateTodoHTML(element) {
     let id = element['taskID'];
     let categoryColor = '';
@@ -99,6 +130,12 @@ function generateTodoHTML(element) {
     </div>`;
 }
 
+/**
+ * Generates the HTML for the assigned contacts icons based on the provided contacts array.
+ *
+ * @param {Array} contacts - The array of contacts for which icons are to be generated.
+ * @return {string} The HTML string containing the assigned contacts icons.
+ */
 function getAssignedToIconsHTML(contacts) {
     let html = /*html*/ `<div class="overlapped_contact_icons">`;
     let shift = 0;
@@ -114,20 +151,42 @@ function getAssignedToIconsHTML(contacts) {
 }
 
 
+/**
+ * Prevents the default behavior of the drop event.
+ *
+ * @param {Event} ev - The drop event object.
+ * @return {void} This function does not return a value.
+ */
 function allowDrop(ev) {
     ev.preventDefault();
 }
-
+/**
+ * Moves a task to a new processing status.
+ *
+ * @param {string} processingStatus - The new processing status for the task.
+ * @return {Promise<void>} - A promise that resolves when the task has been moved and the HTML has been updated.
+ */
 async function moveTo(processingStatus) {
-    allTasks[currentDraggedElement]['processingStatus'] = processingStatus;
-    updateHTML();
-    await setItem('allTasks', JSON.stringify(allTasks));
-    checkEmptyToDo();
-    checkEmptyDone();
-    checkEmptyProgress();
-    checkEmptyAwaitFeedback();
-    
+    if (currentDraggedElement !== undefined && allTasks[currentDraggedElement] !== undefined) {
+        allTasks[currentDraggedElement]['processingStatus'] = processingStatus;
+        updateHTML();
+        await setItem('allTasks', JSON.stringify(allTasks));
+        checkEmptyToDo();
+        checkEmptyDone();
+        checkEmptyProgress();
+        checkEmptyAwaitFeedback();
+    } else {
+        console.error("Invalid task ID or task does not exist.");
+    }
 }
+
+/**
+ * Checks if the specified column is empty and adds a message if it is.
+ *
+ * @param {string} columnId - The ID of the column element.
+ * @param {string} message - The message to be added if the column is empty.
+ * @return {void} This function does not return a value.
+ */
 function checkEmptyColumn(columnId, message) {
     let column = document.getElementById(columnId);
     if (column.innerHTML.trim() === '') {
@@ -151,6 +210,14 @@ function checkEmptyDone() {
     checkEmptyColumn('done', 'No tasks Done');
 }
 
+/**
+ * Opens the big task with the given ID by removing the 'd-none' class from the 'bigTask' element,
+ * adding the 'show' class to the 'bigTask' element, and setting the innerHTML of the 'bigTask' element
+ * to the result of the 'showBigTask' function with the task from 'allTasks' array that matches the given ID.
+ *
+ * @param {number} id - The ID of the task to be opened.
+ * @return {void} This function does not return a value.
+ */
 function openBigTask(id){
     for (let i=0; i<allTasks.length; i++){
             const task=allTasks[i]['taskID'];
@@ -167,6 +234,12 @@ function closeBigTask(){
     document.getElementById('bigTask').classList.add('d-none');
 }
 
+/**
+ * Generates the HTML markup for displaying a big task element.
+ *
+ * @param {Object} element - The task element to display.
+ * @return {string} The HTML markup for the big task element.
+ */
 function showBigTask(element){
     let id = element['taskID'];
     let categoryColor = '';
@@ -228,6 +301,13 @@ function showBigTask(element){
     `;
 }
 
+/**
+ * Toggles the completion status of a subtask and updates the progress of the task.
+ *
+ * @param {number} taskID - The ID of the task.
+ * @param {number} subtaskIndex - The index of the subtask.
+ * @return {void} This function does not return a value.
+ */
 function toggleSubtask(taskID, subtaskIndex) {
     const task = allTasks.find(task => task.taskID === taskID);
     if (task && task.subtasks && task.subtasks[subtaskIndex]) {
@@ -245,9 +325,12 @@ function toggleSubtask(taskID, subtaskIndex) {
     }
 }
 
-
-
-
+/**
+ * Updates the progress of a task.
+ *
+ * @param {number} taskID - The ID of the task.
+ * @return {Promise<void>} A promise that resolves when the progress is updated.
+ */
 async function updateProgress(taskID) {
     const task = allTasks.find(task => task.taskID === taskID);
     if (task) {
@@ -263,8 +346,12 @@ async function updateProgress(taskID) {
     await setItem('allTasks', JSON.stringify(allTasks));
 }
 
-
-
+/**
+ * Generates the HTML for the contact information displayed in the big card.
+ *
+ * @param {Object} contact - The contact object containing the name and logo.
+ * @return {string} The HTML string representing the contact information.
+ */
 function getContactForBigCardHTML(contact) {
     return (
       /*html*/ `
@@ -272,24 +359,39 @@ function getContactForBigCardHTML(contact) {
       getContactLogoHTML(contact) +
       /*html*/ `  
           <div>${contact.name}</div>
-        </div>
-      `
+          </div>`
     );
   }
 
+/**
+ * Generates the HTML for the assigned contacts based on the provided contacts array.
+ *
+ * @param {Array} contacts - The array of contacts for which HTML is to be generated.
+ * @return {string} The HTML string representing the assigned contacts.
+ */
 function getAssignedToHTML(contacts) {
     let html = "";
     contacts.forEach((contact) => (html += getContactForBigCardHTML(contact)));
     return html;
 }
 
+/**
+ * Generates the HTML for the contact logo based on the provided contact object.
+ *
+ * @param {Object} contact - The contact object containing the name and color.
+ * @return {string} The HTML string representing the contact logo.
+ */
 function getContactLogoHTML(contact) {
     return /*html*/ `
         <div class='contacts_icon' style="background-color: ${contact.color}">${makeInitials(contact.name)}</div>
       `;
 }
 
-
+/**
+ * Finds tasks based on the search input and updates the corresponding HTML elements.
+ *
+ * @return {void} This function does not return anything.
+ */  
 function findTaskFunction() {
     let search = document.getElementById('search').value.toLowerCase();
     let searchArray = [];
@@ -317,16 +419,12 @@ function findTaskFunction() {
     }
 }
 
-// function formateDate(date) {
-//     const yyyy = date.getFullYear();
-//     let mm = date.getMonth() + 1; // Months start at 0!
-//     let dd = date.getDate();
-//     if (dd < 10) dd = "0" + dd;
-//     if (mm < 10) mm = "0" + mm;
-//     return dd + "/" + mm + "/" + yyyy;
-//   }
-
-
+/**
+ * Filters all tasks by a specific status and returns the number of tasks with that status.
+ *
+ * @param {string} status - The processing status to filter tasks by.
+ * @return {number} The number of tasks with the specified status.
+ */
 function countTasksByStatus(status) {
     return allTasks.filter(task => task.processingStatus === status).length;
 }
@@ -338,6 +436,13 @@ function getUrgentTask() {
     return allTasks.find(task => task.prio.includes('Urgent'));
 }
 
+/**
+ * Deletes a task with the given taskID from the allTasks array, updates the HTML,
+ * closes the big task, and saves the updated allTasks array to local storage.
+ *
+ * @param {number} taskID - The ID of the task to be deleted.
+ * @return {Promise<void>} A promise that resolves when the task is deleted and the local storage is updated.
+ */
 async function deleteTasks(taskID) {
     const index = allTasks.findIndex(task => task.taskID === taskID);
     if (index !== -1) {
@@ -348,6 +453,12 @@ async function deleteTasks(taskID) {
     await setItem('allTasks', JSON.stringify(allTasks));
 }
 
+/**
+ * Opens the edit tasks popup for a specific task.
+ *
+ * @param {string} taskID - The ID of the task to edit.
+ * @return {undefined} This function does not return a value.
+ */
 function openEditTasks(taskID) {
     const task = allTasks.find(task => task.taskID === taskID);
     const editPopupContent = `
@@ -424,47 +535,29 @@ function openEditTasks(taskID) {
         openPopup(editPopupContent);
     }
 
-
-
-
-
-
-function getAssignedToHTML(contacts) {
-    let html = "";
-    contacts.forEach((contact) => (html += getContactForBigCardHTML(contact)));
-    return html;
-}
-
-function getContactForBigCardHTML(contact) {
-    return (
-        /*html*/ `
-            <div class='bigTaskAssignedTo'>
-                ${getContactLogoHTML(contact)}
-                <div>${contact.name}</div>
-            </div>
-        `
-    );
-}
-
-function getContactLogoHTML(contact) {
-    return /*html*/ `
-        <div class='contacts_icon' style="background-color: ${contact.color}">${makeInitials(contact.name)}</div>
-    `;
-}
-
+/**
+ * Generates the HTML for the subtasks of a task.
+ *
+ * @param {Array} subtasks - The array of subtasks to generate HTML for.
+ * @return {string} The HTML string representing the subtasks.
+ */
 function getSubtasksHTML(subtasks) {
     let subtasksHTML="";
     subtasks.forEach(subtask => {
         subtasksHTML += `
             <ul class="bigSubtasksContainer">
                 <li class="bigInfosContacts">${subtask.name}</li>
-            </ul>
-        `;
+            </ul>`;
     });
     return subtasksHTML;
 }
 
-
+/**
+ * Opens a popup with the provided content.
+ *
+ * @param {string} content - The HTML content to be displayed in the popup.
+ * @return {void} This function does not return a value.
+ */
 function openPopup(content) {
     const editPopup = document.getElementById('editTaskOverlay');
     editPopup.innerHTML = content;
@@ -475,6 +568,14 @@ function closePopup() {
     const editPopup = document.getElementById('editTaskOverlay');
     editPopup.classList.add('d-none');
 }
+
+/**
+ * Saves the edited task with the given taskID by updating the task details in the allTasks array,
+ * updating the HTML, closing the popup, and saving the updated allTasks array to local storage.
+ *
+ * @param {number} taskID - The ID of the task to be edited.
+ * @return {void} This function does not return a value.
+ */
 function saveEditedTask(taskID) {
     const editedTaskIndex = allTasks.findIndex(task => task.taskID === taskID);
     if (editedTaskIndex !== -1) {

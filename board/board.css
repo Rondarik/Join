@@ -348,8 +348,10 @@ color: #A8A8A8;
         flex-direction: column;
     }
     .content_column{
+        width: 100%; 
+    }
+    .task_todo{
         width: 100%;
-       
     }
     .drag_area{
         display: flex;
