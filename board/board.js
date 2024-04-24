@@ -284,7 +284,7 @@ function showBigTask(element){
 }
 
 function checked(id,i) {
-    
+    console.log('test');
 }
 
 function getContactForBigCardHTML(contact) {

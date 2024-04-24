@@ -218,7 +218,6 @@ function setTaskPrio(prio) {
         lowBtn.classList.add('clicked');
         lowBtn.querySelector('img').src = '/assets/img/prio_low_white.svg';
     }
-    console.log(taskPrio);
 }
 
 /**
