@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="/assets/templates/templates.css">
     <link rel="stylesheet" href="/assets/fonts.css">
     <link rel="stylesheet" href="/contacts/contacts.css">
+    <link rel="stylesheet" href="/contacts/contactsResponsive.css">
     <script src="/contacts/contacts.js"></script>
     <script src="/dummyData.js"></script>
     <script src="/script.js"></script>
     <script src="/assets/templates/template_script.js"></script>
     <script src="/serverCommunication.js"></script>
+    
 </head>
 
 <body onload="contactsInit()">
@@ -21,10 +23,10 @@
     <div w3-include-html="/assets/templates/header.html"></div>
     <div id="contactDialog" onclick="closeContactDialog(event)" class="contact_dialog_bg d_none">
     </div>
-    <div class="content">
+    <main>
         <div class="contacts">
             <div class="btn_container">
-                <button onclick="openContactDialog()">
+                <button onclick="openAddNewContactDialog()">
                     <div class="btn_span">
                         <span>Add new contact</span>
                     </div>
@@ -34,7 +36,6 @@
                 </button>
             </div>
             <div class="contact_list" id="contactListID">
-                
             </div>
         </div>
         <div class="contact_layout">
@@ -43,9 +44,18 @@
                 <div class="dividing_line"></div>
                 <span class="contact_text">Better with a team</span>
             </div>
+            <div class="contactResponsive">
+                <div class="responsive_contact_text">
+                <span class="contact_headline">Contacts</span>
+                <span class="contact_text">Better with a team</span>
+                <div class="dividing_line_responsive"></div>
+                </div>
+            </div>
+            
             <div id="contact"></div>
         </div>
-    </div>
+        <div class="contact_added" id="contactAdded"><span>Contact succesfully created</span></div>
+    </main>
 </body>
 
 </html>

@@ -26,9 +26,34 @@
     flex-direction: column;
     justify-content: space-between;
     width: fit-content;
-    max-height: 618px;
+    height: 70vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
 
-    /* border: 1px solid blue; */
+.close_img_container{
+    width: 32px;
+    height: 32px;
+    position: fixed;
+    top: 64px;
+    left: 1044px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close_img_container img{
+    cursor: pointer;
+    width: 13.15px;
+    height: 13.15px;
+    padding: 5px;
+}
+
+.close_img_container img:hover{
+    background-color:#D9D9D9;
+    border-radius: 40px;
+    width: 16.15px;
+    height: 16.15px;
 }
 
 .form_inner {
@@ -140,6 +165,7 @@ input:-webkit-autofill:focus {
 
 .contact_to_assign_container {
     position: absolute;
+    z-index: 99;
     width: 440px;
     max-height: 168px;
     border-radius: 0 0 10px 10px;
@@ -307,6 +333,7 @@ input:-webkit-autofill:focus {
 #allSubtasksID {
     height: 60px;
     overflow: auto;
+    scrollbar-width: none;
 }
 
 #subtasks {
@@ -525,10 +552,17 @@ input:-webkit-autofill:focus {
 
     .form_bottom_container {
         align-items: center;
+        /* justify-content: space-between;
+        position: fixed;
+        bottom: 80px;
+        z-index: 999;
+        width: 90%;
+        height: 80px;
+        background-color: #f6f7f8; */
     }
 
     .form_bottom_container p {
-        margin-bottom: 0;
+        margin-top: 0px;
         font-size: 18px;
     }
 }

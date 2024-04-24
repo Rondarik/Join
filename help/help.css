@@ -55,5 +55,15 @@ h2{
     margin-block-end: 0;
 }
 
+@media (max-width: 1400px){
+    .help_container{
+        padding-left: 10px;
+        margin-bottom: 82px;
+    }
+}
 
-
+@media (max-width: 750px){
+    .arrow_img{
+        margin-right: 10px;
+    }
+}

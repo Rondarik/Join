@@ -45,7 +45,7 @@ body{
 #headline::after{
     content: '';
     height: 3px;
-    width: 180px;
+    width: 148px;
     background: #29ABE2;
     position: absolute;
     left: 16px;
@@ -117,7 +117,6 @@ body{
 }
 
 .password-input{
-    margin-bottom: 20px;
     border: solid 1px #d1d1d1;
     border-radius: 10px;
     padding: 12px 21px 12px 21px;
@@ -125,6 +124,10 @@ body{
     height: 24px;
     outline: none;
     font-size: 20px;
+}
+
+.marginB{
+    margin-bottom: 20px;
 }
 
 .password-input::placeholder{
@@ -138,7 +141,6 @@ body{
     height: 24px;
     width: 24px;;
 }
-
 
 .check{
     display: flex;
@@ -245,7 +247,12 @@ body{
 
 .redBorder{
     outline: none;
-    border:2px solid red;
+    border:1px solid red;
+}
+
+#message{
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
 
 #guestLoginBtn{
@@ -300,4 +307,59 @@ body{
 
 .not{
     font-size: 20px;
+}
+
+input:focus{
+    border-color: #29ABE2;
+}
+
+@media (max-width: 750px){
+    .buttons{
+        flex-direction: column;
+        align-items: center;
+    }
+    #loginBtn{
+        width: 180px;
+    }
+    .check{
+        position: relative;
+        left: -108px;
+        width: fit-content;
+    }
+    .top{
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 84vh;
+    }
+    .email{
+        width: 250px;
+        background: url(../assets/img/letter.svg) no-repeat scroll 268px 16px;
+    }
+    .password-input{
+        width: 250px;
+    }
+    .loginForm{
+        width: 310px;
+    }
+    #lock{
+        left: 276px;
+        top: 222px;
+    }
+    #eyeOff{
+        left: 276px;
+        top: 226px;
+    }
+    #eyeOpen{
+        left: 276px;
+        top: 226px;
+    }
+    .logoBigStart{
+        position: relative;
+        left: -56px;
+    }
+    #formLogin{
+        width: 310px;
+    }
 }

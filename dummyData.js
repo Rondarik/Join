@@ -7,7 +7,7 @@ let dummyTasks = [
         "assignedTo": [],
         "dueDate": "2024-04-10",
         "prio": "urgent",
-        "category": "technical task",
+        "category": "Technical Task",
         "subtasks": []
     },
     {
@@ -18,7 +18,7 @@ let dummyTasks = [
         "assignedTo": [],
         "dueDate": "2024-04-12",
         "prio": "medium",
-        "category": "user story",
+        "category": "User Story",
         "subtasks": []
     },
     {
@@ -66,6 +66,22 @@ let dummyContacts = [
         "password":"pw11",
         "tel": "+49151234567",
         "color": "#FF6699",
+        "Tasks": []
+    },
+    {
+        "name": "Bernd Richter",
+        "eMail": "bernd_richter@gmail.com",
+        "password":"pw11",
+        "tel": "+49154533567",
+        "color": "#436699",
+        "Tasks": []
+    },
+    {
+        "name": "Zoe Wiliams",
+        "eMail": "zoe_wiliams@gmail.com",
+        "password":"pw11",
+        "tel": "+49174535367",
+        "color": "#666699",
         "Tasks": []
     },
     {

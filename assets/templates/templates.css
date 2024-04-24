@@ -22,6 +22,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 15px
 }
 .link{
     text-decoration: none;
@@ -36,8 +37,6 @@ body{
 }
 .link:hover{
     background-color:#2E3D5A;
-    /* background-color: rgb(9,25,49); */
-    /* filter: brightness(150%); */
 }
 .logo_img{
     width: 100.03px;
@@ -69,7 +68,7 @@ body{
 }
 .policy_text:hover{
     color: #2AABE2;
-font-weight: 700;
+    font-weight: 700;
 }
 .policy_link{
     text-decoration: none;
@@ -77,7 +76,6 @@ font-weight: 700;
     height: 35px;
     display: flex;
     align-items: center;
-   
 }
 .policy_container{
     width: 232px;
@@ -92,8 +90,6 @@ font-weight: 700;
     background-color: #091931;
     color: white !important;
 }
-
-
 header{
     height: 96px;
     position: fixed;
@@ -108,13 +104,13 @@ header{
     box-shadow: 0px 4px 4px 0px #0000001A;
 }
 .header_text{
-font-family: "Inter", sans-serif;
-font-size: 20px;
-font-weight: 400;
-line-height: 24px;
-width: 319px;
-height: 24px;
-padding-left: 80px;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    width: 319px;
+    line-height: 24px;
+    padding-left: 80px;
 }
 .initial_container{
     display: flex;
@@ -123,7 +119,7 @@ padding-left: 80px;
     gap: 16px;
     height:56px;
     width:104px;
-    padding-right: 40px;
+    padding-right: 20px;
 }
 .initial_text:hover{
    background-color:  #0C2E621F ;
@@ -215,6 +211,8 @@ align-items: center;
 .mobile_img_header{
     width: 32px;
     height: 40px;
+    display: none;
+    padding: 40px;
 }
 .link_container_mobile{
     height: 80px;
@@ -255,3 +253,72 @@ align-items: center;
 .link_mobile:hover{
     background-color:#2E3D5A;
 }
+
+@media(max-width:1400px){
+    .side_container{
+        width: 100%;
+        background-color: #2A3647;
+        position: fixed;
+        z-index: 1;
+        left: auto;
+        bottom: 0;
+        min-height: 80px;
+        height: 80px;
+        right: auto;
+        top:auto;
+        display: flex;
+        justify-content: unset;
+        align-items: center;
+        padding: 0;
+    }
+    .flex_start{
+        justify-content: center;
+    }
+    .help_img{
+        display: none;
+    }
+    .link_container{
+        display: flex;
+       flex-direction: row;
+       justify-content: space-evenly;
+       align-items: center;
+       width:100%;
+       gap: unset;
+    }
+    .link{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 76px;
+    height: 80px;
+    gap: 10px;
+    text-decoration: none;
+    color: #CDCDCD;
+    text-align: center;
+    }
+    .text{
+        margin: 0;
+    }
+    .logo_img{
+        display: none;
+    }
+    .policy_container{
+        display: none;
+    }
+    header{
+        left:0;
+        height: 80px;
+    }
+    .header_text{
+        display: none;
+    }
+    .mobile_img_header{
+        display: flex;
+    }
+    .initial_text{
+        height: 42px;
+        width: 42px;
+    }
+}
+        
