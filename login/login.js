@@ -233,3 +233,14 @@ function checkPassword(filteredUser){
 function saveCurrentUser(filteredUser){
     localStorage.setItem('logedInUser', filteredUser['remoteName']);
 }
+
+
+/**
+ * Sets the 'logedInUser' item in the local storage to 'Guest' and redirects to the summary page.
+ *
+ * @return {void} This function does not return a value.
+ */
+function guestLogin(){
+    localStorage.setItem('logedInUser', 'Guest');
+    redirectToSummary();
+}

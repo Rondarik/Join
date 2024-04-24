@@ -16,9 +16,7 @@ body{
     border-color: #29ABE2;
 }
 
-#remoteCPassword:focus{
-    border-color: #29ABE2;
-}
+
 
 .top{
     display: flex;
@@ -274,14 +272,18 @@ body{
     border:1px solid #29ABE2;
 }
 
+.blueFocus:focus{
+    border-color: #29ABE2;
+}
+
 .greenBorder{
     outline: none;
-    border:1px solid green;
+    border:1px solid green !important;
 }
 
 .redBorder{
     outline: none;
-    border:1px solid red;
+    border:1px solid red !important;
 }
 
 p{
