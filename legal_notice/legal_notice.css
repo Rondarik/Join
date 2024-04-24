@@ -60,3 +60,16 @@ h3{
 .arrow_img:hover{
 background-color: lightgray;
 }
+
+@media (max-width: 1400px) {
+    .legal_notice_container{
+        padding-left: 10px;
+        margin-bottom: 82px;
+    }
+}
+
+@media (max-width: 750px) {
+    .arrow_img {
+        margin-right: 10px;
+    }
+}

@@ -288,6 +288,7 @@ align-items: center;
        justify-content: space-evenly;
        align-items: center;
        width:100%;
+       gap: unset;
     }
     .link{
     display: flex;
@@ -312,12 +313,17 @@ align-items: center;
     }
     header{
         left:0;
+        height: 80px;
     }
     .header_text{
         display: none;
     }
     .mobile_img_header{
         display: flex;
+    }
+    .initial_text{
+        height: 42px;
+        width: 42px;
     }
 }
         

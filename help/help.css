@@ -55,76 +55,15 @@ h2{
     margin-block-end: 0;
 }
 
-.help_img{
-    display: none;
-}
-
-.d-none{
-    display: none;
-}
-
-.invisible_logo{
-    display: none;
-    position: fixed;
-    top: 0;
-    left:0;
+@media (max-width: 1400px){
+    .help_container{
+        padding-left: 10px;
+        margin-bottom: 82px;
+    }
 }
 
 @media (max-width: 750px){
-    .side_container{
-        width: 100%;
-        height: 80px;
-        padding: 8px;
-        min-height: 50px;
-        bottom: 0;
-        top: unset;
-        flex-direction: unset;
-    }
-    .link_container{
-        flex-direction: row;
-        width: 100%;
-        gap: unset;
-    }
-    .link{
-        gap: unset;
-        flex-direction: column;
-    }
-    .text{
-        width: unset;
-    }
-    .help_container{
-        padding-left: 10px;
-        margin-bottom: 100px;
-    }
-    header{
-        left: unset;
-        right: unset;
-        width: 100%;
-    }
-    .policy_container{
-        display: none;
-    }
-    .logo_img{
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        display: none;
-    }
-    .header_text{
-        display: none;
-    }
     .arrow_img{
         margin-right: 10px;
-    }
-    .initial_container{
-        width: 100%;
-        justify-content: end;
-    }
-    header{
-        height: 80px;
-    }
-    .initial_text{
-        height: 42px;
-        width: 42px;
     }
 }
