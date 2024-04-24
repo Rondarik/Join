@@ -267,7 +267,6 @@ h3{
 
 @media(max-width:950px){
     .summary_greet{
-        align-items: center;
         position: fixed;
         top: 90px;
         bottom: 80px;
@@ -275,8 +274,7 @@ h3{
         right: 0;
         background-color: white;
         text-align: center;
-        /* display: flex;
-        align-items: center; */
+        padding-top: 400px;
     }
 
     .summary_main{
