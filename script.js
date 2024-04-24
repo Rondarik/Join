@@ -3,6 +3,11 @@ let allTasks = [];
 let allUser = [];
 // let allContacts = [];
 
+/**
+ * Asynchronously retrieves all tasks from the server using 'allTasks' key.
+ *
+ * @return {Promise<void>} A promise that resolves after retrieving the tasks or handles errors.
+ */
 async function getAllTasksFromServer(){
     try {
         allTasks = await getItem('allTasks');
@@ -12,6 +17,11 @@ async function getAllTasksFromServer(){
     console.log(allTasks); // nur zur Kontrolle!
 }
 
+/**
+ * Asynchronously retrieves all users from the server using 'allUser' key.
+ *
+ * @return {Promise<void>} A promise that resolves after retrieving the users or handles errors.
+ */
 async function getAllUserFromServer(){
     try {
         allUser = await getItem('allUser');
@@ -21,6 +31,11 @@ async function getAllUserFromServer(){
     console.log(allUser); // nur zur Kontrolle!
 }
 
+/**
+ * Asynchronously deletes all users by setting 'allUser' key to an empty array in the server.
+ *
+ * @return {Promise<void>} A promise that resolves after deleting all users or handles errors.
+ */
 async function deleteAllUser(){
     await setItem('allUser', JSON.stringify([]));
 }
