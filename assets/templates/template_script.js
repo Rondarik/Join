@@ -1,3 +1,8 @@
+/**
+ * Asynchronously includes HTML content into elements based on the 'w3-include-html' attribute.
+ *
+ * @return {Promise<void>} This function does not return anything directly but updates the HTML content of elements.
+ */
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
@@ -12,6 +17,11 @@ async function includeHTML() {
     }
 }
 
+/**
+ * Toggles the navigation menu between active and inactive states.
+ *
+ * @return {void} This function does not return a value.
+ */
 function toggleNavMenu() {
     let navMenu = document.getElementById('navMenu');
     navMenu.classList.toggle('active');
@@ -25,12 +35,24 @@ for (let i = 0; i < links.length; i++) {
     }
 }
 
+/**
+ * Sets the initials of the active user in the HTML element with the ID 'activeUserInitial'.
+ *
+ * @return {void} This function does not return a value.
+ */
 function setInitials() {
     const userActive = getUserName();
     const initials = makeInitials(userActive);
     document.getElementById('activeUserInitial').innerHTML = initials;
 }
 
+/**
+ * Splits a string into names, extracts the first letter of the first name (uppercase), 
+ * and if there is more than one name, appends the first letter of the last name (uppercase) to it.
+ *
+ * @param {string} string - The input string to extract initials from.
+ * @return {string} The initials extracted from the input string.
+ */
 function makeInitials(string) {
     let names = string.split(' '),
         initials = names[0].substring(0, 1).toUpperCase();
@@ -40,6 +62,11 @@ function makeInitials(string) {
     return initials;
 }
 
+/**
+ * Retrieves the initials of the active user from local storage.
+ *
+ * @return {string} The initials of the active user, or 'Guest' if no user is active.
+ */
 function getUserInitials() {
     const userActive = localStorage.getItem('logedInUser');
     if (userActive) {
@@ -48,12 +75,22 @@ function getUserInitials() {
         return 'Guest';
     }
 }
+
+/**
+ * Retrieves the username stored in the localStorage under the key 'logedInUser'.
+ *
+ * @return {string|null} The username if it exists, null otherwise.
+ */
 function getUserName(){
     const userName = localStorage.getItem('logedInUser');
     return userName;
 }
 
-
+/**
+ * Sets necessary local storage items to empty strings and redirects to the login page.
+ *
+ * @return {void} No return value.
+ */
 async function backToLogin() {
       localStorage.setItem('startAnimation','true');
       localStorage.setItem('Password','');
@@ -62,9 +99,14 @@ async function backToLogin() {
       redirectToLogin();
     }
 
-    function redirectToLogin() {
+/**
+ * Redirects the user to the login page.
+ *
+ * @return {void} This function does not return anything.
+ */
+function redirectToLogin() {
         const targetUrl = '../login/login.html';
         window.location.href = targetUrl;
-      }
+}
 
     
