@@ -41,7 +41,7 @@
                     <p class="container_row_text">To do</p>
                     <button class="plus_button" onclick="showAddTaskOverlay('ToDo')"><b>+</b></button>
                 </div>
-                <div  class="drag_area" id="todo" ondrop="moveTo('ToDo')" ondragover="allowDrop(event)"></div>
+                <div  class="drag_area" id="todo" ondrop="moveTo('ToDo')" ondragleave="removeHighlight('todo')" ondragover="allowDrop(event); highlight('todo')" ></div>
                 
             </div>
             <div class="content_column">
@@ -49,20 +49,20 @@
                     <p class="container_row_text">In progress</p>
                     <button class="plus_button"onclick="showAddTaskOverlay('progress')"><b>+</b></button>
                 </div>
-                <div class="drag_area"  id="progress" ondrop="moveTo('progress')" ondragover="allowDrop(event)"></div>
+                <div class="drag_area"  id="progress" ondrop="moveTo('progress')" ondragleave="removeHighlight('progress')" ondragover="allowDrop(event); highlight('progress')" ></div>
             </div>
             <div class="content_column">
                 <div class="container_row">
                     <p class="container_row_text">Await Feedback</p>
                     <button class="plus_button" onclick="showAddTaskOverlay('awaitFeedback')"><b>+</b></button>
                 </div>
-                <div class="drag_area"   id="awaitfeedback"ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)"></div>
+                <div class="drag_area"   id="awaitfeedback"ondrop="moveTo('awaitFeedback')" ondragleave="removeHighlight('awaitfeedback')" ondragover="allowDrop(event); highlight('awaitfeedback')" ></div>
             </div>
             <div class="content_column" >
                 <div class="container_row">
                     <p class="container_row_text">Done</p>
                 </div>
-                <div class="drag_area"  id="done"ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
+                <div class="drag_area"  id="done"ondrop="moveTo('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')"></div>
             </div>
         </div>
     </div>

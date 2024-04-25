@@ -160,7 +160,7 @@ function allowDrop(ev) {
  * @param {string} processingStatus - The new processing status for the task.
  * @return {Promise<void>} - A promise that resolves when the task has been moved and the HTML has been updated.
  */
-async function moveTo(processingStatus) {
+async function moveTo(processingStatus,id) {
     if (currentDraggedElement !== undefined && allTasks[currentDraggedElement] !== undefined) {
         allTasks[currentDraggedElement]['processingStatus'] = processingStatus;
         updateHTML();
@@ -172,7 +172,16 @@ async function moveTo(processingStatus) {
     } else {
         console.error("Invalid task ID or task does not exist.");
     }
+    // removeHighlight(id);
 }
+
+function highlight(id) {
+    document.getElementById(id).classList.add('drag_area_highlight');
+}
+function removeHighlight(id) {
+    document.getElementById(id).classList.remove('drag_area_highlight');
+}
+
 
 /**
  * Checks if the specified column is empty and adds a message if it is.
@@ -430,23 +439,51 @@ function getUrgentTask() {
     return allTasks.find(task => task.prio.includes('Urgent'));
 }
 
+// /**
+//  * Deletes a task with the given taskID from the allTasks array, updates the HTML,
+//  * closes the big task, and saves the updated allTasks array to local storage.
+//  *
+//  * @param {number} taskID - The ID of the task to be deleted.
+//  * @return {Promise<void>} A promise that resolves when the task is deleted and the local storage is updated.
+//  */
+// async function deleteTasks(taskID) {
+//     const index = allTasks.findIndex(task => task.taskID === taskID);
+//     if (index !== -1) {
+//         allTasks.splice(index, 1);
+//         updateHTML();
+//     } 
+//     closeBigTask();
+//     await setItem('allTasks', JSON.stringify(allTasks));
+// }
+
 /**
- * Deletes a task with the given taskID from the allTasks array, updates the HTML,
- * closes the big task, and saves the updated allTasks array to local storage.
+ * Löscht eine Aufgabe mit der angegebenen taskID aus dem allTasks-Array,
+ * aktualisiert das HTML, ordnet die IDs neu und speichert das aktualisierte allTasks-Array im lokalen Speicher.
  *
- * @param {number} taskID - The ID of the task to be deleted.
- * @return {Promise<void>} A promise that resolves when the task is deleted and the local storage is updated.
+ * @param {number} taskID - Die ID der zu löschenden Aufgabe.
+ * @return {Promise<void>} Ein Promise, das auflöst, wenn die Aufgabe gelöscht und der lokale Speicher aktualisiert wurde.
  */
 async function deleteTasks(taskID) {
     const index = allTasks.findIndex(task => task.taskID === taskID);
     if (index !== -1) {
         allTasks.splice(index, 1);
         updateHTML();
+        reorderTaskIDs(); // Reorder task IDs after deletion
+        await setItem('allTasks', JSON.stringify(allTasks));
     } 
     closeBigTask();
-    await setItem('allTasks', JSON.stringify(allTasks));
 }
 
+/**
+ * Ordnet die IDs der Aufgaben im allTasks-Array neu, um sicherzustellen, dass sie eindeutig sind und keine Lücken aufweisen.
+ *
+ * @return {void} Diese Funktion gibt keinen Wert zurück.
+ */
+function reorderTaskIDs() {
+    for (let i = 0; i < allTasks.length; i++) {
+        allTasks[i].taskID = i; // Setzt die ID auf den Index-Wert
+    }
+}
 /**
  * Opens the edit tasks popup for a specific task.
  *
