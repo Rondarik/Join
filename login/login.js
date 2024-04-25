@@ -147,29 +147,23 @@ function redirectToSummary() {
  * @return {undefined} No return value.
  */
   function animation(){
- 
     let startAnimation = localStorage.getItem('startAnimation');
-    console.log(startAnimation);
     if(startAnimation === null){
     document.getElementById('whole').classList.add('wholeSiteStart');
     document.getElementById('big').classList.add('logoBigStart');
     } else{
         document.getElementById('whole').classList.remove('wholeSite');
         document.getElementById('big').classList.remove('logoBig');
-
         document.getElementById('whole').classList.add('wholeSiteStart');
         document.getElementById('big').classList.add('logoBigStart');
-
         document.getElementById('privat').style.opacity = '1';
         document.getElementById('legal').style.opacity = '1';
         document.getElementById('top').style.opacity = '1';
         document.getElementById('loginForm').style.opacity = '1';
-
         document.getElementById('privat').style.animation = 'unset';
         document.getElementById('legal').style.animation = 'unset';
         document.getElementById('top').style.animation = 'unset';
         document.getElementById('loginForm').style.animation = 'unset';
-
         localStorage.removeItem('startAnimation');
     }
 }
@@ -182,11 +176,8 @@ function redirectToSummary() {
  */
 async function checkUser(){
     let inputE = document.getElementById('uEmail').value;
-
     allUser = await getItem('allUser');
- 
     const filteredUser = allUser.find(filterFunction);
-    
     function filterFunction(allUser){
         return allUser['remoteEmail'] == inputE;
     };
@@ -233,7 +224,6 @@ function checkPassword(filteredUser){
 function saveCurrentUser(filteredUser){
     localStorage.setItem('logedInUser', filteredUser['remoteName']);
 }
-
 
 /**
  * Sets the 'logedInUser' item in the local storage to 'Guest' and redirects to the summary page.

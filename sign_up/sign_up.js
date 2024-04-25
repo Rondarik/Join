@@ -76,12 +76,9 @@ function eyeOn(){
  * @return {undefined} No return value.
  */
 function eye() {
-    // Check if the password input type is set to "text"
     if (document.getElementById('remotePassword').type === "text") {
-        // Remove the "d-none" class from the "eyeOff" element and add the "d-none" class to the "eyeOpen" element
         document.getElementById('eyeOff').classList.remove('d-none');
         document.getElementById('eyeOpen').classList.add('d-none');
-        // Set the password input type to "password"
         document.getElementById('remotePassword').type = "password";
     }
 }
@@ -95,7 +92,6 @@ async function register() {
     const isChecked = await checkUser();
     if(isChecked){
     if(on && confirmed){
-    console.log(allUser);
     allUser.push({
         remoteName: remoteName.value,
         remoteEmail: remoteEmail.value,
@@ -132,11 +128,6 @@ function resetForm(){
 async function loadUsers(){
     allUser = await getItem('allUser');
 }
-
-// alle EMails vom Server downloaden
-// vergleichen ob Email bereits vorhanden ist
-//wennn ja dann Fehlermeldung -> rote Schrift darunter
-// wenn richtig neuen User anlegen
 
 /**
  * Asynchronously checks if a user exists in the database with the email provided by the user.
@@ -257,7 +248,6 @@ function unchecked(){
 function checkPassword(){
     let password = document.getElementById('remotePassword').value;
     let confirmPassword = document.getElementById('remoteCPassword').value;
-    console.log(password, confirmPassword)
     let message = document.getElementById('message');
     if(password.length != 0 && confirmPassword.length != 0){
         if(password == confirmPassword){
