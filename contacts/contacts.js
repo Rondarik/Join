@@ -499,8 +499,8 @@ async function saveEditedContact(id){
     currentContact.tel = phone.value;
     if (checkInputFieldEditIfEmpty()) {
         await setItem('allContacts',JSON.stringify(dummyContacts));
-        await displayContactInfo(id)
-        displayContacts()
+        await displayContactInfo(id);
+        await contactsInit();
     }
     closeContactDialogFromButton();
 }
