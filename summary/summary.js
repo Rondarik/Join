@@ -101,13 +101,22 @@ function updateSummary() {
         doneCountElement.innerText = doneCount.toString();
         urgentCountElement.innerText = urgentCount.toString();
         if (urgentTask) {
-            urgentDateElement.innerText = urgentTask.dueDate;
+            urgentDateElement.innerText = formatDate(urgentTask.dueDate);
         } else {
             urgentDateElement.innerText = '';
         }
         allTasksCountElement.innerText = totalCount.toString();
     } 
 }
+
+function formatDate(dateString) {
+    const options = { month: 'long', day: 'numeric', year: 'numeric' };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', options);
+}
+
+
+
 
 /**
  * Toggles the visibility of an element based on window width.
