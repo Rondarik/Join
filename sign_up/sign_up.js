@@ -165,6 +165,11 @@ async function checkUser(){
  * @return {void} This function does not return a value.
  */
 function changingEyes(){ 
+    iput = document.getElementById('remoteCPassword').value;
+    if(iput.length <= 0){
+        document.getElementById('message').classList.add('d-none');
+        document.getElementById('remoteCPassword').classList.remove('redBorder');
+    }
     document.getElementById('locks').classList.add('d-none');
     if(document.getElementById('remoteCPassword').type =="password"){
         document.getElementById('eyesOff').classList.remove('d-none');
@@ -260,14 +265,14 @@ function checkPassword(){
             message.style.color = 'green';
             document.getElementById('remoteCPassword').classList.remove('redBorder');
             document.getElementById('remoteCPassword').classList.add('greenBorder');
-            document.getElementById('remoteCPassword').style.borderColor = "green";
+            // document.getElementById('remoteCPassword').style.borderColor = "green";
             confirmed = true;
         } else {
             message.textContent = `Ups! your password don't match`;
             message.style.color = 'red';
             document.getElementById('remoteCPassword').classList.remove('greenBorder');
             document.getElementById('remoteCPassword').classList.add('redBorder');
-            document.getElementById('remoteCPassword').style.borderColor = "red";
+            // document.getElementById('remoteCPassword').style.borderColor = "red";
             confirmed = false;
         }
     }
