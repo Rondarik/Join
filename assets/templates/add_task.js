@@ -375,6 +375,7 @@ function subtaskHTML(ID, text) {
 }
 
 let subtaskIsFocused = false;
+
 /**
  * Handles the mouseover event for styling subtask input.
  *
@@ -443,7 +444,7 @@ function deleteSubtask(ID) {
  */
 function saveChangedSubtask(ID) {
     let inputValue = document.getElementById(`inputSubtaskID${ID}`).value;
-    subtasks.splice(ID, 1, inputValue);
+    subtasks[ID].name = inputValue;
     renderNewSubtask();
     subtaskIsFocused = false;
 }
