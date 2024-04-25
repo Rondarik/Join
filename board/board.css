@@ -312,6 +312,11 @@ color: #A8A8A8;
     padding-bottom: 160px;
     gap: 16px;
 }
+.drag_area_highlight{
+    background-color: rgba(0, 0, 0, 0.2);
+    border-top-right-radius: 24px;
+    border-top-left-radius: 24px;
+}
 
 .d-none{
     display: none;
