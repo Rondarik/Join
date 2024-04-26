@@ -234,23 +234,6 @@ function openBigTask(id){
 }
 }
 
-// function closeBigTask(){
-//     const editedTaskIndex = allTasks.findIndex(task => task.taskID === currentDraggedElement);
-//     if (editedTaskIndex !== -1) {
-//         const editedTask = allTasks[editedTaskIndex];
-//         const bigTaskElement = document.getElementById('bigTask');
-//         const titleElement = bigTaskElement.querySelector('.bigTitle');
-//         const descriptionElement = bigTaskElement.querySelector('.bigInfosDescription');
-//         const dueDateElement = bigTaskElement.querySelector('.bigInfosText p:nth-child(2)');
-//         editedTask.title = titleElement.textContent;
-//         editedTask.description = descriptionElement.textContent;
-//         editedTask.dueDate = dueDateElement.textContent.split(': ')[1];
-//         allTasks[editedTaskIndex] = editedTask;
-//         updateHTML(); 
-//     }
-//     document.getElementById('bigTask').classList.add('d-none'); 
-// }
-
 
 function closeBigTask(){
     document.getElementById('bigTask').classList.add('d-none');
@@ -535,13 +518,13 @@ function openEditTasks(taskID) {
                     </div>
                     <label>Priority</label><br>
                         <div class="prio_buttons" >
-                            <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('urgent')">
+                            <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('Urgent')">
                                 Urgent <img src="/assets/img/prio_urgent.svg" alt="">
                             </button>
-                            <button type="button" class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('medium')">
+                            <button type="button" class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('Medium')">
                                 Medium <img src="/assets/img/prio_medium.svg" alt="">
                             </button>
-                            <button type="button" class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('low')">
+                            <button type="button" class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('Low')">
                                 Low <img src="/assets/img/prio_low.svg" alt="">
                             </button>
                         </div>
@@ -626,8 +609,8 @@ function closePopup() {
  * @param {number} taskID - The ID of the task to be edited.
  * @return {void} This function does not return a value.
  */
-function saveEditedTask() {
-    const editedTaskIndex = allTasks.findIndex(task => task.taskID);
+function saveEditedTask(taskID) {
+    const editedTaskIndex = allTasks.findIndex(task => task.taskID ==taskID);
     if (editedTaskIndex !== -1) {
         const editedTask = allTasks[editedTaskIndex];
         editedTask.title = document.getElementById('taskTitle').value;
