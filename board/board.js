@@ -140,7 +140,7 @@ function getAssignedToIconsHTML(contacts) {
     
     contacts.forEach(contact => {
         let initials = makeInitials(contact.name);
-        html += /*html*/ `<div class='contacts_icon' style="background-color: ${contact.color}; transform: translateX(${shift}px);">${initials}</div>`;
+        html += /*html*/ `<div class='contacts_icon' style="background-color: ${contact.color};">${initials}</div>`;
         shift -= 10;
     });
     html += /*html*/`</div>`;
