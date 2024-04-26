@@ -12,6 +12,7 @@ async function addTaskInit() {
     await includeHTML();
     setInitials();
     clearTaskForm();
+    showCategory();
 }
 
 /**

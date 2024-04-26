@@ -1,45 +1,52 @@
 .help_container{
-padding-left: 328px; 
-padding-top: 106px;
-background-color: #F6F7F8;
+    padding-left: 328px; 
+    padding-top: 106px;
+    background-color: #F6F7F8;
 }
+
 .help_headline{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 h1{
-font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 61px;
-line-height: 120%;
-color: #000000;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 61px;
+    line-height: 120%;
+    color: #000000;
 }
+
 p{
     font-size: 16px;
     font-weight: 400;
     font-family: "Inter", sans-serif;
-    
 }
+
 h2{
     font-size: 27px;
     font-weight: 700;
     font-family: "Inter", sans-serif;
 }
+
 .list_container{
     display: flex;
     align-items: flex-start;
     gap:35px;
 }
+
 .number{
     font-size: 27px;
     font-weight: 700;
     font-family: "Inter", sans-serif;
 }
+
 .highlicht{
     color: #2AABE2;
 }
+
 .arrow_img{
     width: 37px;
     height: 37px;
@@ -47,9 +54,11 @@ h2{
     border-radius: 100%;
     margin-right: 220px;
 }
+
 .arrow_img:hover{
     background-color: lightgray;
 }
+
 .h2{
     margin-block-start: 0;
     margin-block-end: 0;

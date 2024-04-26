@@ -9,6 +9,7 @@ async function boardInit(){
     await getAllTasksFromServer();
     updateHTML();
     setInitials();
+    showCategory();
 }
 
 /**
