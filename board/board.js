@@ -29,6 +29,7 @@ function showAddTaskOverlay(status){
  * @return {void} 
  */
 function closeAddTaskOverlay(){
+    document.getElementById('contact_to_assign_containerID').classList.add('d-none');
     document.getElementById('addTaskOverlayID').classList.add('d-none');
 }
 function doNotClose(event) {
@@ -498,6 +499,7 @@ async function deleteTasks(taskID) {
 function openEditTasks(taskID) {
     const task = allTasks.find(task => task.taskID === taskID);
     subtasks = task.subtasks;
+    assignedContacts = task.assignedTo;
     const editPopupContent = `
            <div id="editTask" class="editTaskInner" onclick="doNotClose(event)">
                <div class="form_inner_edit">
@@ -540,7 +542,7 @@ function openEditTasks(taskID) {
                                     <img id="assign_arrow_up" class="d-none" src="/assets/img/arrow_up_drop_down.svg" alt="">
                                  </div>
                                 <div class="contact_to_assign_container d-none" id="contact_to_assign_containerID" onclick="doNotClose(event)">
-                                   ${getAssignedToHTML(task.assignedTo)}
+                                   
                                 </div>
                                 <div class="contacts_container">
                                 <div class="small_card_users_area">` +
@@ -581,6 +583,7 @@ function openPopup(content,prio) {
     const editPopup = document.getElementById('editTaskOverlay');
     editPopup.innerHTML = content;
     renderNewSubtask();
+  
     editPopup.classList.remove('d-none');
     setTaskPrio(prio[1]);
 }

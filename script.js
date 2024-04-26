@@ -49,3 +49,7 @@ async function getAllContactsFromServer(){
 async function deleteAllUser(){
     await setItem('allUser', JSON.stringify([]));
 }
+
+async function deleteAllTasks(){
+    await setItem('allTasks', JSON.stringify([]));
+}

@@ -214,6 +214,8 @@ function showToastMessage() {
         const myTimeout = setTimeout(switchToBaordSide, 1000);
     } else {
         closeAddTaskOverlay();
+        updateHTML();
+        showCategory();
     }
 }
 
