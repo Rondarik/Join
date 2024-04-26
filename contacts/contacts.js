@@ -18,7 +18,6 @@ async function contactsInit() {
  * @param {type} paramName - description of parameter
  * @return {type} description of return value
  */
-
 function displayContacts() {
     let contactListContainer = document.getElementById('contactListID');
     contactListContainer.innerHTML = '';
@@ -113,6 +112,11 @@ function openAddNewContactDialog() {
     contactDialog.classList.remove('fade_away');
 }
 
+/**
+ * Opens the dialog for adding a new contact in a responsive manner.
+ *
+ * @return {void} No return value
+ */
 function openAddNewContactDialogResponsive() {
     let contactDialog = document.getElementById('contactDialog');
     contactDialog.style.display = 'block';
@@ -154,6 +158,12 @@ async function addContact() {
     }
 }
 
+/**
+ * Adds a new contact to the list of dummy contacts and performs necessary UI updates.
+ *
+ * @param {Object} newContact - The contact object to be added.
+ * @return {Promise<void>} A promise that resolves when the contact is added and UI updates are complete.
+ */
 async function addNewContact(newContact) {
     dummyContacts.push(newContact);
     let contactDialog = document.getElementById('contactDialog');
@@ -167,12 +177,12 @@ async function addNewContact(newContact) {
     displayContacts();
 }
 
-function animateDivContainerResponsive() {
-    if (window.innerWidth <= 900) {
-        // Führen Sie hier die Animation für Bildschirmbreiten kleiner oder gleich 900 Pixel aus
-    }
-}
-
+/**
+ * Handles the case when a duplicate contact already exists.
+ *
+ * @param {type} paramName - description of parameter
+ * @return {type} description of return value
+ */
 function handleDuplicateContact() {
     alert('Contact already exists');
 }
@@ -207,11 +217,29 @@ function openEditDialog(id) {
     mail.value = currentContact.eMail;
     phone.value = currentContact.tel;
     dialog.style.display = 'block';
-    dialog.querySelector('.contact_dialog').style.left = '2800px';
-    setTimeout(() => {
-        dialog.querySelector('.contact_dialog').style.left = '50%';
-    },);
-    dialog.classList.remove('fade_away');
+    animateEditDialogContainer(dialog);
+}
+
+/**
+ * Animates the edit dialog container based on the screen width.
+ *
+ * @param {HTMLElement} dialog - The dialog element to be animated.
+ */
+function animateEditDialogContainer(dialog) {
+    let screenWidth = window.innerWidth;
+    if (screenWidth <= 900) {
+        dialog.querySelector('.contact_dialog').style.transform = 'translate(-50%, 100%)';
+        setTimeout(() => {
+            dialog.querySelector('.contact_dialog').style.transform = 'translate(-50%, -50%)';
+            dialog.classList.remove('fade_away');
+        }, 50);
+    } else {
+        dialog.querySelector('.contact_dialog').style.left = '2800px';
+        setTimeout(() => {
+            dialog.querySelector('.contact_dialog').style.left = '50%';
+            dialog.classList.remove('fade_away');
+        }, 50);
+    }
 }
 
 /**
@@ -225,13 +253,14 @@ async function saveEditedContact(id) {
     let name = document.getElementById('editContactName');
     let mail = document.getElementById('editContactMail');
     let phone = document.getElementById('editContactPhone');
+    let contactDialog = document.getElementById('contactDialog');
     currentContact.name = name.value;
     currentContact.eMail = mail.value;
     currentContact.tel = phone.value;
     await setItem('allContacts', JSON.stringify(dummyContacts));
     await displayContactInfo(id);
     await contactsInit();
-    closeContactDialogFromButton();
+    contactDialog.classList.add('fade_away');
 }
 
 /**
@@ -291,6 +320,12 @@ function closeContactDialogFromButton() {
     }, 400);
 }
 
+/**
+ * Closes the contact dialog from the button in a responsive manner.
+ *
+ * @param {none} none - No parameters.
+ * @return {none} No return value.
+ */
 function closeContactDialogFromButtonResponsive() {
     let dialog = document.getElementById('contactDialog');
     let currentPosition = dialog.querySelector('.contact_dialog').getBoundingClientRect().top;
@@ -451,7 +486,6 @@ function backPageButton() {
         element.classList.remove('clicked');
     });
 }
-
 
 /**
  * A function to show and animate the display of the edit/delete container element.

@@ -243,16 +243,10 @@
         background-color: #2A3647;
         box-shadow: 0px 4px 4px 0px #00000000;
     }
-    .contact_dialog {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
     .contact_added{
         display: none;
     }
-    .contact_added_responsive {
+    .contact_added_responsive{
         position: absolute;
         top: 60%;
         left: calc(50% - 163px);
@@ -276,10 +270,10 @@
         font-weight: 400;
         line-height: 24px;
     }
-    .hide_animation_responsive {
+    .hide_animation_responsive{
         animation: slideOutToBottom 0.6s forwards;
     }
-    @keyframes slideInFromBottom {
+    @keyframes slideInFromBottom{
         from {
             transform: translateY(100vh);
         }
@@ -287,7 +281,7 @@
             transform: translate(0%);
         }
     }
-    @keyframes slideOutToBottom {
+    @keyframes slideOutToBottom{
         from {
             transform: translateY(0%);
         }
@@ -300,9 +294,12 @@
         width: 500px;
         flex-direction: column;
         transition: all 0.2s ease;
+        position: absolute;
+        left: 50%;
+        top: 50%;
     }
-    .dialog_left_area{
-        height: 50%;
+    .transition .contact_dialog{
+        transition: transform 0.5s ease;
     }
     .profilebadge_layout{
         position: absolute;
@@ -314,6 +311,7 @@
         margin-bottom: 0px;
     }
     .dialog_left_area{
+        height: 50%;
         width: auto;
         border-top-right-radius: 30px;
         border-bottom-left-radius: 0px;
