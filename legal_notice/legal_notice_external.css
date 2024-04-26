@@ -72,10 +72,20 @@ h3{
 background-color: lightgray;
 }
 
+<<<<<<< HEAD
 @media (max-width: 1400px){
+=======
+.initial_container{
+    display: none;
+}
+
+@media (max-width: 1400px) {
+>>>>>>> 0979ab872d20d705a6a3110a450c652efcc5dd0a
     .legal_notice_container{
         padding-left: 10px;
-        margin-bottom: 82px;
+    }
+    .side_container{
+        display: none;
     }
 }
 

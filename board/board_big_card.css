@@ -79,6 +79,7 @@
 }
 
 .bigInfosText{
+<<<<<<< HEAD
     font-family: Inter;
     font-size: 20px;
     font-weight: 400;
@@ -95,6 +96,31 @@
     font-weight: 400;
     line-height: 24px;
     text-align: left;
+=======
+font-family: Inter;
+font-size: 20px;
+font-weight: 400;
+line-height: 24px;
+display: flex;
+justify-content: flex-start;
+align-items: center;
+gap:25px;
+}
+.bigInfosDescription{
+font-family: Inter;
+font-size: 20px;
+font-weight: 400;
+line-height: 24px;
+gap:25px;
+word-wrap: break-word;
+}
+.bigInfosContacts{
+font-family: Inter;
+font-size: 20px;
+font-weight: 400;
+line-height: 24px;
+text-align: left;
+>>>>>>> 0979ab872d20d705a6a3110a450c652efcc5dd0a
 }
 
 .bigTaskAssignedTo{
