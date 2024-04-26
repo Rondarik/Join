@@ -1,25 +1,5 @@
 let allAddedContacts = [];
-let randomColors = ['#D10000',
-    '#082D6C',
-    '#00FF00',
-    '#FFFF00',
-    '#800080',
-    '#40E0D0',
-    '#FF4500',
-    '#50C878',
-    '#4169E1',
-    '#B76E79',
-    '#FFF44F',
-    '#4B0082',
-    '#9ACD32',
-    '#E6E6FA',
-    '#B87333',
-    '#FFE5B4',
-    '#808000',
-    '#E30B5C',
-    '#007FFF',
-    '#EAE0C8']
-    
+
 /**
  * Initializes contacts by fetching them from the server, displaying them, including HTML, and setting initials.
  *
@@ -30,6 +10,7 @@ async function contactsInit() {
     displayContacts();
     await includeHTML();
     setInitials();
+    showCategory();
 }
 
 /**
@@ -40,8 +21,8 @@ async function contactsInit() {
  */
 function displayContacts() {
     let contactListContainer = document.getElementById('contactListID');
+    contactListContainer.innerHTML = '';
     let firstLetterList = getFirstLetters();
-
     for (let i = 0; i < firstLetterList.length; i++) {
         const letter = firstLetterList[i];
         const headlineHTML = renderAlphabetHeadline(letter, i);
@@ -52,96 +33,6 @@ function displayContacts() {
             contactHTML += renderContact(contact);
         }
         contactListContainer.innerHTML += headlineHTML + contactHTML;
-    }
-}
-
-/**
- * Renders a contact as an HTML element.
- *
- * @param {Object} contact - The contact object to render.
- * @return {string} The rendered HTML element.
- */
-function renderContact(contact) {
-    return /*html*/ `
-    <div class="contact_dummy" id="${contact.eMail}" onclick="displayContactInfo('${contact.eMail}'), checkIfContactIsClicked(this), handleContactDummyClick()">
-        <div class="contact_dummy_border_layout">
-            <div class="contact_dummy_border" style="background-color: ${contact.color}">
-                ${getInitials(contact.name)}
-            </div>
-        </div>
-        <div class="contact_dummy_info_layout">
-            <div class="contact_dummy_info">
-                <span class="contact_dummy_name">${contact.name}</span>
-                <span class="contact_dummy_mail">${contact.eMail}</span>
-            </div>
-        </div>
-    </div>
-    `;
-}
-
-/**
- * Renders an alphabet headline with the provided letter.
- *
- * @param {string} letter - The letter to render in the headline.
- * @return {string} The HTML element representing the alphabet headline.
- */
-function renderAlphabetHeadline(letter){
-    return /*html*/ `
-    <div class="letter">
-        <div class="letter_layout">
-            <span>${letter}</span>
-        </div>
-     </div>
-    <div class="divding_line_container">
-        <div class="dividing_line_contacts"></div>
-    </div>
-    `;
-}
-
-/**
- * Adds a clicked class to contacts and adjusts the display properties of the contact info.
- *
- */
-function addClickedClassToContacts(){
-    let contactInfoOnClick = document.querySelector('.contact_info_onclick');
-    let clickedContactDummy = document.querySelector('.clicked');
-    if (clickedContactDummy) {
-        if (contactInfoOnClick) {
-            setTimeout(() => { contactInfoOnClick.classList.add('show'); }, 50);
-            contactInfoOnClick.classList.remove('d_none');
-            contactInfoOnClick.style.display = 'flex';
-        }
-    } else {
-        if (contactInfoOnClick) {
-            contactInfoOnClick.classList.remove('show');
-            contactInfoOnClick.classList.add('d_none');
-        }
-    }
-}
-
-/**
- * A function that checks if a contact is clicked, toggles classes, and adjusts display properties.
- *
- * @param {Element} element - The element representing the contact being clicked.
- */
-function checkIfContactIsClicked(element) {
-    let contactInfoOnClick = element.querySelector('.contact_info_onclick');
-    if (element.classList.contains('clicked')) {
-        element.classList.remove('clicked');
-        if (contactInfoOnClick) {
-            contactInfoOnClick.classList.add('d_none');
-            contactInfoOnClick.classList.remove('show');
-        }
-    } else {
-        let allContactDummies = document.querySelectorAll('.contact_dummy');
-        allContactDummies.forEach(dummy => {
-            dummy.classList.remove('clicked');
-        });
-        element.classList.add('clicked');
-        if (contactInfoOnClick) {
-            contactInfoOnClick.classList.remove('d_none');
-            contactInfoOnClick.classList.add('show');
-        }
     }
 }
 
@@ -199,68 +90,8 @@ async function displayContactInfo(id) {
     let tel = clickedContact.tel;
     contactContainer.innerHTML = generateContactInfoHTML(name, email, profileBadge, color, tel);
     addClickedClassToContacts();
-}
-
-/**
- * Generates the HTML content for displaying contact information.
- *
- * @param {string} name - The name of the contact.
- * @param {string} email - The email address of the contact.
- * @param {string} profileBadge - The profile badge of the contact.
- * @param {string} color - The color for styling.
- * @param {string} tel - The phone number of the contact.
- * @return {string} The HTML content for the contact information.
- */
-function generateContactInfoHTML(name, email, profileBadge, color, tel) {
-    return /*html*/ `
-    <div class="contact_info_onclick">
-        <div class="contact_info_onclick_title">
-            <div>
-                <div class="contact_info_onclick_profilebadge" style="background-color: ${color};">
-                    <span>${profileBadge}</span>
-                </div>
-            </div>
-            <div class="contact_info_onclick_name_edit">
-                <div class="contact_info_onclick_name">
-                    <span>${name}</span>
-                </div>
-                <div class="contact_info_onclick_edit_delete">
-                    <div class="contact_info_onclick_edit" onclick="openEditDialog('${email}')">
-                        <img class="edit_icon" src="/assets/img/edit.svg" alt="">
-                        <img class="edit_hover_icon" src="/assets/img/editHover.svg" alt="">
-                        <span>Edit</span>
-                    </div>
-                    <div onclick="deleteContact('${email}')" class="contact_info_onclick_delete">
-                        <img class="delete_icon" src="/assets/img/delete.svg" alt="">
-                        <img class="delete_hover_icon" src="/assets/img/deleteHover.svg" alt="">
-                        <span>Delete</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="contact_info_onclick_text">
-            <span>Contact Information</span>
-        </div>
-        <div class="contact_info_onclick_email_phone">
-            <div class="contact_info_onclick_email">
-                <div class="email_text">
-                    <span>Email</span>
-                </div>
-                <div class="email">
-                    <span>${email}</span>
-                </div>
-            </div>
-            <div class="contact_info_onclick_phone">
-                <div class="phone_text">
-                    <span>Phone</span>
-                </div>
-                <div>
-                    <span>${tel}</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    `;
+    let showMoreResponsive = document.getElementById('showMoreResponsive');
+    showMoreResponsive.style.display = 'block';
 }
 
 /**
@@ -278,74 +109,28 @@ function openAddNewContactDialog() {
     dialog.querySelector('.contact_dialog').style.left = '2800px';
     setTimeout(() => {
         dialog.querySelector('.contact_dialog').style.left = '50%';
-    }, );
+    },);
     contactDialog.classList.remove('fade_away');
 }
 
 /**
- * Generates the HTML for the dialog for adding a new contact.
+ * Opens the dialog for adding a new contact in a responsive manner.
  *
- * @return {string} The HTML for the dialog.
+ * @return {void} No return value
  */
-function openAddNewContactDialogHTML(){
-    return /*html*/ `
-    <div class="contact_dialog active">
-        <div class="dialog_left_area">
-            <div class="dialog_left_area_container">
-                    <div class="dialog_left_area_logo">
-                        <img src="/assets/img/Joinlogo.svg">
-                    </div>
-                <div class="dialog_left_area_all_container">
-                    <div class="dialog_left_area_text_container">
-                        <div class="dialog_left_area_span">
-                            <span>Add contact</span>
-                        </div>
-                        <div class="dialog_left_area_span_small">
-                            <span>Tasks are better with a team!</span>
-                        </div>
-                    </div>   
-                    <div class="dividing_line_vertical">
-                    </div> 
-                </div>    
-            </div>
-        </div>
-        <div class="profilebadge_layout">
-            <div class="addcontact_profilebadge_layout">
-                <div class="addcontact_profilebadge">
-                    <img src="/assets/img/person.svg" alt="">
-                </div>    
-            </div>
-        </div>    
-        <div class="dialog_right_area">
-                <div class="dialog_right_area_close">
-                    <img onclick="closeContactDialogFromButton()" src="/assets/img/close.svg">
-                </div>
-                <div class="form_container">
-                    <input class="input_style person" id="addContactName" type="text" onchange="clearErrorAddContact('name')" placeholder="Name">
-                    <span class="error d_none" id="errorContactName">This field is required</span>
-                    <input class="input_style mail" id="addContactMail" type="text" onchange="clearErrorAddContact('mail')" placeholder="Email">
-                    <span class="error d_none" id="errorContactMail">This field is required</span>
-                    <input class="input_style phone" id="addContactPhone" type="text" onchange="clearErrorAddContact('phone')" placeholder="Phone">
-                    <span class="error d_none" id="errorContactPhone">This field is required</span>
-                </div>                      
-                <div class="form_buttons">
-                    <div class="cancel_btn">
-                        <button onclick="closeContactDialogFromButton()">
-                            <span>Cancel</span>
-                            <img class="close_icon" src="/assets/img/close.svg">
-                            <img class="close_hover_icon" src="/assets/img/closeHover.svg">
-                        </button>
-                    </div>
-                    <div class="create_contact_btn">
-                        <button onclick="addContact()">
-                            <span>Create contact</span>
-                            <img src="/assets/img/check_white.svg">
-                        </button>
-                    </div>
-                </div> 
-        </div>
-    </div>
-    `;
+function openAddNewContactDialogResponsive() {
+    let contactDialog = document.getElementById('contactDialog');
+    contactDialog.style.display = 'block';
+    let dialog = document.getElementById('contactDialog');
+    dialog.innerHTML = '';
+    dialog.innerHTML = openAddNewContactDialogHTML();
+    dialog.style.display = 'block';
+    dialog.querySelector('.contact_dialog').style.transform = 'translate(-50%, 100%)';
+    contactDialog.classList.add('transition');
+    setTimeout(() => {
+        dialog.querySelector('.contact_dialog').style.transform = 'translate(-50%, -50%)';
+    }, 50);
+    contactDialog.classList.remove('fade_away');
 }
 
 /**
@@ -353,7 +138,7 @@ function openAddNewContactDialogHTML(){
  *
  * @return {Promise<void>} A promise that resolves when the contact is added.
  */
-async function addContact(){
+async function addContact() {
     let name = document.getElementById('addContactName').value;
     let mail = document.getElementById('addContactMail').value;
     let phone = document.getElementById('addContactPhone').value;
@@ -363,22 +148,51 @@ async function addContact(){
         'tel': phone,
         'color': randomColor()
     };
-    if (checkInputFieldAddContactIfEmpty()) {
-        let filteredContacts = dummyContacts.filter(filterFunction);
-        function filterFunction(allContacts){
-            return allContacts['eMail'] == mail;
-        };
-        if (filteredContacts.length == 0){
-            dummyContacts.push(addedContact);
-            animateDivContainer();
-            let contactDialog = document.getElementById('contactDialog');
-            contactDialog.classList.add('fade_away');
-            await setItem('allContacts',JSON.stringify(dummyContacts));
-            displayContacts()
-        } else {
-            alert('Contact already exist');
-        }
+    let filteredContacts = dummyContacts.filter(filterFunction);
+
+    /**
+     * Filters the `allContacts` array based on the provided `mail` value.
+     *
+     * @param {Array} allContacts - The array of contact objects to filter.
+     * @return {boolean} Returns `true` if the `mail` value matches the `eMail` property of any contact object, `false` otherwise.
+     */
+    function filterFunction(allContacts) {
+        return allContacts['eMail'] == mail;
+    };
+    if (filteredContacts.length == 0) {
+        addNewContact(addedContact);
+    } else {
+        handleDuplicateContact();
     }
+}
+
+/**
+ * Adds a new contact to the list of dummy contacts and performs necessary UI updates.
+ *
+ * @param {Object} newContact - The contact object to be added.
+ * @return {Promise<void>} A promise that resolves when the contact is added and UI updates are complete.
+ */
+async function addNewContact(newContact) {
+    dummyContacts.push(newContact);
+    let contactDialog = document.getElementById('contactDialog');
+    contactDialog.classList.add('fade_away');
+    if (window.innerWidth <= 900) {
+        animateDivContainerResponsive();
+    } else {
+        animateDivContainer();
+    }
+    await setItem('allContacts', JSON.stringify(dummyContacts));
+    displayContacts();
+}
+
+/**
+ * Handles the case when a duplicate contact already exists.
+ *
+ * @param {type} paramName - description of parameter
+ * @return {type} description of return value
+ */
+function handleDuplicateContact() {
+    alert('Contact already exists');
 }
 
 /**
@@ -386,8 +200,8 @@ async function addContact(){
  *
  * @return {string} The randomly selected color.
  */
-function randomColor(){
-   let color = randomColors[Math.floor(Math.random()*randomColors.length)];
+function randomColor() {
+    let color = randomColors[Math.floor(Math.random() * randomColors.length)];
     return color;
 }
 
@@ -405,82 +219,35 @@ function openEditDialog(id) {
     let name = document.getElementById('editContactName');
     let mail = document.getElementById('editContactMail');
     let phone = document.getElementById('editContactPhone');
+    let showMoreDivContainerEditDelete = document.getElementById('showMoreDivContainerEditDelete');
+    showMoreDivContainerEditDelete.style.transform = 'translateX(110%)';
     name.value = currentContact.name;
     mail.value = currentContact.eMail;
     phone.value = currentContact.tel;
     dialog.style.display = 'block';
-    dialog.querySelector('.contact_dialog').style.left = '2800px';
-    setTimeout(() => {
-        dialog.querySelector('.contact_dialog').style.left = '50%';
-    }, );
-    dialog.classList.remove('fade_away');
+    animateEditDialogContainer(dialog);
 }
 
 /**
- * Generates the HTML content for the edit contact dialog.
+ * Animates the edit dialog container based on the screen width.
  *
- * @param {string} color - The color of the profile badge.
- * @param {string} name - The name of the contact.
- * @param {string} email - The email address of the contact.
- * @return {string} The HTML content for the edit contact dialog.
+ * @param {HTMLElement} dialog - The dialog element to be animated.
  */
-function openEditDialogHTML(color, name, email){
-    let initials = getInitials(name);
-    return /*html*/ `
-    <div class="contact_dialog active">
-        <div class="dialog_left_area">
-            <div class="dialog_left_area_container_edit">
-                <div>
-                    <div class="dialog_left_area_logo">
-                        <img src="/assets/img/Joinlogo.svg">
-                    </div>
-                </div>
-                <div class="dialog_left_area_all_container_edit">
-                    <div>
-                        <div class="dialog_left_area_span">
-                            <span>Edit contact</span>
-                        </div>
-                    </div>   
-                    <div class="dividing_line_vertical">
-                    </div> 
-                </div>    
-            </div>
-        </div>
-        <div class="profilebadge_layout">
-            <div class="addcontact_profilebadge_layout">
-                <div class="addcontact_profilebadge" style="background-color: ${color};">
-                    <span>${initials}</span>
-                </div>    
-            </div>
-        </div>    
-        <div class="dialog_right_area">
-                <div class="dialog_right_area_close">
-                    <img onclick="closeContactDialogFromButton()" src="/assets/img/close.svg">
-                </div>
-                <div class="form_container">
-                    <input class="input_style person" id="editContactName" type="text" onchange="clearErrorEditContact('name')" placeholder="Name">
-                    <div class="error d_none" id="errorContactName">This field is required</div>
-                    <input class="input_style mail" id="editContactMail" type="text" onchange="clearErrorEditContact('mail')" placeholder="Email">
-                    <div class="error d_none" id="errorContactMail">This field is required</div>
-                    <input class="input_style phone" id="editContactPhone" type="text" onchange="clearErrorEditContact('phone')" placeholder="Phone">
-                    <div class="error d_none" id="errorContactPhone">This field is required</div>
-                </div>                      
-                <div class="form_buttons_edit">
-                    <div class="delete_btn">
-                    <button onclick="deleteContact('${email}'), closeContactDialogFromButton()">
-                            <span>Delete</span>
-                        </button>
-                    </div>
-                    <div class="save_btn">
-                        <button onclick="saveEditedContact('${email}')">
-                            <span>Save</span>
-                            <img src="/assets/img/check_white.svg">
-                        </button>
-                    </div>
-                </div> 
-        </div>
-    </div>
-    `;
+function animateEditDialogContainer(dialog) {
+    let screenWidth = window.innerWidth;
+    if (screenWidth <= 900) {
+        dialog.querySelector('.contact_dialog').style.transform = 'translate(-50%, 100%)';
+        setTimeout(() => {
+            dialog.querySelector('.contact_dialog').style.transform = 'translate(-50%, -50%)';
+            dialog.classList.remove('fade_away');
+        }, 50);
+    } else {
+        dialog.querySelector('.contact_dialog').style.left = '2800px';
+        setTimeout(() => {
+            dialog.querySelector('.contact_dialog').style.left = '50%';
+            dialog.classList.remove('fade_away');
+        }, 50);
+    }
 }
 
 /**
@@ -489,20 +256,19 @@ function openEditDialogHTML(color, name, email){
  * @param {string} id - The ID of the contact to be edited.
  * @return {Promise<void>} A promise that resolves when the contact is saved.
  */
-async function saveEditedContact(id){
+async function saveEditedContact(id) {
     let currentContact = dummyContacts.filter(contacts => contacts.eMail === id)[0];
     let name = document.getElementById('editContactName');
     let mail = document.getElementById('editContactMail');
     let phone = document.getElementById('editContactPhone');
+    let contactDialog = document.getElementById('contactDialog');
     currentContact.name = name.value;
     currentContact.eMail = mail.value;
     currentContact.tel = phone.value;
-    if (checkInputFieldEditIfEmpty()) {
-        await setItem('allContacts',JSON.stringify(dummyContacts));
-        await displayContactInfo(id);
-        await contactsInit();
-    }
-    closeContactDialogFromButton();
+    await setItem('allContacts', JSON.stringify(dummyContacts));
+    await displayContactInfo(id);
+    await contactsInit();
+    contactDialog.classList.add('fade_away');
 }
 
 /**
@@ -512,12 +278,18 @@ async function saveEditedContact(id){
  * @param {string} id - The ID of the contact to delete.
  * @return {Promise<void>} A promise that resolves once the contact is deleted.
  */
-async function deleteContact(id){
+async function deleteContact(id) {
     let currentContact = dummyContacts.filter(contacts => contacts.eMail === id)[0];
     let index = dummyContacts.indexOf(currentContact);
+    let contactInfoOnClick = document.querySelector('.contact_info_onclick');
     dummyContacts.splice(index, 1);
-    await setItem('allContacts',JSON.stringify(dummyContacts));
+    await setItem('allContacts', JSON.stringify(dummyContacts));
     await contactsInit();
+    contactInfoOnClick.style.display = 'none';
+    
+    if (window.innerWidth <= 900) {
+        backPageButton();
+    }
 }
 
 /**
@@ -534,7 +306,7 @@ function closeContactDialog(event) {
             dialog.querySelector('.contact_dialog').classList.remove('active');
             setTimeout(() => {
                 dialog.style.display = 'none';
-            }, 0); 
+            }, 0);
             dialog.querySelector('.contact_dialog').clas
         }, 400);
     }
@@ -552,7 +324,26 @@ function closeContactDialogFromButton() {
         dialog.querySelector('.contact_dialog').classList.remove('active');
         setTimeout(() => {
             dialog.style.display = 'none';
-        }, 0); 
+        }, 0);
+    }, 400);
+}
+
+/**
+ * Closes the contact dialog from the button in a responsive manner.
+ *
+ * @param {none} none - No parameters.
+ * @return {none} No return value.
+ */
+function closeContactDialogFromButtonResponsive() {
+    let dialog = document.getElementById('contactDialog');
+    let currentPosition = dialog.querySelector('.contact_dialog').getBoundingClientRect().top;
+    dialog.classList.add('transition');
+    dialog.querySelector('.contact_dialog').style.transform = `translate(-50%, ${currentPosition}px)`;
+    setTimeout(() => {
+        dialog.querySelector('.contact_dialog').style.transform = 'translate(-50%, 100%)';
+    }, 50);
+    setTimeout(() => {
+        dialog.style.display = 'none';
     }, 400);
 }
 
@@ -565,9 +356,57 @@ function closeContactDialogFromButton() {
 function getInitials(name) {
     let words = name.split(' ');
     let initials = '';
-    words.forEach(word => {initials += word.charAt(0);
+    words.forEach(word => {
+        initials += word.charAt(0);
     });
-    return initials.toUpperCase(); 
+    return initials.toUpperCase();
+}
+
+/**
+ * Adds a clicked class to contacts and adjusts the display properties of the contact info.
+ *
+ */
+function addClickedClassToContacts() {
+    let contactInfoOnClick = document.querySelector('.contact_info_onclick');
+    let clickedContactDummy = document.querySelector('.clicked');
+    if (clickedContactDummy) {
+        if (contactInfoOnClick) {
+            setTimeout(() => { contactInfoOnClick.classList.add('show'); }, 50);
+            contactInfoOnClick.classList.remove('d_none');
+            contactInfoOnClick.style.display = 'flex';
+        }
+    } else {
+        if (contactInfoOnClick) {
+            contactInfoOnClick.classList.remove('show');
+            contactInfoOnClick.classList.add('d_none');
+        }
+    }
+}
+
+/**
+ * A function that checks if a contact is clicked, toggles classes, and adjusts display properties.
+ *
+ * @param {Element} element - The element representing the contact being clicked.
+ */
+function checkIfContactIsClicked(element) {
+    let contactInfoOnClick = element.querySelector('.contact_info_onclick');
+    if (element.classList.contains('clicked')) {
+        element.classList.remove('clicked');
+        if (contactInfoOnClick) {
+            contactInfoOnClick.classList.add('d_none');
+            contactInfoOnClick.classList.remove('show');
+        }
+    } else {
+        let allContactDummies = document.querySelectorAll('.contact_dummy');
+        allContactDummies.forEach(dummy => {
+            dummy.classList.remove('clicked');
+        });
+        element.classList.add('clicked');
+        if (contactInfoOnClick) {
+            contactInfoOnClick.classList.remove('d_none');
+            contactInfoOnClick.classList.add('show');
+        }
+    }
 }
 
 /**
@@ -582,12 +421,38 @@ function animateDivContainer() {
     let contactAdded = document.getElementById('contactAdded');
     contactAdded.style.display = 'block';
     setTimeout(() => {
-        contactAdded.classList.add('hide_animation'); 
+        contactAdded.classList.add('hide_animation');
         setTimeout(() => {
             contactAdded.style.display = 'none';
-            contactAdded.classList.remove('hide_animation'); 
-        }, 1500); 
-    }, 1500); 
+            contactAdded.classList.remove('hide_animation');
+        }, 1500);
+    }, 1500);
+}
+
+/**
+ * Animates the display of a container element with responsive behavior for screens smaller than or equal to 900 pixels.
+ *
+ * @param {type} None - No parameters are required.
+ * @return {type} None - The function does not return a value.
+ */
+function animateDivContainerResponsive() {
+    if (window.innerWidth > 900) {
+        return;
+    }
+    let contactAdded = document.getElementById('contactAddedResponsive');
+    contactAdded.style.transform = 'translate(-50%, 50%)';
+    contactAdded.style.display = 'block';
+    contactAdded.classList.add('transition');
+    setTimeout(() => {
+        contactAdded.style.transform = 'translate(-10%, -50%)';
+    }, 50);
+    setTimeout(() => {
+        contactAdded.classList.add('hide_animation_responsive');
+        setTimeout(() => {
+            contactAdded.style.display = 'none';
+            contactAdded.classList.remove('hide_animation_responsive');
+        }, 600);
+    }, 1500);
 }
 
 /**
@@ -596,7 +461,9 @@ function animateDivContainer() {
  * @return {void} No return value
  */
 function handleContactDummyClick() {
-    if (window.matchMedia("(max-width: 800px)").matches) {
+    if (window.matchMedia("(max-width: 900px)").matches) {
+        let addNewContactResponsiveButton = document.getElementById('addNewContactResponsiveButton')
+        addNewContactResponsiveButton.style.display = 'none';
         document.querySelector('.contact_list').style.display = 'none';
         document.querySelector('.contact_layout').style.display = 'flex';
         document.querySelector('.contact_layout').style.height = '730px';
@@ -613,6 +480,12 @@ function backPageButton() {
     const contactContainer = document.querySelector('.contacts');
     const contactLayoutContainer = document.querySelector('.contact_layout');
     const contactDummyElements = document.querySelectorAll('.contact_dummy');
+    let addNewContactResponsiveButton = document.getElementById('addNewContactResponsiveButton')
+    let showMoreResponsive = document.getElementById('showMoreResponsive');
+    let showMoreDivContainerEditDelete = document.getElementById('showMoreDivContainerEditDelete');
+    showMoreDivContainerEditDelete.style.transform = 'translateX(110%)';
+    addNewContactResponsiveButton.style.display = 'block';
+    showMoreResponsive.style.display = 'none';
     contactContainer.style.display = 'block';
     contactLayoutContainer.style.display = 'none';
     document.querySelector('.contacts').style.height = '940px';
@@ -622,124 +495,16 @@ function backPageButton() {
     });
 }
 
-
 /**
- * Checks if the input fields for adding a contact are empty and displays error messages if necessary.
+ * A function to show and animate the display of the edit/delete container element.
  *
- * @return {boolean} Returns true if all input fields are not empty, false otherwise.
+ * @param {type} None - No parameters are required.
+ * @return {type} None - The function does not return a value.
  */
-function checkInputFieldAddContactIfEmpty() {
-    const addContactName = document.getElementById('addContactName');
-    const addContactMail = document.getElementById('addContactMail');
-    const addContactPhone = document.getElementById('addContactPhone');
-    const errorName = document.getElementById('errorContactName');
-    const errorMail = document.getElementById('errorContactMail');
-    const errorPhone = document.getElementById('errorContactPhone');
-    let allFieldsAreNotEmpty = true;
-    const validateField = (field, errorElement) => {
-        if (field.value.trim() === '') {
-            errorElement.classList.remove('d_none');
-            field.classList.add('red_border');
-            allFieldsAreNotEmpty = false;
-        } else {
-            errorElement.classList.add('d_none');
-            field.classList.remove('red_border');
-        }
-    };
-    validateField(addContactName, errorName);
-    validateField(addContactMail, errorMail);
-    validateField(addContactPhone, errorPhone);
-    return allFieldsAreNotEmpty;
-}
-
-
-/**
- * Checks input fields for editing a contact, displays error messages if necessary, and returns a boolean indicating if all fields are not empty.
- *
- * @param {HTMLElement} editContactName - The input field for the contact name.
- * @param {HTMLElement} editContactMail - The input field for the contact email.
- * @param {HTMLElement} editContactPhone - The input field for the contact phone number.
- * @param {HTMLElement} errorName - The element to display error message for the contact name.
- * @param {HTMLElement} errorMail - The element to display error message for the contact email.
- * @param {HTMLElement} errorPhone - The element to display error message for the contact phone number.
- * @return {boolean} Returns true if all input fields are not empty, false otherwise.
- */
-function checkInputFieldEditIfEmpty() {
-    const editContactName = document.getElementById('editContactName');
-    const editContactMail = document.getElementById('editContactMail');
-    const editContactPhone = document.getElementById('editContactPhone');
-    const errorName = document.getElementById('errorContactName');
-    const errorMail = document.getElementById('errorContactMail');
-    const errorPhone = document.getElementById('errorContactPhone');
-    let allFieldsAreNotEmpty = true;
-    const validateField = (field, errorElement) => {
-        if (field.value.trim() === '') {
-            errorElement.classList.remove('d_none');
-            field.classList.add('red_border');
-            allFieldsAreNotEmpty = false;
-        } else {
-            errorElement.classList.add('d_none');
-            field.classList.remove('red_border');
-        }
-    };
-    validateField(editContactName, errorName);
-    validateField(editContactMail, errorMail);
-    validateField(editContactPhone, errorPhone);
-    return allFieldsAreNotEmpty;
-}
-
-
-/**
- * Clears the error and removes the red border from the specified input field in the add contact form.
- *
- * @param {string} inputField - The type of input field ('name', 'mail', or 'phone').
- * @return {void} This function does not return a value.
- */
-function clearErrorAddContact(inputField) {
-    let addContactName = document.getElementById('addContactName');
-    let addContactMail = document.getElementById('addContactMail');
-    let addContactPhone = document.getElementById('addContactPhone');
-    let errorName = document.getElementById('errorContactName');
-    let errorMail = document.getElementById('errorContactMail');
-    let errorPhone = document.getElementById('errorContactPhone');
-    if (inputField == 'name') {
-        addContactName.classList.remove('red_border');
-        errorName.classList.add('d_none');
-    }
-    if (inputField == 'mail') {
-        addContactMail.classList.remove('red_border');
-        errorMail.classList.add('d_none');
-    }
-    if (inputField == 'phone') {
-        addContactPhone.classList.remove('red_border');
-        errorPhone.classList.add('d_none');
-    }
-}
-
-
-/**
- * Clears the error and removes the red border from the specified input field in the edit contact form.
- *
- * @param {string} inputField - The type of input field ('name', 'mail', or 'phone').
- * @return {void} This function does not return a value.
- */
-function clearErrorEditContact(inputField){
-    let editContactName = document.getElementById('editContactName');
-    let editContactMail = document.getElementById('editContactMail');
-    let editContactPhone = document.getElementById('editContactPhone');
-    let errorName = document.getElementById('errorContactName');
-    let errorMail = document.getElementById('errorContactMail');
-    let errorPhone = document.getElementById('errorContactPhone');
-    if (inputField == 'name') {
-        editContactName.classList.remove('red_border');
-        errorName.classList.add('d_none');
-    }
-    if (inputField == 'mail') {
-        editContactMail.classList.remove('red_border');
-        errorMail.classList.add('d_none');
-    }
-    if (inputField == 'phone') {
-        editContactPhone.classList.remove('red_border');
-        errorPhone.classList.add('d_none');
-    }
+function showMoreDivContainerEditDelete() {
+    let showMoreDivContainerEditDelete = document.getElementById('showMoreDivContainerEditDelete');
+    showMoreDivContainerEditDelete.style.display = 'flex';
+    setTimeout(() => {
+        showMoreDivContainerEditDelete.style.transform = 'translateX(0)';
+    }, 50);
 }

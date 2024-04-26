@@ -56,16 +56,13 @@ let dummyTasks = [
     }
 ];
 
-
-
-
 let dummyContacts = [
     {
         "name": "Max Mustermann",
         "eMail": "max_mustermann@gmail.com",
         "password":"pw11",
         "tel": "+49151234567",
-        "color": "#FF6699",
+        "color": "#d2d45b",
         "Tasks": []
     },
     {
@@ -73,7 +70,7 @@ let dummyContacts = [
         "eMail": "bernd_richter@gmail.com",
         "password":"pw11",
         "tel": "+49154533567",
-        "color": "#436699",
+        "color": "#93cc72",
         "Tasks": []
     },
     {
@@ -89,7 +86,7 @@ let dummyContacts = [
         "eMail": "john_doe@outlook.com",
         "password":"pw33",
         "tel": "+49173456789",
-        "color": "#00FFCC",
+        "color": "#ff4f4f",
         "Tasks": []
     },
     {
@@ -105,7 +102,7 @@ let dummyContacts = [
         "eMail": "anna_schmidt@hotmail.com",
         "password":"pw55",
         "tel": "+49176678901",
-        "color": "#FF9966",
+        "color": "#177fff",
         "Tasks": []
     },
     {
@@ -113,7 +110,7 @@ let dummyContacts = [
         "eMail": "leonie.wagner@hotmail.com",
         "password":"pw66",
         "tel": "+49177789012",
-        "color": "#FF0006",
+        "color": "#f5b247",
         "Tasks": []
     },
     {
@@ -121,7 +118,7 @@ let dummyContacts = [
         "eMail": "jonas_keller@outlook.com",
         "password":"pw77",
         "tel": "+49178890123",
-        "color": "#999999",
+        "color": "#b82e63",
         "Tasks": []
     },
     {

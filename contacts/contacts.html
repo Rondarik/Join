@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +9,14 @@
     <link rel="stylesheet" href="/assets/fonts.css">
     <link rel="stylesheet" href="/contacts/contacts.css">
     <link rel="stylesheet" href="/contacts/contactsResponsive.css">
+    <script src="/contacts/randomColors.js"></script>
     <script src="/contacts/contacts.js"></script>
+    <script src="/contacts/contacts_HTMLtemplates.js"></script>
     <script src="/dummyData.js"></script>
     <script src="/script.js"></script>
     <script src="/assets/templates/template_script.js"></script>
     <script src="/serverCommunication.js"></script>
 </head>
-
 <body onload="contactsInit()">
     <div w3-include-html="/assets/templates/side_menu.html"></div>
     <div w3-include-html="/assets/templates/header.html"></div>
@@ -29,6 +29,13 @@
                     <div class="btn_span">
                         <span>Add new contact</span>
                     </div>
+                    <div class="btn_img">
+                        <img src="/assets/img/addContact.svg" alt="">
+                    </div>
+                </button>
+            </div>
+            <div class="btn_responsive">
+                <button id="addNewContactResponsiveButton" onclick="openAddNewContactDialogResponsive()">
                     <div class="btn_img">
                         <img src="/assets/img/addContact.svg" alt="">
                     </div>
@@ -54,7 +61,7 @@
             <div id="contact"></div>
         </div>
         <div class="contact_added" id="contactAdded"><span>Contact succesfully created</span></div>
+        <div class="contact_added_responsive" id="contactAddedResponsive"><span>Contact succesfully created</span></div>
     </main>
 </body>
-
 </html>

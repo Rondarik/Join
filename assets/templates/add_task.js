@@ -1,7 +1,7 @@
-let taskPrio = ['/assets/img/prio_medium.svg','medium'];
+let taskPrio = ['/assets/img/prio_medium.svg','Medium'];
 let assignedContacts = [];
 let subtasks = [];
-let globalenStatus = '';
+let globalenStatus='';
 
 /**
  * Initializes the task by including HTML, setting initial values, and clearing the task form.
@@ -12,6 +12,7 @@ async function addTaskInit() {
     await includeHTML();
     setInitials();
     clearTaskForm();
+    showCategory();
 }
 
 /**
@@ -56,7 +57,7 @@ function clearTaskForm() {
     document.getElementById('taskDiscription').value = '';
     assignedContacts = [];
     document.getElementById('dueDate').value = '';
-    setTaskPrio('medium');
+    setTaskPrio('Medium');
     document.getElementById('category').value = '';
     subtasks = [];
     renderNewSubtask();
@@ -269,18 +270,18 @@ function setTaskPrio(prio) {
         mediumBtn.querySelector('img').src = '/assets/img/prio_medium.svg';
         lowBtn.querySelector('img').src = '/assets/img/prio_low.svg';
     });
-    if (prio === 'urgent') {
-        taskPrio = ['/assets/img/prio_urgent.svg','urgent'];
+    if (prio === 'Urgent') {
+        taskPrio = ['/assets/img/prio_urgent.svg','Urgent'];
         urgentBtn.classList.add('clicked');
         urgentBtn.querySelector('img').src = '/assets/img/prio_urgent_white.svg';
     }
-    if (prio === 'medium') {
-        taskPrio = ['/assets/img/prio_medium.svg','medium'];
+    if (prio === 'Medium') {
+        taskPrio = ['/assets/img/prio_medium.svg','Medium'];
         mediumBtn.classList.add('clicked');
         mediumBtn.querySelector('img').src = '/assets/img/prio_medium_white.svg';
     }
-    if (prio === 'low') {
-        taskPrio = ['/assets/img/prio_low.svg','low'];
+    if (prio === 'Low') {
+        taskPrio = ['/assets/img/prio_low.svg','Low'];
         lowBtn.classList.add('clicked');
         lowBtn.querySelector('img').src = '/assets/img/prio_low_white.svg';
     }

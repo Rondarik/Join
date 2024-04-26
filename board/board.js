@@ -9,6 +9,7 @@ async function boardInit(){
     await getAllTasksFromServer();
     updateHTML();
     setInitials();
+    showCategory();
 }
 
 /**
@@ -17,9 +18,9 @@ async function boardInit(){
  * @param {type} paramName - description of parameter
  * @return {type} description of return value
  */
-function showAddTaskOverlay(status) {
+function showAddTaskOverlay(status){
     document.getElementById('addTaskOverlayID').classList.remove('d-none');
-    globalenStatus = status;
+    globalenStatus=status;
 }
 
 /**
@@ -161,7 +162,7 @@ function allowDrop(ev) {
  * @param {string} processingStatus - The new processing status for the task.
  * @return {Promise<void>} - A promise that resolves when the task has been moved and the HTML has been updated.
  */
-async function moveTo(processingStatus,id) {
+async function moveTo(processingStatus) {
     if (currentDraggedElement !== undefined && allTasks[currentDraggedElement] !== undefined) {
         allTasks[currentDraggedElement]['processingStatus'] = processingStatus;
         updateHTML();
@@ -234,8 +235,10 @@ function openBigTask(id){
 }
 }
 
+
 function closeBigTask(){
     document.getElementById('bigTask').classList.add('d-none');
+   
 }
 
 /**
@@ -274,7 +277,7 @@ function showBigTask(element){
             </div>
             <div>
                 <h2 class="bigTitle">${element['title']}</h2>
-                <p class="bigInfosText">${element['description']}</p>
+                <p class="bigInfosDescription">${element['description']}</p>
             </div>
             <div>
                 <div class="bigInfosText"><p>Due date:</p> ${element['dueDate']}</div>
@@ -516,13 +519,13 @@ function openEditTasks(taskID) {
                     </div>
                     <label>Priority</label><br>
                         <div class="prio_buttons" >
-                            <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('urgent')">
+                            <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('Urgent')">
                                 Urgent <img src="/assets/img/prio_urgent.svg" alt="">
                             </button>
-                            <button type="button" class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('medium')">
+                            <button type="button" class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('Medium')">
                                 Medium <img src="/assets/img/prio_medium.svg" alt="">
                             </button>
-                            <button type="button" class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('low')">
+                            <button type="button" class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('Low')">
                                 Low <img src="/assets/img/prio_low.svg" alt="">
                             </button>
                         </div>
@@ -608,15 +611,15 @@ function closePopup() {
  * @param {number} taskID - The ID of the task to be edited.
  * @return {void} This function does not return a value.
  */
-function saveEditedTask(ID) {
-    const editedTaskIndex = allTasks.findIndex(task => task.taskID == ID);
+function saveEditedTask(taskID) {
+    const editedTaskIndex = allTasks.findIndex(task => task.taskID ==taskID);
     if (editedTaskIndex !== -1) {
         const editedTask = allTasks[editedTaskIndex];
         editedTask.title = document.getElementById('taskTitle').value;
         editedTask.description = document.getElementById('taskDiscription').value;
         editedTask.dueDate = document.getElementById('dueDate').value;
-        editedTask.assignedTo = getAssignedToContactsFromPopup();
-        editedTask.prio = getSelectedPriority();
+        editedTask.assignedTo = getAssignedToContactsFromPopup(); 
+        editedTask.prio = getSelectedPriority(); 
         allTasks[editedTaskIndex] = editedTask;
         setItem('allTasks', JSON.stringify(allTasks));
         updateHTML();
@@ -625,3 +628,35 @@ function saveEditedTask(ID) {
     closePopup();
 }
 
+function getAssignedToContactsFromPopup() {
+    const selectedContacts = [];
+    const contactElements = document.querySelectorAll('.contact_to_assign_container .contact_icon_selected');
+    contactElements.forEach(contactElement => {
+        const contactName = contactElement.dataset.contactName;
+        const contactColor = contactElement.dataset.contactColor;
+        selectedContacts.push({ name: contactName, color: contactColor });
+    });
+    return selectedContacts;
+}
+
+/**
+ * Retrieves the selected priority from the edit task popup.
+ *
+ * @return {Array} An array containing the selected priority and its corresponding image URL.
+ */
+function getSelectedPriority() {
+    const selectedPriority = [];
+    const urgentBtn = document.getElementById('urgentBtnID');
+    const mediumBtn = document.getElementById('mediumBtnID');
+    const lowBtn = document.getElementById('lowBtnID');
+
+    if (urgentBtn.classList.contains('btn_selected')) {
+        selectedPriority.push('Urgent', '/assets/img/prio_urgent.svg');
+    } else if (mediumBtn.classList.contains('btn_selected')) {
+        selectedPriority.push('Medium', '/assets/img/prio_medium.svg');
+    } else if (lowBtn.classList.contains('btn_selected')) {
+        selectedPriority.push('Low', '/assets/img/prio_low.svg');
+    }
+
+    return selectedPriority;
+}
