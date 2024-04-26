@@ -10,6 +10,7 @@ async function contactsInit() {
     displayContacts();
     await includeHTML();
     setInitials();
+    showCategory();
 }
 
 /**
@@ -148,7 +149,7 @@ async function addContact() {
         'color': randomColor()
     };
     let filteredContacts = dummyContacts.filter(filterFunction);
-    
+
     /**
      * Filters the `allContacts` array based on the provided `mail` value.
      *

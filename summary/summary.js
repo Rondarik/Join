@@ -13,6 +13,7 @@ async function summaryInit(){
     updateSummary();
     greetUser();
     setInitials();
+    showCategory();
 }
 
 let logedInUser='';

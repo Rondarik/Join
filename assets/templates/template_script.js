@@ -109,4 +109,22 @@ function redirectToLogin() {
         window.location.href = targetUrl;
 }
 
-    
+/**
+ * Sets the active sideboard category based on the current URL path.
+ *
+ * @return {void} This function does not return a value.
+ */
+function showCategory() {
+    if (window.location.pathname == '/add_task/add_task.html') {
+        document.getElementById('addTask').classList.add('active_sideboard');
+    }
+    if (window.location.pathname == '/summary/summary.html') {
+        document.getElementById('summary').classList.add('active_sideboard');
+    }
+    if (window.location.pathname == '/board/board.html') {
+        document.getElementById('board').classList.add('active_sideboard');
+    }
+    if (window.location.pathname == '/contacts/contacts.html') {
+        document.getElementById('contacts').classList.add('active_sideboard');
+    }
+}

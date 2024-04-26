@@ -56,9 +56,6 @@ let dummyTasks = [
     }
 ];
 
-
-
-
 let dummyContacts = [
     {
         "name": "Max Mustermann",

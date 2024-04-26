@@ -16,8 +16,6 @@ body{
     border-color: #29ABE2;
 }
 
-
-
 .top{
     display: flex;
     justify-content: space-between;
@@ -338,7 +336,7 @@ p{
     color: #A8A8A8;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 750px){
     .loginForm {
         width: 310px;
     }

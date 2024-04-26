@@ -2,55 +2,61 @@
     padding-left: 328px; 
     padding-top: 106px;
     background-color: #F6F7F8;
-    
 }
-    h1{
+
+h1{
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
     font-size: 61px;
     color: black;
-    }
-    h2{
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 27px;
-        color: black; 
-    }
-    p{
-        font-size: 16px;
-        font-weight: 400;
-        font-family: "Inter", sans-serif;
-        margin-block-start: 0em;
-        margin-block-end: 0em;
-        
-    }
-    li{
-            font-size: 16px;
-            font-weight: 400;
-            font-family: "Inter", sans-serif;
-    }
-    h3{
-        font-size: 16px;
-            font-weight: 400;
-            font-family: "Inter", sans-serif;
-            color: black;
-            margin-block-start: 0em;
-        margin-block-end: 0em;
-    }
-    .headline_privacy_policy{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .arrow_img{
-        width: 37px;
-        height: 37px;
-        cursor: pointer;
-        border-radius: 100%;
-        margin-right: 220px;
-    }
+}
+
+h2{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 27px;
+    color: black; 
+}
+
+p{
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Inter", sans-serif;
+    margin-block-start: 0em;
+    margin-block-end: 0em;    
+}
+
+li{
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Inter", sans-serif;
+}
+
+h3{
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Inter", sans-serif;
+    color: black;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
+.headline_privacy_policy{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arrow_img{
+    width: 37px;
+    height: 37px;
+    cursor: pointer;
+    border-radius: 100%;
+    margin-right: 220px;
+}
+
 .arrow_img:hover{
     background-color: lightgray;
 }
@@ -59,14 +65,14 @@
     word-wrap: break-word;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1400px){
     .privacy_policy_container{
         padding-left: 10px;
         margin-bottom: 82px;
     }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 750px){
     .arrow_img {
         margin-right: 10px;
     }
