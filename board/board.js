@@ -560,7 +560,6 @@ function openEditTasks(taskID) {
                             <img class="subtask_btn_check" src="/assets/img/check.svg" alt="" onclick="addNewSubtask()">
                         </div>
                     </div>
-                    <!-- <div id="allSubtasksID"> ${getSubtasksHTML(task.subtasks)} -->
                     <div id="allSubtasksID">
                     </div>
                 </div>
@@ -570,23 +569,6 @@ function openEditTasks(taskID) {
                 </div>
             </div>`;
     openPopup(editPopupContent,task.prio);
-}
-
-/**
- * Generates the HTML for the subtasks of a task.
- *
- * @param {Array} subtasks - The array of subtasks to generate HTML for.
- * @return {string} The HTML string representing the subtasks.
- */
-function getSubtasksHTML(subtasks) {
-    let subtasksHTML="";
-    subtasks.forEach(subtask => {
-        subtasksHTML += `
-            <ul class="bigSubtasksContainer">
-                <li class="bigInfosContacts">${subtask.name}</li>
-            </ul>`;
-    });
-    return subtasksHTML;
 }
 
 /**
