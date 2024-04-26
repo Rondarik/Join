@@ -1,6 +1,7 @@
-let taskPrio = ['/assets/img/prio_medium.svg','Medium'];
+let taskPrio = ['/assets/img/prio_medium.svg','medium'];
 let assignedContacts = [];
 let subtasks = [];
+let globalenStatus = '';
 
 /**
  * Initializes the task by including HTML, setting initial values, and clearing the task form.
@@ -19,7 +20,7 @@ async function addTaskInit() {
  * @param {string} processingStatus - The status of the task being added.
  * @return {Promise<void>} A promise that resolves when the task is added successfully.
  */
-async function addNewTask(processingStatus) {
+async function addNewTask() {
     await getAllTasksFromServer();
     if (checkInputForNewTask()) {
         let taskTilte = document.getElementById('taskTitle').value;
@@ -28,7 +29,7 @@ async function addNewTask(processingStatus) {
         let category = document.getElementById('category').value;
         let task = {
             "taskID": setTaskID(),
-            "processingStatus": processingStatus,
+            "processingStatus": globalenStatus,
             "title": taskTilte,
             "description": taskDiscription,
             "assignedTo": assignedContacts,
@@ -269,17 +270,17 @@ function setTaskPrio(prio) {
         lowBtn.querySelector('img').src = '/assets/img/prio_low.svg';
     });
     if (prio === 'urgent') {
-        taskPrio = ['/assets/img/prio_urgent.svg','Urgent'];
+        taskPrio = ['/assets/img/prio_urgent.svg','urgent'];
         urgentBtn.classList.add('clicked');
         urgentBtn.querySelector('img').src = '/assets/img/prio_urgent_white.svg';
     }
     if (prio === 'medium') {
-        taskPrio = ['/assets/img/prio_medium.svg','Medium'];
+        taskPrio = ['/assets/img/prio_medium.svg','medium'];
         mediumBtn.classList.add('clicked');
         mediumBtn.querySelector('img').src = '/assets/img/prio_medium_white.svg';
     }
     if (prio === 'low') {
-        taskPrio = ['/assets/img/prio_low.svg','Low'];
+        taskPrio = ['/assets/img/prio_low.svg','low'];
         lowBtn.classList.add('clicked');
         lowBtn.querySelector('img').src = '/assets/img/prio_low_white.svg';
     }
@@ -535,30 +536,30 @@ function setDate() {
  * @param {string} status - The status of the task being added.
  * @return {void} This function does not return a value.
  */
-function showAddTaskOverlay(status) {
-    document.getElementById('addTaskOverlayID').classList.remove('d-none');
-    document.getElementById('addTaskForm').addEventListener('submit', function(event) {
-        event.preventDefault(); 
-        const title = document.getElementById('taskTitle').value;
-        const description = document.getElementById('taskDescription').value;
-        const dueDate = document.getElementById('dueDate').value;
-        const category = document.getElementById('taskCategory').value;
-        const priority = document.getElementById('taskPriority').value;
-        const assignedTo = []; 
-        const newTask = {
-            taskID: generateTaskID(), 
-            title: title,
-            description: description,
-            dueDate: dueDate,
-            category: category,
-            prio: priority,
-            assignedTo: assignedTo,
-            processingStatus: status 
-        };
-        const container = document.getElementById(status.toLowerCase());
-        container.innerHTML += generateTodoHTML(newTask);
-        closeAddTaskOverlay();
-        allTasks.push(newTask);
-        setItem('allTasks', JSON.stringify(allTasks));
-    });
-}
+// function showAddTaskOverlay(status) {
+//     document.getElementById('addTaskOverlayID').classList.remove('d-none');
+//     document.getElementById('addTaskForm').addEventListener('submit', function(event) {
+//         event.preventDefault(); 
+//         const title = document.getElementById('taskTitle').value;
+//         const description = document.getElementById('taskDescription').value;
+//         const dueDate = document.getElementById('dueDate').value;
+//         const category = document.getElementById('taskCategory').value;
+//         const priority = document.getElementById('taskPriority').value;
+//         const assignedTo = []; 
+//         const newTask = {
+//             taskID: generateTaskID(), 
+//             title: title,
+//             description: description,
+//             dueDate: dueDate,
+//             category: category,
+//             prio: priority,
+//             assignedTo: assignedTo,
+//             processingStatus: status 
+//         };
+//         const container = document.getElementById(status.toLowerCase());
+//         container.innerHTML += generateTodoHTML(newTask);
+//         closeAddTaskOverlay();
+//         allTasks.push(newTask);
+//         setItem('allTasks', JSON.stringify(allTasks));
+//     });
+// }

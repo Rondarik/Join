@@ -17,8 +17,9 @@ async function boardInit(){
  * @param {type} paramName - description of parameter
  * @return {type} description of return value
  */
-function showAddTaskOverlay() {
+function showAddTaskOverlay(status) {
     document.getElementById('addTaskOverlayID').classList.remove('d-none');
+    globalenStatus = status;
 }
 
 /**
@@ -562,7 +563,7 @@ function openEditTasks(taskID) {
                     </div>
                 </div>
             </div>`;
-    openPopup(editPopupContent);
+    openPopup(editPopupContent,task.prio);
 }
 
 /**
@@ -588,10 +589,11 @@ function getSubtasksHTML(subtasks) {
  * @param {string} content - The HTML content to be displayed in the popup.
  * @return {void} This function does not return a value.
  */
-function openPopup(content) {
+function openPopup(content,prio) {
     const editPopup = document.getElementById('editTaskOverlay');
     editPopup.innerHTML = content;
     editPopup.classList.remove('d-none');
+    setTaskPrio(prio[1]);
 }
 
 function closePopup() {
@@ -606,8 +608,8 @@ function closePopup() {
  * @param {number} taskID - The ID of the task to be edited.
  * @return {void} This function does not return a value.
  */
-function saveEditedTask(taskID) {
-    const editedTaskIndex = allTasks.findIndex(task => task.taskID === taskID);
+function saveEditedTask(ID) {
+    const editedTaskIndex = allTasks.findIndex(task => task.taskID == ID);
     if (editedTaskIndex !== -1) {
         const editedTask = allTasks[editedTaskIndex];
         editedTask.title = document.getElementById('taskTitle').value;
