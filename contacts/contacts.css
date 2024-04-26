@@ -18,7 +18,7 @@ body{
 }
 
 .contact_list{
-    margin-top: 81px;
+    margin-top: 31px;
     margin-bottom: 40px;
     height: auto;
     display: flex;
@@ -588,7 +588,6 @@ button:hover{
 }
 
 .form_container{
-    height: 215px;
     display: flex;
     flex-direction: column;
     gap: 32px;  
@@ -861,4 +860,12 @@ button:hover{
     font-size: 13px;
     margin-top: -30px;
     height: 0;
+}
+
+.close_responsive{
+    display: none;
+}
+
+.show_more_responsive{
+    display: none;
 }
