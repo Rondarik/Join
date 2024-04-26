@@ -234,8 +234,27 @@ function openBigTask(id){
 }
 }
 
+// function closeBigTask(){
+//     const editedTaskIndex = allTasks.findIndex(task => task.taskID === currentDraggedElement);
+//     if (editedTaskIndex !== -1) {
+//         const editedTask = allTasks[editedTaskIndex];
+//         const bigTaskElement = document.getElementById('bigTask');
+//         const titleElement = bigTaskElement.querySelector('.bigTitle');
+//         const descriptionElement = bigTaskElement.querySelector('.bigInfosDescription');
+//         const dueDateElement = bigTaskElement.querySelector('.bigInfosText p:nth-child(2)');
+//         editedTask.title = titleElement.textContent;
+//         editedTask.description = descriptionElement.textContent;
+//         editedTask.dueDate = dueDateElement.textContent.split(': ')[1];
+//         allTasks[editedTaskIndex] = editedTask;
+//         updateHTML(); 
+//     }
+//     document.getElementById('bigTask').classList.add('d-none'); 
+// }
+
+
 function closeBigTask(){
     document.getElementById('bigTask').classList.add('d-none');
+   
 }
 
 /**
@@ -607,15 +626,15 @@ function closePopup() {
  * @param {number} taskID - The ID of the task to be edited.
  * @return {void} This function does not return a value.
  */
-function saveEditedTask(taskID) {
-    const editedTaskIndex = allTasks.findIndex(task => task.taskID === taskID);
+function saveEditedTask() {
+    const editedTaskIndex = allTasks.findIndex(task => task.taskID);
     if (editedTaskIndex !== -1) {
         const editedTask = allTasks[editedTaskIndex];
         editedTask.title = document.getElementById('taskTitle').value;
         editedTask.description = document.getElementById('taskDiscription').value;
         editedTask.dueDate = document.getElementById('dueDate').value;
-        editedTask.assignedTo = getAssignedToContactsFromPopup();
-        editedTask.prio = getSelectedPriority();
+        editedTask.assignedTo = getAssignedToContactsFromPopup(); 
+        editedTask.prio = getSelectedPriority(); 
         allTasks[editedTaskIndex] = editedTask;
         setItem('allTasks', JSON.stringify(allTasks));
         updateHTML();
@@ -624,3 +643,35 @@ function saveEditedTask(taskID) {
     closePopup();
 }
 
+function getAssignedToContactsFromPopup() {
+    const selectedContacts = [];
+    const contactElements = document.querySelectorAll('.contact_to_assign_container .contact_icon_selected');
+    contactElements.forEach(contactElement => {
+        const contactName = contactElement.dataset.contactName;
+        const contactColor = contactElement.dataset.contactColor;
+        selectedContacts.push({ name: contactName, color: contactColor });
+    });
+    return selectedContacts;
+}
+
+/**
+ * Retrieves the selected priority from the edit task popup.
+ *
+ * @return {Array} An array containing the selected priority and its corresponding image URL.
+ */
+function getSelectedPriority() {
+    const selectedPriority = [];
+    const urgentBtn = document.getElementById('urgentBtnID');
+    const mediumBtn = document.getElementById('mediumBtnID');
+    const lowBtn = document.getElementById('lowBtnID');
+
+    if (urgentBtn.classList.contains('btn_selected')) {
+        selectedPriority.push('Urgent', '/assets/img/prio_urgent.svg');
+    } else if (mediumBtn.classList.contains('btn_selected')) {
+        selectedPriority.push('Medium', '/assets/img/prio_medium.svg');
+    } else if (lowBtn.classList.contains('btn_selected')) {
+        selectedPriority.push('Low', '/assets/img/prio_low.svg');
+    }
+
+    return selectedPriority;
+}
