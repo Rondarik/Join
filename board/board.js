@@ -10,6 +10,10 @@ async function boardInit(){
     updateHTML();
     setInitials();
     showCategory();
+    checkEmptyDone();
+    checkEmptyToDo();
+    checkEmptyProgress();
+    checkEmptyAwaitFeedback();
 }
 
 /**
@@ -105,7 +109,7 @@ function generateTodoHTML(element) {
     if (totalSubtasks > 0) {
         subtaskHTML = `
             <div class="progress_container">
-                <progress id="progress_${id}" max="100" value="${progressPercentage}">${progressPercentage}%</progress>
+                <progress id="progress_${id}" class="progressbar" max="100" value="${progressPercentage}">${progressPercentage}%</progress>
                 <p class="progress_text">${completedSubtasks}/${totalSubtasks} Subtasks</p>
             </div>`;
     }
@@ -127,6 +131,7 @@ function generateTodoHTML(element) {
         </div>
     </div>`;
 }
+
 
 /**
  * Generates the HTML for the assigned contacts icons based on the provided contacts array.
@@ -472,7 +477,7 @@ async function deleteTasks(taskID) {
     if (index !== -1) {
         allTasks.splice(index, 1);
         updateHTML();
-        reorderTaskIDs(); // Reorder task IDs after deletion
+        // reorderTaskIDs(); // Reorder task IDs after deletion
         await setItem('allTasks', JSON.stringify(allTasks));
     } 
     closeBigTask();
@@ -483,11 +488,12 @@ async function deleteTasks(taskID) {
  *
  * @return {void} Diese Funktion gibt keinen Wert zurück.
  */
-function reorderTaskIDs() {
-    for (let i = 0; i < allTasks.length; i++) {
-        allTasks[i].taskID = i; // Setzt die ID auf den Index-Wert
-    }
-}
+// function reorderTaskIDs() {
+//     for (let i = 0; i < allTasks.length; i++) {
+//         allTasks[i].taskID = i; // Setzt die ID auf den Index-Wert
+//     }
+// }
+
 /**
  * Opens the edit tasks popup for a specific task.
  *
@@ -496,6 +502,7 @@ function reorderTaskIDs() {
  */
 function openEditTasks(taskID) {
     const task = allTasks.find(task => task.taskID === taskID);
+    subtasks = task.subtasks;
     const editPopupContent = `
            <div id="editTask" class="editTaskInner" onclick="doNotClose(event)">
                <div class="form_inner_edit">
@@ -558,7 +565,7 @@ function openEditTasks(taskID) {
                             <img class="subtask_btn_check" src="/assets/img/check.svg" alt="" onclick="addNewSubtask()">
                         </div>
                     </div>
-                    <div id="allSubtasksID"> ${getSubtasksHTML(task.subtasks)}
+                    <div id="allSubtasksID">
                     </div>
                 </div>
                     <div class="edit_button_container">
@@ -566,24 +573,7 @@ function openEditTasks(taskID) {
                     </div>
                 </div>
             </div>`;
-    openPopup(editPopupContent);
-}
-
-/**
- * Generates the HTML for the subtasks of a task.
- *
- * @param {Array} subtasks - The array of subtasks to generate HTML for.
- * @return {string} The HTML string representing the subtasks.
- */
-function getSubtasksHTML(subtasks) {
-    let subtasksHTML="";
-    subtasks.forEach(subtask => {
-        subtasksHTML += `
-            <ul class="bigSubtasksContainer">
-                <li class="bigInfosContacts">${subtask.name}</li>
-            </ul>`;
-    });
-    return subtasksHTML;
+    openPopup(editPopupContent,task.prio);
 }
 
 /**
@@ -592,10 +582,12 @@ function getSubtasksHTML(subtasks) {
  * @param {string} content - The HTML content to be displayed in the popup.
  * @return {void} This function does not return a value.
  */
-function openPopup(content) {
+function openPopup(content,prio) {
     const editPopup = document.getElementById('editTaskOverlay');
     editPopup.innerHTML = content;
+    renderNewSubtask();
     editPopup.classList.remove('d-none');
+    setTaskPrio(prio[1]);
 }
 
 function closePopup() {
@@ -617,45 +609,13 @@ function saveEditedTask(taskID) {
         editedTask.title = document.getElementById('taskTitle').value;
         editedTask.description = document.getElementById('taskDiscription').value;
         editedTask.dueDate = document.getElementById('dueDate').value;
-        editedTask.assignedTo = getAssignedToContactsFromPopup(); 
-        editedTask.prio = getSelectedPriority(); 
+        editedTask.assignedTo = assignedContacts;
+        editedTask.prio = taskPrio;
+        editedTask.subtask = subtasks;
         allTasks[editedTaskIndex] = editedTask;
         setItem('allTasks', JSON.stringify(allTasks));
         updateHTML();
         document.getElementById('bigTask').innerHTML = showBigTask(editedTask);
     }
     closePopup();
-}
-
-function getAssignedToContactsFromPopup() {
-    const selectedContacts = [];
-    const contactElements = document.querySelectorAll('.contact_to_assign_container .contact_icon_selected');
-    contactElements.forEach(contactElement => {
-        const contactName = contactElement.dataset.contactName;
-        const contactColor = contactElement.dataset.contactColor;
-        selectedContacts.push({ name: contactName, color: contactColor });
-    });
-    return selectedContacts;
-}
-
-/**
- * Retrieves the selected priority from the edit task popup.
- *
- * @return {Array} An array containing the selected priority and its corresponding image URL.
- */
-function getSelectedPriority() {
-    const selectedPriority = [];
-    const urgentBtn = document.getElementById('urgentBtnID');
-    const mediumBtn = document.getElementById('mediumBtnID');
-    const lowBtn = document.getElementById('lowBtnID');
-
-    if (urgentBtn.classList.contains('btn_selected')) {
-        selectedPriority.push('Urgent', '/assets/img/prio_urgent.svg');
-    } else if (mediumBtn.classList.contains('btn_selected')) {
-        selectedPriority.push('Medium', '/assets/img/prio_medium.svg');
-    } else if (lowBtn.classList.contains('btn_selected')) {
-        selectedPriority.push('Low', '/assets/img/prio_low.svg');
-    }
-
-    return selectedPriority;
 }

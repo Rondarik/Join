@@ -61,7 +61,10 @@
     text-align: left;
     margin-block-start: 0;
     margin-block-end: 0;
+    word-wrap: break-word;
+    height: auto;
 }
+
 
 .bigSubtasksContainer{
     display: flex;
@@ -77,9 +80,16 @@
     line-height: 24px;
     text-align: left;
 }
+.bigInfosDescription{
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    word-wrap:break-word ;
+}
 
 .bigInfosText{
-    font-family: 'Inter';
+    font-family: Inter;
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;

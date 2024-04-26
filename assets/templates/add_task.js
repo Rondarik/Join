@@ -13,6 +13,7 @@ async function addTaskInit() {
     setInitials();
     clearTaskForm();
     showCategory();
+
 }
 
 /**
@@ -207,8 +208,13 @@ function renderUserTag() {
 }
 
 function showToastMessage() {
-    document.getElementById('messageAddedTask').classList.remove('d-none');
-    const myTimeout = setTimeout(switchToBaordSide, 1000);
+ 
+    if (window.location.pathname == '/add_task/add_task.html'){
+        document.getElementById('messageAddedTask').classList.remove('d-none');
+        const myTimeout = setTimeout(switchToBaordSide, 1000);
+    } else {
+        closeAddTaskOverlay();
+    }
 }
 
 function switchToBaordSide() {

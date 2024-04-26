@@ -36,6 +36,7 @@
     padding-left: 232px;
     padding-top: 96px;
     background-color: #F6F7F8;
+    min-height: 100vh;
 }
 
 .headline{
@@ -200,17 +201,20 @@ input::placeholder{
 }
 
 .content_container{
-    min-height: 100vh;
-    padding-left: 64px;
-    padding-right: 64px;
-    gap:26px;
     display: flex;
     justify-content: space-between;
+    align-items: start;
+    overflow: auto;
+    scrollbar-width: none;
+    height: 100%;
+    padding: 16px;
+    gap: 30px;
 }
+
 
 .content_column{
     width:246px;
-    height: 400px;
+    height: auto;
 }
 
 .task_todo{
@@ -235,15 +239,21 @@ input::placeholder{
 }
 
 .task_progress{
-    width: 210px;
-    padding: 16px;
-    box-shadow: 0px 0px 10px 3px #00000014;
-    background: #FFFFFF;
-    gap:24px;
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    max-width: 252px;
+    background-color: #ffff;
+    padding: 16px 10px 16px 10px;
     border-radius: 24px;
-    margin-top: 10px;
+    gap: 20px;
+    box-shadow: 0px 0px 10px 3px #00000014;
+    margin-bottom: 20px;
     cursor: pointer;
+    box-sizing: border-box;
+    transition: all 0.5s ease;
 }
+
 
 .progress_title{
     width: 81px;
@@ -264,7 +274,8 @@ input::placeholder{
     font-weight: 400;
     line-height: 14.4px;
     color: black;
-    width: 120px;
+    width:auto;
+    word-wrap: break-word;
     margin-left: 10px;
 }
 
@@ -282,9 +293,10 @@ input::placeholder{
     font-weight: 400;
     line-height: 19.2px;
     color: #A8A8A8;
-    word-wrap: break-word;
+    }
+.progressbar{
+    width:50%;
 }
-
 .progress_container{
     display: flex;
     justify-content: space-between;
@@ -308,6 +320,7 @@ input::placeholder{
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    
 }
 
 .contacts_icon{
@@ -322,6 +335,8 @@ input::placeholder{
     font-family: Inter;
     color: white;
     padding: 4px;
+    margin-left: -8px;
+    
 }
 
 .contacts_img{
@@ -335,15 +350,11 @@ input::placeholder{
 }
 
 .drag_area{
-    width: 252px;
-    min-width: 226px;
-    height: 800px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding-bottom: 10px;
-    gap: 16px;
+    width:246px;
+    height: 688px;
+    gap: 5px;
 }
+
 
 .drag_area_highlight{
     background-color: rgba(0, 0, 0, 0.2);
@@ -381,7 +392,7 @@ input::placeholder{
         left:auto;
     }
     .content_container{
-        display: flex;
+        width: 100%;
         flex-direction: column;
     }
     .content_column{
@@ -391,18 +402,26 @@ input::placeholder{
         width: 100%;
     }
     .drag_area{
-        display: flex;
-        flex-direction: row;
-        overflow-x: auto;
-        padding-bottom: 10px;
-        scrollbar-width: none;
         width: 100%;
+        min-height: 350px;
+        height: auto;
+        display: flex;
+        overflow-x: auto;
+        flex: 1;
+        box-sizing: border-box;
     }
     .container_row{
         width: 100%;
     }
     .task_progress{
-        margin-right: 10px;
+        min-width: 260px;
+        max-width: 270px;
+        min-height: auto;
+        overflow: auto;
+        margin: 5px;
+        overflow: auto;
+        scrollbar-width: none;
+
     }
     .board_add_task_text{
         display: none;
