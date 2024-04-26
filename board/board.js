@@ -17,8 +17,9 @@ async function boardInit(){
  * @param {type} paramName - description of parameter
  * @return {type} description of return value
  */
-function showAddTaskOverlay() {
+function showAddTaskOverlay(status){
     document.getElementById('addTaskOverlayID').classList.remove('d-none');
+    globalenStatus=status;
 }
 
 /**
@@ -160,7 +161,7 @@ function allowDrop(ev) {
  * @param {string} processingStatus - The new processing status for the task.
  * @return {Promise<void>} - A promise that resolves when the task has been moved and the HTML has been updated.
  */
-async function moveTo(processingStatus,id) {
+async function moveTo(processingStatus) {
     if (currentDraggedElement !== undefined && allTasks[currentDraggedElement] !== undefined) {
         allTasks[currentDraggedElement]['processingStatus'] = processingStatus;
         updateHTML();
