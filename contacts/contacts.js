@@ -148,6 +148,13 @@ async function addContact() {
         'color': randomColor()
     };
     let filteredContacts = dummyContacts.filter(filterFunction);
+    
+    /**
+     * Filters the `allContacts` array based on the provided `mail` value.
+     *
+     * @param {Array} allContacts - The array of contact objects to filter.
+     * @return {boolean} Returns `true` if the `mail` value matches the `eMail` property of any contact object, `false` otherwise.
+     */
     function filterFunction(allContacts) {
         return allContacts['eMail'] == mail;
     };
