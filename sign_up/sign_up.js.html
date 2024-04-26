@@ -123,7 +123,6 @@ async function register() {
     const isChecked = await checkUser();
     if(isChecked){
     if(on &amp;&amp; confirmed){
-    console.log(allUser);
     allUser.push({
         remoteName: remoteName.value,
         remoteEmail: remoteEmail.value,
@@ -280,7 +279,6 @@ function unchecked(){
 function checkPassword(){
     let password = document.getElementById('remotePassword').value;
     let confirmPassword = document.getElementById('remoteCPassword').value;
-    console.log(password, confirmPassword)
     let message = document.getElementById('message');
     if(password.length != 0 &amp;&amp; confirmPassword.length != 0){
         if(password == confirmPassword){

@@ -43,7 +43,6 @@ async function addNewTask() {
         allTasks.push(task);
         await setItem('allTasks', JSON.stringify(allTasks));
         showToastMessage();
-        console.log(allTasks);
     }
 }
 
@@ -326,7 +325,6 @@ function addNewSubtask() {
     subtasks.push(subtask);
     renderNewSubtask();
     subtasksNoFucus();
-    console.log('add Subtask ' + subtasks[0].clicked);
 }
 
 /**
@@ -486,7 +484,6 @@ function checkInputForNewTask() {
     if ((taskTilte.value != '') && (date.value != '') && (category.value != '')) {
         allFieldsAreEmpty = true;
     }
-    console.log(allFieldsAreEmpty);
     return allFieldsAreEmpty;
 }
 
