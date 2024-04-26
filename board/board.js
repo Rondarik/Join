@@ -10,6 +10,10 @@ async function boardInit(){
     updateHTML();
     setInitials();
     showCategory();
+    checkEmptyDone();
+    checkEmptyToDo();
+    checkEmptyProgress();
+    checkEmptyAwaitFeedback();
 }
 
 /**
@@ -128,6 +132,7 @@ function generateTodoHTML(element) {
         </div>
     </div>`;
 }
+
 
 /**
  * Generates the HTML for the assigned contacts icons based on the provided contacts array.
