@@ -1,7 +1,7 @@
-let taskPrio = ['/assets/img/prio_medium.svg','Medium'];
+let taskPrio = ['/assets/img/prio_medium.svg', 'Medium'];
 let assignedContacts = [];
 let subtasks = [];
-let globalenStatus='';
+let globalenStatus = '';
 
 /**
  * Initializes the task by including HTML, setting initial values, and clearing the task form.
@@ -11,9 +11,9 @@ let globalenStatus='';
 async function addTaskInit() {
     await includeHTML();
     setInitials();
+    await getAllContactsFromServer();
     clearTaskForm();
     showCategory();
-
 }
 
 /**
@@ -57,6 +57,7 @@ function clearTaskForm() {
     document.getElementById('taskTitle').value = '';
     document.getElementById('taskDiscription').value = '';
     assignedContacts = [];
+    document.getElementById('assignContactContainerID').innerHTML = '';
     document.getElementById('dueDate').value = '';
     setTaskPrio('Medium');
     document.getElementById('category').value = '';
@@ -92,12 +93,6 @@ function closeAssignContactsBox() {
     renderUserTag();
 }
 
-/**
- * Renders all contacts in the specified container.
- *
- * @param {HTMLElement} contactsContainer - The container to render the contacts into.
- * @return {void} 
- */
 /**
  * Renders all contacts in the specified container.
  *
@@ -142,7 +137,7 @@ function makeInitials(string) {
  */
 function renderAssignablContactsHTML(bgColor, initials, userName, id) {
     return /*html*/ `
-        <div class="contact_to_assign_box" id="assignBox${id}" onclick="editContanctsInTask(${id})" >
+        <div class="contact_to_assign_box" id="assignBox${id}" onclick="editContactsInTask(${id})" >
             <div class="user_name_box">
                 <div class="user_tag" style="background-color: ${bgColor}">${initials}</div>
                 <div class="user_name">${userName}</div>
@@ -157,7 +152,7 @@ function renderAssignablContactsHTML(bgColor, initials, userName, id) {
  * @param {number} id - The ID of the task.
  * @return {undefined} This function does not return a value.
  */
-function editContanctsInTask(id) {
+function editContactsInTask(id) {
     if (assignedContacts.includes(dummyContacts[id])) {
         deleteContactFromTask(dummyContacts[id], id);
     } else {
@@ -180,6 +175,13 @@ function changStyleFromAddedContact(id) {
     assignCheckbox.src = '/assets/img/checkboxOn_white.svg';
 }
 
+
+/**
+ * deletes the transferred contact
+ * 
+ * @param {object} element - the object to be deleted
+ * @param {number} id - The ID of the contact box.
+ */
 function deleteContactFromTask(element, id) {
     let contactBox = document.getElementById(`assignBox${id}`);
     let assignCheckbox = document.getElementById(`assignCheckbox${id}`);
@@ -194,6 +196,9 @@ function doNotClose(event) {
     event.stopPropagation();
 }
 
+/**
+ * render the contact icons
+ */
 function renderUserTag() {
     let userTags = document.getElementById('assignContactContainerID');
     userTags.innerHTML = '';
@@ -207,13 +212,16 @@ function renderUserTag() {
 
 }
 
+/**
+ * shows the toast message and change to the board side only on the add task side. 
+ */
 function showToastMessage() {
- 
-    if (window.location.pathname == '/add_task/add_task.html'){
+    if (window.location.pathname == '/add_task/add_task.html') {
         document.getElementById('messageAddedTask').classList.remove('d-none');
         const myTimeout = setTimeout(switchToBaordSide, 1000);
     } else {
         closeAddTaskOverlay();
+        updateHTML();
     }
 }
 
@@ -250,16 +258,6 @@ function IdAlreadyExists(ID) {
     return false;
 }
 
-// /**
-//  * this function set the selected priority in the clobal variable for the new task
-//  * 
-//  * @param {string} prio - the priority of task, selected by the user
-//  */
-// function setTaskPrio(prio) {
-//     taskPrio = prio;
-//     setTaskPrio(prio);
-// }
-
 /**
  * This function swaps the background color and the icon in the priority buttons
  * 
@@ -277,25 +275,21 @@ function setTaskPrio(prio) {
         lowBtn.querySelector('img').src = '/assets/img/prio_low.svg';
     });
     if (prio === 'Urgent') {
-        taskPrio = ['/assets/img/prio_urgent.svg','Urgent'];
+        taskPrio = ['/assets/img/prio_urgent.svg', 'Urgent'];
         urgentBtn.classList.add('clicked');
         urgentBtn.querySelector('img').src = '/assets/img/prio_urgent_white.svg';
     }
     if (prio === 'Medium') {
-        taskPrio = ['/assets/img/prio_medium.svg','Medium'];
+        taskPrio = ['/assets/img/prio_medium.svg', 'Medium'];
         mediumBtn.classList.add('clicked');
         mediumBtn.querySelector('img').src = '/assets/img/prio_medium_white.svg';
     }
     if (prio === 'Low') {
-        taskPrio = ['/assets/img/prio_low.svg','Low'];
+        taskPrio = ['/assets/img/prio_low.svg', 'Low'];
         lowBtn.classList.add('clicked');
         lowBtn.querySelector('img').src = '/assets/img/prio_low_white.svg';
     }
 }
-
-/**
- *  Subtasks 
- */
 
 /**
  * Sets the visibility of the subtasks create buttons and hides the subtask add button.
@@ -318,7 +312,6 @@ function subtasksNoFucus() {
     document.getElementById('subtasks').value = '';
 }
 
-
 /**
  * Adds a new subtask to the subtasks array, renders the new subtask, and clears the subtask input field.
  *
@@ -336,11 +329,11 @@ function addNewSubtask() {
     console.log('add Subtask ' + subtasks[0].clicked);
 }
 
-    /**
-     * Cancels the creation of a new subtask by resetting the subtask input field and hiding the subtask creation buttons.
-     *
-     * @return {void} This function does not return a value.
-     */
+/**
+ * Cancels the creation of a new subtask by resetting the subtask input field and hiding the subtask creation buttons.
+ *
+ * @return {void} This function does not return a value.
+ */
 function cancelNewSubtask() {
     subtasksNoFucus();
 }
@@ -536,37 +529,3 @@ function setDate() {
     var dateInput = document.getElementById('dueDate');
     dateInput.setAttribute('min', today);
 }
-
-/**
- * Displays the add task overlay and sets up an event listener for the form submission.
- *
- * @param {string} status - The status of the task being added.
- * @return {void} This function does not return a value.
- */
-// function showAddTaskOverlay(status) {
-//     document.getElementById('addTaskOverlayID').classList.remove('d-none');
-//     document.getElementById('addTaskForm').addEventListener('submit', function(event) {
-//         event.preventDefault(); 
-//         const title = document.getElementById('taskTitle').value;
-//         const description = document.getElementById('taskDescription').value;
-//         const dueDate = document.getElementById('dueDate').value;
-//         const category = document.getElementById('taskCategory').value;
-//         const priority = document.getElementById('taskPriority').value;
-//         const assignedTo = []; 
-//         const newTask = {
-//             taskID: generateTaskID(), 
-//             title: title,
-//             description: description,
-//             dueDate: dueDate,
-//             category: category,
-//             prio: priority,
-//             assignedTo: assignedTo,
-//             processingStatus: status 
-//         };
-//         const container = document.getElementById(status.toLowerCase());
-//         container.innerHTML += generateTodoHTML(newTask);
-//         closeAddTaskOverlay();
-//         allTasks.push(newTask);
-//         setItem('allTasks', JSON.stringify(allTasks));
-//     });
-// }

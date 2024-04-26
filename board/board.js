@@ -7,6 +7,7 @@ let currentDraggedElement;
 async function boardInit(){
     await includeHTML();
     await getAllTasksFromServer();
+    await getAllContactsFromServer();
     updateHTML();
     setInitials();
     showCategory();
@@ -25,6 +26,7 @@ async function boardInit(){
 function showAddTaskOverlay(status){
     document.getElementById('addTaskOverlayID').classList.remove('d-none');
     globalenStatus=status;
+    clearTaskForm();
 }
 
 /**
@@ -33,8 +35,10 @@ function showAddTaskOverlay(status){
  * @return {void} 
  */
 function closeAddTaskOverlay(){
+    document.getElementById('contact_to_assign_containerID').classList.add('d-none');
     document.getElementById('addTaskOverlayID').classList.add('d-none');
 }
+
 function doNotClose(event) {
     event.stopPropagation();
 }
@@ -448,23 +452,6 @@ function getUrgentTask() {
     return allTasks.find(task => task.prio.includes('Urgent'));
 }
 
-// /**
-//  * Deletes a task with the given taskID from the allTasks array, updates the HTML,
-//  * closes the big task, and saves the updated allTasks array to local storage.
-//  *
-//  * @param {number} taskID - The ID of the task to be deleted.
-//  * @return {Promise<void>} A promise that resolves when the task is deleted and the local storage is updated.
-//  */
-// async function deleteTasks(taskID) {
-//     const index = allTasks.findIndex(task => task.taskID === taskID);
-//     if (index !== -1) {
-//         allTasks.splice(index, 1);
-//         updateHTML();
-//     } 
-//     closeBigTask();
-//     await setItem('allTasks', JSON.stringify(allTasks));
-// }
-
 /**
  * Löscht eine Aufgabe mit der angegebenen taskID aus dem allTasks-Array,
  * aktualisiert das HTML, ordnet die IDs neu und speichert das aktualisierte allTasks-Array im lokalen Speicher.
@@ -484,17 +471,6 @@ async function deleteTasks(taskID) {
 }
 
 /**
- * Ordnet die IDs der Aufgaben im allTasks-Array neu, um sicherzustellen, dass sie eindeutig sind und keine Lücken aufweisen.
- *
- * @return {void} Diese Funktion gibt keinen Wert zurück.
- */
-// function reorderTaskIDs() {
-//     for (let i = 0; i < allTasks.length; i++) {
-//         allTasks[i].taskID = i; // Setzt die ID auf den Index-Wert
-//     }
-// }
-
-/**
  * Opens the edit tasks popup for a specific task.
  *
  * @param {string} taskID - The ID of the task to edit.
@@ -503,8 +479,10 @@ async function deleteTasks(taskID) {
 function openEditTasks(taskID) {
     const task = allTasks.find(task => task.taskID === taskID);
     subtasks = task.subtasks;
+    // assignedContacts = task.assignedTo;
+    assignedContacts = getAssignedContacts(task.assignedTo);
     const editPopupContent = `
-           <div id="editTask" class="editTaskInner" onclick="doNotClose(event)">
+           <div id="editTask" class="editTaskInner" onclick="doNotClose(event), closeAddTaskOverlay()">
                <div class="form_inner_edit">
                     <div class="editHeadline">
                         <img onclick="closePopup()" class="editHeadlineImg"  src="/assets/img/close.svg" alt="">
@@ -540,18 +518,15 @@ function openEditTasks(taskID) {
                             <label for="assignedTo">Assigned to</label><br>
                             <div class="dropdown">
                                <div class="input_styles" id="assignedTo" onclick="showAssignablContacts(), doNotClose(event)">
-                                   Select contacts to assign
-                                  <img id="assign_arrow_down" src="/assets/img/arrow_drop_down.svg" alt="">
+                                    Select contacts to assign
+                                    <img id="assign_arrow_down" src="/assets/img/arrow_drop_down.svg" alt="">
                                     <img id="assign_arrow_up" class="d-none" src="/assets/img/arrow_up_drop_down.svg" alt="">
-                                 </div>
+                                </div>
                                 <div class="contact_to_assign_container d-none" id="contact_to_assign_containerID" onclick="doNotClose(event)">
-                                   ${getAssignedToHTML(task.assignedTo)}
                                 </div>
-                                <div class="contacts_container">
-                                <div class="small_card_users_area">` +
-                                     getAssignedToIconsHTML(task['assignedTo']) +
-                                    /*html*/ `
-                                </div>
+                            </div>
+                            <div class="assign_contact_container" id="assignContactContainerID">
+                                <!-- render content -->
                             </div>
                        </div>
                     <div class="form_right_edit">
@@ -586,6 +561,7 @@ function openPopup(content,prio) {
     const editPopup = document.getElementById('editTaskOverlay');
     editPopup.innerHTML = content;
     renderNewSubtask();
+    renderUserTag();
     editPopup.classList.remove('d-none');
     setTaskPrio(prio[1]);
 }
@@ -593,6 +569,21 @@ function openPopup(content,prio) {
 function closePopup() {
     const editPopup = document.getElementById('editTaskOverlay');
     editPopup.classList.add('d-none');
+}
+
+/**
+ * fetches the transferred contacts from the list of all contacts based on the email
+ * 
+ * @param {object} contacts - assigned contacts
+ * @returns
+ */
+function getAssignedContacts(contacts) {
+    let contactList = [];
+    for (let i = 0; i < contacts.length; i++) {
+        const element = contacts[i];
+        contactList.push(dummyContacts.find(contact => contact.eMail === element.eMail));
+    }
+    return contactList;
 }
 
 /**
@@ -611,7 +602,7 @@ function saveEditedTask(taskID) {
         editedTask.dueDate = document.getElementById('dueDate').value;
         editedTask.assignedTo = assignedContacts;
         editedTask.prio = taskPrio;
-        editedTask.subtask = subtasks;
+        editedTask.subtasks = subtasks;
         allTasks[editedTaskIndex] = editedTask;
         setItem('allTasks', JSON.stringify(allTasks));
         updateHTML();

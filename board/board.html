@@ -71,7 +71,7 @@
     <div id="editTaskOverlay" onclick="closePopup()" class="editTaskOverlay d-none"></div>
 </div>
     <div class="add_task_overlay d-none" id="addTaskOverlayID" onclick="closeAddTaskOverlay()">
-        <div class="add_task_overlay_inner" onclick="doNotClose(event)">
+        <div class="add_task_overlay_inner" onclick="doNotClose(event), closeAssignContactsBox()">
             <div w3-include-html="/assets/templates/task_form.html"></div>
         </div>
     </div>

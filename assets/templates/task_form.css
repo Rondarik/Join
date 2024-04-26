@@ -455,6 +455,7 @@ input:-webkit-autofill:focus{
     border: 1px solid #2a3647 !important;
     color: #2a3647;
     margin-right: 16px;
+    cursor: pointer;
 }
 
 .clear_btn:hover{
@@ -500,9 +501,7 @@ input:-webkit-autofill:focus{
 }
 
 @media (max-width: 1250px){
-    .contact_to_assign_container{
-        width: 300px;
-    }
+ 
     .add_task_container{
         height: 100%;
         display: flex;
@@ -570,5 +569,8 @@ input:-webkit-autofill:focus{
     }
     .form_container{
         width: min-content;
+    }
+    .contact_to_assign_container{
+        width: 300px;
     }
 }
