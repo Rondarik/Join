@@ -50,6 +50,11 @@ async function deleteAllUser(){
     await setItem('allUser', JSON.stringify([]));
 }
 
+/**
+ * Asynchronously deletes all Tasks by setting 'allTasks' key to an empty array in the server.
+ *
+ * @return {Promise<void>} A promise that resolves after deleting all users or handles errors.
+ */
 async function deleteAllTasks(){
     await setItem('allTasks', JSON.stringify([]));
 }
