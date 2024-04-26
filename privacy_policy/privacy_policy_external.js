@@ -5,6 +5,4 @@ async function backToLastPage() {
 
   async function init(){
     await includeHTML();
-    document.querySelector('.link_container').style.display = 'none';
-    setInitials();
   }

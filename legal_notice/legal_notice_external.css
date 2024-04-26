@@ -65,10 +65,16 @@ h3{
 background-color: lightgray;
 }
 
+.initial_container{
+    display: none;
+}
+
 @media (max-width: 1400px) {
     .legal_notice_container{
         padding-left: 10px;
-        margin-bottom: 82px;
+    }
+    .side_container{
+        display: none;
     }
 }
 
