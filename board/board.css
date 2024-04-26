@@ -286,16 +286,16 @@ word-wrap: break-word;
     box-sizing: border-box;
 }
 .contacts_icon{
-    height: 32px;
-    width: 32px;
-    border-radius: 45px;
-    color: white;
-    font-size: 12px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
+    flex-direction: row;
     justify-content: center;
+    height: 32px;
+    width: 32px;
     border: 1px solid white;
     font-family: Inter;
+    color: white;
 }
 .contacts_img{
     width: 80px;
