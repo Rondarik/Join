@@ -274,7 +274,7 @@ function showBigTask(element){
             </div>
             <div>
                 <h2 class="bigTitle">${element['title']}</h2>
-                <p class="bigInfosText">${element['description']}</p>
+                <p class="bigInfosDescription">${element['description']}</p>
             </div>
             <div>
                 <div class="bigInfosText"><p>Due date:</p> ${element['dueDate']}</div>

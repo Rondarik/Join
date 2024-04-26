@@ -296,6 +296,7 @@ word-wrap: break-word;
     border: 1px solid white;
     font-family: Inter;
     color: white;
+    padding: 4px;
 }
 .contacts_img{
     width: 80px;
