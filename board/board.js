@@ -105,7 +105,7 @@ function generateTodoHTML(element) {
     if (totalSubtasks > 0) {
         subtaskHTML = `
             <div class="progress_container">
-                <progress id="progress_${id}" max="100" value="${progressPercentage}">${progressPercentage}%</progress>
+                <progress id="progress_${id}" class="progressbar" max="100" value="${progressPercentage}">${progressPercentage}%</progress>
                 <p class="progress_text">${completedSubtasks}/${totalSubtasks} Subtasks</p>
             </div>`;
     }
@@ -140,7 +140,7 @@ function getAssignedToIconsHTML(contacts) {
     
     contacts.forEach(contact => {
         let initials = makeInitials(contact.name);
-        html += /*html*/ `<div class='contacts_icon' style="background-color: ${contact.color}; transform: translateX(${shift}px);">${initials}</div>`;
+        html += /*html*/ `<div class='contacts_icon' style="background-color: ${contact.color};">${initials}</div>`;
         shift -= 10;
     });
     html += /*html*/`</div>`;
