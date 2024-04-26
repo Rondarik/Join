@@ -568,6 +568,7 @@ function openPopup(content,prio) {
 
 function closePopup() {
     const editPopup = document.getElementById('editTaskOverlay');
+    editPopup.innerHTML = '';
     editPopup.classList.add('d-none');
 }
 
