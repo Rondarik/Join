@@ -2,7 +2,7 @@
     padding-left: 328px; 
     padding-top: 106px;
     background-color: #F6F7F8;
-    height: 90vh;
+    height: 89vh;
 }
 
 .headline_summary{
@@ -439,7 +439,13 @@ h3{
     }
 }
 
-@media(max-width:380px){
+@media(max-width:430px){
+    .summary_container{
+        padding-top: 100px;
+    }
+    .summary_main{
+        max-height: 700px;
+    }
     .summary_img{
         width: 40px;
         height: 40px;
@@ -486,5 +492,20 @@ h3{
     }
     .line_blue_bottom{
         margin-top: 5px;
+    }
+    .row_container{
+        max-height: 100px;
+    }
+    .todo_container{
+        max-height: 100px;
+    }
+    .done_container{
+        max-height: 100px;
+    }
+    .prio_container{
+        width: 200px;
+    }
+    body{
+        overflow: hidden;
     }
 }

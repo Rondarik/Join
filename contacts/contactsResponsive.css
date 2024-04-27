@@ -137,8 +137,11 @@
     .transition .contact_dialog {
         transition: transform 0.5s ease;
     }
+    .letter{
+        width: auto;
+    }
     .contact_layout{
-        display: flex;
+        display: none;
         justify-content: center;
         align-items: center;
         flex-direction: column;
@@ -570,3 +573,32 @@
         min-height: 41px;
     }
 }
+
+@media (max-width: 430px) {
+    .btn_responsive button{
+        bottom: 100px;
+        right: 20px;
+    }
+    .show_more_responsive button{
+        bottom: 100px;
+        right: 20px;
+    }
+    .input_style{
+        font-size: 17px;
+        padding-left: 18px;
+    }
+    .contact_layout{
+        display: none;
+    }
+}
+
+@media (max-width: 350px) {
+    .letter_layout{
+        width: 60px;
+    }
+    .contact_dummy_border_layout{
+        min-width: 60px;
+    }
+}
+
+

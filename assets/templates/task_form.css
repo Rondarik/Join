@@ -560,7 +560,7 @@ input:-webkit-autofill:focus{
     }
 }
 
-@media (max-width: 380px){
+@media (max-width: 430px){
     .form_left{
         width: 300px;
     }
@@ -572,5 +572,21 @@ input:-webkit-autofill:focus{
     }
     .contact_to_assign_container{
         width: 300px;
+    }
+    .form_bottom_container{
+        height: 45px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+    .create_btn{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px;
+    }
+    .form_bottom_container p{
+        font-size: 14px;
+        width: 110px;
     }
 }

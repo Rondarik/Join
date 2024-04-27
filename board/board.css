@@ -443,3 +443,31 @@ input::placeholder{
         width: 100%;
    }
 }
+
+@media(max-width:1100px){
+    h1 {
+        font-size: 47px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .board_button{
+        top: 134px;
+    }
+    .board_container{
+        padding-bottom: 20px;
+    }
+}
+
+
+@media(max-width:430px){
+    .add_task_overlay_inner{
+        height: 700px;
+    }
+    .add_task_container h2{
+        font-size: 47px;
+    }
+    .close_img_container{
+        left: 290px;
+        top: 30px;
+    }
+}
