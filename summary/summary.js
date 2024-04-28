@@ -70,7 +70,16 @@ function countTasksByPriority(priority) {
  * @return {Object|undefined} The task object with the highest priority or `undefined` if no such task exists.
  */
 function getUrgentTask() {
-    return allTasks.find(task => task.prio.includes('Urgent'));
+    const urgentTasks = allTasks.filter(task => task.prio.includes('Urgent'));
+    if (urgentTasks.length > 0) {
+        return urgentTasks.reduce((earliestTask, currentTask) => {
+            const earliestDueDate = new Date(earliestTask.dueDate);
+            const currentDueDate = new Date(currentTask.dueDate);
+            return earliestDueDate < currentDueDate ? earliestTask : currentTask;
+        });
+    } else {
+        return undefined;
+    }
 }
 
 /**

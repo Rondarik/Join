@@ -39,6 +39,7 @@ function closeAddTaskOverlay(){
     document.getElementById('addTaskOverlayID').classList.add('d-none');
 }
 
+
 function doNotClose(event) {
     event.stopPropagation();
 }
@@ -172,7 +173,6 @@ function allowDrop(ev) {
  */
 async function moveTo(processingStatus) {
     let currendTask = allTasks.find(task => task.taskID === currentDraggedElement);
-    // if (currentDraggedElement !== undefined && allTasks[currentDraggedElement] !== undefined) {
     if (currentDraggedElement !== undefined && currendTask !== undefined) {
         currendTask['processingStatus'] = processingStatus;
         updateHTML();
@@ -181,10 +181,13 @@ async function moveTo(processingStatus) {
         checkEmptyDone();
         checkEmptyProgress();
         checkEmptyAwaitFeedback();
+        removeHighlight('awaitfeedback');
+        removeHighlight('done');
+        removeHighlight('progress');
+        removeHighlight('todo');
     } else {
         console.error("Invalid task ID or task does not exist.");
     }
-    // removeHighlight(id);
 }
 
 function highlight(id) {
@@ -245,6 +248,12 @@ function openBigTask(id){
 }
 }
 
+/**
+ * Closes the big task by adding the 'd-none' class to the 'bigTask' element.
+ *
+ * @param {none} none - This function does not take any parameters.
+ * @return {none} This function does not return any value.
+ */
 function closeBigTask(){
     document.getElementById('bigTask').classList.add('d-none');
    
@@ -410,12 +419,32 @@ function countTasksByStatus(status) {
     return allTasks.filter(task => task.processingStatus === status).length;
 }
 
+/**
+ * Counts the number of tasks in the `allTasks` array that have the specified priority.
+ *
+ * @param {string} priority - The priority to filter tasks by.
+ * @return {number} The number of tasks with the specified priority.
+ */
 function countTasksByPriority(priority) {
     return allTasks.filter(task => task.prio.includes(priority)).length;
 }
 
+/**
+ * Retrieves the most urgent task from the list of all tasks.
+ *
+ * @return {Object|undefined} The most urgent task object, or undefined if no urgent tasks exist.
+ */
 function getUrgentTask() {
-    return allTasks.find(task => task.prio.includes('Urgent'));
+    const urgentTasks = allTasks.filter(task => task.prio.includes('Urgent'));
+    if (urgentTasks.length > 0) {
+        return urgentTasks.reduce((earliestTask, currentTask) => {
+            const earliestDueDate = new Date(earliestTask.dueDate);
+            const currentDueDate = new Date(currentTask.dueDate);
+            return earliestDueDate < currentDueDate ? earliestTask : currentTask;
+        });
+    } else {
+        return undefined;
+    }
 }
 
 /**
@@ -450,6 +479,11 @@ function openPopup(content,prio) {
     setTaskPrio(prio[1]);
 }
 
+/**
+ * Closes the popup by clearing its content and hiding it.
+ *
+ * @return {void} This function does not return a value.
+ */
 function closePopup() {
     const editPopup = document.getElementById('editTaskOverlay');
     editPopup.innerHTML = '';

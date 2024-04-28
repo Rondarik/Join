@@ -262,13 +262,18 @@ async function saveEditedContact(id) {
     let mail = document.getElementById('editContactMail');
     let phone = document.getElementById('editContactPhone');
     let contactDialog = document.getElementById('contactDialog');
+    let showDisplayContactInfo = document.querySelector('.contact_info_onclick');
     currentContact.name = name.value;
     currentContact.eMail = mail.value;
     currentContact.tel = phone.value;
     await setItem('allContacts', JSON.stringify(dummyContacts));
-    await displayContactInfo(id);
+    await displayContactInfo(mail.value);
     await contactsInit();
+    let clicked = document.getElementById(id);
+    clicked.classList.add('clicked');
     contactDialog.classList.add('fade_away');
+    showDisplayContactInfo.style.display = 'flex';
+    showDisplayContactInfo.classList.remove('d_none');
 }
 
 /**
