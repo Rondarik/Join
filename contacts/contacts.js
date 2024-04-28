@@ -269,7 +269,7 @@ async function saveEditedContact(id) {
     await setItem('allContacts', JSON.stringify(dummyContacts));
     await displayContactInfo(mail.value);
     await contactsInit();
-    let clicked = document.getElementById(id);
+    let clicked = document.getElementById(mail.value);
     clicked.classList.add('clicked');
     contactDialog.classList.add('fade_away');
     showDisplayContactInfo.style.display = 'flex';
