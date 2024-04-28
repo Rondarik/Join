@@ -202,13 +202,15 @@ function renderUserTag() {
     let userTags = document.getElementById('assignContactContainerID');
     userTags.innerHTML = '';
     for (let i = 0; i < assignedContacts.length; i++) {
+        if (assignedContacts[i] == undefined) {
+            assignedContacts.splice(i,1);
+        }
         const name = assignedContacts[i].name;
         const bgColor = assignedContacts[i].color;
         userTags.innerHTML += /*html*/ `
              <div class="user_tag" style="background-color: ${bgColor};">${makeInitials(name)}</div>
         `;
     }
-
 }
 
 /**
