@@ -31,7 +31,7 @@ async function addNewTask() {
         let category = document.getElementById('category').value;
         let task = {
             "taskID": setTaskID(),
-            "processingStatus": globalenStatus,
+            "processingStatus": 'ToDo',
             "title": taskTilte,
             "description": taskDiscription,
             "assignedTo": assignedContacts,
