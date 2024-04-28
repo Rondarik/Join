@@ -184,7 +184,7 @@ async function moveTo(processingStatus) {
     } else {
         console.error("Invalid task ID or task does not exist.");
     }
-    // removeHighlight(id);
+
 }
 
 function highlight(id) {
