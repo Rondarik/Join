@@ -12,13 +12,13 @@
                     <p class="error_message d-none" id="errorTitleID">This field is required</p>
                 </div>
                 <div class="discripton_container">
-                    <label for="TaskDiscription">Discription</label><br>
+                    <span>Discription</span><br>
                     <textarea class="input_styles" name="" id="taskDiscription"
                         placeholder="Enter a Discription"></textarea><br>
                 </div>
                 <div class="dropdown_container">
-                    <label for="assignedTo">Assigned to</label><br>
                     <div class="dropdown">
+                        <span>Assigned to</span><br>
                         <div class="input_styles" id="assignedTo" onclick="showAssignablContacts(), doNotClose(event)">
                             Select contacts to assign
                             <img id="assign_arrow_down" src="/assets/img/arrow_drop_down.svg" alt="">
@@ -41,7 +41,7 @@
                     <input class="input_styles" type="date" id="dueDate" required onclick="setDate()" onkeyup="clearError('dueDate')" onchange="clearError('dueDate')">
                     <p class="error_message d-none" id="errorDueDateID">This field is required</p>
                 </div>
-                <label>Prio</label><br>
+                <span>Prio</span><br>
                 <div class="prio_buttons">
                     <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('Urgent')">
                         Urgent <img src="/assets/img/prio_urgent.svg" alt="">

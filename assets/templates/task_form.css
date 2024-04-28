@@ -73,6 +73,12 @@
     font-weight: 400;
 }
 
+.form_inner span{
+    font-family: 'Inter';
+    font-size: 20px;
+    font-weight: 400;
+}
+
 .input_styles{
     margin-top: 8px;
     width: calc(100% - 14px);
