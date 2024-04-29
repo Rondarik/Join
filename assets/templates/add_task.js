@@ -141,7 +141,7 @@ function renderAssignablContactsHTML(bgColor, initials, userName, id) {
                 <div class="user_tag" style="background-color: ${bgColor}">${initials}</div>
                 <div class="user_name">${userName}</div>
             </div>
-            <img id="assignCheckbox${id}" src="/assets/img/checkboxOff.svg" alt="">
+            <img id="assignCheckbox${id}" src="./assets/img/checkboxOff.svg" alt="">
         </div> `;
 }
 
@@ -363,14 +363,14 @@ function subtaskHTML(ID, text) {
         <div id="subtaskID${ID}" class="subtask_box" onmouseover="mouseoverStyleSubtaskInput(${ID})" onmouseout="mouseoutStyleSubtaskInput(${ID})">
             <input type="text" id="inputSubtaskID${ID}" value="${text}" class="input_subtask" onfocus="onfocusStyleSubtaskInput(${ID})">
             <div class="edit_buttons d-none" id="substaskEditButtonsID${ID}">
-                <img class="subtask_btn_edit" src="/assets/img/edit.svg" alt="" onclick="editSubtask(${ID})">
+                <img class="subtask_btn_edit" src="./assets/img/edit.svg" alt="" onclick="editSubtask(${ID})">
                 <div class="substask_seperator"></div>
-                <img class="subtask_btn_delete" src="/assets/img/delete.svg" alt="" onclick="deleteSubtask(${ID})">
+                <img class="subtask_btn_delete" src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${ID})">
             </div>
             <div class="edit_buttons d-none" id="substaskConfirmButtonsID${ID}">
-                <img class="subtask_btn_delete" src="/assets/img/delete.svg" alt="" onclick="deleteSubtask(${ID})">
+                <img class="subtask_btn_delete" src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${ID})">
                 <div class="substask_seperator"></div>
-                <img class="subtask_btn_check" src="/assets/img/check.svg" alt="" onclick="saveChangedSubtask(${ID})">
+                <img class="subtask_btn_check" src="./assets/img/check.svg" alt="" onclick="saveChangedSubtask(${ID})">
             </div>
         </div>`;
 }
