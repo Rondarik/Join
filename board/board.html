@@ -5,35 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Board</title>
-    <link rel="shortcut icon" href="/assets/img/favicon.png">
-    <link rel="stylesheet" href="/assets/templates/templates.css">
-    <link rel="stylesheet" href="/assets/fonts.css">
-    <link rel="stylesheet" href="/assets/templates/task_form.css">
-    <link rel="stylesheet" href="/board/board.css">
-    <link rel="stylesheet" href="/board/board_big_card.css">
-    <script src="/assets/templates/add_task.js"></script>
-    <script src="/drag_drop_mobile.js"></script>
-    <script src="/script.js"></script>
-    <script src="/dummyData.js"></script>
-    <script src="/board/board.js"></script>
-    <script src="/board/board_TasksHTML.js"></script>
-    <script src="/serverCommunication.js"></script>
-    <script src="/assets/templates/template_script.js"></script>
+    <link rel="shortcut icon" href="./assets/img/favicon.png">
+    <link rel="stylesheet" href="./assets/templates/templates.css">
+    <link rel="stylesheet" href="./assets/fonts.css">
+    <link rel="stylesheet" href="./assets/templates/task_form.css">
+    <link rel="stylesheet" href="./board/board.css">
+    <link rel="stylesheet" href="./board/board_big_card.css">
+    <script src="./assets/templates/add_task.js"></script>
+    <script src="./drag_drop_mobile.js"></script>
+    <script src="./script.js"></script>
+    <script src="./dummyData.js"></script>
+    <script src="./board/board.js"></script>
+    <script src="./board/board_TasksHTML.js"></script>
+    <script src="./serverCommunication.js"></script>
+    <script src="./assets/templates/template_script.js"></script>
    
 </head>
 
 <body onload="boardInit()">
-    <div w3-include-html="/assets/templates/side_menu.html"></div>
-    <div w3-include-html="/assets/templates/header.html"></div>
+    <div w3-include-html="./assets/templates/side_menu.html"></div>
+    <div w3-include-html="./assets/templates/header.html"></div>
     <div class="board_container">
         <div class="headline">
             <h1>Board</h1>
             <div class="search_container">
                 <div class="find_task_container" id="formContainer">
                     <input class="input_container" type="text" placeholder="Find Task" id="search" onkeydown="findTaskFunction()">
-                    <button class="search_button" onclick="findTaskFunction()"><img class="search_img" src="/assets/img/search_board.svg" alt=""></button>
+                    <button class="search_button" onclick="findTaskFunction()"><img class="search_img" src="./assets/img/search_board.svg" alt=""></button>
                 </div>
-                <button id="submitButton" onclick="showAddTaskOverlay('ToDo')" class="board_button"><p class="board_add_task_text">Add Task</p> <img src="/assets/img/add.svg" alt=""></button>
+                <button id="submitButton" onclick="showAddTaskOverlay('ToDo')" class="board_button"><p class="board_add_task_text">Add Task</p> <img src="./assets/img/add.svg" alt=""></button>
             </div>
         </div>
         <div class="content_container">
@@ -73,7 +73,7 @@
 </div>
     <div class="add_task_overlay d-none" id="addTaskOverlayID" onclick="closeAddTaskOverlay()">
         <div class="add_task_overlay_inner" onclick="doNotClose(event), closeAssignContactsBox()">
-            <div w3-include-html="/assets/templates/task_form.html"></div>
+            <div w3-include-html="./assets/templates/task_form.html"></div>
         </div>
     </div>
 
