@@ -1,7 +1,7 @@
 <div class="add_task_container">
     <h2>Add Task</h2>
     <div class="close_img_container">
-        <img src="./assets/img/close.svg" alt="" onclick="closeAddTaskOverlay()">
+        <img src="../assets/img/close.svg" alt="" onclick="closeAddTaskOverlay()">
     </div>
     <div class="form_container" id="addTaskForm">
         <div class="form_inner">
@@ -21,8 +21,8 @@
                         <span>Assigned to</span><br>
                         <div class="input_styles" id="assignedTo" onclick="showAssignablContacts(), doNotClose(event)">
                             Select contacts to assign
-                            <img id="assign_arrow_down" src="./assets/img/arrow_drop_down.svg" alt="">
-                            <img id="assign_arrow_up" class="d-none" src="./assets/img/arrow_up_drop_down.svg" alt="">
+                            <img id="assign_arrow_down" src="../assets/img/arrow_drop_down.svg" alt="">
+                            <img id="assign_arrow_up" class="d-none" src="../assets/img/arrow_up_drop_down.svg" alt="">
                         </div>
                         <div class="contact_to_assign_container d-none" id="contact_to_assign_containerID"
                             onclick="doNotClose(event)">
@@ -44,20 +44,20 @@
                 <span>Prio</span><br>
                 <div class="prio_buttons">
                     <button type="button" class="prio_btn_1" id="urgentBtnID" onclick="setTaskPrio('Urgent')">
-                        Urgent <img src="./assets/img/prio_urgent.svg" alt="">
+                        Urgent <img src="../assets/img/prio_urgent.svg" alt="">
                     </button>
                     <button type="button" class="prio_btn_2" id="mediumBtnID" onclick="setTaskPrio('Medium')">
-                        Medium <img src="./assets/img/prio_medium.svg" alt="">
+                        Medium <img src="../assets/img/prio_medium.svg" alt="">
                     </button>
                     <button type="button" class="prio_btn_3" id="lowBtnID" onclick="setTaskPrio('Low')">
-                        Low <img src="./assets/img/prio_low.svg" alt="">
+                        Low <img src="../assets/img/prio_low.svg" alt="">
                     </button>
                 </div>
                 <div class="category_container">
                     <label for="category">Category<span style="color: #ffa800;">*</span></label><br>
                     <select class="input_styles" id="category" required onchange="clearError('category')">
                         <option value="" selected disabled hidden>Select task category <img
-                                src="./assets/img/event_calendar.svg" alt=""></option>
+                                src="../assets/img/event_calendar.svg" alt=""></option>
                         <option value="Technical Task">Technical Task</option>
                         <option value="User Story">User Story</option>
                     </select><br>
@@ -67,11 +67,11 @@
                 <div class="subtasks_container input_styles">
                     <!-- <input type="text" id="subtasks" onfocus="subtasksFucus()" onblur="subtasksNoFucus()"> -->
                     <input type="text" id="subtasks" onfocus="subtasksFucus()">
-                    <img class="subtask_btn_add" id="subtaskBtnAddID" src="./assets/img/add.svg" alt="">
+                    <img class="subtask_btn_add" id="subtaskBtnAddID" src="../assets/img/add.svg" alt="">
                     <div class="subtasks_create_buttons d-none" id="subtasksCreateButtonsID">
-                        <img class="subtask_btn_close" src="./assets/img/close.svg" alt="" onclick="cancelNewSubtask()">
+                        <img class="subtask_btn_close" src="../assets/img/close.svg" alt="" onclick="cancelNewSubtask()">
                         <div class="substask_seperator"></div>
-                        <img class="subtask_btn_check" src="./assets/img/check.svg" alt="" onclick="addNewSubtask()">
+                        <img class="subtask_btn_check" src="../assets/img/check.svg" alt="" onclick="addNewSubtask()">
                     </div>
                 </div>
                 <div id="allSubtasksID">
@@ -82,15 +82,15 @@
         <div class="form_bottom_container">
             <p><span style="color: #ffa800;">*</span>This field is required</p>
             <div class="form_buttons">
-                <button type="button" class="clear_btn" onclick="clearTaskForm()">Clear <img src="./assets/img/close.svg"
+                <button type="button" class="clear_btn" onclick="clearTaskForm()">Clear <img src="../assets/img/close.svg"
                         alt=""></button>
                 <button class="create_btn" onclick="addNewTask('ToDo')">Create Task <img
-                        src="./assets/img/check_white.svg" alt=""></button>
+                        src="../assets/img/check_white.svg" alt=""></button>
             </div>
         </div>
         <div class="message_added_task d-none" id="messageAddedTask">
             <p>Task added to board </p>
-            <img src="./assets/img/board_white.svg" alt="">
+            <img src="../assets/img/board_white.svg" alt="">
         </div>
     </div>
 
