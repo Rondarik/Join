@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Summary</title>
-    <link rel="stylesheet" href="./assets/templates/templates.css">
-    <link rel="stylesheet" href="./assets/fonts.css">
-    <script src="./assets/templates/template_script.js"></script>
-    <link rel="shortcut icon" href="./assets/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/templates/templates.css">
+    <link rel="stylesheet" href="/assets/fonts.css">
+    <script src="/assets/templates/template_script.js"></script>
+    <link rel="shortcut icon" href="/assets/img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="summary.css">
     <script src="summary.js"></script>
-    <script src="./dummyData.js"></script>
-    <script src="./script.js"></script>
-    <script src="./board/board.js"></script>
-    <script src="./serverCommunication.js"></script>
+    <script src="/dummyData.js"></script>
+    <script src="/script.js"></script>
+    <script src="/board/board.js"></script>
+    <script src="/serverCommunication.js"></script>
    
 </head>
 <body onload=" summaryInit()">
-    <div w3-include-html="./assets/templates/side_menu.html"></div>
-    <div w3-include-html="./assets/templates/header.html"></div>
+    <div w3-include-html="/assets/templates/side_menu.html"></div>
+    <div w3-include-html="/assets/templates/header.html"></div>
     <div class="summary_container">
         <div class="headline_summary">
             <h1>Join 360</h1>
@@ -29,24 +29,24 @@
         <div class="summary_main">
             <div class="summary_tasks">
             <div class="row_container">
-                <a href="./board/board.html" class="todo_container">
-                    <img class="summary_img" src="../assets/img/todo.svg" alt="">
+                <a href="/board/board.html" class="todo_container">
+                    <img class="summary_img" src="/assets/img/todo.svg" alt="">
                     <div>
                         <h2 id="todoCount">1</h2>
                         <p class="text_below">To-do</p>
                     </div>
                 </a>
-                <a href="./board/board.html" class="done_container" >
-                    <img class="summary_img" src="../assets/img/done.svg" alt="">
+                <a href="/board/board.html" class="done_container" >
+                    <img class="summary_img" src="/assets/img/done.svg" alt="">
                     <div>
                         <h2 id="doneCount">1</h2>
                         <p class="text_below">Done</p>
                     </div>
                 </a>
             </div>
-            <a href="./board/board.html" class="prio_row_container">
+            <a href="/board/board.html" class="prio_row_container">
                 <div class="prio_container">
-                    <img class="summary_img" src="./assets/img/prio.svg" alt="">
+                    <img class="summary_img" src="/assets/img/prio.svg" alt="">
                     <div>
                         <h2 id="urgentCount">1</h2>
                         <p class="text_below">Urgent</p>
@@ -59,19 +59,19 @@
                 </div>
             </a>
         <div class="tasks_container">
-            <a href="./board/board.html" class="tasks_row">
+            <a href="/board/board.html" class="tasks_row">
                 <div class="text_container">
                 <h2 id="allTasksCount">5</h2>
                 <p class="text_below">Tasks in Board</p>
                 </div>
             </a>
-            <a href="./board/board.html" class="tasks_row">
+            <a href="/board/board.html" class="tasks_row">
                 <div class="text_container">
                 <h2 id="progressCount">5</h2>
                 <p class="text_below">Tasks in Progress</p>
                 </div>
             </a>
-            <a href="./board/board.html" class="tasks_row">
+            <a href="/board/board.html" class="tasks_row">
                 <div class="text_container">
                 <h2 id="awaitFeedbackCount">5</h2>
                 <p class="text_below">Awaiting Feedback</p>
